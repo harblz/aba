@@ -25,7 +25,7 @@ SECRET_KEY = 'g*ihxgugp)-k2f!1&7^oeh05h0p7i2_4#7@vtaf#gw))44_=$n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aba.rocks', 'localhost', '127.0.0.1']
 
 
 # Application definition
