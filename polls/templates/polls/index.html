@@ -1,3 +1,9 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+<p class="qq">Yo! These are poll questions. Click them, and vote.</p>
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

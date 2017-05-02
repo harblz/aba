@@ -1,0 +1,23 @@
+li a {
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration: none;
+    font-family: Helvetica;
+}
+
+.qq {
+  color: white;
+  font-weight: bold;
+  size: 1.5em;
+  font-family: Helvetica;
+
+}
+
+li a:hover {
+  color: red;
+}
+
+body {
+    background: white url("images/background.gif") no-repeat right bottom;
+}
