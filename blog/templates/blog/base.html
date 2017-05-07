@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<!doctype html>
 <html>
     <head>
       <title>ABA Rocks: A Blog</title>
@@ -7,8 +8,12 @@
       <link href="https://fonts.googleapis.com/css?family=Catamaran|Comfortaa" rel="stylesheet">
 
       <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-      <script href="{% static 'bootstrap/bootstrap.min.js' %}"></script>
       <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+      <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+      <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+      <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
       <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
@@ -38,6 +43,10 @@
 
         ga('create', 'UA-98470698-1', 'auto');
         ga('send', 'pageview');
+
+        $('.row').each(function() {
+          $(this).css('background-color', 'red');
+        });
 
       </script>
 

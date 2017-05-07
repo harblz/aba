@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import tempfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -25,7 +25,11 @@ SECRET_KEY = 'g*ihxgugp)-k2f!1&7^oeh05h0p7i2_4#7@vtaf#gw))44_=$n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aba.rocks', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1']
+
+
+CACHED_STORAGE = False
+
 
 # Google Analytics
 GOOGLE_ANALYTICS_PROPERTY_ID = "UA-98470698-1"
@@ -34,6 +38,7 @@ GOOGLE_ANALYTICS_DOMAIN = 'aba.rocks'
 # Application definition
 
 INSTALLED_APPS = [
+    'ckeditor',
     'home.apps.HomeConfig',
     'polls.apps.PollsConfig',
     'blog.apps.BlogConfig',
@@ -119,10 +124,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
+
+# CKEditor paths
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
