@@ -25,7 +25,7 @@ SECRET_KEY = 'g*ihxgugp)-k2f!1&7^oeh05h0p7i2_4#7@vtaf#gw))44_=$n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1', '192.168.1.110']
 
 
 CACHED_STORAGE = False
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'home.apps.HomeConfig',
     'polls.apps.PollsConfig',
+    'rbtquiz.apps.RbtquizConfig',
+    'quiz.apps.QuizConfig',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -134,5 +136,28 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
 
-# CKEditor paths
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+# CKEditor
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Styles', 'Format'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat'],
+            ['Maximize'],
+            '/',
+            ['Bold', 'Italic', 'Underline'],
+            ['TextColor', 'BGColor'],
+            ['Scayt'],
+            ['PasteFromWord'],
+        ],
+        'extraPlugins': ','.join([
+            'autolink',
+            'autoembed',
+            'autogrow',
+            'scayt',
+        ]),
+    }
+}

@@ -1,0 +1,93 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+  <h1>{{ question.question_text }} <small>{{ unit_name }} Practice Quiz</small></h1>
+  <br>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Select the best answer from these choices:</h3>
+    </div>
+    <div class="panel-body">
+      <form action="/quiz/{{ unit_name }}/create_post/" method="POST" id="post-form">
+      {% csrf_token %}
+      {% for choice in question.choice_set.all %}
+          <input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" />
+          <label for="choice{{ forloop.counter }}"><span style="font-weight: normal">{{ choice.choice_text }}</span></label><br />
+      {% endfor %}
+    </div>
+    <div class="panel-footer">
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="button" data-toggle="collapse" data-target="#hint" class="btn btn-default">Give me a hint!</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="submit" id="post-form" class="btn btn-info"><b>Submit Answer</b></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse" id="hint">
+    <div style="margin: 25px;">
+      <h3>Here's a hint:</h3>
+      {{ question.question_hint|safe }}
+    </div>
+  </div>
+
+  <div id="results">
+
+  </div>
+
+<script>
+  $('#post-form').on('submit', function(event){
+      event.preventDefault();
+      console.log("form submitted!")  // sanity check
+      create_post();
+  });
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+  function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+      }
+  });
+
+  // AJAX for posting
+  function create_post() {
+      console.log("create post is working!") // sanity check
+      var id  = $('input[name=choice]:checked').attr("id");
+      var q   = $('input[name=choice]:checked').next("label").text();
+      console.log(id, q);
+      $.ajax({
+        //url : "/quiz/{{ unit_name }}/{{ question.id }}/create_post/", // the endpoint
+        url : "/quiz/RBT/1/create_post/",
+        type : "POST", // http method
+        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', the_post : q }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            //$('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+  };
+
+</script>
+
+{% endblock %}

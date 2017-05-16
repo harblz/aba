@@ -35,13 +35,10 @@
 
     </head>
     <body>
-      <script type="text/javascript" src="{% static 'js/google-analytics.js' %}"></script>
+      <script type="text/javascript" src="{% static "js/google-analytics.js" %}"></script>
 
       <div class="page-header">
-        {% if user.is_authenticated %}
-          <a href="{% url 'post_new' %}" class="top-menu"><span class="top-menu-add-post"><span class="glyphicon glyphicon-plus"></span> New Post</span></a>
-        {% endif %}
-          <h1 class="page-title"><a href="/">ABA Rocks: A Behavior Analysis Blog</a></h1>
+          <h1 class="page-title"><a href="/">ABA Rocks: Practice Materials</a></h1>
       </div>
 
       <div class="content container-fluid">
