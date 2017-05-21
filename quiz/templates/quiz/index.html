@@ -2,9 +2,12 @@
 
 {% block content %}
   {% if quizes_available %}
-      <ul>
+      <ul class="list-group">
       {% for question in quizes_available %}
-        <li><a href="{% url 'quiz:detail' 5 %}">{{ question.unit_name }}</a></li>
+          <a class="list-group-item" href="{{question.unit_name}}" style="cursor: pointer;">
+            <h4><b>{{ question.unit_name }}</b> practice quiz</h4>
+            <p class="list-group-item-text">A simple, 20 question study guide of basic behavioral principles.</p>
+          </a>
       {% endfor %}
       </ul>
   {% else %}

@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 import json
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.core import serializers
 
 from django.utils import timezone
 
@@ -33,18 +34,74 @@ class QuizView(generic.ListView):
         question = get_object_or_404(Question, pk=question_id)
         return question
 
-def quiz_view(request, quiz_name, question_id ):
-    question  = get_object_or_404(Question, pk=question_id)
-    unit_name = quiz_name
-    questions = Question.objects.filter(
-        unit_name=unit_name
-    ).order_by('-id')
+def quiz_view(request, quiz_name ):
+    if request.method == 'GET':
+        first_question_id = Question.objects.filter(unit_name=quiz_name).first().id
+        question  = get_object_or_404(Question, pk=first_question_id)
+        unit_name = quiz_name
+        questions = Question.objects.filter(
+            unit_name=unit_name
+        ).order_by('-id')
 
-    return render(request, 'quiz/quiz.html', {
-        'question': question,
-        'unit_name': unit_name,
-        'questions': questions,
-    })
+        return render(request, 'quiz/quiz.html', {
+            'question'  : question,
+            'unit_name' : unit_name,
+            'questions' : questions,
+        })
+    else:
+        attempt          = request.POST.get('selected_choice')
+        attempt_id       = request.POST.get('selected_choice_id')
+        selected_choice  = Choice.objects.get(pk=attempt_id)
+        question_id      = selected_choice.question_id
+        question         = get_object_or_404(Question, pk=question_id)
+        question_set     = Question.objects.filter(unit_name=quiz_name).all()
+        last_question_id = Question.objects.filter(unit_name=question.unit_name).all().latest('id').id
+        question_hint    = question.question_hint
+        continue_quiz    = False
+
+        if question_id == last_question_id:
+            x = question_id
+        else:
+            for index, q in enumerate(question_set):
+                if question_id == q.id:
+                    x = question_set[index + 1].id
+                    break
+                else:
+                    x = question_id
+
+        next_question_id      = x
+        next_question         = Question.objects.filter(pk=x).get()
+        next_question_choices = Choice.objects.filter(question_id=next_question)
+        next_choices          = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
+
+        if question.id < last_question_id:
+            continue_quiz = True
+        else:
+            continue_quiz = False
+
+
+        return JsonResponse({
+            'unit_name'     : question.unit_name,
+            'question_id'   : question.id,
+            'question_hint' : question.question_hint,
+            'choice_text'   : attempt,
+            'is_correct'    : selected_choice.is_correct,
+            'last_id'       : last_question_id,
+            'continue_quiz' : continue_quiz,
+            'next_question_id' : next_question_id,
+            'next_question_text' : next_question.question_text,
+            'next_question_choices' : next_choices
+            })
+
+def home(request):
+    if request.method == 'POST':
+        post_text = request.POST.get('the_post')
+        response_data = {}
+
+        return JsonResponse({'foo':'bar post'})
+
+    else:
+        return JsonResponse({'foo':'bar get'})
 
 def create_post(request, quiz_name, question_id):
     if request.method == 'POST':

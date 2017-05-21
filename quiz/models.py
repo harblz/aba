@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Question(models.Model):
-    question_text = models.CharField(max_length=200)
+    question_text = RichTextField()
     unit_name     = models.CharField(max_length=50)
     question_hint = RichTextField()
     pub_date      = models.DateTimeField('date published')
@@ -38,6 +38,7 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+    votes       = models.IntegerField(default=0)
+    is_correct  = models.BooleanField(default=False)
     def __str__(self):
         return self.choice_text

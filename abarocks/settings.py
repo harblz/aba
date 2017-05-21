@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'home.apps.HomeConfig',
     'polls.apps.PollsConfig',
-    'rbtquiz.apps.RbtquizConfig',
     'quiz.apps.QuizConfig',
     'blog.apps.BlogConfig',
     'django.contrib.admin',

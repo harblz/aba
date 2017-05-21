@@ -14,6 +14,7 @@
       <script type="text/javascript" src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/Chart.bundle.min.js" %}"></script>
 
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
       <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
@@ -43,17 +44,13 @@
 
       <div class="content container-fluid">
           <div class="row">
-              <div class="col-md-1">
-                &nbsp
+              <div class="col-md-2">
+                <p style="font-weight: bold;margin: 0 0 -10px 0;"> Menu </p><br>
+                <ul class="list-group">
+                  <li class="list-group-item"><a href="/quiz/">Practice Quizes</a></li>
+                </ul>
               </div>
-              <div class="col-md-11">
-                &nbsp
-              </div>
-
-              <div class="col-md-1">
-                &nbsp
-              </div>
-              <div class="col-md-8">
+              <div class="col-md-10">
                 {% block content %}
                 {% endblock %}
               </div>
