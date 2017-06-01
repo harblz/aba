@@ -23,3 +23,6 @@ urlpatterns = [
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+
+admin.site.site_title  = 'ABA.rocks Administration'
+admin.site.site_header = 'ABA.rocks administration'
