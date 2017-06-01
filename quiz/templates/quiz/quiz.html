@@ -48,7 +48,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title alert alert-danger"><b>Oops!</b> That answer is not correct</h4>
+          <h4 class="modal-title alert alert-danger"><b>Oops!</b> That answer was not correct</h4>
         </div>
         <div class="modal-body">
           <div id="error_modal_message">
@@ -100,6 +100,7 @@
       event.preventDefault();
       grade_question();
   });
+
   var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
   function csrfSafeMethod(method) {
@@ -139,17 +140,46 @@
     myChart.update();
   }
 
+  Array.prototype.randomElement = function () {
+      return this[Math.floor(Math.random() * this.length)]
+  }
+
+  Array.prototype.remove = function() {
+      var what, a = arguments, L = a.length, ax;
+      while (L && this.length) {
+          what = a[--L];
+          while ((ax = this.indexOf(what)) !== -1) {
+              this.splice(ax, 1);
+          }
+      }
+      return this;
+  };
+
+
+  var question_ids      = JSON.parse("{{question_ids}}");
+  var first_question_id = JSON.parse("{{first_question_id}}");
+  question_ids = question_ids.remove(first_question_id);
+  localStorage.setItem("{{question.unit_name}}_question_ids",JSON.stringify(question_ids));
+
   function grade_question() {
-      var id  = $('input[name=choice]:checked').attr("id");
+      var choice_id  = $('input[name=choice]:checked').attr("id");
       var q   = $('input[name=choice]:checked').next("label").text();
       var current_score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
+      var id = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).randomElement();
+      var id_list = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).remove(id);
+      localStorage.setItem("{{question.unit_name}}_question_ids", JSON.stringify(id_list));
+      var end_of_quiz = false;
+      if ( id_list.length == 0 ) {
+        end_of_quiz = true;
+      }
+      localStorage.setItem("{{question.unit_name}}_question_ids",JSON.stringify(id_list))
       $.ajax({
         url : "/quiz/{{question.unit_name}}/",
         type : "POST",
-        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', selected_choice : q, selected_choice_id : id }, // data sent with the post request
+        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
         success : function(response) {
             $('#results').html('');
-            if (response.is_correct == true && response.question_id < response.last_id) {
+            if (response.is_correct == true && end_of_quiz == false) {
             current_score.push("correct");
             localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
               $('#choices').html('');
@@ -160,7 +190,7 @@
               $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
               $('#question_text').html('<small>'+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
             } else {
-              if ( response.question_id >= response.last_id && response.is_correct == true) {
+              if ( end_of_quiz == true && response.is_correct == true) {
                 current_score.push("correct");
                 localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#question_text').html("<b>That's it!</b> You finished the quiz.");
@@ -171,7 +201,10 @@
                 current_score.push("incorrect");
                 localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#error_modal').modal('show');
-                $('#error_modal_message').html(response.question_hint);
+                $('#error_modal_message').html('');
+                $('#error_modal_message').append('<h3><small>The question was...</small> '+response.prev_question_was+'</h3>');
+                $('#error_modal_message').append('<h3><small>The correct answer was...</small><br><b>'+response.correct_choice_text+'</b></h3><br>');
+                $('#error_modal_message').append(response.prev_question_hint);
                 $('#choices').html('');
                 if ( response.question_id >= response.last_id ) {
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
