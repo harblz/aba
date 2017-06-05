@@ -39,7 +39,7 @@ class QuizView(generic.ListView):
 
 def quiz_view(request, quiz_name ):
     if request.method == 'GET':
-        queryset_ids        = Question.objects.filter(unit_name=quiz_name).values_list('id', flat=True)
+        queryset_ids        = Question.objects.filter(unit_name='BCaBA').values_list('id', flat=True)
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
@@ -53,7 +53,7 @@ def quiz_view(request, quiz_name ):
     else:
         attempt             = request.POST.get('selected_choice')
         attempt_id          = request.POST.get('selected_choice_id')
-        next_question_id    = request.POST.get('question_id')
+        next_question_id    = request.POST.get('next_question_id')
 
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
@@ -62,15 +62,25 @@ def quiz_view(request, quiz_name ):
         prev_question       = Question.objects.get(pk=prev_question_id)
         correct_choice      = Choice.objects.get(question_id=prev_question_id, is_correct=1).choice_text
 
-        next_question           = get_object_or_404(Question, pk=next_question_id)
-        next_question_choices   = Choice.objects.filter(question_id=next_question_id)
-        next_question_choices   = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
-
+        try:
+            next_question           = Question.objects.get(pk=next_question_id)
+            next_question_choices   = Choice.objects.filter(question_id=next_question_id)
+            next_question_choices   = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
+        except(KeyError, Question.DoesNotExist):
+            next_question               = None;
+            next_question_choices       = None;
+            next_question_question_text = None;
+            next_question_question_hint = None;
+        else:
+            next_question               = None;
+            next_question_choices       = None;
+            next_question_question_text = None;
+            next_question_question_hint = None;
 
         return JsonResponse({
-            'unit_name'             : next_question.unit_name,
-            'question_id'           : next_question.id,
-            'question_hint'         : next_question.question_hint,
+            'unit_name'             : quiz_name,
+            'question_id'           : next_question_id,
+            'question_hint'         : next_question_question_hint,
             'choice_text'           : attempt,
             'is_correct'            : selected_choice.is_correct,
             'correct_choice_text'   : correct_choice,
@@ -78,7 +88,7 @@ def quiz_view(request, quiz_name ):
             'prev_question_hint'    : prev_question.question_hint,
             'prev_question_choice'  : attempt,
             'next_question_id'      : next_question_id,
-            'next_question_text'    : next_question.question_text,
+            'next_question_text'    : next_question_question_text,
             'next_question_choices' : next_question_choices
             })
 

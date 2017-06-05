@@ -2,6 +2,10 @@
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
+{% block extrahead %}
+  <link rel="icon" type="image/png" sizes="96x96" href="https://aba.rocks/static/favicon/favicon-96x96.png">
+{% endblock %}
+
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Yo') }}</a></h1>
 {% endblock %}

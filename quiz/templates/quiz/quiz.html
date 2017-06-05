@@ -176,7 +176,7 @@
       $.ajax({
         url : "/quiz/{{question.unit_name}}/",
         type : "POST",
-        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
+        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
         success : function(response) {
             $('#results').html('');
             if (response.is_correct == true && end_of_quiz == false) {
@@ -204,9 +204,10 @@
                 $('#error_modal_message').html('');
                 $('#error_modal_message').append('<h3><small>The question was...</small> '+response.prev_question_was+'</h3>');
                 $('#error_modal_message').append('<h3><small>The correct answer was...</small><br><b>'+response.correct_choice_text+'</b></h3><br>');
+                $('#error_modal_message').append('<h3><small>Your answer was...</small><br><b>'+q+'</b></h3><br>');
                 $('#error_modal_message').append(response.prev_question_hint);
                 $('#choices').html('');
-                if ( response.question_id >= response.last_id ) {
+                if ( end_of_quiz == true ) {
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
                   console.log(JSON.parse(localStorage.getItem("{{question.unit_name}}")));
