@@ -39,7 +39,7 @@ class QuizView(generic.ListView):
 
 def quiz_view(request, quiz_name ):
     if request.method == 'GET':
-        queryset_ids        = Question.objects.filter(unit_name='BCaBA').values_list('id', flat=True)
+        queryset_ids        = Question.objects.filter(unit_name=quiz_name).values_list('id', flat=True)
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
@@ -50,6 +50,7 @@ def quiz_view(request, quiz_name ):
             'first_question_id' : first_question_id,
             'unit_name'         : unit_name,
         })
+    # post
     else:
         attempt             = request.POST.get('selected_choice')
         attempt_id          = request.POST.get('selected_choice_id')
@@ -63,19 +64,21 @@ def quiz_view(request, quiz_name ):
         correct_choice      = Choice.objects.get(question_id=prev_question_id, is_correct=1).choice_text
 
         try:
-            next_question           = Question.objects.get(pk=next_question_id)
-            next_question_choices   = Choice.objects.filter(question_id=next_question_id)
-            next_question_choices   = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
+            next_question               = Question.objects.get(pk=next_question_id)
         except(KeyError, Question.DoesNotExist):
-            next_question               = None;
-            next_question_choices       = None;
-            next_question_question_text = None;
-            next_question_question_hint = None;
+            next_question               = None
+
+        #next_question               = Question.objects.get(pk=next_question_id)
+        if (next_question == None):
+            next_question_choices       = None
+            next_question_question_text = None
+            next_question_question_hint = None
         else:
-            next_question               = None;
-            next_question_choices       = None;
-            next_question_question_text = None;
-            next_question_question_hint = None;
+            next_question               = Question.objects.get(pk=next_question_id)
+            next_question_choices       = Choice.objects.filter(question_id=next_question_id)
+            next_question_choices       = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
+            next_question_question_text = next_question.question_text
+            next_question_question_hint = next_question.question_hint
 
         return JsonResponse({
             'unit_name'             : quiz_name,

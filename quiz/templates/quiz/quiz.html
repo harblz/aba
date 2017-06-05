@@ -195,7 +195,6 @@
                 localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                 $('#choice_menu').fadeOut();
-                console.log(JSON.parse(localStorage.getItem("{{question.unit_name}}")));
                 displayScore();
               } else {
                 current_score.push("incorrect");
@@ -210,7 +209,6 @@
                 if ( end_of_quiz == true ) {
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
-                  console.log(JSON.parse(localStorage.getItem("{{question.unit_name}}")));
                   displayScore();
                 } else {
                   for (var i = 0; i < response.next_question_choices.length; i++) {
@@ -225,7 +223,7 @@
 
         error : function(xhr,errmsg,err) {
             $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: <i>"+err+
-                "</i>. Try again, I guess? <a href='#' class='close'>&times;</a></div>");
+                "</i>. Try again, I guess? <a href='#' class='close'>&times;</a> If the problem persis, email Alex</div>");
             console.log(xhr.status + ": " + xhr.responseText);
         }
     });
