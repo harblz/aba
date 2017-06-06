@@ -1,7 +1,7 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-  <h1 id="question_text"><small>{{ unit_name }} Practice Quiz</small><br>{{ question.question_text|safe }} </h1>
+  <h3 id="question_text"><small>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</small><br>{{ question.question_text|safe }} </h3>
   <br>
   <div id="score_graph" class="fade" style="display: none; height: 400px; width: 400px;">
     <canvas id="myChart" width="400" height="400"></canvas>
@@ -64,7 +64,7 @@
 
 
 <script>
-  var dataset = [12, 5];
+  var dataset = [];
 
   var ctx = document.getElementById("myChart");
   var myChart = new Chart(ctx, {
@@ -116,6 +116,8 @@
 
   var current_score = [];
   localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
+
+  var max_questions = "{{total_questions}}";
 
   function displayScore() {
     var score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
@@ -179,6 +181,7 @@
         data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
         success : function(response) {
             $('#results').html('');
+            $('#questionNumber').html(max_questions - id_list.length);
             if (response.is_correct == true && end_of_quiz == false) {
             current_score.push("correct");
             localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
@@ -188,7 +191,7 @@
                 $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
               }
               $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-              $('#question_text').html('<small>'+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
+              $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
             } else {
               if ( end_of_quiz == true && response.is_correct == true) {
                 current_score.push("correct");
@@ -201,9 +204,9 @@
                 localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#error_modal').modal('show');
                 $('#error_modal_message').html('');
-                $('#error_modal_message').append('<h3><small>The question was...</small> '+response.prev_question_was+'</h3>');
-                $('#error_modal_message').append('<h3><small>The correct answer was...</small><br><b>'+response.correct_choice_text+'</b></h3><br>');
-                $('#error_modal_message').append('<h3><small>Your answer was...</small><br><b>'+q+'</b></h3><br>');
+                $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
+                $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3>');
+                $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+q+'</b></p></h3><br>');
                 $('#error_modal_message').append(response.prev_question_hint);
                 $('#choices').html('');
                 if ( end_of_quiz == true ) {
@@ -215,7 +218,7 @@
                     $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
                     $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
                   }
-                  $('#question_text').html('<small>'+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
+                  $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
                 }
               }
             }

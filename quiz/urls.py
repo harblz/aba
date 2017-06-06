@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'quiz'
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.quiz_index, name='index'),
     url(r'^hello/', views.home, name='home'),
     url(r'^(?P<pk>[0-9]+)/\w+', views.DetailView.as_view(), name='detail'),
     url(r'^(?P<quiz_name>\w+)/$', views.quiz_view, name='quiz'),

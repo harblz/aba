@@ -15,27 +15,16 @@ from django.utils import timezone
 
 from .models import Choice, Question
 
-class IndexView(generic.ListView):
-    template_name = 'quiz/index.html'
-    context_object_name = 'quizes_available'
+def quiz_index(request):
+    template_name       = 'quiz/index.html'
+    unit_names          = Question.objects.values("unit_name").distinct()
 
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        return Question.objects.filter(
-            pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
-        """
-        return Question.objects.values("unit_name").distinct()
+    for unit in unit_names:
+        unit['count']    = len(Question.objects.values('unit_name').filter(unit_name=unit['unit_name']))
 
-class QuizView(generic.ListView):
-    template_name = 'quiz/quiz.html'
-    context_object_name = 'quiz'
-
-    def get_queryset(request, question_id):
-        question = get_object_or_404(Question, pk=question_id)
-        return question
+    return render(request, 'quiz/index.html', {
+        'unit_names'        : unit_names,
+    })
 
 def quiz_view(request, quiz_name ):
     if request.method == 'GET':
@@ -43,12 +32,14 @@ def quiz_view(request, quiz_name ):
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
+        max_questions       = len(queryset_ids)
 
         return render(request, 'quiz/quiz.html', {
             'question_ids'      : json.dumps(list(queryset_ids), cls=DjangoJSONEncoder),
             'question'          : question,
             'first_question_id' : first_question_id,
             'unit_name'         : unit_name,
+            'total_questions'   : max_questions,
         })
     # post
     else:

@@ -1,12 +1,12 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-  {% if quizes_available %}
+  {% if unit_names|length > 0 %}
       <ul class="list-group">
-      {% for question in quizes_available %}
-          <a class="list-group-item" href="{{question.unit_name}}" style="cursor: pointer;">
-            <h4><b>{{ question.unit_name }}</b> practice quiz</h4>
-            <p class="list-group-item-text">A simple, 20 question study guide of basic behavioral principles.</p>
+      {% for unit_name in unit_names %}
+          <a class="list-group-item" href="{{unit_name.unit_name}}" style="cursor: pointer;">
+            <h4><b>{{ unit_name.unit_name }}</b> practice quiz</h4>
+            <p class="list-group-item-text">A simple, {{ unit_name.count }} question study guide of basic behavioral principles.</p>
           </a>
       {% endfor %}
       </ul>
