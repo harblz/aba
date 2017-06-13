@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
+      <script type="text/javascript" src="{% static 'js/google-analytics.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
@@ -35,7 +36,6 @@
 
     </head>
     <body>
-      <script type="text/javascript" src="{% static 'js/google-analytics.js' %}"></script>
 
       <div class="page-header">
         {% if user.is_authenticated %}
