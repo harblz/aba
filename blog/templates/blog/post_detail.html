@@ -9,7 +9,7 @@
           <div class="col-md-2">
             {% if post.published_date %}
                 <div class="date">
-                    {{ post.published_date }}
+                  posted by <b>{{post.author}}</b> on {{ post.published_date }}
                 </div>
             {% endif %}
           </div>

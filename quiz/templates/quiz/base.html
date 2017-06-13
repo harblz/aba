@@ -2,6 +2,9 @@
 <!doctype html>
 <html>
     <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>ABA Rocks: A Blog</title>
       <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
       <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
@@ -19,7 +22,8 @@
         ga('create', 'UA-98470698-1', 'auto');
         ga('send', 'pageview');
 
-      </script>      <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
+      </script>
+      <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
@@ -46,15 +50,19 @@
     </head>
     <body>
       <div class="page-header">
-          <h1 class="page-title"><a href="/">ABA Rocks: Practice Materials</a></h1>
+          <h1 class="hidden-xs  page-title"><a href="/">ABA Rocks: A Behavior Analysis Blog</a></h1>
+          <h2 class="visible-xs page-title"><a style="color: white;" href="/">ABA Rocks: A Behavior Analysis Blog</a></h2>
       </div>
 
       <div class="content container-fluid">
           <div class="row">
               <div class="col-md-2">
-                <p style="font-weight: bold;margin: 0 0 -10px 0;"> Menu </p><br>
-                <ul class="list-group">
+                <p data-toggle="collapse" data-target="#mainMenu" style="width: 100%;font-weight: bold;margin: 0 0 -10px 0;"> Stuff </p><br>
+                <ul id="mainMenu" class="list-group mainMenu">
                   <li class="list-group-item"><a href="/quiz/">Practice Quizes</a></li>
+                  {% if user.is_authenticated %}
+                    <li class="list-group-item"><a href="{% url 'post_new' %}"><span class="top-menu-add-post"><span class="glyphicon glyphicon-plus"></span> New Post</span></a></li>
+                  {% endif %}
                 </ul>
               </div>
               <div class="col-md-10">
