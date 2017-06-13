@@ -1,19 +1,19 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post">
-        <div class="row-fluid">
-          <div class="col-md-6">
+    <div class="container post">
+        <div class="row-flex">
+          <div class="col-xs-6">
                     <h1>{{ post.title }}</h1>
           </div>
-          <div class="col-md-2">
+          <div class="col-xs-2">
             {% if post.published_date %}
                 <div class="date">
                   posted by <b>{{post.author}}</b> on {{ post.published_date }}
                 </div>
             {% endif %}
           </div>
-          <div class="col-md-1">
+          <div class="col-xs-1">
             {% if user.is_authenticated %}
                  <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
             {% endif %}
