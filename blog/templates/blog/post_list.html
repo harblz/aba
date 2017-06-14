@@ -3,11 +3,26 @@
 {% block content %}
     {% for post in posts %}
         <div class="post">
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <div class="date" style="margin: 0 0 15px 0;">
-                posted by <b>{{post.author}}</b> on {{ post.published_date }}
+          <div class="row-fluid">
+            <div class="col-md-12">
+              <h1>
+                {% if user.is_authenticated %}
+                  <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
+                {% endif %}
+                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+              </h1>
             </div>
+            <div class="col-md-12">
+              {% if post.published_date %}
+                  <div class="date">
+                    posted by <b>{{post.author}}</b> on {{ post.published_date }}
+                  </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-12">
             <p>{{ post.text|safe }}</p>
+          </div>
         </div>
 
     {% endfor %}
