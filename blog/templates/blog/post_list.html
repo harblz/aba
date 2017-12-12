@@ -4,6 +4,14 @@
     {% for post in posts %}
         <div class="post">
           <div class="row-fluid">
+          <div class="col-md-1">
+            <time datetime="{{ post.published_date }}" class="icon">
+              <em>{{ post.published_date|date:"l" }}</em>
+              <strong>{{ post.published_date|date:"F" }}</strong>
+              <span>{{ post.published_date|date:"j" }}</span>
+            </time>
+          </div>
+          <div class="col-md-11">
             <div class="col-md-12">
               <h1>
                 {% if user.is_authenticated %}
@@ -19,9 +27,9 @@
                   </div>
               {% endif %}
             </div>
-          </div>
-          <div class="col-md-12">
-            <p>{{ post.text|safe }}</p>
+            <div class="col-md-12">
+              <p>{{ post.text|safe }}</p>
+            </div>
           </div>
         </div>
 
