@@ -1,6 +1,10 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
+
+  <div id="results">
+
+  </div>
   <h3 id="question_text"><small>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</small><br>{{ question.question_text|safe }} </h3>
   <br>
   <div id="score_graph" class="fade" style="display: none; height: 400px; width: 400px;">
@@ -16,9 +20,9 @@
       <div id="choices">
       {% for choice in question.choice_set.all %}
           <div>
-            <label for="choice{{ forloop.counter }}">
+            <label class="quiz-choice-labels">
               <input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" />
-              <span style="font-weight: normal">{{ choice.choice_text }}</span>
+              <span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text }}</span>
             </label><br />
           </div>
       {% endfor %}
@@ -42,10 +46,6 @@
       <h3>Here's a hint:</h3>
       {{ question.question_hint|safe }}
     </div>
-  </div>
-
-  <div id="results">
-
   </div>
 
   <div id="error_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="Question Hint" aria-hidden="true">
@@ -137,8 +137,10 @@
     }
     var final_score = correct_count/(incorrect_count+correct_count);
     if ( final_score >= 0.8 ) {
+      window.scrollTo(0,0);
       $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
     } else {
+      window.scrollTo(0,0);
       $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
     }
     myChart.data.datasets[0].data[1] = correct_count;
@@ -170,70 +172,78 @@
   function grade_question() {
       var choice_id  = $('input[name=choice]:checked').attr("id");
       var q   = $('input[name=choice]:checked').next("label").text();
-      var current_score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
-      var id = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).randomElement();
-      var id_list = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).remove(id);
-      localStorage.setItem("{{question.unit_name}}_question_ids", JSON.stringify(id_list));
-      var end_of_quiz = false;
-      if ( id_list.length == 0 ) {
-        end_of_quiz = true;
-      }
-      localStorage.setItem("{{question.unit_name}}_question_ids",JSON.stringify(id_list))
-      $.ajax({
-        url : "/quiz/{{question.unit_name}}/",
-        type : "POST",
-        data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
-        success : function(response) {
-            $('#results').html('');
-            $('#questionNumber').html(max_questions - id_list.length);
-            if (response.is_correct == true && end_of_quiz == false) {
-            current_score.push("correct");
-            localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
-              $('#choices').html('');
-              for (var i = 0; i < response.next_question_choices.length; i++) {
-                $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
-                $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
-              }
-              $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-              $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
-            } else {
-              if ( end_of_quiz == true && response.is_correct == true) {
-                current_score.push("correct");
-                localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
-                $('#question_text').html("<b>That's it!</b> You finished the quiz.");
-                $('#choice_menu').fadeOut();
-                displayScore();
-              } else {
-                current_score.push("incorrect");
-                localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
-                $('#error_modal').modal('show');
-                $('#error_modal_message').html('');
-                $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
-                $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3>');
-                $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+q+'</b></p></h3><br>');
-                $('#error_modal_message').append(response.prev_question_hint);
+      console.log(choice_id);
+      if ( typeof(choice_id) !== 'undefined' ) {
+        var current_score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
+        var id = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).randomElement();
+        var id_list = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).remove(id);
+        localStorage.setItem("{{question.unit_name}}_question_ids", JSON.stringify(id_list));
+        var end_of_quiz = false;
+        if ( id_list.length == 0 ) {
+          end_of_quiz = true;
+        }
+        localStorage.setItem("{{question.unit_name}}_question_ids",JSON.stringify(id_list))
+        $.ajax({
+          url : "/quiz/{{question.unit_name}}/",
+          type : "POST",
+          data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
+          success : function(response) {
+              $('#results').html('');
+              $('#questionNumber').html(max_questions - id_list.length);
+              if (response.is_correct == true && end_of_quiz == false) {
+              current_score.push("correct");
+              localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#choices').html('');
-                if ( end_of_quiz == true ) {
+                for (var i = 0; i < response.next_question_choices.length; i++) {
+                  $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
+                  $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                }
+                window.scrollTo(0,0);
+                $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
+                $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
+              } else {
+                if ( end_of_quiz == true && response.is_correct == true) {
+                  current_score.push("correct");
+                  localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
                   displayScore();
                 } else {
-                  for (var i = 0; i < response.next_question_choices.length; i++) {
-                    $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
-                    $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                  current_score.push("incorrect");
+                  localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
+                  $('#error_modal').modal('show');
+                  $('#error_modal_message').html('');
+                  $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
+                  $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3>');
+                  $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+q+'</b></p></h3><br>');
+                  $('#error_modal_message').append(response.prev_question_hint);
+                  $('#choices').html('');
+                  if ( end_of_quiz == true ) {
+                    $('#question_text').html("<b>That's it!</b> You finished the quiz.");
+                    $('#choice_menu').fadeOut();
+                    displayScore();
+                  } else {
+                    for (var i = 0; i < response.next_question_choices.length; i++) {
+                      $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
+                      $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                    }
+                    $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
                   }
-                  $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
                 }
               }
-            }
-        },
+          },
 
-        error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: <i>"+err+
-                "</i>. Try again, I guess? <a href='#' class='close'>&times;</a> If the problem persis, email Alex</div>");
-            console.log(xhr.status + ": " + xhr.responseText);
-        }
-    });
+          error : function(xhr,errmsg,err) {
+              window.scrollTo(0,0);
+              $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: <i>"+err+
+                  "</i>. Try again, I guess? <a href='#' class='close'>&times;</a> If the problem persis, email Alex</div>");
+              console.log(xhr.status + ": " + xhr.responseText);
+          }
+        });
+      } else {
+        window.scrollTo(0,0);
+        $('#results').html('<div class="alert alert-warning" role="alert"><b>Did you forget to make a choice??<br/> <strong>You clicked submit without picking a choice!</submit></div>');
+      }
   };
 
 </script>

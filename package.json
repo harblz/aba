@@ -1,0 +1,26 @@
+{
+  "name": "aba",
+  "version": "1.0.0",
+  "description": "ABA.rocks blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harblz/aba.git"
+  },
+  "author": "Harblz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harblz/aba/issues"
+  },
+  "homepage": "https://github.com/harblz/aba#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-loader": "^7.1.2",
+    "react": "^16.2.0",
+    "webpack": "^3.10.0",
+    "webpack-bundle-tracker": "^0.2.0"
+  }
+}

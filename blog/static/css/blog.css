@@ -1,3 +1,26 @@
+@media screen and (max-device-width: 480px) {
+  h1 {
+    font-size: 2em;
+  }
+  .col-lg-11 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .col-md-12 {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+}
+
+/* Quiz Styles */
+.quiz-choice-labels {
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 1.15em;
+}
+
+
+/* Calendar Icon for Posts */
 time.icon
 {
   font-size: 1em; /* change icon size */
@@ -75,6 +98,7 @@ time.icon:hover, time.icon:focus
   100% { transform: rotate(0deg)  skewY(0deg); }
 }
 
+/* section-to-print hides the rest of the page when printing, in case anyone is crazy enough to print these articles */
 @media print {
   body * {
     visibility: hidden;
