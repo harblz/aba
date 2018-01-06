@@ -195,8 +195,14 @@
               localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
                 $('#choices').html('');
                 for (var i = 0; i < response.next_question_choices.length; i++) {
-                  $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
-                  $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                  $('#choices').append(`
+                      <label class="quiz-choice-labels">
+                        <input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" />
+                        <span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span>
+                      </label><br />
+                    `);
+                  //<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />
+                  //$('#choices').append('<label class="quiz-choice-labels"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
@@ -224,8 +230,12 @@
                     displayScore();
                   } else {
                     for (var i = 0; i < response.next_question_choices.length; i++) {
-                      $('#choices').append('<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />');
-                      $('#choices').append('<label for="choice'+i+'"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                      $('#choices').append(`
+                          <label class="quiz-choice-labels">
+                            <input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" />
+                            <span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span>
+                          </label><br />
+                        `);
                     }
                     $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
                   }

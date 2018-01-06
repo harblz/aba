@@ -5,7 +5,7 @@ from datetime import datetime
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
     title = models.CharField(max_length=200)
     text = RichTextField()
     created_date = models.DateTimeField(
