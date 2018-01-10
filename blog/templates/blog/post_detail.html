@@ -3,15 +3,15 @@
 {% block content %}
     <div class="post">
       <div class="row-fluid">
-        <div class="col-md-1">
+        <div class="col-1">
           <time datetime="{{ post.published_date }}" class="icon">
             <em>{{ post.published_date|date:"l" }}</em>
             <strong>{{ post.published_date|date:"F" }}</strong>
             <span>{{ post.published_date|date:"j" }}</span>
           </time>
         </div>
-        <div class="col-md-11">
-          <div class="col-md-12">
+        <div class="col-lg-11" style="margin-left: 0px;">
+          <div class="col-lg-12">
             <h1>
               {% if user.is_authenticated %}
                 <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
@@ -19,14 +19,14 @@
               {{ post.title }}
             </h1>
           </div>
-          <div class="col-md-12">
+          <div class="col-lg-12">
             {% if post.published_date %}
                 <div class="date">
                   posted by <b>{{post.author}}</b> on {{ post.published_date }}
                 </div>
             {% endif %}
           </div>
-          <div class="col-md-12">
+          <div class="col-lg-12">
             <p>{{ post.text|safe }}</p>
           </div>
         </div>

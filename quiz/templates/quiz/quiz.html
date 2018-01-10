@@ -171,8 +171,7 @@
 
   function grade_question() {
       var choice_id  = $('input[name=choice]:checked').attr("id");
-      var q   = $('input[name=choice]:checked').next("label").text();
-      console.log(choice_id);
+      var q   = $('#'+choice_id).next('span').text();
       if ( typeof(choice_id) !== 'undefined' ) {
         var current_score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
         var id = JSON.parse(localStorage.getItem("{{question.unit_name}}_question_ids")).randomElement();
@@ -221,7 +220,7 @@
                   $('#error_modal_message').html('');
                   $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
                   $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3>');
-                  $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+q+'</b></p></h3><br>');
+                  $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+response.prev_question_choice+'</b></p></h3><br>');
                   $('#error_modal_message').append(response.prev_question_hint);
                   $('#choices').html('');
                   if ( end_of_quiz == true ) {
