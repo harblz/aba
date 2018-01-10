@@ -141,17 +141,16 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',
         'toolbar_Custom': [
-            ['Styles', 'Format'],
+            ['Styles', 'Format', 'Templates', 'CopyFormatting', 'RemoveFormat', 'PageBreak'],
             ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
-            ['RemoveFormat'],
             ['Maximize'],
             '/',
             ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript'],
             ['Font','FontSize', 'TextColor', 'BGColor'],
             ['Scayt'],
-            ['PasteFromWord'],
+            ['PasteFromWord', ],
         ],
         'extraPlugins': ','.join([
             'autolink',
