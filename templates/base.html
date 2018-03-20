@@ -1,0 +1,301 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>
+        ABA Rocks: A Behavior Analysis Blog
+      </title>
+
+      <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Catamaran|Comfortaa" rel="stylesheet">
+
+      <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-98470698-1', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+
+      <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+      <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+      <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/moment.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/fontawesome-all.min.js" %}"></script>
+      <script type="text/javascript" src="{% static "js/Chart.bundle.min.js" %}"></script>
+
+      <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
+      <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
+      <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png' %}">
+      <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-icon-76x76.png' %}">
+      <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-icon-114x114.png' %}">
+      <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-icon-120x120.png' %}">
+      <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-icon-144x144.png' %}">
+      <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-icon-152x152.png' %}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-icon-180x180.png' %}">
+      <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'favicon/android-icon-192x192.png' %}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+      <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+      <link rel="manifest" href="{% static 'favicon/manifest.json' %}">
+      <meta name="msapplication-TileColor" content="#ffffff">
+      <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png' %}">
+      <meta name="theme-color" content="#ffffff">
+
+    </head>
+    <body>
+
+      <div class="page-header">
+
+          <h1 class="d-none d-md-block page-title" style="text-align: center;">
+            <div class="d-inline">
+              <a class="page-banner-title" href="/">
+                ABA Rocks: <small>A Behavior Analysis Blog</small>
+              </a>
+            </div>
+          </h1>
+
+          <h2 class="d-inline d-sm-block d-md-none d-lg-none page-title" style="text-align: center;">
+            <div class="d-inline">
+              <button class="float-left btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+            <div class="d-inline" style="margin-left: 12%">
+              <a class="page-banner-title" href="/">
+                ABA Rocks: <br /> <small>A Behavior Analysis Blog</small>
+              </a>
+            </div>
+          </h2>
+
+          {% if user.is_not_authenticated %}
+            <button type="button" class="btn btn-dark">Log in</button><br>
+          {% endif %}
+      </div>
+
+      <div class="content container-fluid">
+        <div class="row">
+              <!-- Desktop Sidebar !-->
+              <div class="col-md-2 d-none d-lg-block">
+                {% block sidebar %}
+                  <div id="sidebar">
+
+                    <ul class="list-group list-group-flush">
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-home"></i>
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/">Home</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Learn what ABA is, where it comes from, and who can use it">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-question"></i> 
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Gain a little knowledge about some <b>basic concepts</b> in Applied Behavior Analysis">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Research regarding the efficacy of ABA and it's limitations">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-flask"></i> 
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/research">Research & Evidence</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Resources for <b>Providers</b> & <b>Families</b> regarding ABA services">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-info-circle"></i>
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/resources">Resources</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Quizzes to help you prepare for the RBT and BCaBA Exam!">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="fas fa-book"></i> 
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/quiz">ABA Exam Prep Materials</a>
+                          </div>
+                      </li>
+
+                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Information about this site and it's author">
+                        <div style="width: 100%;">
+                          <div class="sidebar-link-icon">
+                            <i class="far fa-envelope"></i> 
+                          </div>
+                          <div class="sidebar-link-text">
+                            <a class="sidebar-link" href="/about">About ABA.rocks</a>
+                          </div>
+                      </li>
+
+                      {% if user.is_authenticated %}
+                      <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" title="Create a new post">
+                          <div class="sidebar-link-icon">
+                            <i class="far fa-plus-square"></i>
+                          </div> 
+                          <div class="sidebar-link-text">
+                            <a href="{% url 'post_new' %}">
+                              New Post
+                            </a>
+                          </div>
+                      </li>
+                      {% endif %}
+
+                    </ul>
+
+                  </div>
+                {% endblock %}
+              </div>
+
+              <!-- Mobile Sidebar !-->
+              <div class="collapse" id="collapseExample" style="margin: 0 2.5% 0 2.5%; width: 95%;">
+                <div class="d-lg-none d-md-none">
+                  {% block mobile-sidebar %}
+                    <div id="sidebar">
+
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-home"></i>
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">Home
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-question"></i> 
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">What is ABA?
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">Learn Behavioral Basics 
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-flask"></i> 
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">Research Supporting ABA 
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">Resources
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="fas fa-book"></i> 
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">ABA Exam Prep Materials
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                          <div style="width: 100%;">
+                            <div class="sidebar-link-icon">
+                              <i class="far fa-envelope"></i> 
+                            </div>
+                            <div class="sidebar-link-text">
+                              <a class="sidebar-link" href="/">About ABA.rocks
+                            </div>
+                        </li>
+
+                        {% if user.is_authenticated %}
+                          <li class="list-group-item">
+                            <a href="{% url 'post_new' %}">
+                              
+                              <div class="sidebar-link-icon">
+                                <i class="far fa-plus-square"></i>
+                              </div> 
+                              <div class="sidebar-link-text">
+                                <a class="sidebar-link" href="/">New Post
+                              </div>
+                            </a>
+                          </li>
+                        {% endif %}
+
+                      </ul>
+
+                    </div>
+                  {% endblock %}
+                </div>
+              </div>
+
+
+              <!-- Blog Posts Content !-->
+              <div id="section-to-print" class="col-md-10">
+                <!-- Posts -->
+                {% block content %}
+                {% endblock %}
+              </div>
+        </div>
+
+      </div>
+      <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+      </script>
+    </body>
+
+</html>

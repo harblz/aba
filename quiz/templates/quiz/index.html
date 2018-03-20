@@ -1,4 +1,4 @@
-{% extends 'quiz/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
   {% if unit_names|length > 0 %}
@@ -11,6 +11,6 @@
       {% endfor %}
       </ul>
   {% else %}
-      <p>No quizes are available at this time. If you believe this is an error, contact the administrator at <a href="mailto:admin@aba.rocks">admin@aba.rocks</a>.</p>
+      <p>No quizzes are available at this time. If you believe this is an error, contact the administrator at <a href="mailto:admin@aba.rocks">admin@aba.rocks</a>.</p>
   {% endif %}
 {% endblock %}

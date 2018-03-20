@@ -6,6 +6,22 @@ from .forms import PostForm
 from django.shortcuts import redirect
 
 
+def blog_what_is_aba(request):
+    return render(request, 'blog/blog_what_is_aba.html', {})
+
+def blog_behavior_basics(request):
+    return render(request, 'blog/blog_behavior_basics.html', {})
+
+def blog_research(request):
+    return render(request, 'blog/blog_research.html', {})
+
+def blog_resources(request):
+    return render(request, 'blog/blog_resources.html', {})
+
+def blog_about(request):
+    return render(request, 'blog/blog_about.html', {})
+
+
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})

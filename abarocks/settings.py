@@ -39,7 +39,6 @@ GOOGLE_ANALYTICS_DOMAIN = 'aba.rocks'
 
 INSTALLED_APPS = [
     'ckeditor',
-    'home.apps.HomeConfig',
     'polls.apps.PollsConfig',
     'quiz.apps.QuizConfig',
     'blog.apps.BlogConfig',
@@ -67,7 +66,10 @@ ROOT_URLCONF = 'abarocks.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))),"static","templates")],
+        'DIRS': [
+            (os.path.join(BASE_DIR, 'templates')),
+            os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))),"static","templates")
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,13 +134,15 @@ USE_TZ = True
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
 
 # CKEditor
 CKEDITOR_CONFIGS = {
     'default': {
+        'width': '100%',
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Styles', 'Format', 'Templates', 'CopyFormatting', 'RemoveFormat', 'PageBreak'],
@@ -150,13 +154,16 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript'],
             ['Font','FontSize', 'TextColor', 'BGColor'],
             ['Scayt'],
-            ['PasteFromWord', ],
+            ['PasteFromWord', 'youtube'],
         ],
         'extraPlugins': ','.join([
             'autolink',
             'autoembed',
             'autogrow',
             'scayt',
+            'autosave',
+            'notification',
+            'youtube',
         ]),
     }
 }

@@ -1,7 +1,7 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Manage Posts</h1>
+    <h1>Create a Post!</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ myform.media }}
         {{ form.as_p }}

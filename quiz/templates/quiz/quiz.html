@@ -1,10 +1,15 @@
-{% extends 'quiz/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-  <div id="results">
+<div class="progress">
+  <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
-  </div>
+  <!-- Displays the Quiz Results at the end !-->
+  <div id="results"></div>
+
   <h3 id="question_text"><small>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</small><br>{{ question.question_text|safe }} </h3>
   <br>
   <div id="score_graph" class="fade" style="display: none; height: 400px; width: 400px;">
@@ -52,7 +57,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title alert alert-danger"><b>Oops!</b> That answer was not correct</h4>
+          <h4 class="modal-title alert alert-danger" style='width: 100%;'><b>Oops!</b> That answer was not correct</h4>
         </div>
         <div class="modal-body">
           <div id="error_modal_message">
@@ -121,7 +126,33 @@
   var current_score = [];
   localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
 
-  var max_questions = "{{total_questions}}";
+  var max_questions = Number("{{total_questions}}");
+
+  function calculateScore() {
+    var score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
+    console.log(score);
+    var incorrect_count = 0;
+    var correct_count   = 0;
+    for (i = 0; i < score.length; i++ ) {
+      if ( score[i] == "correct" ) {
+        correct_count++;
+      } else {
+        incorrect_count++;
+      }
+    }
+    var total_score = correct_count/(incorrect_count+correct_count);
+
+    var score = new Object();
+    score.correct = correct_count;
+    score.incorrect = incorrect_count;
+    score.percent_correct = total_score;
+    score.max_questions = Number(max_questions)-1;
+
+    $('#progress_bar_correct').css('width', (score.correct/score.max_questions*100)+'%').attr('aria-valuenow', (score.correct/score.max_questions*100));
+    $('#progress_bar_incorrect').css('width', (score.incorrect/score.max_questions*100)+'%').attr('aria-valuenow', (score.incorrect/score.max_questions*100));
+
+    return score;
+  }
 
   function displayScore() {
     var score = JSON.parse(localStorage.getItem("{{question.unit_name}}"));
@@ -189,19 +220,24 @@
           success : function(response) {
               $('#results').html('');
               $('#questionNumber').html(max_questions - id_list.length);
-              if (response.is_correct == true && end_of_quiz == false) {
-              current_score.push("correct");
+
+              if (response.is_correct == true && end_of_quiz == false) {              
+              current_score.push("correct");              
               localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
-                $('#choices').html('');
-                for (var i = 0; i < response.next_question_choices.length; i++) {
-                  $('#choices').append(`
-                      <label class="quiz-choice-labels">
+              calculateScore();
+              /* Update Progress Bar */
+
+
+
+
+              $('#choices').html('');
+              for (var i = 0; i < response.next_question_choices.length; i++) {
+                $('#choices').append(`
+                    <label class="quiz-choice-labels">
                         <input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" />
                         <span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span>
                       </label><br />
-                    `);
-                  //<input type="radio" name="choice" id="'+response.next_question_choices[i].id+'" value="'+i+'" />
-                  //$('#choices').append('<label class="quiz-choice-labels"><span style="font-weight: normal">'+response.next_question_choices[i].choice+'</span></label><br />');
+                  `);
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
@@ -210,12 +246,23 @@
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
                   localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
+                  calculateScore();
+                  /* Update Progress Bar */
+
+
+
+
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
                   displayScore();
                 } else {
                   current_score.push("incorrect");
                   localStorage.setItem("{{question.unit_name}}",JSON.stringify(current_score));
+                  calculateScore();
+                  /* Update Progress Bar */
+
+
+
                   $('#error_modal').modal('show');
                   $('#error_modal_message').html('');
                   $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
@@ -226,6 +273,7 @@
                   if ( end_of_quiz == true ) {
                     $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                     $('#choice_menu').fadeOut();
+                    calculateScore();
                     displayScore();
                   } else {
                     for (var i = 0; i < response.next_question_choices.length; i++) {
@@ -244,7 +292,7 @@
 
           error : function(xhr,errmsg,err) {
               window.scrollTo(0,0);
-              $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: <i>"+err+
+              $('#results').html("<div class='alert-box alert radius' style='width: 100%;' data-alert>Oops! We have encountered an error: <i>"+err+
                   "</i>. Try again, I guess? <a href='#' class='close'>&times;</a> If the problem persis, email Alex</div>");
               console.log(xhr.status + ": " + xhr.responseText);
           }
