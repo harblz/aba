@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if unit_names|length > 0 %}
+  {% if units|length > 0 %}
       <ul class="list-group">
-      {% for unit_name in unit_names %}
-          <a class="list-group-item" href="{{unit_name.unit_name}}" style="cursor: pointer;">
-            <h4><b>{{ unit_name.unit_name }}</b> practice quiz</h4>
-            <p class="list-group-item-text">A simple, {{ unit_name.count }} question study guide of basic behavioral principles.</p>
+      {% for unit in units %}
+        {% if unit.count != 0 %}
+          <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
+            <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
+            <span style="color: #000;">
+              <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description }} </p>
+              <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+            </span>
           </a>
+        {%endif %}
       {% endfor %}
       </ul>
   {% else %}

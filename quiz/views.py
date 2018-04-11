@@ -13,25 +13,27 @@ import random
 
 from django.utils import timezone
 
-from .models import Choice, Question
+from .models import Unit, Choice, Question
 
 def quiz_index(request):
     template_name       = 'quiz/index.html'
-    unit_names          = Question.objects.values("unit_name").distinct()
+    units               = Unit.objects.values("unit_name", "unit_description", "id").all() # Question.objects.values("unit_name").distinct()
 
-    for unit in unit_names:
-        unit['count']    = len(Question.objects.values('unit_name').filter(unit_name=unit['unit_name']))
+    for unit in units:
+        unit['count']    = len(Question.objects.values('unit_id').filter(unit_id=unit['id']))
 
     return render(request, 'quiz/index.html', {
-        'unit_names'        : unit_names,
+        'units'        : units,
     })
 
-def quiz_view(request, quiz_name ):
+def quiz_view(request, quiz_id ):
     if request.method == 'GET':
-        queryset_ids        = Question.objects.filter(unit_name=quiz_name).values_list('id', flat=True)
+        quiz_name           = Unit.objects.get(pk=quiz_id) #Unit.objects.filter(unit_id=quiz_id).values('unit_name', flat=True)
+        queryset_ids        = Question.objects.filter(unit_id=quiz_id).values_list('id', flat=True)
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
+        unit_id             = quiz_id
         max_questions       = len(queryset_ids)
 
         return render(request, 'quiz/quiz.html', {
@@ -39,6 +41,7 @@ def quiz_view(request, quiz_name ):
             'question'          : question,
             'first_question_id' : first_question_id,
             'unit_name'         : unit_name,
+            'unit_id'           : unit_id,
             'total_questions'   : max_questions,
         })
     # post
@@ -46,6 +49,10 @@ def quiz_view(request, quiz_name ):
         attempt             = request.POST.get('selected_choice')
         attempt_id          = request.POST.get('selected_choice_id')
         next_question_id    = request.POST.get('next_question_id')
+
+        quiz_id             = Question.objects.filter(id=next_question_id).values_list('unit_id', flat=True)
+        #quiz_name           = Unit.objects.filter(id=quiz_id).values_list('unit_name', flat=True)
+        quiz_name           = Unit.objects.get(pk=quiz_id[0])
 
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 

@@ -28,7 +28,7 @@
 
       </script>
 
-      <script type="text/javascript" src="{% static 'js/jQuery-3.1.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/jQuery-3.3.1.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
       <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
@@ -87,6 +87,7 @@
 
       <div class="content container-fluid">
         <div class="row">
+
               <!-- Desktop Sidebar !-->
               <div class="col-md-2 d-none d-lg-block">
                 {% block sidebar %}
@@ -94,86 +95,54 @@
 
                     <ul class="list-group list-group-flush">
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="">
+                      <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true" title="">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-home"></i>
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/">Home</a>
-                          </div>
+                          <i class="fas fa-home" style="min-width: 25px;"></i> <a class="sidebar-link" href="/">Home</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Learn what ABA is, where it comes from, and who can use it">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-question"></i> 
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
-                          </div>
+                          <i class="fas fa-question" style="min-width: 25px;"></i> <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Gain a little knowledge about some <b>basic concepts</b> in Applied Behavior Analysis">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
-                          </div>
+                          <i class="fas fa-graduation-cap" style="min-width: 25px;"></i> <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Research regarding the efficacy of ABA and it's limitations">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-flask"></i> 
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/research">Research & Evidence</a>
-                          </div>
+                          <i class="fas fa-flask" style="min-width: 25px;"></i> <a class="sidebar-link" href="/research">Research & Evidence</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Resources for <b>Providers</b> & <b>Families</b> regarding ABA services">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-info-circle"></i>
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/resources">Resources</a>
-                          </div>
+                          <i class="fas fa-info-circle" style="min-width: 25px;"></i> <a class="sidebar-link" href="/resources">Resources</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Quizzes to help you prepare for the RBT and BCaBA Exam!">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="fas fa-book"></i> 
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/quiz">ABA Exam Prep Materials</a>
-                          </div>
+                          <i class="fas fa-book" style="min-width: 25px;"></i> <a class="sidebar-link" href="/quiz">ABA Exam Prep Materials</a>
+                        </div>
                       </li>
 
                       <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" title="Information about this site and it's author">
                         <div style="width: 100%;">
-                          <div class="sidebar-link-icon">
-                            <i class="far fa-envelope"></i> 
-                          </div>
-                          <div class="sidebar-link-text">
-                            <a class="sidebar-link" href="/about">About ABA.rocks</a>
-                          </div>
+                          <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/about">About ABA.rocks</a>
+                        </div>
                       </li>
 
                       {% if user.is_authenticated %}
                       <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" title="Create a new post">
-                          <div class="sidebar-link-icon">
-                            <i class="far fa-plus-square"></i>
-                          </div> 
-                          <div class="sidebar-link-text">
-                            <a href="{% url 'post_new' %}">
-                              New Post
-                            </a>
-                          </div>
+                        <i class="far fa-plus-square" style="min-width: 25px;"></i>
+                        <a href="{% url 'post_new' %}">
+                          New Post
+                        </a>
                       </li>
                       {% endif %}
 
@@ -196,7 +165,7 @@
                               <i class="fas fa-home"></i>
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">Home
+                              <a class="sidebar-link" href="/">Home</a>
                             </div>
                         </li>
 
@@ -206,7 +175,7 @@
                               <i class="fas fa-question"></i> 
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">What is ABA?
+                              <a class="sidebar-link" href="/">What is ABA?</a>
                             </div>
                         </li>
 
@@ -216,7 +185,7 @@
                               <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">Learn Behavioral Basics 
+                              <a class="sidebar-link" href="/">Learn Behavioral Basics </a>
                             </div>
                         </li>
 
@@ -226,7 +195,7 @@
                               <i class="fas fa-flask"></i> 
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">Research Supporting ABA 
+                              <a class="sidebar-link" href="/">Research Supporting ABA </a>
                             </div>
                         </li>
 
@@ -236,7 +205,7 @@
                               <i class="fas fa-info-circle"></i>
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">Resources
+                              <a class="sidebar-link" href="/">Resources</a>
                             </div>
                         </li>
 
@@ -246,7 +215,7 @@
                               <i class="fas fa-book"></i> 
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">ABA Exam Prep Materials
+                              <a class="sidebar-link" href="/">ABA Exam Prep Materials</a>
                             </div>
                         </li>
 
@@ -256,7 +225,7 @@
                               <i class="far fa-envelope"></i> 
                             </div>
                             <div class="sidebar-link-text">
-                              <a class="sidebar-link" href="/">About ABA.rocks
+                              <a class="sidebar-link" href="/">About ABA.rocks</a>
                             </div>
                         </li>
 
@@ -268,7 +237,7 @@
                                 <i class="far fa-plus-square"></i>
                               </div> 
                               <div class="sidebar-link-text">
-                                <a class="sidebar-link" href="/">New Post
+                                <a class="sidebar-link" href="/">New Post</a>
                               </div>
                             </a>
                           </li>
@@ -281,9 +250,8 @@
                 </div>
               </div>
 
-
               <!-- Blog Posts Content !-->
-              <div id="section-to-print" class="col-md-10">
+              <div id="section-to-print" class="col-md-10" style="margin: 0 auto 0 auto;">
                 <!-- Posts -->
                 {% block content %}
                 {% endblock %}

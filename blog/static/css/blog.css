@@ -125,14 +125,6 @@ time.icon:hover, time.icon:focus
 .sidebar-link:hover {
   text-decoration: none;
 }
-.sidebar-link-text {
-  width: 90%;
-  float: left;
-}
-.sidebar-link-icon {
-  width: 10%;
-  float: left;
-}
 .page-header {
     background-color: #ff9400;
     margin: 0 0 30px 0;
