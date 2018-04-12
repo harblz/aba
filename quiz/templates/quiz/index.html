@@ -8,7 +8,7 @@
           <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
             <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
             <span style="color: #000;">
-              <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description }} </p>
+              <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
               <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
             </span>
           </a>
