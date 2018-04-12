@@ -27,6 +27,7 @@ def quiz_index(request):
     })
 
 def quiz_view(request, quiz_id ):
+    # get
     if request.method == 'GET':
         quiz_name           = Unit.objects.get(pk=quiz_id) #Unit.objects.filter(unit_id=quiz_id).values('unit_name', flat=True)
         queryset_ids        = Question.objects.filter(unit_id=quiz_id).values_list('id', flat=True)
@@ -50,9 +51,9 @@ def quiz_view(request, quiz_id ):
         attempt_id          = request.POST.get('selected_choice_id')
         next_question_id    = request.POST.get('next_question_id')
 
-        quiz_id             = Question.objects.filter(id=next_question_id).values_list('unit_id', flat=True)
-        #quiz_name           = Unit.objects.filter(id=quiz_id).values_list('unit_name', flat=True)
-        quiz_name           = Unit.objects.get(pk=quiz_id[0])
+        #quiz_id             = Question.objects.filter(id=next_question_id).values_list('unit_id', flat=True)
+        quiz_id             = Question.objects.get(id=next_question_id)
+        quiz_name           = Unit.objects.get(id=quiz_id.unit_id)
 
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
@@ -72,14 +73,14 @@ def quiz_view(request, quiz_id ):
             next_question_question_text = None
             next_question_question_hint = None
         else:
-            next_question               = Question.objects.get(pk=next_question_id)
+            next_question               = Question.objects.get(pk=1)
             next_question_choices       = Choice.objects.filter(question_id=next_question_id)
             next_question_choices       = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
             next_question_question_text = next_question.question_text
             next_question_question_hint = next_question.question_hint
 
         return JsonResponse({
-            'unit_name'             : quiz_name,
+            'unit_name'             : quiz_name.unit_name,
             'question_id'           : next_question_id,
             'question_hint'         : next_question_question_hint,
             'choice_text'           : attempt,

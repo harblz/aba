@@ -9,7 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible # only if you need to support Python 2
 class Unit(models.Model):
     unit_name           = models.CharField(max_length=50)
-    unit_description    = models.TextField()
+    unit_description    = RichTextField()
 
     def __str__(self):
         return self.unit_name

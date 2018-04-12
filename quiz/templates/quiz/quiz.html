@@ -9,15 +9,18 @@
 
   <!-- Displays the Quiz Results at the end !-->
   <div id="results"></div>
+    <p>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</p>
 
-  <h3 id="question_text"><small>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</small><br>{{ question.question_text|safe }} </h3>
+    <h6 style="font-size: 1.5rem;font-weight: normal" id="question_text" style="margin-top: 5px;">
+        {{ question.question_text|safe }}
+    </h6>
   <br>
   <div id="score_graph" class="fade" style="display: none; height: 400px; width: 400px;">
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>
   <div id="choice_menu" class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Select the best answer from these choices:</h3>
+      <h5 style="font-size: 1rem;font-weight: normal" class="panel-title">Select the best answer from these choices:</h5>
     </div>
     <div class="panel-body">
       <form action="/quiz/{{ unit_id }}/grade_question/" method="POST" id="post-form">
@@ -294,7 +297,7 @@
           error : function(xhr,errmsg,err) {
               window.scrollTo(0,0);
               $('#results').html("<div class='alert-box alert radius' style='width: 100%;' data-alert>Oops! We have encountered an error: <i>"+err+
-                  "</i>. Try again, I guess? <a href='#' class='close'>&times;</a> If the problem persists, email Alex</div>");
+                  "</i>. Try again, I guess? If the problem persists, email <a href='alex@behaviorist.tech'>Alex</a></div>");
               console.log(xhr.status + ": " + xhr.responseText);
           }
         });

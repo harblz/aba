@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from django.utils.html import format_html
 
 from .models import Unit, Choice, Question
 
@@ -21,7 +22,7 @@ class QuestionAdmin(admin.ModelAdmin):
     # actions = [change_unit]
 
     def escaped_question_text(self, obj):
-        return obj.question_text
+        return format_html(obj.question_text)
 
     def question_unit_name(self, obj):
         return Unit.objects.get(pk=obj.unit_id)
