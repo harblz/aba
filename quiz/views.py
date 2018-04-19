@@ -50,10 +50,9 @@ def quiz_view(request, quiz_id ):
         attempt             = request.POST.get('selected_choice')
         attempt_id          = request.POST.get('selected_choice_id')
         next_question_id    = request.POST.get('next_question_id')
+        quiz_id             = request.POST.get('unit_id')
 
-        #quiz_id             = Question.objects.filter(id=next_question_id).values_list('unit_id', flat=True)
-        quiz_id             = Question.objects.get(id=next_question_id)
-        quiz_name           = Unit.objects.get(id=quiz_id.unit_id)
+        quiz_name           = Unit.objects.get(id=quiz_id)
 
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
@@ -67,13 +66,12 @@ def quiz_view(request, quiz_id ):
         except(KeyError, Question.DoesNotExist):
             next_question               = None
 
-        #next_question               = Question.objects.get(pk=next_question_id)
         if (next_question == None):
             next_question_choices       = None
             next_question_question_text = None
             next_question_question_hint = None
         else:
-            next_question               = Question.objects.get(pk=1)
+            next_question               = Question.objects.get(pk=next_question_id)
             next_question_choices       = Choice.objects.filter(question_id=next_question_id)
             next_question_choices       = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
             next_question_question_text = next_question.question_text
