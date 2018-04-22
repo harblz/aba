@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block quiz-content %}
 
 <div class="progress">
   <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -17,7 +17,7 @@
       </h6>
     </div>
   <br>
-  <div id="score_graph" class="fade" style="display: none; height: 400px; width: 400px;">
+  <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>
   <div id="choice_menu" class="panel panel-primary">

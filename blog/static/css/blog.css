@@ -37,7 +37,9 @@ time.icon
   font-size: 1em; /* change icon size */
   display: block;
   position: relative;
-  width: 7em;
+  width: 100%;
+  min-width: 70px;
+  max-width: 112px;
   height: 7em;
   background-color: #fff;
   margin: 2em auto;
@@ -74,7 +76,7 @@ time.icon strong
 time.icon em
 {
   position: absolute;
-  bottom: 0.3em;
+  bottom: 0.2em;
   color: #fd9f1b;
 }
 
@@ -130,6 +132,16 @@ time.icon:hover, time.icon:focus
     margin: 0 0 30px 0;
     padding: 20px 10px 10px 40px;
     font-family: Helvetica;
+}
+
+.page-header-mobile {
+    background-color: #ff9400;
+    margin: 0 0 30px 0;
+    padding: 10px 5px 5px 20px;
+    font-family: Helvetica;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 .mainMenu {
