@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block content %}{% block mobile-content %}
       <!-- Jumbotron !-->
     <div class="jumbotron jumbotron-fluid" style="background-color: #fff">
       <div class="container">
@@ -54,60 +54,4 @@
         </div>
       </div>
     {% endfor %}
-{% endblock %}
-
-{% block mobile-content %}
-      <!-- Jumbotron !-->
-    <div class="jumbotron jumbotron-fluid" style="background-color: #fff">
-      <div class="container">
-        <h1 class="display-4">Getting Ready for the RBT Exam?</h1>
-        <p class="lead">You could procrastinate by watching <a href="https://www.youtube.com/results?search_query=cat+videos&page=&utm_source=opensearch">cat videos on YouTube...</a> or take a few practice quizzes!</p>
-          <hr class="my-4">
-          <p>
-            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT Competency Assessment</a> and attempt to simulate actual questions you might encounter on the RBT exam. </p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/quiz" role="button">Practice Quizzes</a>
-          </p>
-      </div>
-    </div>
-
-    <h3>Recent Posts</h3>
-    <hr>
-    {% for post in posts %}
-
-      <div class="post container-fluid" style="margin-top: 25px;">
-        <div class="row">
-
-          <div class="col-md-1" style="padding: 0px;">
-            <time datetime="{{ post.published_date }}" class="icon">
-              <em>{{ post.published_date|date:"l" }}</em>
-              <strong>{{ post.published_date|date:"F" }}</strong>
-              <span>{{ post.published_date|date:"j" }}</span>
-            </time>
-          </div>
-
-          <div class="col-md-11" style="margin-bottom: 7%;">
-            <div class="col-12">
-              <h1>
-                {% if user.is_authenticated %}
-                  <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
-                {% endif %}
-                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-              </h1>
-            </div>
-            <div class="col-12">
-              {% if post.published_date %}
-                  <div class="date">
-                    posted by <b>{{post.author}}</b> on {{ post.published_date }}
-                  </div>
-              {% endif %}
-            </div>
-            <div class="col-12">
-              <p>{{ post.text|safe }}</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    {% endfor %}
-{% endblock %}
+{% endblock %}{% endblock %}

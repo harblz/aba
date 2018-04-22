@@ -161,73 +161,73 @@
 
       <div class="content container-fluid">
         <div class="row">
+              <!-- Desktop Sidebar !-->
+              {% block sidebar %}
+                <div id="sidebar" class="d-none d-lg-block d-md-block" style="position: fixed; width: 15%; z-index: 1000; border-top: 0px; border-left: 0px; border-right: 0px; top: 18%;">
 
-                <!-- Desktop Sidebar !-->
-                {% block sidebar %}
-                  <div id="sidebar" class="d-none d-lg-block d-md-block" style="position: fixed; width: 15%; border-top: 0px; border-left: 0px; border-right: 0px; top: 18%;">
+                  <ul class="list-group list-group-flush">
 
-                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="fas fa-home" style="min-width: 25px;"></i> <a class="sidebar-link" href="/">Home</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="fas fa-home" style="min-width: 25px;"></i> <a class="sidebar-link" href="/">Home</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="fas fa-question" style="min-width: 25px;"></i> <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="fas fa-question" style="min-width: 25px;"></i> <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="fas fa-graduation-cap" style="min-width: 25px;"></i> <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="fas fa-graduation-cap" style="min-width: 25px;"></i> <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" >
+                      <div style="width: 100%;">
+                        <i class="fas fa-flask" style="min-width: 25px;"></i> <a class="sidebar-link" href="/research">Research & Evidence</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" >
-                        <div style="width: 100%;">
-                          <i class="fas fa-flask" style="min-width: 25px;"></i> <a class="sidebar-link" href="/research">Research & Evidence</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="fas fa-info-circle" style="min-width: 25px;"></i> <a class="sidebar-link" href="/resources">Resources</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="fas fa-info-circle" style="min-width: 25px;"></i> <a class="sidebar-link" href="/resources">Resources</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="fas fa-book" style="min-width: 25px;"></i> <a class="sidebar-link" href="/quiz">ABA Exam Prep Materials</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="fas fa-book" style="min-width: 25px;"></i> <a class="sidebar-link" href="/quiz">ABA Exam Prep Materials</a>
-                        </div>
-                      </li>
+                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
+                      <div style="width: 100%;">
+                        <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/about">About ABA.rocks</a>
+                      </div>
+                    </li>
 
-                      <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                        <div style="width: 100%;">
-                          <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/about">About ABA.rocks</a>
-                        </div>
-                      </li>
+                    {% if user.is_authenticated %}
+                    <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
+                      <i class="far fa-plus-square" style="min-width: 25px;"></i>
+                      <a href="{% url 'post_new' %}">
+                        New Post
+                      </a>
+                    </li>
+                    {% endif %}
 
-                      {% if user.is_authenticated %}
-                      <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
-                        <i class="far fa-plus-square" style="min-width: 25px;"></i>
-                        <a href="{% url 'post_new' %}">
-                          New Post
-                        </a>
-                      </li>
-                      {% endif %}
+                  </ul>
+                </div>
+              {% endblock %}
 
-                    </ul>
-
-                  </div>
-                {% endblock %}
-
-
-
-                <div class="col-md-2 d-none d-lg-block d-md-block"></div>
               <!-- Blog Quiz Content !-->
+
+              <div class="d-none d-md-block d-lg-block col-md-2">
+                <!-- Filler Column !-->
+              </div>
+
               <div id="section-to-print" class="col-md-10" style="margin: 0 auto 0 auto;">
                 <div class="quiz-filler d-block d-sm-block d-md-none" style="min-height: 150px;">
                 </div>
@@ -235,16 +235,20 @@
                 {% endblock %}
               </div>
 
-              <!-- Blog Posts Desktop Content !-->
-              <div id="section-to-print" class="d-none d-md-block d-lg-block col-md-10" style="margin: 0em auto 0 auto;">
 
+              <!-- Blog Posts Desktop Content !-->                
+              <div class="d-none d-md-block d-lg-block col-md-2">
+                  <!-- Filler Column !-->
+              </div>
+
+              <div id="section-to-print" class="d-none d-md-block d-lg-block col-md-10">
                 <!-- Posts -->
                 {% block content %}
                 {% endblock %}
               </div>
 
               <!-- Blog Posts Mobile Content !-->
-              <div id="section-to-print" class="d-block d-sm-block d-md-none col-md-10" style="margin: 7em auto 0 auto;">
+              <div id="section-to-print" class="d-block d-sm-block d-md-none col-md-10">
 
                 <!-- Posts -->
                 {% block mobile-content %}
