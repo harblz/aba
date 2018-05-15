@@ -46,7 +46,7 @@ class QuestionAdmin(admin.ModelAdmin):
         (None,               {'fields': ['question_text']}),
         ('Question Hint', {'fields': ['question_hint'], 'classes': ['']}), # put "collapse" in classes to auto-hide it; requires bootstrap
         ('Unit / Course Information', {'fields': [ 'unit'], 'classes': ['']}),
-        ('Difficulty', {'fields': [ 'difficultyjhnjhkj'], 'classes': ['']}),
+        ('Difficulty', {'fields': [ 'difficulty'], 'classes': ['']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['']}),
     ]
     inlines = [ChoiceInline]
