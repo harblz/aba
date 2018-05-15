@@ -20,18 +20,40 @@ class Unit(models.Model):
     def get_unit_id(self):
         return self.unit_id
 
+@python_2_unicode_compatible
+class Difficulty(models.Model):
+    difficulty_name         = models.CharField(max_length=25)
+    difficulty_description  = RichTextField()
+
+    class Meta:
+        verbose_name_plural = "Difficulties"
+
+    def __str__(self):
+        return self.difficulty_name
+
+    def get_difficulty_description(self):
+        return self.difficulty_description
+        
+    def get_difficulty_id(self):
+        return self.difficulty_id
+
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Question(models.Model):
     question_text   = RichTextField()
     unit            = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    difficulty      = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     question_hint   = RichTextField()
     pub_date        = models.DateTimeField('date published')
+
 
     def __str__(self):
         return self.question_text
 
     def get_unit_id(self):
         return self.unit_id
+
+    def get_difficulty_id(self):
+        return self.difficulty_id
 
     get_unit_id.admin_order_field = 'Quiz ID'
     get_unit_id.short_description = 'A unique number for each quiz. Each question that belongs to the same quiz will have the same Quiz ID.'

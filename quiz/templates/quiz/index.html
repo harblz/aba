@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
 {% block quiz-content %}
+  <h2> ABA Practice Quizzes</h2>
+  <br />
+  <p>This site is dedicated to providing free, useful practice quizzes for folks looking forward to taking the big ABA exam(s)! Whether you're sitting for the RBT exam. just trying to brush up on terminology, or you're preparing for the big BCBA test, I'm doing my best to gather some useful practice materials for ya here!<br /><br />
+
+  Check back regularly as I try to add a new set of quiz questions every Monday.</p>
   {% if units|length > 0 %}
       <ul class="list-group">
       {% for unit in units %}
         {% if unit.count != 0 %}
+          <br />
           <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
             <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
             <span style="color: #000;">
