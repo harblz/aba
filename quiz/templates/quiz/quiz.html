@@ -60,16 +60,20 @@
 
   <br /><br />
 
+  <br /><br />
 
-<button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
-  <i class="far fa-comment"></i>
-  Toggle Comments
-</button>
 
-<br /><br />
+  <div class="container" style="text-align: center;">
+    <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
+      <i class="far fa-comment"></i>
+      Toggle Comments
+    </button>
+  </div>
+
+  <br /><br />
 
   <!-- Disqus Code !-->
-  <div id="disqus_thread" class="post-text col-12"></div>
+  <div id="disqus_thread" class="col-12"></div>
 
   <script>
 
@@ -237,10 +241,10 @@
 
 
   var question_ids      = JSON.parse("{{question_ids}}");
-  console.log(question_ids);
+  //console.log(question_ids);
   var first_question_id = JSON.parse("{{first_question_id}}");
   question_ids = question_ids.remove(first_question_id);
-  console.log('Remaining ids: ', question_ids);
+  //console.log('Remaining ids: ', question_ids);
   var unit_id = "{{unit_id}}";
   localStorage.setItem(unit_id + "_question_ids",JSON.stringify(question_ids));
   var end_of_quiz = false;
@@ -254,7 +258,7 @@
         var current_score = JSON.parse(localStorage.getItem("{{unit_id}}"));
         var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
         var id_list = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
-        console.log(id_list, id);
+        //console.log(id_list, id);
 
         localStorage.setItem(unit_id + "_question_ids", JSON.stringify(id_list));
 
@@ -272,11 +276,16 @@
               $('#results').html('');
               $('#questionNumber').html(max_questions - id_list.length);
 
+              if ( end_of_quiz == false ) { 
+                $('#hint').collapse('hide').html("<br><h3>Here's a hint:</h3>" + response.question_hint);
+              } else {
+                $('#hint').html('');
+              }
+
               if (response.is_correct == true && end_of_quiz == false) {              
               current_score.push("correct");              
               localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
               calculateScore();
-              /* Update Progress Bar */
 
               $('#choices').html('');
               for (var i = 0; i < response.next_question_choices.length; i++) {
@@ -296,10 +305,6 @@
                   current_score.push("correct");
                   localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
                   calculateScore();
-                  /* Update Progress Bar */
-
-
-
 
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
@@ -308,10 +313,6 @@
                   current_score.push("incorrect");
                   localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
                   calculateScore();
-                  /* Update Progress Bar */
-
-
-
                   $('#error_modal').modal('show');
                   $('#error_modal_message').html('');
                   $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
