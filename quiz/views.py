@@ -17,7 +17,7 @@ from .models import Unit, Choice, Question
 
 def quiz_index(request):
     template_name       = 'quiz/index.html'
-    units               = Unit.objects.values("unit_name", "unit_description", "id").all() # Question.objects.values("unit_name").distinct()
+    units               = Unit.objects.values("unit_name", "unit_target", "unit_description", "id").all() # Question.objects.values("unit_name").distinct()
 
     for unit in units:
         unit['count']    = len(Question.objects.values('unit_id').filter(unit_id=unit['id']))

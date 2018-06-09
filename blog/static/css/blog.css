@@ -6,7 +6,7 @@ h4 {
 }
 
 a:hover {
-  color: red;
+  color: #ff6005;
 }
 
 @media screen and (max-device-width: 480px) {

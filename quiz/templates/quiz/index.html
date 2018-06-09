@@ -6,24 +6,105 @@
   <p>This site is dedicated to providing free, useful practice quizzes for folks looking forward to taking the big ABA exam(s)! Whether you're sitting for the RBT exam. just trying to brush up on terminology, or you're preparing for the big BCBA test, I'm doing my best to gather some useful practice materials for ya here!<br /><br />
 
   Check back regularly as I try to add a new set of quiz questions every Monday.</p>
+  <br /><br />
+
+  <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="RBT-tab" data-toggle="tab" href="#RBT" role="tab" aria-controls="RBT" aria-selected="true"><b>RBT Level</b></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="BCaBA-tab" data-toggle="tab" href="#BCaBA" role="tab" aria-controls="BCaBA" aria-selected="false"><b>BCaBA Level</b></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="BCBA-tab" data-toggle="tab" href="#BCBA" role="tab" aria-controls="BCBA" aria-selected="false"><b>BCBA Level</b></a>
+    </li>
+  </ul>
+
+  <br />
+
   {% if units|length > 0 %}
-      <ul class="list-group">
-      {% for unit in units %}
-        {% if unit.count != 0 %}
-          <br />
-          <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
-            <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
-            <span style="color: #000;">
-              <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-              <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
-            </span>
-          </a>
-        {%endif %}
-      {% endfor %}
-      </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="RBT" role="tabpanel" aria-labelledby="RBT-tab">
+      <div class="container-fluid">
+        <br><h3>RBT Practice Quizzes</h3>
+        <ul class="list-group">
+        {% for unit in units %}
+          {% if unit.count != 0 and unit.unit_target == "RBT" %}
+            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
+              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
+              <span style="color: #000;">
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
+                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+              </span>
+            </a>
+          {%endif %}
+          &nbsp
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <!-- End RBT Quiz Block -->
+
+    <div class="tab-pane fade" id="BCaBA" role="tabpanel" aria-labelledby="BCaBA-tab">
+      <div class="container-fluid">
+        <br><h3>BCaBA Practice Quizzes</h3>
+        <ul class="list-group">
+        {% for unit in units %}
+          {% if unit.count != 0 and unit.unit_target == "BCaBA" %}
+            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
+              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
+              <span style="color: #000;">
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
+                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+              </span>
+            </a>
+          {% endif %}
+          {% if forloop.last %}
+            {% if unit.count == 0%}
+              <br>
+              <p style="font-size: 5.0em">&#x1f629;</p>
+              <h4>No quizzes here just yet...</h4>
+              <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <!-- End BCaBA Quiz Block -->
+
+    <div class="tab-pane fade" id="BCBA" role="tabpanel" aria-labelledby="BCBA-tab">
+      <div class="container-fluid">
+        <br><h3>BCBA Practice Quizzes</h3>
+        <ul class="list-group">
+        {% for unit in units %}
+          {% if unit.count != 0 and unit.unit_target == "BCBA" %}
+            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
+              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
+              <span style="color: #000;">
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
+                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+              </span>
+            </a>
+          {% endif %}
+          {% if forloop.last %}
+            {% if unit.count == 0%}
+              <br>
+              <p style="font-size: 5.0em">&#x1f629;</p>
+              <h4>No quizzes here just yet...</h4>
+              <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <!-- End BCBA Quiz Block -->
+
+  </div>
   {% else %}
       <p>No quizzes are available at this time. If you believe this is an error, contact the administrator at <a href="mailto:admin@aba.rocks">admin@aba.rocks</a>.</p>
   {% endif %}
-
-  <br /><br /><br />
 {% endblock %}
+
+<br/><br/><br/><br/><br/><br/>

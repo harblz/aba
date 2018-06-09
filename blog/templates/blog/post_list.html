@@ -47,7 +47,8 @@
               {% endif %}
             </div>
             <div class="col-12">
-              <p>{{ post.text|safe }}</p>
+              <p>{{ post.text|safe|truncatewords_html:150 }}</p>
+              <p class="btn btn-info">See the full post...</p>
             </div>
           </div>
 
