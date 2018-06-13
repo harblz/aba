@@ -13,11 +13,13 @@ class Post(models.Model):
         ('p', 'Published'),
         ('w', 'Withdrawn'),
     )
+
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    page_views = models.IntegerField(default=0)
 
     def publish(self):
         self.published_date = timezone.now()

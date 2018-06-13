@@ -6,7 +6,7 @@ h4 {
 }
 
 a:hover {
-  color: red;
+  color: #ff6005;
 }
 
 @media screen and (max-device-width: 480px) {
@@ -38,6 +38,8 @@ time.icon
   display: block;
   position: relative;
   width: 100%;
+  min-width: 70px;
+  max-width: 112px;
   height: 7em;
   background-color: #fff;
   margin: 2em auto;
@@ -132,6 +134,16 @@ time.icon:hover, time.icon:focus
     font-family: Helvetica;
 }
 
+.page-header-mobile {
+    background-color: #ff9400;
+    margin: 0 0 30px 0;
+    padding: 10px 5px 5px 20px;
+    font-family: Helvetica;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
 .mainMenu {
     font-family: 'Verdana', cursive;
 }
@@ -189,16 +201,4 @@ time.icon:hover, time.icon:focus
 }
 .post h1 a:hover {
     font-weight: bold;
-}
-
-p.bg-primary.rounded-top a:after {
-    font-family:Fontawesome;
-    content:'\f077';
-    float:right;
-    font-size:10px;
-    font-weight:300;
-}
-.panel-title a.collapsed:after {
-    font-family:Fontawesome;
-    content:'\f078';
 }

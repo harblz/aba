@@ -6,7 +6,7 @@ def make_published(modeladmin, request, queryset):
 make_published.short_description = "Mark selected stories as published"
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'status', 'created_date', 'published_date']
+    list_display = ['title', 'author', 'page_views', 'status', 'created_date', 'published_date']
     ordering = ['title']
     actions = [make_published]
 

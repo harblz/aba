@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}{% block mobile-content %}
+    <div class="post container-fluid" style="margin-top: 25px;">
+      <div class="row">
+
+        <div class="calendar-icon col-1">
+        </div>
+
+        <div class="col-12" style="margin-left: 0px;">
+          <h2>Buy me a Coffee?</h2>
+
+          <br />
+
+          <p>This site takes a lot of work, and coffee makes all that work possible. If you'd like to buy me a cup of coffee, make a donation below. I use <a href="stripe.com">stripe.com</a> for payment processing, which means your credit card never touches my server.</p>
+
+          <br />
+          
+          <p class="text-info">Curious how this is possible (or are you a computer science nerd like me?) - <a href="https://stripe.com/docs">check out stripe's documentation.</a></p>
+
+		  <form action="/checkout" method="POST">
+		    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+		        data-key="{{ STRIPE_PUBLIC_KEY }}" # Make sure to wrap the variable name with double {}
+		        data-amount="2000"
+		        data-name="ABA.Rocks"
+		        data-description="Thank you so much for your generosity!"
+		        data-image="/static/favicon/android-icon-192x192.png"
+		        data-currency="usd">
+		    </script>
+		  </form>
+
+
+
+          <br />
+
+          <p>Check back every once in awhile for updates, and <b>leave a comment below if you wanna let me know a little about yourself and what you think of the site.</b></p>
+
+
+          <br /><br /><br /><br />
+
+        </div>
+
+		<div id="disqus_thread" class="post-text col-12"></div>
+		<script>
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://https-aba-rocks.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+      </div>
+    </div>
+{% endblock %}{% endblock %}
+

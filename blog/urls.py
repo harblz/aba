@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^research$', views.blog_research, name='research'),
     url(r'^resources$', views.blog_resources, name='resources'),
     url(r'^what-is-aba$', views.blog_what_is_aba, name='what-is-aba'),
+    url(r'^coffee$', views.blog_coffee, name='coffee'),
 ]
