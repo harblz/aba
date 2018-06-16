@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 
 {% block coffee-content %}
+
+	<!-- Modal -->
+	<div class="modal fade" id="confirmDonationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Confirm Donation</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <h2>Confirm Your Donation</h2>
+	        <br />
+	        <p style="font-size: 18px;">Just double checking - are you sure you want to donate <b>$<span id="donationQuantity"></span>?</b></p>
+	        <br />
+	        <p>Hitting the button below will charge your card (and I will love you to pieces)!</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="confirmDonationForReal" type="button" class="btn btn-success">Donate!</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
     <div class="post container-fluid" style="margin-top: 25px;">
       <div class="row">
 
@@ -25,30 +51,30 @@
 				    <div class="form-row">
 				    	{% csrf_token %}
 
+				    	<label for="donation" class="font-weight-bold">Donation Amount</label>
 				    	<div class="input-group mb-3">
-					    	<div class="input-group-prepend">
-					    		<span class="input-group-text" id="amount">Donate $</span>
-					    	</div>
+							
 					    	<input oninput="check_donation(this)" type="number" required="required" step="0.01" id="donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Donation" aria-describedby="amount">
 						</div>
 
+						<label for="card-element" class="font-weight-bold">Confirm Donation</label>
 				    	<div class="input-group mb-3">
-					    	<div class="input-group-prepend">
-					    		<span class="input-group-text" id="confirm-amount">Confirm $</span>
-					    	</div>
 					    	<input oninput="check_confirm(this)" type="number" required="required" step="0.01" id="confirm-donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Confirm Donation Amount" aria-describedby="amount">
 						</div>
 
 						<label for="card-element" class="font-weight-bold">Card Details:</label>
 						<div class="input-group mb-3">
-					    	<div id="card-element">
+					    	<div id="card-element" style="border: 1px solid #ffa021;">
 					    	<!-- A Stripe Element will be inserted here. -->
 					    	</div>
 						</div>
 
 				    	<!-- Used to display form errors. -->
-				    	<div id="card-errors" role="alert"></div>
+				    	<div id="card-errors" role="alert" class="text-danger font-weight-bold" style="padding: 5px;"></div>
+
 					</div>
+
+					<br /><br />
 
 			  		<button class="btn btn-primary">Submit Payment</button>
 				</form>
@@ -91,21 +117,21 @@
 {% block extra-body-js %}
 	<script>
 		(function() {
-			console.log(window.innerWidth);
+			//console.log(window.innerWidth);
 			var width = window.innerWidth;
 
 			if ( width >= 768 && width < 950 ) {
-				console.log('iPad');
+				//console.log('iPad');
 				$('#coffee_container').css('margin-left', 120)
 			}
 
 			if ( width >= 950 && width < 1200) {
-				console.log('iPad');
+				//console.log('iPad');
 				$('#coffee_container').css('margin-left', 160)
 			}
 
 			if ( width > 1200 ) {
-				console.log('Desktop');
+				//console.log('Desktop');
 				$('#coffee_container').css('margin-left', 300)
 			}
 
@@ -183,18 +209,25 @@
 		// Handle form submission.
 		var form = document.getElementById('payment-form');
 		form.addEventListener('submit', function(event) {
-		  event.preventDefault();
 
-		  stripe.createToken(card).then(function(result) {
-		    if (result.error) {
-		      // Inform the user if there was an error.
-		      var errorElement = document.getElementById('card-errors');
-		      errorElement.textContent = result.error.message;
-		    } else {
-		      // Send the token to your server.
-		      stripeTokenHandler(result.token);
-		    }
-		  });
-		});
+			event.preventDefault();
+
+
+
+			stripe.createToken(card).then(function(result) {
+		    	if (result.error) {
+		    			// Inform the user if there was an error.
+		    			var errorElement = document.getElementById('card-errors');
+		    			errorElement.textContent = result.error.message;
+		    		} else {
+		      			// Send the token to your server.
+		      			$('#donationQuantity').html(document.getElementById('donation').value);
+						$('#confirmDonationModal').modal('show')
+		      			document.getElementById('confirmDonationForReal').addEventListener('click', function(event) {
+		      				stripeTokenHandler(result.token);
+		      			});
+		    		}
+				});
+			});
 	</script>
 {% endblock %}
