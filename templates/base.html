@@ -12,10 +12,6 @@
         ABA Rocks: A Behavior Analysis Blog
       </title>
 
-      <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-      <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Catamaran|Comfortaa" rel="stylesheet">
-
       <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
@@ -276,6 +272,10 @@
                 {% block mobile-content %}
                 {% endblock %}
               </div>
+
+              {% block coffee-content %}
+
+              {% endblock %}
         </div>
 
       </div>
@@ -285,6 +285,13 @@
         })
       </script>
       <script id="dsq-count-scr" src="//https-aba-rocks.disqus.com/count.js" async></script>
+
+      {% block extra-body-js %}
+      {% endblock %}
+
     </body>
+
+    {% block extra-js %}
+    {% endblock %}
 
 </html>

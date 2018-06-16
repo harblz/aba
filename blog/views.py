@@ -15,10 +15,11 @@ def blog_coffee_checkout(request):
 
     if request.method == "POST":
         token    = request.POST.get("stripeToken")
+        donation = request.POST.get("donation")
 
     try:
         charge  = stripe.Charge.create(
-            amount      = token.amount,
+            amount      = donation,
             currency    = "usd",
             source      = token,
             description = "A generous donation from a fan!"
@@ -31,9 +32,9 @@ def blog_coffee_checkout(request):
 
     else:
         #new_car.save()
-        return render(request, 'blog/thanks.html', {})
-        # The payment was successfully processed, the user's card was charged.
-        # You can now redirect the user to another page or whatever you want
+        donation = int(donation) / 100.00
+        return render(request, 'blog/thanks.html', { 'donation' : donation })
+        # The payment was successfully processed & the user's card was charged - confirm with them how much
 
 
 def blog_what_is_aba(request):
@@ -41,6 +42,9 @@ def blog_what_is_aba(request):
 
 def blog_coffee(request):
     return render(request, 'blog/blog_coffee.html', {})
+
+def blog_coffee_new(request):
+    return render(request, 'blog/new_blog_coffee.html', {})
 
 def blog_behavior_basics(request):
     return render(request, 'blog/blog_behavior_basics.html', {})

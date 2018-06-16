@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}{% block mobile-content %}
+    <div class="post container-fluid" style="margin-top: 25px;">
+      <div class="row">
+
+        <div class="calendar-icon col-1">
+        </div>
+
+        <div class="col-12" style="margin-left: 0px;">
+          <h2>Buy me a Coffee?</h2>
+
+          <br />
+
+          <p>This site takes a lot of work, and coffee makes all that work possible. If you'd like to buy me a cup of coffee, make a donation of any value below. I use <a href="stripe.com">stripe.com</a> for payment processing, which means your credit card never touches my server (as a security procaution). If you want to give back and don't have cash, leave a comment - positive praise is a reinforcer for me.</p>
+
+          <br />
+
+			<script src="https://js.stripe.com/v3/"></script>
+
+			<form action="/charge" method="post" id="payment-form">
+			  <div class="form-row">
+			    <label for="card-element">
+			      Credit or debit card
+			    </label>
+			    <div id="card-element">
+			      <!-- A Stripe Element will be inserted here. -->
+			    </div>
+
+			    <!-- Used to display form errors. -->
+			    <div id="card-errors" role="alert"></div>
+			  </div>
+
+			  <button>Submit Payment</button>
+			</form>
+
+
+
+
+          <br /><br /><br /><br />
+
+        </div>             
+
+      </div>
+    </div>
+
+	<script>
+		// Create a Stripe client.
+		var stripe = Stripe('pk_test_ujrxSeDWQe8wFLQohp9Jp172');
+
+		// Create an instance of Elements.
+		var elements = stripe.elements();
+
+		// Custom styling can be passed to options when creating an Element.
+		// (Note that this demo uses a wider set of styles than the guide below.)
+		var style = {
+		  base: {
+		    color: '#32325d',
+		    lineHeight: '18px',
+		    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+		    fontSmoothing: 'antialiased',
+		    fontSize: '16px',
+		    '::placeholder': {
+		      color: '#aab7c4'
+		    }
+		  },
+		  invalid: {
+		    color: '#fa755a',
+		    iconColor: '#fa755a'
+		  }
+		};
+
+		// Create an instance of the card Element.
+		var card = elements.create('card', {style: style});
+
+		// Add an instance of the card Element into the `card-element` <div>.
+		card.mount('#card-element');
+
+		// Handle real-time validation errors from the card Element.
+		card.addEventListener('change', function(event) {
+		  var displayError = document.getElementById('card-errors');
+		  if (event.error) {
+		    displayError.textContent = event.error.message;
+		  } else {
+		    displayError.textContent = '';
+		  }
+		});
+
+		// Handle form submission.
+		var form = document.getElementById('payment-form');
+		form.addEventListener('submit', function(event) {
+		  event.preventDefault();
+
+		  stripe.createToken(card).then(function(result) {
+		    if (result.error) {
+		      // Inform the user if there was an error.
+		      var errorElement = document.getElementById('card-errors');
+		      errorElement.textContent = result.error.message;
+		    } else {
+		      // Send the token to your server.
+		      stripeTokenHandler(result.token);
+		    }
+		  });
+		});
+	</script>
+
+{% endblock %}{% endblock %}
