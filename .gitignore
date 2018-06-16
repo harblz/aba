@@ -1,3 +1,5 @@
+.gitignore
+/abarocks/settings.py
 *.pyc
 *~
 *.sqlite3
