@@ -4,81 +4,82 @@
     <div class="post container-fluid" style="margin-top: 25px;">
       <div class="row">
 
-        <div class="container">
-        	<div class="col-12" style="margin-left: 0px;">
+        <div id="coffee_container" class="container-fluid" style="margin-left: 0px;">
 
-	        <h2>Buy me a Coffee?</h2>
+        	<div class="col-12">
 
-	        <br />
+		        <h2>Buy me a Coffee?</h2>
 
-	        <h4>This site takes a lot of work, and coffee makes all that work possible.</h4>
+		        <br />
 
-	        <br />
+		        <h4>This site takes a lot of work, and coffee makes all that work possible.</h4>
 
-	    	<p>If you'd like to buy me a cup of coffee, type your donation in below</p>
+		        <br />
+
+		    	<p>If you'd like to buy me a cup of coffee, type your donation in below</p>
 
 
-	        <br />
+	        	<br />
 
-			<form action="/blog_coffee_checkout" method="post" id="payment-form">
-			    <div class="form-row">
-			    	{% csrf_token %}
+				<form action="/blog_coffee_checkout" method="post" id="payment-form">
+				    <div class="form-row">
+				    	{% csrf_token %}
 
-			    	<div class="input-group mb-3">
-				    	<div class="input-group-prepend">
-				    		<span class="input-group-text" id="amount">Donate $</span>
-				    	</div>
-				    	<input oninput="check_donation(this)" type="number" required="required" step="0.01" id="donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Donation" aria-describedby="amount">
+				    	<div class="input-group mb-3">
+					    	<div class="input-group-prepend">
+					    		<span class="input-group-text" id="amount">Donate $</span>
+					    	</div>
+					    	<input oninput="check_donation(this)" type="number" required="required" step="0.01" id="donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Donation" aria-describedby="amount">
+						</div>
+
+				    	<div class="input-group mb-3">
+					    	<div class="input-group-prepend">
+					    		<span class="input-group-text" id="confirm-amount">Confirm $</span>
+					    	</div>
+					    	<input oninput="check_confirm(this)" type="number" required="required" step="0.01" id="confirm-donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Confirm Donation Amount" aria-describedby="amount">
+						</div>
+
+						<label for="card-element" class="font-weight-bold">Card Details:</label>
+						<div class="input-group mb-3">
+					    	<div id="card-element">
+					    	<!-- A Stripe Element will be inserted here. -->
+					    	</div>
+						</div>
+
+				    	<!-- Used to display form errors. -->
+				    	<div id="card-errors" role="alert"></div>
 					</div>
 
-			    	<div class="input-group mb-3">
-				    	<div class="input-group-prepend">
-				    		<span class="input-group-text" id="confirm-amount">Confirm $</span>
-				    	</div>
-				    	<input oninput="check_confirm(this)" type="number" required="required" step="0.01" id="confirm-donation" class="form-control" style="width: 500px;" placeholder="Donation Amount" aria-label="Confirm Donation Amount" aria-describedby="amount">
-					</div>
+			  		<button class="btn btn-primary">Submit Payment</button>
+				</form>
 
-					<label for="card-element" class="font-weight-bold">Card Details:</label>
-					<div class="input-group mb-3">
-				    	<div id="card-element">
-				    	<!-- A Stripe Element will be inserted here. -->
-				    	</div>
-					</div>
+				<script language='javascript' type='text/javascript'>
+				    function check_confirm(input) {
+				        if (input.value != document.getElementById('donation').value) {
+				            input.setCustomValidity('Please CHECK THIS AMOUNT CAREFULLY - your donation amount MUST MATCH in both fields before you can submit!');
+				        } else {
+				            // input is valid -- reset the error message
+				            input.setCustomValidity('');
+				            document.getElementById('donation').setCustomValidity('');
+				        }
+				    }
 
-			    	<!-- Used to display form errors. -->
-			    	<div id="card-errors" role="alert"></div>
-				</div>
+				    function check_donation(input) {
+				        if (input.value != document.getElementById('confirm-donation').value) {
+				            input.setCustomValidity('Please CHECK THIS AMOUNT CAREFULLY - your donation amount MUST MATCH in both fields before you can submit!');
+				        } else {
+				            // input is valid -- reset the error message
+				            input.setCustomValidity('');
+				            document.getElementById('confirm-donation').setCustomValidity('');
+				        }
+				    }
+				</script>
 
-		  		<button class="btn btn-primary">Submit Payment</button>
-			</form>
+				<br /><br />
 
-			<script language='javascript' type='text/javascript'>
-			    function check_confirm(input) {
-			        if (input.value != document.getElementById('donation').value) {
-			            input.setCustomValidity('Please CHECK THIS AMOUNT CAREFULLY - your donation amount MUST MATCH in both fields before you can submit!');
-			        } else {
-			            // input is valid -- reset the error message
-			            input.setCustomValidity('');
-			            document.getElementById('donation').setCustomValidity('');
-			        }
-			    }
+	        	<p class="text-muted"><u>Card info is never stored on this site</u> - I use <a href="https://www.stripe.com">Stripe</a> for payment, which is also used by a lot of folks quite a bit more widely known than me, such as <a href="https://stripe.com/us/customers">Lyft, Facebook, UNICEF, Habitat For Humanity, Target...</a> basically, a bunch of big companies use Stripe to securely handle customer payment information. <b>The least I can do to thank you for your generosity is to ensure your personal data is handled securely and anonymously.</b></p>
 
-			    function check_donation(input) {
-			        if (input.value != document.getElementById('confirm-donation').value) {
-			            input.setCustomValidity('Please CHECK THIS AMOUNT CAREFULLY - your donation amount MUST MATCH in both fields before you can submit!');
-			        } else {
-			            // input is valid -- reset the error message
-			            input.setCustomValidity('');
-			            document.getElementById('confirm-donation').setCustomValidity('');
-			        }
-			    }
-			</script>
-
-			<br /><br />
-
-	        <p class="text-muted"><u>Card info is never stored on this site</u> - I use <a href="https://www.stripe.com">Stripe</a> for payment, which is also used by a lot of folks quite a bit more widely known than me, such as <a href="https://stripe.com/us/customers">Lyft, Facebook, UNICEF, Habitat For Humanity, Target...</a> basically, a bunch of big companies use Stripe to securely handle customer payment information. <b>The least I can do to thank you for your generosity is to ensure your personal data is handled securely and anonymously.</b></p>
-
-	        <p class="text-muted">If you donated by accident, contact me at <a href="mailto:alex@behaviorist.tech">alex@behaviorist.tech</a> and I will fix it!</p>
+	        	<p class="text-muted">If you donated by accident, contact me at <a href="mailto:alex@behaviorist.tech">alex@behaviorist.tech</a> and I will fix it!</p>
 
 	    	</div>
 		</div>
@@ -88,6 +89,28 @@
 {% endblock %}
 
 {% block extra-body-js %}
+	<script>
+		(function() {
+			console.log(window.innerWidth);
+			var width = window.innerWidth;
+
+			if ( width >= 768 && width < 950 ) {
+				console.log('iPad');
+				$('#coffee_container').css('margin-left', 120)
+			}
+
+			if ( width >= 950 && width < 1200) {
+				console.log('iPad');
+				$('#coffee_container').css('margin-left', 160)
+			}
+
+			if ( width > 1200 ) {
+				console.log('Desktop');
+				$('#coffee_container').css('margin-left', 300)
+			}
+
+		})();
+	</script>
     <script src="https://js.stripe.com/v3/"></script>
 	<script>
 
@@ -117,7 +140,7 @@
 		}
 
 		// Create a Stripe client.
-		var stripe = Stripe('pk_test_ujrxSeDWQe8wFLQohp9Jp172');
+		var stripe = Stripe('pk_live_woBbfdvDUMkNSZBX4FdG3Nt0');
 
 		// Create an instance of Elements.
 		var elements = stripe.elements();

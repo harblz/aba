@@ -138,8 +138,8 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
 
-STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "pk_test_ujrxSeDWQe8wFLQohp9Jp172")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "sk_test_GXRtTKknI00RdnWG9bXPy1iu")
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "pk_live_woBbfdvDUMkNSZBX4FdG3Nt0")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7")
 
 # CKEditor
 CKEDITOR_CONFIGS = {

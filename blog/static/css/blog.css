@@ -196,9 +196,9 @@ time.icon:hover, time.icon:focus
   color: #fff;
 }
 
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+.page-header h2, .page-header h2 a, .page-header h2 a:visited, .page-header h2 a:active {
     color: #fff;
-    font-size: 36pt;
+    font-size: 30pt;
     text-decoration: none;
 }
 

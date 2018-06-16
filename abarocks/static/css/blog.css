@@ -41,6 +41,7 @@ a:hover {
 .StripeElement {
   background-color: white;
   height: 40px;
+  width: 500px;
   padding: 10px 12px;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -195,7 +196,7 @@ time.icon:hover, time.icon:focus
   color: #fff;
 }
 
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+.page-header h2, .page-header h2 a, .page-header h2 a:visited, .page-header h2 a:active {
     color: #fff;
     font-size: 36pt;
     text-decoration: none;
