@@ -18,17 +18,75 @@
 
           <p class="text-info">Curious how this is possible (or are you a computer science nerd like me?) - <a href="https://stripe.com/docs">check out stripe's documentation.</a></p>
 
-		  <form action="/checkout" method="POST">
+		  <form action="/blog_coffee_checkout" method="POST">
+		  	{% csrf_token %}
+		  	<article>
+				<label class="font-weight-bold" for="basic-url">How much do you want to donate?</label>
+				<div class="input-group mb-3">
+				  <input id="amount" name="amount" type="text" class="form-control" placeholder="Donation Amount" id="basic-url" aria-describedby="basic-addon3">
+				</div>
+		  	</article>
+		  	<!--
 		    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-		        data-key="{{ STRIPE_PUBLIC_KEY }}" # Make sure to wrap the variable name with double {}
-		        data-amount="2000"
+		        data-key="pk_test_ujrxSeDWQe8wFLQohp9Jp172" # Make sure to wrap the variable name with double {}
 		        data-name="ABA.Rocks"
 		        data-description="Thank you so much for your generosity!"
 		        data-image="/static/favicon/android-icon-192x192.png"
 		        data-currency="usd">
 		    </script>
+		    !-->  
+		    <button class="btn btn-primary font-weight-bold" id='donateButton'>Donate</button>
 		  </form>
 
+
+
+    	  <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
+		  <script>
+
+		    var handler = StripeCheckout.configure({
+		      key: 'pk_test_ujrxSeDWQe8wFLQohp9Jp172',
+		      locale: 'auto',
+		      name: 'ABA.Rocks',
+		      description: 'Thank you so much for your generosity!',
+		      image: '/static/favicon/android-icon-192x192.png',
+		      currency: 'usd',
+		      token: function(token) {
+		        $('input#stripeToken').val(token.id);
+		        $('form').submit();
+		       }
+		    });
+
+			$('#donateButton').on('click', function(e) {
+			  e.preventDefault();
+
+			  var $form = $(this);
+
+			  $('#error_explanation').html('');
+
+			  var amount = $('#amount').val();
+
+			  amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+
+			  amount = parseFloat(amount);
+
+			  if (isNaN(amount)) {
+			    $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
+			  }
+			  else if (amount < 5.00) {
+			    $('#error_explanation').html('<p>Donation amount must be at least $5.</p>');
+			  }
+			  else {
+			    amount = amount * 100; // Needs to be an integer!
+
+			    Stripe.createToken($form, handler);
+
+			    handler.open({
+			      amount: Math.round(amount)
+			    })
+			  }
+			});
+		  </script>
 
 
           <br />

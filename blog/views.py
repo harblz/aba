@@ -1,9 +1,39 @@
+import stripe
+
+from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
+
+
+
+def blog_coffee_checkout(request):
+    stripe.api_key = "sk_test_GXRtTKknI00RdnWG9bXPy1iu"
+
+    if request.method == "POST":
+        token    = request.POST.get("stripeToken")
+
+    try:
+        charge  = stripe.Charge.create(
+            amount      = token.amount,
+            currency    = "usd",
+            source      = token,
+            description = "A generous donation from a fan!"
+        )
+
+        # new_car.charge_id   = charge.id
+
+    except stripe.error.CardError as ce:
+        return False, ce
+
+    else:
+        #new_car.save()
+        return render(request, 'blog/thanks.html', {})
+        # The payment was successfully processed, the user's card was charged.
+        # You can now redirect the user to another page or whatever you want
 
 
 def blog_what_is_aba(request):
