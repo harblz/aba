@@ -11,7 +11,7 @@ from django.shortcuts import redirect
 
 
 def blog_coffee_checkout(request):
-    stripe.api_key = "sk_test_GXRtTKknI00RdnWG9bXPy1iu"
+    stripe.api_key = "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7"
 
     if request.method == "POST":
         token    = request.POST.get("stripeToken")
