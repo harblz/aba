@@ -8,7 +8,7 @@
         <p class="lead">You could procrastinate by watching <a href="https://www.youtube.com/results?search_query=cat+videos&page=&utm_source=opensearch">cat videos on YouTube...</a> or take a few practice quizzes!</p>
           <hr class="my-4">
           <p>
-            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT Competency Assessment</a> and attempt to simulate actual questions you might encounter on the RBT exam. </p>
+            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT</a> and <a href="https://www.bacb.com/bcba-bcaba-task-list/">BCBA Competency Assessments</a> and attempt to simulate actual questions you might encounter on the RBT exam. </p>
           <p class="lead">
             <a class="btn btn-primary btn-lg" href="/quiz" role="button">Practice Quizzes</a>
           </p>
@@ -37,6 +37,9 @@
                   <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
                 {% endif %}
                 <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                <small style="font-size: 0.5em">
+                     <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_detail' pk=post.pk %}#disqus_thread"></a></span>
+                </small>
               </h1>
             </div>
             <div class="col-12">
@@ -47,8 +50,8 @@
               {% endif %}
             </div>
             <div class="col-12">
-              <p>{{ post.text|safe|truncatewords_html:150 }}</p>
-              <p class="btn btn-info">See the full post...</p>
+              <p>{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
+              <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 

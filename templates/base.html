@@ -100,62 +100,8 @@
 
               <ul class="list-group list-group-flush">
 
-                <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-home" style="min-width: 25px;"></i> <a class="sidebar-link" href="/">Home</a>
-                  </div>
-                </li>
+                {% include "mobile_sidebar.html" %}
 
-                <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-question" style="min-width: 25px;"></i> <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-graduation-cap" style="min-width: 25px;"></i> <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-flask" style="min-width: 25px;"></i> <a class="sidebar-link" href="/research">Research & Evidence</a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-info-circle" style="min-width: 25px;"></i> <a class="sidebar-link" href="/resources">Resources</a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="fas fa-book" style="min-width: 25px;"></i> <a class="sidebar-link" href="/quiz"><b>ABA Exam Prep Materials</b></a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/about">About ABA.rocks</a>
-                  </div>
-                </li>
-
-                <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                  <div style="width: 100%;">
-                    <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/coffee"><b>Buy me coffee!</b></a>
-                  </div>
-                </li>
-
-                {% if user.is_authenticated %}
-                <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true">
-                  <i class="far fa-plus-square" style="min-width: 25px;"></i>
-                  <a href="{% url 'post_new' %}">
-                    New Post
-                  </a>
-                </li>
-                {% endif %}
               </ul>
 
             </div>
@@ -171,70 +117,7 @@
 
                   <ul class="list-group list-group-flush">
 
-                    <li class="list-group-item sidebar-link-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-home" style="min-width: 25px;"></i> <a class="sidebar-link" href="/">Home</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-question" style="min-width: 25px;"></i> <a class="sidebar-link" href="/what-is-aba">What is ABA?</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-graduation-cap" style="min-width: 25px;"></i> <a class="sidebar-link" href="/behavior-basics">Behavior Basics</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true" >
-                      <div style="width: 100%;">
-                        <i class="fas fa-flask" style="min-width: 25px;"></i> <a class="sidebar-link" href="/research">Research & Evidence</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-info-circle" style="min-width: 25px;"></i> <a class="sidebar-link" href="/resources">Resources</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-book" style="min-width: 25px;"></i> <a class="sidebar-link" href="/quiz"><b>ABA Exam Prep Materials</b></a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="far fa-envelope" style="min-width: 25px;"></i> <a class="sidebar-link" href="/about">About ABA.rocks</a>
-                      </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="right" data-html="true">
-                      <div style="width: 100%;">
-                        <i class="fas fa-coffee" style="min-width: 25px;"></i> <a class="sidebar-link" href="/coffee"><b>Buy me coffee!</b></a>
-                      </div>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
-                      <i class="far fa-plus-square" style="min-width: 25px;"></i>
-                      <a href="{% url 'post_new' %}">
-                        <b>New Post</b>
-                      </a>
-                    </li>
-
-
-                    <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
-                      <i class="fas fa-unlock-alt" style="min-width: 25px;"></i>
-                      <a href="/admin">
-                        <b>Admin Site</b>
-                      </a>
-                    </li>
-                    {% endif %}
+                    {% include "desktop_sidebar.html" %}
 
                   </ul>
                 </div>
@@ -284,10 +167,11 @@
           $('[data-toggle="tooltip"]').tooltip()
         })
       </script>
-      <script id="dsq-count-scr" src="//https-aba-rocks.disqus.com/count.js" async></script>
 
       {% block extra-body-js %}
       {% endblock %}
+      
+      <script id="dsq-count-scr" src="//https-aba-rocks.disqus.com/count.js" async></script>
 
     </body>
 

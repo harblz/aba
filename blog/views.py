@@ -4,6 +4,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
+from pages.models import Pages
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
@@ -36,40 +37,30 @@ def blog_coffee_checkout(request):
         return render(request, 'blog/thanks.html', { 'donation' : donation })
         # The payment was successfully processed & the user's card was charged - confirm with them how much
 
-
-def blog_what_is_aba(request):
-    return render(request, 'blog/blog_what_is_aba.html', {})
-
 def blog_coffee(request):
-    return render(request, 'blog/blog_coffee.html', {})
-
-def blog_coffee_new(request):
-    return render(request, 'blog/new_blog_coffee.html', {})
-
-def blog_behavior_basics(request):
-    return render(request, 'blog/blog_behavior_basics.html', {})
+    pages = Pages.objects.order_by('order')
+    return render(request, 'blog/blog_coffee.html', {'pages': pages})
 
 def blog_research(request):
-    return render(request, 'blog/blog_research.html', {})
-
-def blog_resources(request):
-    return render(request, 'blog/blog_resources.html', {})
-
-def blog_about(request):
-    return render(request, 'blog/blog_about.html', {})
+    pages = Pages.objects.order_by('order')
+    return render(request, 'blog/blog_research.html', {'pages': pages})
 
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    pages = Pages.objects.order_by('order')
+    return render(request, 'blog/post_list.html', { 'posts': posts, 'pages': pages })
 
 def post_detail(request, pk):
+    pages = Pages.objects.order_by('order')
     post = get_object_or_404(Post, pk=pk)
     post.page_views += 1;
     post.save()
-    return render(request, 'blog/post_detail.html', {'post': post})
+    return render(request, 'blog/post_detail.html', {'post': post, 'pages': pages})
 
 def post_new(request):
+    pages = Pages.objects.order_by('order')
+
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -80,9 +71,10 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'pages': pages})
 
 def post_edit(request, pk):
+    pages = Pages.objects.order_by('order')
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -94,4 +86,4 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'pages': pages})

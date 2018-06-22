@@ -14,8 +14,10 @@ import random
 from django.utils import timezone
 
 from .models import Unit, Choice, Question
+from pages.models import Pages
 
 def quiz_index(request):
+    pages = Pages.objects.order_by('order')
     template_name       = 'quiz/index.html'
     units               = Unit.objects.values("unit_name", "unit_target", "unit_description", "id").all() # Question.objects.values("unit_name").distinct()
 
@@ -24,9 +26,11 @@ def quiz_index(request):
 
     return render(request, 'quiz/index.html', {
         'units'        : units,
+        'pages': pages
     })
 
 def quiz_view(request, quiz_id ):
+    pages = Pages.objects.order_by('order')
     # get
     if request.method == 'GET':
         quiz_name           = Unit.objects.get(pk=quiz_id) #Unit.objects.filter(unit_id=quiz_id).values('unit_name', flat=True)
@@ -44,6 +48,7 @@ def quiz_view(request, quiz_id ):
             'unit_name'         : unit_name,
             'unit_id'           : unit_id,
             'total_questions'   : max_questions,
+            'pages'             : pages,
         })
     # post
     else:
@@ -91,58 +96,3 @@ def quiz_view(request, quiz_id ):
             'next_question_text'    : next_question_question_text,
             'next_question_choices' : next_question_choices
             })
-
-def home(request):
-    if request.method == 'POST':
-        post_text = request.POST.get('the_post')
-        response_data = {}
-
-        return JsonResponse({'foo':'bar post'})
-
-    else:
-        return JsonResponse({'foo':'bar get'})
-
-def create_post(request, quiz_name, question_id):
-    if request.method == 'POST':
-        post_text = request.POST.get('the_post')
-        response_data = {}
-
-        return JsonResponse({'foo':'bar'})
-
-    else:
-        return JsonResponse({'foo':'bar'})
-
-
-
-class DetailView(TemplateView):
-    template_name = 'quiz/detail.html'
-
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
-
-
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'quiz/results.html'
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'quiz/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))
