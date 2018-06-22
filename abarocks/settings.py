@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'quiz.apps.QuizConfig',
     'blog.apps.BlogConfig',
+    'pages.apps.PagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -166,6 +167,11 @@ CKEDITOR_CONFIGS = {
             'autosave',
             'notification',
             'youtube',
+            'tableresize',
+            'image2',
+            'undo',
+            'autoembed',
+            'embedbase',
         ]),
     }
 }
