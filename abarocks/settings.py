@@ -166,12 +166,11 @@ CKEDITOR_CONFIGS = {
             'scayt',
             'autosave',
             'notification',
-            'youtube',
             'tableresize',
-            'image2',
             'undo',
             'autoembed',
             'embedbase',
+            'youtube',
         ]),
     }
 }
