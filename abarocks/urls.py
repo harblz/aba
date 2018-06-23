@@ -14,15 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 
+from blog.views import post_list
+
+from django.views.generic import RedirectView
+
+from .views import redirect_root
+
 urlpatterns = [
-    url(r'^',  include('blog.urls')),
+    url(r'^admin/', admin.site.urls),
+    #url(r'^',  include('blog.urls')),
+    #path('', include('blog.urls')),
+    url(r'^$', redirect_root),
     url(r'^blog/', include('blog.urls')),
     url(r'^pages/', include('pages.urls')),
     url(r'^quiz/', include('quiz.urls')),
     url(r'^polls/', include('polls.urls')),
-    url(r'^admin/', admin.site.urls),
 ]
 
 admin.site.site_title  = 'ABA.rocks Administration'
