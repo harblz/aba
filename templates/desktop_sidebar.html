@@ -36,14 +36,6 @@
 
 {% if user.is_authenticated %}
 <li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
-  <i class="far fa-plus-square" style="min-width: 25px;"></i>
-  <a href="{% url 'post_new' %}">
-    <b>New Post</b>
-  </a>
-</li>
-
-
-<li class="list-group-item"  data-toggle="tooltip" data-placement="right" data-html="true" >
   <i class="fas fa-unlock-alt" style="min-width: 25px;"></i>
   <a href="/admin">
     <b>Admin Site</b>

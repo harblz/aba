@@ -1,7 +1,7 @@
 import datetime
-
 from django.db import models
 from django.utils import timezone
+
 from ckeditor.fields import RichTextField
 
 from django.utils.encoding import python_2_unicode_compatible
@@ -38,10 +38,35 @@ class Difficulty(models.Model):
     def get_difficulty_id(self):
         return self.difficulty_id
 
+class Task(models.Model):
+    task_name               = models.CharField(max_length=50)
+    task_list_description   = RichTextField()
+    certification           = models.CharField(max_length=25, default='RBT')
+    task_version            = models.CharField(max_length=50, default='2017')    
+
+    def __str__(self):
+        return self.task_name
+
+    def get_task_name(self):
+        return self.task_name
+
+    def get_task_description(self):
+        return self.task_description
+
+    def get_task_certification(self):
+        return self.task_certification
+
+    def get_task_version(self):
+        return self.task_version
+
+    def get_task_id(self):
+        return self.task_id
+
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Question(models.Model):
     question_text   = RichTextField()
     unit            = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    task_list_item  = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     difficulty      = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     question_hint   = RichTextField()
     pub_date        = models.DateTimeField('date published')
@@ -75,7 +100,7 @@ class Question(models.Model):
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Choice(models.Model):
     question    = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
+    choice_text = RichTextField()
     votes       = models.IntegerField(default=0)
     is_correct  = models.BooleanField(default=False)
     def __str__(self):
