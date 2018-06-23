@@ -22,19 +22,21 @@
   </div>
   <div id="choice_menu" class="panel panel-primary">
     <div class="panel-heading">
-      <h5 style="font-size: 1rem;font-weight: normal" class="panel-title">Select the best answer from these choices:</h5>
+      <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
     </div>
     <div class="panel-body">
       <form action="/quiz/{{ unit_id }}/grade_question/" method="POST" id="post-form">
       {% csrf_token %}
       <div id="choices">
       {% for choice in question.choice_set.all %}
-          <div>
             <label class="quiz-choice-labels">
-              <input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" />
-              <span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text }}</span>
+              <table>
+                <tr>
+                  <td style="vertical-align: top"><input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" /></td>
+                  <td><span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span></td>
+                </tr>
+              </table>
             </label><br />
-          </div>
       {% endfor %}
       </div>
     </div>
@@ -97,17 +99,18 @@
 
   <div id="error_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="Question Hint" aria-hidden="true">
     <div class="modal-dialog modal-lg">
+      <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title alert alert-danger" style='width: 100%;'><b>Oops!</b> That answer was not correct</h4>
+          <h4 class="modal-title alert alert-danger" style='cursor: pointer;width: 100%;'><b>Oops!</b> That answer was not correct</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="font-size: 14px;">
           <div id="error_modal_message">
           </div>
         </body>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">OK, I got it</button>
+        <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
       </div>
     </div>
   </div>
@@ -291,15 +294,28 @@
               for (var i = 0; i < response.next_question_choices.length; i++) {
                 $('#choices').append(`
                     <label class="quiz-choice-labels">
-                        <input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" />
-                        <span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span>
+                        <table>
+                          <tr>
+                            <td style="vertical-align: top"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
+                            <td><span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span></td>
+                          </tr>
+                        </table>
                       </label><br />
                   `);
+
+                /*
+                  <table>
+                    <tr>
+                      <td style="vertical-align: top"><input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" /></td>
+                      <td><span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span></td>
+                    </tr>
+                  </table>
+                */
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
 
-                $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
+                $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
               } else {
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
@@ -316,9 +332,9 @@
                   $('#error_modal').modal('show');
                   $('#error_modal_message').html('');
                   $('#error_modal_message').append('<h3 style="margin: 5px;"><small>The question was...</small><br> <p style="margin: 10px 0 0 10px;">'+response.prev_question_was+'</p></h3>');
-                  $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3>');
-                  $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+response.prev_question_choice+'</b></p></h3><br>');
-                  $('#error_modal_message').append(response.prev_question_hint);
+                  $('#error_modal_message').append('<h3 style="color:green;"><small>The correct answer was...</small><br><p style="padding: 10px;"><b>'+response.correct_choice_text+'</b></p></h3><hr>');
+                  $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+response.choice_text+'</b></p></h3><br>');
+                  $('#error_modal_message').append("<h3>Here's some additional info:</h3>" + response.prev_question_hint);
                   $('#choices').html('');
 
                   if ( end_of_quiz == true ) {
@@ -329,15 +345,18 @@
                   } else {
                     for (var i = 0; i < response.next_question_choices.length; i++) {
                       $('#choices').append(`
-                          <label class="quiz-choice-labels">
-                            <input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" />
-                            <span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span>
+                        <label class="quiz-choice-labels">
+                            <table>
+                              <tr>
+                                <td style="vertical-align: top"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
+                                <td><span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span></td>
+                              </tr>
+                            </table>
                           </label><br />
                         `);
                     }
 
-
-                    $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>'+response.next_question_text);
+                    $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
                   }
                 }
               }

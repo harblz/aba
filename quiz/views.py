@@ -52,12 +52,13 @@ def quiz_view(request, quiz_id ):
         })
     # post
     else:
-        attempt             = request.POST.get('selected_choice')
-        attempt_id          = request.POST.get('selected_choice_id')
-        next_question_id    = request.POST.get('next_question_id')
-        quiz_id             = request.POST.get('unit_id')
+        attempt                 = request.POST.get('selected_choice')
+        attempt_id              = request.POST.get('selected_choice_id')
+        prev_question_choice    = Choice.objects.get(id=attempt_id).choice_text
+        next_question_id        = request.POST.get('next_question_id')
+        quiz_id                 = request.POST.get('unit_id')
 
-        quiz_name           = Unit.objects.get(id=quiz_id)
+        quiz_name               = Unit.objects.get(id=quiz_id)
 
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
@@ -82,16 +83,17 @@ def quiz_view(request, quiz_id ):
             next_question_question_text = next_question.question_text
             next_question_question_hint = next_question.question_hint
 
+
         return JsonResponse({
             'unit_name'             : quiz_name.unit_name,
             'question_id'           : next_question_id,
             'question_hint'         : next_question_question_hint,
-            'choice_text'           : attempt,
+            'choice_text'           : prev_question_choice,
             'is_correct'            : selected_choice.is_correct,
             'correct_choice_text'   : correct_choice,
             'prev_question_was'     : prev_question.question_text,
             'prev_question_hint'    : prev_question.question_hint,
-            'prev_question_choice'  : attempt,
+            'prev_question_choice'  : prev_question_choice,
             'next_question_id'      : next_question_id,
             'next_question_text'    : next_question_question_text,
             'next_question_choices' : next_question_choices
