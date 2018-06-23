@@ -36,9 +36,9 @@
                 {% if user.is_authenticated %}
                   <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
                 {% endif %}
-                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                <a href="{% url 'post_details_by_slug' slug=post.slug %}">{{ post.title }}</a>
                 <small style="font-size: 0.5em">
-                     <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_detail' pk=post.pk %}#disqus_thread"></a></span>
+                     <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
                 </small>
               </h1>
             </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-12">
               <p>{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
-              <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 

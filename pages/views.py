@@ -5,7 +5,7 @@ from .models import Pages
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 
-# Create your views here.
+
 def pages_base(request, slug):
 	pages = Pages.objects.order_by('order')
 	page = Pages.objects.filter(slug=slug)

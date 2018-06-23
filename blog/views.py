@@ -45,15 +45,22 @@ def blog_research(request):
     pages = Pages.objects.order_by('order')
     return render(request, 'blog/blog_research.html', {'pages': pages})
 
-
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     pages = Pages.objects.order_by('order')
     return render(request, 'blog/post_list.html', { 'posts': posts, 'pages': pages })
 
-def post_detail(request, pk):
+def post_details_by_id(request, pk):
     pages = Pages.objects.order_by('order')
     post = get_object_or_404(Post, pk=pk)
+    post.page_views += 1;
+    post.save()
+    return render(request, 'blog/post_detail.html', {'post': post, 'pages': pages})
+
+def post_details_by_slug(request, slug):
+    pages = Pages.objects.order_by('order')
+    post = Post.objects.filter(slug=slug)
+    post = get_object_or_404(Post, pk=post[0].id)
     post.page_views += 1;
     post.save()
     return render(request, 'blog/post_detail.html', {'post': post, 'pages': pages})
@@ -68,7 +75,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_details_by_id', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form, 'pages': pages})
@@ -83,7 +90,7 @@ def post_edit(request, pk):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_details_by_id', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form, 'pages': pages})
