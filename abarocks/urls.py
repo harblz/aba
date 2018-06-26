@@ -21,12 +21,14 @@ from blog.views import post_list
 
 from django.views.generic import RedirectView
 
-from .views import redirect_root
+from .views import redirect_root, redirect_research, redirect_coffee
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^',  include('blog.urls')),
     #path('', include('blog.urls')),
+    url(r'^research/', redirect_research),
+    url(r'^coffee/', redirect_coffee),
     url(r'^$', redirect_root),
     url(r'^blog/', include('blog.urls')),
     url(r'^pages/', include('pages.urls')),

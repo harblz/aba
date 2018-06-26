@@ -10,7 +10,7 @@
   <!-- Displays the Quiz Results at the end !-->
   <div id="results"></div>
     <div  id="question_text">
-      <p>Question #<span id="questionNumber">1 </span> of {{ total_questions }} — {{ unit_name }} Practice Quiz</p>
+      <p class="mt-2">Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</p></span></small>
 
       <h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">
         {{ question.question_text|safe }}
@@ -314,8 +314,8 @@
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-
-                $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                // <p class="mt-2">Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</p></span></small>
+                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">'+response.unit_name+' Practice Quiz</p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
               } else {
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
@@ -355,8 +355,8 @@
                           </label><br />
                         `);
                     }
-
-                    $('#question_text').html('<small>Question #<span id="questionNumber">'+(max_questions - id_list.length)+' of '+max_questions+' </span> - '+response.unit_name+' Practice Quiz<br></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                    $('#results').html('<div class="alert alert-warning" role="alert"><b>Oops!</b> You got question #'+(max_questions - id_list.length - 1)+' incorrect. <a href="#" class="redisplay-error-modal" onClick="$(`#error_modal`).modal(`show`);"><b>Wanna see why again?</b></a></div>');
+                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">'+response.unit_name+' Practice Quiz</p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
                   }
                 }
               }
