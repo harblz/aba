@@ -25,18 +25,32 @@
   {% if units|length > 0 %}
   <div class="tab-content" id="myTabContent">
 
-    <div class="tab-pane fade show active" id="RBT" role="tabpanel" aria-labelledby="RBT-tab">
+    <div class="tab-pane fade show active"id="RBT" role="tabpanel" aria-labelledby="RBT-tab">
       <div class="container-fluid">
-        <br><h3>RBT Practice Quizzes</h3>
+        <br><h3>RBT Practice Quizzes:</h3>
+        <br>
         <ul class="list-group">
         {% for unit in units %}
           {% if unit.count != 0 and unit.unit_target == "RBT" %}
-            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
-              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
-              <span style="color: #000;">
-                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
-              </span>
+            <a class="list-group-item">
+              <div>
+                <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#RBT-Collapse-{{unit.id}}">
+                  <div class="btn btn-success" onClick="window.location='{{unit.id}}'"><i class="fas fa-play"></i></div>
+                  {{ unit.unit_name }} practice quiz
+                  <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
+                  <small style="font-size: 0.5em;" class="text-muted">{{ unit.count }} questions</small>
+                  <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
+                    Click title to toggle quiz details; click the green play button to start the quiz.
+                  </small>
+                </h4>
+              </div>
+              <div style="color: #000;" class="collapse" href="{{unit.id}}" id="RBT-Collapse-{{unit.id}}">
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
+                  <br>
+                  <div href="{{unit.id}}" class="btn btn-success font-weight-bold">Start Quiz</div>
+                </p>
+                <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+              </div>
             </a>
           {%endif %}
           &nbsp
@@ -49,14 +63,23 @@
     <div class="tab-pane fade" id="BCaBA" role="tabpanel" aria-labelledby="BCaBA-tab">
       <div class="container-fluid">
         <br><h3>BCaBA Practice Quizzes</h3>
+        <br>
         <ul class="list-group">
         {% for unit in units %}
           {% if unit.count != 0 and unit.unit_target == "BCaBA" %}
-            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
-              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
-              <span style="color: #000;">
+            <a class="list-group-item" style="cursor: pointer;">
+                <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCaBA-Collapse-{{unit.id}}">
+                  <div class="btn btn-success" onClick="window.location='{{unit.id}}'"><i class="fas fa-play"></i></div>
+                  {{ unit.unit_name }} practice quiz
+                  <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
+                  <small style="font-size: 0.5em;" class="text-muted">{{ unit.count }} questions</small>
+                  <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
+                    Click title to toggle quiz details; click the green play button to start the quiz.
+                  </small>
+                </h4>
+              <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCaBA-Collapse-{{unit.id}}">
                 <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+                <p class="list-group-item-text text-muted"> {{ unit.count }} question quiz.</p>
               </span>
             </a>
           {% endif %}
@@ -77,14 +100,23 @@
     <div class="tab-pane fade" id="BCBA" role="tabpanel" aria-labelledby="BCBA-tab">
       <div class="container-fluid">
         <br><h3>BCBA Practice Quizzes</h3>
+        <br>
         <ul class="list-group">
         {% for unit in units %}
           {% if unit.count != 0 and unit.unit_target == "BCBA" %}
             <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
-              <h4><b>{{ unit.unit_name }}</b> practice quiz</h4>
-              <span style="color: #000;">
+              <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCBA-Collapse-{{unit.id}}">
+                <div class="btn btn-success" onClick="window.location='{{unit.id}}'"><i class="fas fa-play"></i></div>
+                {{ unit.unit_name }} practice quiz
+                <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
+                <small style="font-size: 0.5em;" class="text-muted">{{ unit.count }} questions</small>
+                <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
+                  Click title to toggle quiz details; click the green play button to start the quiz.
+                </small>
+              </h4>
+              <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCBA-Collapse-{{unit.id}}">
                 <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-                <p class="list-group-item-text"> {{ unit.count }} question quiz.</p>
+                <p class="list-group-item-text text-muted"> {{ unit.count }} question quiz.</p>
               </span>
             </a>
           {% endif %}

@@ -7,7 +7,7 @@ from .models import Unit, Difficulty, Choice, Question, Task
 # Register your models here.
 class ChoiceInline(admin.TabularInline):
     model = Choice
-    extra = 0
+    extra = 4
 
 
 class UnitInline(admin.TabularInline):
