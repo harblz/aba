@@ -47,7 +47,7 @@
               <div style="color: #000;" class="collapse" href="{{unit.id}}" id="RBT-Collapse-{{unit.id}}">
                 <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
                   <br>
-                  <div href="{{unit.id}}" class="btn btn-success font-weight-bold">Start Quiz</div>
+                  <div onClick="window.location='{{unit.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                 </p>
                 <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
               </div>
@@ -78,8 +78,11 @@
                   </small>
                 </h4>
               <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCaBA-Collapse-{{unit.id}}">
-                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-                <p class="list-group-item-text text-muted"> {{ unit.count }} question quiz.</p>
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
+                  <br>
+                  <div onClick="window.location='{{unit.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
+                </p>
+                <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
               </span>
             </a>
           {% endif %}
@@ -115,8 +118,11 @@
                 </small>
               </h4>
               <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCBA-Collapse-{{unit.id}}">
-                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} </p>
-                <p class="list-group-item-text text-muted"> {{ unit.count }} question quiz.</p>
+                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
+                  <br>
+                  <div onClick="window.location='{{unit.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
+                </p>
+                <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
               </span>
             </a>
           {% endif %}
