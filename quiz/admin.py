@@ -2,7 +2,11 @@ from django.contrib import admin
 
 from django.utils.html import format_html
 
+from django.contrib.admin import SimpleListFilter
+
 from .models import Unit, Difficulty, Choice, Question, Task
+
+# Extending SimpleListFilter
 
 # Register your models here.
 class ChoiceInline(admin.TabularInline):
@@ -31,9 +35,9 @@ change_difficulty_RBT.short_description = "Change selected questions difficulty 
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('escaped_question_text', 'question_unit_name', 'question_difficulty', 'task_list_item', 'unit_id', 'pub_date', 'was_published_recently')
-
-    list_filter = ['pub_date', 'unit_id', 'task_list_item']
+    list_display = ('escaped_question_text', 'question_unit_name', 'has_answer', 'question_difficulty', 'task_list_item', 'unit_id', 'pub_date', 'was_published_recently')
+    list_per_page = 100000
+    list_filter = ['unit_id', 'task_list_item', 'pub_date', ]
 
     # actions = [change_unit]
 
@@ -42,6 +46,16 @@ class QuestionAdmin(admin.ModelAdmin):
 
     def question_unit_name(self, obj):
         return Unit.objects.get(pk=obj.unit_id)
+
+    def has_answer(self, obj):
+        choices = Choice.objects.filter(question_id=obj.id)
+        status  = False;
+
+        for choice in choices:
+            if choice.is_correct is True:
+                status = True;
+        
+        return status;
 
     def question_difficulty(self, obj):
         return Difficulty.objects.get(pk=obj.difficulty_id)

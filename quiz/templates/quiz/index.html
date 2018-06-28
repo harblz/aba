@@ -85,13 +85,13 @@
                 <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
               </span>
             </a>
-          {% endif %}
-          {% if forloop.last %}
-            {% if unit.count == 0%}
-              <br>
-              <p style="font-size: 5.0em">&#x1f629;</p>
-              <h4>No quizzes here just yet...</h4>
-              <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
+
+          {% else %}
+            {% if forloop.last %}
+                <br>
+                <p style="font-size: 5.0em">&#x1f629;</p>
+                <h4>No quizzes here just yet...</h4>
+                <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
             {% endif %}
           {% endif %}
         {% endfor %}
@@ -125,13 +125,12 @@
                 <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
               </span>
             </a>
-          {% endif %}
-          {% if forloop.last %}
-            {% if unit.count == 0%}
-              <br>
-              <p style="font-size: 5.0em">&#x1f629;</p>
-              <h4>No quizzes here just yet...</h4>
-              <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
+          {% else %}
+            {% if forloop.last %}
+                <br>
+                <p style="font-size: 5.0em">&#x1f629;</p>
+                <h4>No quizzes here just yet...</h4>
+                <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
             {% endif %}
           {% endif %}
         {% endfor %}
@@ -139,6 +138,39 @@
       </div>
     </div>
     <!-- End BCBA Quiz Block -->
+
+          <div class="container" style="text-align: center;">
+            <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
+              <i class="far fa-comment"></i>
+              Toggle Comments
+            </button>
+          </div>
+
+          <br /><br />
+
+          <!-- Disqus Code !-->
+          <div id="disqus_thread" class="collapse col-12"></div>
+
+          <script>
+
+          /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+          
+          var disqus_config = function () {
+              this.page.url = '{{ request.build_absolute_uri }}{{ object.get_absolute_url }}';
+              this.page.identifier = 'quiz';
+              this.page.title = 'Quiz Index';
+          };
+                    
+          (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+          s.src = 'https://https-aba-rocks.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   </div>
   {% else %}
