@@ -1,23 +1,86 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}{% block mobile-content %}
-      <!-- Jumbotron !-->
+
+
+    <!-- Carousel !-->
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carousel" style="min-height: 5px;" data-slide-to="0" class="active"></li>
+    {% for post in posts %}
+      {% if post.is_pinned is True %}
+        <li data-target="#carousel" style="min-height: 5px;" data-slide-to="{{ forloop.counter }}"></li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active text-center p4">
+      <div class="container">
+        <br /><br />
+        <h1 class="display-4">Getting Ready for the RBT Exam?</h1>
+        <p class="lead">You could procrastinate by watching <a href="https://www.youtube.com/results?search_query=cat+videos&page=&utm_source=opensearch">cat videos on YouTube...</a> or take a few practice quizzes!</p>
+          <hr class="my-4">
+          <p>
+            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT</a> and <a href="https://www.bacb.com/bcba-bcaba-task-list/">BCBA Competency Assessments</a> and attempt to simulate actual questions you might encounter on the RBT exam. 
+          </p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/quiz" role="button">Practice Quizzes</a>
+          </p>
+          <br />
+          <br />
+      </div><br>
+    </div>
+
+    {% for post in posts %}
+      {% if post.is_pinned is True %}
+        <div class="carousel-item text-center p4">
+          <div class="container">
+            <br /><br />
+            <h1 class="display-4">{{ post.title|safe }}</h1>
+            <br />
+            {{ post.text|safe|truncatewords_html:post.snippet_size }}
+            <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
+          </div><br><br><br>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+
+  </div>
+
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+    <!-- Jumbotron
     <div class="jumbotron jumbotron-fluid" style="background-color: #fff">
       <div class="container">
         <h1 class="display-4">Getting Ready for the RBT Exam?</h1>
         <p class="lead">You could procrastinate by watching <a href="https://www.youtube.com/results?search_query=cat+videos&page=&utm_source=opensearch">cat videos on YouTube...</a> or take a few practice quizzes!</p>
           <hr class="my-4">
           <p>
-            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT</a> and <a href="https://www.bacb.com/bcba-bcaba-task-list/">BCBA Competency Assessments</a> and attempt to simulate actual questions you might encounter on the RBT exam. </p>
+            Good luck! All quizzes are inspired from tasks on the <a href="https://www.bacb.com/rbt/rbt-competency-assessment/">RBT</a> and <a href="https://www.bacb.com/bcba-bcaba-task-list/">BCBA Competency Assessments</a> and attempt to simulate actual questions you might encounter on the RBT exam. 
+          </p>
           <p class="lead">
             <a class="btn btn-primary btn-lg" href="/quiz" role="button">Practice Quizzes</a>
           </p>
       </div>
     </div>
+    !-->
 
+    <br /><br />
     <h3>Recent Posts</h3>
     <hr>
     {% for post in posts %}
+      {% if post.is_pinned is false %}
 
       <div class="post container-fluid" style="margin-top: 25px;">
         <div class="row">
@@ -57,5 +120,7 @@
 
         </div>
       </div>
+
+      {% endif %}
     {% endfor %}
 {% endblock %}{% endblock %}

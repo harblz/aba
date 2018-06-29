@@ -10,6 +10,11 @@ class Post(models.Model):
     text   = RichTextField()
     slug   = models.CharField(max_length=200)
     snippet_size = models.IntegerField(default=150)
+    is_pinned = models.NullBooleanField(default=False)
+
+    is_pinned.help_text = "Pinning a blog post makes it stick to the 'pinned items' bar on the front page of the site. Try not to pin too many posts because it'll look crazy"
+
+    snippet_size.help_text = "The snippet_size determines how much of a text to 'preview' before the post shows the 'read more' button"
 
     STATUS_CHOICES = (
         ('d', 'Draft'),

@@ -30,6 +30,23 @@ a:hover {
     font-size: 1.15em;
 }
 
+/* Bootstrap Carousel Override */
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+  cursor: pointer;
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #444;
+  border-radius: 15px;
+}
+
 /**
  * STRIPE Default CSS
  */
