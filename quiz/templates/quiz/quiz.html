@@ -118,6 +118,15 @@
 
 
 <script>
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.addEventListener("beforeunload", function (e) {
+    return "";
+  });
+
+  window.onbeforeunload = function ()
+  {
+     return "";
+  };
 
   var dataset = [];
 
