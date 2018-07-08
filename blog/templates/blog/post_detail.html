@@ -18,7 +18,7 @@
               {% if user.is_authenticated %}
                 <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
               {% endif %}
-              {{ post.title }}
+              {{ post.title|safe }}
               <small style="font-size: 0.5em">
                    <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
               </small>
@@ -42,17 +42,28 @@
           <br /><br />
           <br /><br />
 
+          <div class="container-fluid">
+            <h3>Got Something to Say?</h3>
+            <p>Now it's your turn to share your opinion. Tell us what you think!
+              <br />
+            </p>
+            <small>Please always try to keep it civil.</small>
+          </div>
+
           <div class="container" style="text-align: center;">
             <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
               <i class="far fa-comment"></i>
               Toggle Comments
             </button>
           </div>
-
+          <br />
+          <br />
           <br /><br />
 
           <!-- Disqus Code !-->
-          <div id="disqus_thread" class="collapse col-12"></div>
+          <div id="disqus_thread" class="col-12"></div>
+          <br /><br /><br />
+          <br /><br />
 
           <script>
 
