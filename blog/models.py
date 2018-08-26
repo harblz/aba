@@ -8,7 +8,7 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
     title  = models.CharField(max_length=200)
     text   = RichTextField()
-    pic    = models.CharField(max_length=200, null=True)
+    pic    = models.CharField(max_length=200, null=True, blank=True)
     slug   = models.CharField(max_length=200)
     meta   = models.CharField(max_length=1000, null=True)
     snippet_size = models.IntegerField(default=150)

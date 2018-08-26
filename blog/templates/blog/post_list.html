@@ -93,11 +93,14 @@
               {% endif %}
             </div>
             <div class="col-12">
+              <br />
               {% if post.pic %}
               <div class="col-md-12" style="padding: 0px;margin: 0 auto 0 auto;">
-                  <a href="{{post.pic}}">
-                    <img class="mx-auto d-block rounded img-fluid" src="{{post.pic}}">
-                  </a>
+                  <div class="container" >
+                    <a href="{{post.pic}}">
+                      <img class="mx-auto d-block rounded img-fluid" style="max-width: auto; max-height: 350px;" src="{{post.pic}}">
+                    </a>
+                  </div>
               </div>
               {% endif %}
 
