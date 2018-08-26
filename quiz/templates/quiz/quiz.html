@@ -126,13 +126,13 @@
 <script>
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.addEventListener("beforeunload", function (e) {
-    //return "";
+    return "";
   });
 
   // prevent users from accidentally unloading the window; "" because custom messages are no longer allowed
   window.onbeforeunload = function ()
   {
-     //return "";
+     return "";
   };
 
   var dataset = [];

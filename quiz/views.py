@@ -94,7 +94,7 @@ def quiz_view(request, quiz_id, form_id ):
 
 
         return JsonResponse({
-            'form_name'                  : form_name,
+            'form'                  : form_name,
             'form_id'               : form_id,
             'unit_name'             : quiz_name.unit_name,
             'question_id'           : next_question_id,
