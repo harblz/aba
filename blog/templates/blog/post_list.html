@@ -93,6 +93,14 @@
               {% endif %}
             </div>
             <div class="col-12">
+              {% if post.pic %}
+              <div class="col-md-12" style="padding: 0px;margin: 0 auto 0 auto;">
+                  <a href="{{post.pic}}">
+                    <img class="mx-auto d-block rounded img-fluid" src="{{post.pic}}">
+                  </a>
+              </div>
+              {% endif %}
+
               <p>{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
               <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
             </div>

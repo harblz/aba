@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 
 from django.utils.encoding import python_2_unicode_compatible
 
-@python_2_unicode_compatible # only if you need to support Python 2
+
 class Unit(models.Model):
     unit_name           = models.CharField(max_length=50)
     unit_description    = RichTextField()
@@ -21,7 +21,25 @@ class Unit(models.Model):
     def get_unit_id(self):
         return self.unit_id
 
-@python_2_unicode_compatible
+
+class Form(models.Model):
+    form_name           = models.CharField(max_length=50, default='A')
+    form_description    = RichTextField(null=True)
+    form_unit           = models.ForeignKey(Unit, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.form_name
+
+    def get_form_unit(self):
+        return self.form_unit
+
+    def get_form_name(self):
+        return self.form_name
+        
+    def get_form_id(self):
+        return self.form_id
+
+
 class Difficulty(models.Model):
     difficulty_name         = models.CharField(max_length=25)
     difficulty_description  = RichTextField()
@@ -37,6 +55,7 @@ class Difficulty(models.Model):
         
     def get_difficulty_id(self):
         return self.difficulty_id
+
 
 class Task(models.Model):
     task_name               = models.CharField(max_length=50)
@@ -62,10 +81,11 @@ class Task(models.Model):
     def get_task_id(self):
         return self.task_id
 
-@python_2_unicode_compatible  # only if you need to support Python 2
+ 
 class Question(models.Model):
     question_text   = RichTextField()
     unit            = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    form            = models.ForeignKey(Form, on_delete=models.CASCADE)
     task_list_item  = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     difficulty      = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     question_hint   = RichTextField()
@@ -97,7 +117,7 @@ class Question(models.Model):
 
 
 
-@python_2_unicode_compatible  # only if you need to support Python 2
+ 
 class Choice(models.Model):
     question    = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = RichTextField()

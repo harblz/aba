@@ -33,6 +33,14 @@
             {% endif %}
           </div>
 
+          {% if post.pic %}
+          <div class="col-md-12" style="padding: 0px;max-height: 30%;max-width: 30%;margin: 0 auto 0 auto;">
+              <a href="{{post.pic}}">
+                <img class="mx-auto d-block rounded img-fluid" src="{{post.pic}}">
+              </a>
+          </div>
+          {% endif %}
+
           <div class="post-text col-12">
             <p>
               {{ post.text|safe }}

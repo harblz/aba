@@ -13,7 +13,7 @@ import random
 
 from django.utils import timezone
 
-from .models import Unit, Choice, Question
+from .models import Unit, Form, Choice, Question
 from pages.models import Pages
 
 def quiz_index(request):
@@ -22,19 +22,23 @@ def quiz_index(request):
     units               = Unit.objects.values("unit_name", "unit_target", "unit_description", "id").all() # Question.objects.values("unit_name").distinct()
 
     for unit in units:
-        unit['count']    = len(Question.objects.values('unit_id').filter(unit_id=unit['id']))
+        unit['count']   = len(Question.objects.values('unit_id').filter(unit_id=unit['id']))
+        unit['forms']   = Form.objects.filter(form_unit_id=unit['id'])
+        for form in unit['forms']:
+            form.count = len(Question.objects.filter(form_id=form.id))
 
     return render(request, 'quiz/index.html', {
-        'units'        : units,
+        'units': units,
         'pages': pages
     })
 
-def quiz_view(request, quiz_id ):
+def quiz_view(request, quiz_id, form_id ):
     pages = Pages.objects.order_by('order')
     # get
     if request.method == 'GET':
-        quiz_name           = Unit.objects.get(pk=quiz_id) #Unit.objects.filter(unit_id=quiz_id).values('unit_name', flat=True)
-        queryset_ids        = Question.objects.filter(unit_id=quiz_id).values_list('id', flat=True)
+        quiz_name           = Unit.objects.get(pk=quiz_id)
+        form_name           = Form.objects.get(pk=form_id)
+        queryset_ids        = Question.objects.filter(unit_id=quiz_id, form_id=form_id).values_list('id', flat=True)
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
@@ -42,6 +46,8 @@ def quiz_view(request, quiz_id ):
         max_questions       = len(queryset_ids)
 
         return render(request, 'quiz/quiz.html', {
+            'form'              : form_name,
+            'form_id'           : form_id,
             'question_ids'      : json.dumps(list(queryset_ids), cls=DjangoJSONEncoder),
             'question'          : question,
             'first_question_id' : first_question_id,
@@ -50,8 +56,10 @@ def quiz_view(request, quiz_id ):
             'total_questions'   : max_questions,
             'pages'             : pages,
         })
+        
     # post
     else:
+        form_name               = Form.objects.get(pk=form_id).form_name
         attempt                 = request.POST.get('selected_choice')
         attempt_id              = request.POST.get('selected_choice_id')
         prev_question_choice    = Choice.objects.get(id=attempt_id).choice_text
@@ -63,12 +71,13 @@ def quiz_view(request, quiz_id ):
         Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
         selected_choice     = Choice.objects.get(pk=attempt_id)
-        prev_question_id    = selected_choice.question_id
+        prev_question_id    = selected_choice.question_id 
         prev_question       = Question.objects.get(pk=prev_question_id)
         correct_choice      = Choice.objects.get(question_id=prev_question_id, is_correct=1).choice_text
 
         try:
             next_question               = Question.objects.get(pk=next_question_id)
+            
         except(KeyError, Question.DoesNotExist):
             next_question               = None
 
@@ -85,6 +94,8 @@ def quiz_view(request, quiz_id ):
 
 
         return JsonResponse({
+            'form'                  : form_name,
+            'form_id'               : form_id,
             'unit_name'             : quiz_name.unit_name,
             'question_id'           : next_question_id,
             'question_hint'         : next_question_question_hint,

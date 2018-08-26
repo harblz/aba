@@ -8,13 +8,17 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
     title  = models.CharField(max_length=200)
     text   = RichTextField()
+    pic    = models.CharField(max_length=200, null=True)
     slug   = models.CharField(max_length=200)
+    meta   = models.CharField(max_length=1000, null=True)
     snippet_size = models.IntegerField(default=150)
     is_pinned = models.NullBooleanField(default=False)
 
-    is_pinned.help_text = "Pinning a blog post makes it stick to the 'pinned items' bar on the front page of the site. Try not to pin too many posts because it'll look crazy"
+    pic.help_text           = "This is the 'splash' picture that will be shown to the user as a header for each post. You can leave it blank."
 
-    snippet_size.help_text = "The snippet_size determines how much of a text to 'preview' before the post shows the 'read more' button"
+    is_pinned.help_text     = "Pinning a blog post makes it stick to the 'pinned items' bar on the front page of the site. Try not to pin too many posts because it'll look crazy"
+
+    snippet_size.help_text  = "The snippet_size determines how much of a text to 'preview' before the post shows the 'read more' button"
 
     STATUS_CHOICES = (
         ('d', 'Draft'),
