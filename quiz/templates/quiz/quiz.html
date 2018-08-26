@@ -9,13 +9,19 @@
 
   <!-- Displays the Quiz Results at the end !-->
   <div id="results"></div>
-    <div  id="question_text">
-      <p class="mt-2">Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</p></span></small>
 
-      <h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">
-        {{ question.question_text|safe }}
-      </h6>
-    </div>
+  <div  id="question_text">
+    <p class="mt-2">
+      Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small>
+        <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
+        <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span>
+      </small>
+    </p>
+
+    <h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">
+      {{ question.question_text|safe }}
+    </h6>
+  </div>
   <br>
   <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
     <canvas id="myChart" width="400" height="400"></canvas>
@@ -25,7 +31,7 @@
       <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
     </div>
     <div class="panel-body">
-      <form action="/quiz/{{ unit_id }}/grade_question/" method="POST" id="post-form">
+      <form action="/quiz/{{ unit_id }}/form_{{form_id}}/grade_question/" method="POST" id="post-form">
       {% csrf_token %}
       <div id="choices">
       {% for choice in question.choice_set.all %}
@@ -89,11 +95,11 @@
   };
   
   (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://https-aba-rocks.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-aba-rocks.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
   </script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
@@ -120,16 +126,18 @@
 <script>
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.addEventListener("beforeunload", function (e) {
-    return "";
+    //return "";
   });
 
+  // prevent users from accidentally unloading the window; "" because custom messages are no longer allowed
   window.onbeforeunload = function ()
   {
-     return "";
+     //return "";
   };
 
   var dataset = [];
 
+  // Score Pie Chart (generates a visualization of their score for the user)
   var ctx = document.getElementById("myChart");
   var myChart = new Chart(ctx, {
       type: 'doughnut',
@@ -139,8 +147,8 @@
               label: 'Score Report',
               data: dataset,
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(75, 192, 192, 1)',
               ],
               borderColor: [
                   'rgba(255,99,132,1)',
@@ -166,7 +174,6 @@
   });
 
   var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-
   function csrfSafeMethod(method) {
       return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
   }
@@ -253,16 +260,19 @@
 
 
   var question_ids      = JSON.parse("{{question_ids}}");
-  //console.log(question_ids);
   var first_question_id = JSON.parse("{{first_question_id}}");
-  question_ids = question_ids.remove(first_question_id);
-  //console.log('Remaining ids: ', question_ids);
+
   var unit_id = "{{unit_id}}";
+  var form_id = "{{form_id}}";
+  var form_id = "{{form_id}}";
+
+  question_ids = question_ids.remove(first_question_id);
   localStorage.setItem(unit_id + "_question_ids",JSON.stringify(question_ids));
+
   var end_of_quiz = false;
 
-
   function grade_question() {
+
       var choice_id  = $('input[name=choice]:checked').attr("id");
       var q   = $('#'+choice_id).next('span').text();
 
@@ -279,26 +289,23 @@
           console.log("End of Quiz: ", end_of_quiz);
         }
 
-
+        console.log(form_id, id, unit_id, q, choice_id);
         $.ajax({
-          url : "/quiz/{{unit_id}}/",
+          url : "/quiz/{{unit_id}}/form_"+form_id+"/",
           type : "POST",
-          data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, unit_id: unit_id, selected_choice : q, selected_choice_id : choice_id }, // data sent with the post request
+          data : { 'csrfmiddlewaretoken': '{{csrf_token}}', next_question_id : id, unit_id: unit_id, form_id: form_id, selected_choice : q, selected_choice_id : choice_id },
           success : function(response) {
               $('#results').html('');
               $('#questionNumber').html(max_questions - id_list.length);
-
               if ( end_of_quiz == false ) { 
                 $('#hint').collapse('hide').html("<br><h3>Here's a hint:</h3>" + response.question_hint);
               } else {
                 $('#hint').html('');
               }
-
               if (response.is_correct == true && end_of_quiz == false) {              
               current_score.push("correct");              
               localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
               calculateScore();
-
               $('#choices').html('');
               for (var i = 0; i < response.next_question_choices.length; i++) {
                 $('#choices').append(`
@@ -311,7 +318,6 @@
                         </table>
                       </label><br />
                   `);
-
                 /*
                   <table>
                     <tr>
@@ -323,14 +329,12 @@
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-                // <p class="mt-2">Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</p></span></small>
-                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">'+response.unit_name+' Practice Quiz</p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_name +'</span></small></p>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
               } else {
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
                   localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
                   calculateScore();
-
                   $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                   $('#choice_menu').fadeOut();
                   displayScore();
@@ -345,7 +349,6 @@
                   $('#error_modal_message').append('<h3 style="color:red;"><small>Your answer was...</small><br><p style="padding: 10px;"><b>'+response.choice_text+'</b></p></h3><br>');
                   $('#error_modal_message').append("<h3>Here's some additional info:</h3>" + response.prev_question_hint);
                   $('#choices').html('');
-
                   if ( end_of_quiz == true ) {
                     $('#question_text').html("<b>That's it!</b> You finished the quiz.");
                     $('#choice_menu').fadeOut();
@@ -365,18 +368,18 @@
                         `);
                     }
                     $('#results').html('<div class="alert alert-warning" role="alert"><b>Oops!</b> You got question #'+(max_questions - id_list.length - 1)+' incorrect. <a href="#" class="redisplay-error-modal" onClick="$(`#error_modal`).modal(`show`);"><b>Wanna see why again?</b></a></div>');
-                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold">'+response.unit_name+' Practice Quiz</p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_name +'</span></p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
                   }
                 }
               }
           },
-
           error : function(xhr,errmsg,err) {
               window.scrollTo(0,0);
               $('#results').html("<div class='alert-box alert radius' style='width: 100%;' data-alert>Oops! We have encountered an error: <i>"+err+
                   "</i>. Try again, I guess? If the problem persists, email <a href='mailto:alex@behaviorist.tech'>Alex</a></div>");
               console.log(xhr.status + ": " + xhr.responseText);
           }
+
         });
       } else {
         window.scrollTo(0,0);
