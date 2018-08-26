@@ -20,7 +20,7 @@ admin.site.register(Unit)
 
 
 class FormAdmin(admin.ModelAdmin):
-    list_display = ['form_name', 'form_unit_id', 'form_description']
+    list_display = ['form_name', 'form_short_name', 'form_unit_id', 'form_description']
     list_per_page = 100000
     list_filter  = ['form_name', 'form_unit_id']
     search_fields = [  'form_name', 'form_description' ]

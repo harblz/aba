@@ -37,7 +37,7 @@ def quiz_view(request, quiz_id, form_id ):
     # get
     if request.method == 'GET':
         quiz_name           = Unit.objects.get(pk=quiz_id)
-        form_name           = Form.objects.get(pk=form_id)
+        form_name           = Form.objects.get(pk=form_id).form_short_name
         queryset_ids        = Question.objects.filter(unit_id=quiz_id, form_id=form_id).values_list('id', flat=True)
         first_question_id   = random.choice(queryset_ids)
         question            = get_object_or_404(Question, pk=first_question_id)
@@ -60,6 +60,7 @@ def quiz_view(request, quiz_id, form_id ):
     # post
     else:
         form_name               = Form.objects.get(pk=form_id).form_name
+        form_short_name         = Form.objects.get(pk=form_id).form_short_name
         attempt                 = request.POST.get('selected_choice')
         attempt_id              = request.POST.get('selected_choice_id')
         prev_question_choice    = Choice.objects.get(id=attempt_id).choice_text
@@ -96,6 +97,7 @@ def quiz_view(request, quiz_id, form_id ):
         return JsonResponse({
             'form'                  : form_name,
             'form_id'               : form_id,
+            'form_short_name'       : form_short_name,
             'unit_name'             : quiz_name.unit_name,
             'question_id'           : next_question_id,
             'question_hint'         : next_question_question_hint,

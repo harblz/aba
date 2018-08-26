@@ -108,12 +108,12 @@
               {% for form in unit.forms %}
                 <li class="nav-item">
                   {% if forloop.first %}
-                  <a class="nav-link active" id="{{unit.unit_target}}-{{form.form_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    Form {{ form.form_name }}
+                  <a class="nav-link active" id="{{unit.unit_target}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
                   </a>
                   {% else %}
-                  <a class="nav-link" id="{{unit.unit_target}}-{{form.form_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    Form {{ form.form_name }}
+                  <a class="nav-link" id="{{unit.unit_target}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
                   </a>
                   {% endif %}
                 </li>
@@ -124,16 +124,16 @@
             <div class="tab-content" id="RBT-Form-Tabs-Content">
               {% for form in unit.forms %}
                 {% if forloop.first %}
-                  <div class="tab-pane fade show active" id="{{unit.unit_target}}-{{ form.form_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}{{ form.form_name }}-tab">
+                  <div class="tab-pane fade show active" id="{{unit.unit_target}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}{{ form.form_short_name }}-tab">
                 {% else %}
-                  <div class="tab-pane fade show" id="{{unit.unit_target}}-{{ form.form_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}-{{ form.form_name }}-tab">
+                  <div class="tab-pane fade show" id="{{unit.unit_target}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}-{{ form.form_short_name }}-tab">
                 {% endif %}
                   {% if form.count > 0 %}
                   <a class="list-group-item" style="border: none;">
                     <div>
-                      <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#RBT-Collapse-{{form.form_name}}-{{unit.id}}">
+                      <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#RBT-Collapse-{{form.form_short_name}}-{{unit.id}}">
                         <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
-                        Form {{ form.form_name }} - {{ unit.unit_name }}
+                        Form {{ form.form_short_name }} - {{ unit.unit_name }}
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
                         <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
@@ -141,7 +141,7 @@
                         </small>
                       </h4>
                     </div>
-                    <div style="color: #000;" class="collapse" href="{{form.form_name}}-{{unit.id}}" id="RBT-Collapse-{{form.form_name}}-{{unit.id}}">
+                    <div style="color: #000;" class="collapse" href="{{form.form_short_name}}-{{unit.id}}" id="RBT-Collapse-{{form.form_short_name}}-{{unit.id}}">
                       <p class="list-group-item-text" style="font-size: 1.25em">
                         {% if form.form_description %} 
                           {{ form.form_description |safe}} 

@@ -24,6 +24,7 @@ class Unit(models.Model):
 
 class Form(models.Model):
     form_name           = models.CharField(max_length=50, default='A')
+    form_short_name     = models.CharField(max_length=50, blank=True, null=True)
     form_description    = RichTextField(null=True)
     form_unit           = models.ForeignKey(Unit, on_delete=models.CASCADE)
 
