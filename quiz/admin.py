@@ -25,11 +25,6 @@ class FormAdmin(admin.ModelAdmin):
     list_filter  = ['form_name', 'form_unit_id']
     search_fields = [  'form_name', 'form_description' ]
 
-    fieldsets = [
-        ( 'Form Info',
-            {'fields': ['form_name', 'form_unit_id']}),
-        ('Describe this form, briefly', {'fields': ['form_description'], 'classes': ['']}), # put "collapse" in classes to auto-hide it; requires bootstrap
-    ]
 admin.site.register(Form, FormAdmin)
 
 
