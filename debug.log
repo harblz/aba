@@ -1,0 +1,471 @@
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2018-08-30 03:25:40.011687' AND "django_session"."session_key" = 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l'); args=('2018-08-30 03:25:40.011687', 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+Exception while resolving variable 'is_not_authenticated' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+Exception while resolving variable 'is_not_authenticated' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-08-30 03:25:39.986717' ORDER BY "blog_post"."published_date" DESC; args=('2018-08-30 03:25:39.986717',)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+"GET / HTTP/1.1" 200 60565
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 304 0
+"GET /static/css/blog.css HTTP/1.1" 304 0
+"GET /static/fontawesome/css/all.css HTTP/1.1" 304 0
+"GET /static/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 304 0
+"GET /static/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 304 0
+"GET /static/js/moment.js HTTP/1.1" 304 0
+"GET /static/js/fontawesome-all.min.js HTTP/1.1" 304 0
+"GET /static/js/chart.bundle.min.js HTTP/1.1" 304 0
+"GET /static/fontawesome/js/all.js HTTP/1.1" 304 0
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) '^admin/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>
+Not Found: /i.imgur.com/vnqxMpz.jpg
+"GET /i.imgur.com/vnqxMpz.jpg HTTP/1.1" 404 2879
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) '^admin/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>
+Not Found: /i.imgur.com/vnqxMpz.jpg
+"GET /i.imgur.com/vnqxMpz.jpg HTTP/1.1" 404 2879
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 304 0
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 304 0
+(0.003) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
