@@ -76,9 +76,11 @@
           <div class="col-md-11" style="margin-bottom: 7%;">
             <div class="col-12">
               <h1>
+                <!--
                 {% if user.is_authenticated %}
                   <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
                 {% endif %}
+                !-->
                 <a href="{% url 'post_details_by_slug' slug=post.slug %}">{{ post.title|safe }}</a>
                 <small style="font-size: 0.5em">
                      <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
