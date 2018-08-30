@@ -469,3 +469,895 @@ Not Found: /i.imgur.com/vnqxMpz.jpg
             WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
             ORDER BY name; args=None
 (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2018-08-30 10:35:09.751836' AND "django_session"."session_key" = 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l'); args=('2018-08-30 10:35:09.751836', 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+Exception while resolving variable 'is_not_authenticated' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+Exception while resolving variable 'is_not_authenticated' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-08-30 10:35:09.687912' ORDER BY "blog_post"."published_date" DESC; args=('2018-08-30 10:35:09.687912',)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+"GET / HTTP/1.1" 200 60565
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 200 8192
+"GET /static/css/blog.css HTTP/1.1" 200 10680
+"GET /static/fontawesome/css/all.css HTTP/1.1" 200 45687
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) '^admin/'>
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 500 59
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>
+Not Found: /i.imgur.com/vnqxMpz.jpg
+"GET /i.imgur.com/vnqxMpz.jpg HTTP/1.1" 404 2879
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) '^admin/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\urls\resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'i.imgur.com/vnqxMpz.jpg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>
+Not Found: /i.imgur.com/vnqxMpz.jpg
+"GET /i.imgur.com/vnqxMpz.jpg HTTP/1.1" 404 2879
+"GET /static/fontawesome/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 8192
+"GET /static/fontawesome/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 59572
+"GET /static/fontawesome/webfonts/fa-regular-400.woff2 HTTP/1.1" 500 59
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 1222
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 200 17336
+"GET /quiz HTTP/1.1" 301 0
+(0.001) SELECT "quiz_unit"."unit_name", "quiz_unit"."unit_target", "quiz_unit"."unit_description", "quiz_unit"."id" FROM "quiz_unit"; args=()
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 1; args=(1,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 6; args=(6,)
+(0.001) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 8; args=(8,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 7; args=(7,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 7; args=(7,)
+(0.001) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 9; args=(9,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2018-08-30 10:35:13.769710' AND "django_session"."session_key" = 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l'); args=('2018-08-30 10:35:13.769710', 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+Exception while resolving variable 'object' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [object] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x04DFBDB0>>, 'request': <WSGIRequest: GET '/quiz/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04D94A90>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04CF50F0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'units': <QuerySet [{'unit_name': 'Mock RBT Practice Exam (A)', 'unit_target': 'RBT', 'unit_description': '<p>This is a mock RBT practice exam. Questions on this exam are randomly ordered, derived from the RBT competency goals, and focus heavily on concepts, vocabulary, and general knowledge. This is version A of the test, which has unique (but similar) questions to the other versions of the mock exam.</p>\r\n\r\n<p>The actual RBT exam has 85 questions, 10 of which are &quot;under review&quot; and do not count towards your score (the board is assessing the difficulty of those questions to ensure they are appropriate for the exam). <strong>You would have one hour to complete this exam - however, this quiz is <span class="marker">untimed!</span></strong></p>', 'id': 1, 'count': 48, 'forms': <QuerySet [<Form: A - RBT Practice Exam>, <Form: B - RBT Practice Exam>, <Form: C - RBT Practice Exam>]>}, {'unit_name': 'RBT A: Measurement', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz: A - MEASUREMENT</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>A-01</strong> Prepare for data collection.</li>\r\n\t<li><strong>A-02</strong> Implement continuous measurement procedures (e.g., frequency, duration).</li>\r\n\t<li><strong>A-03</strong> Implement discontinuous measurement procedures (e.g., partial &amp; whole interval, momentary time sampling).</li>\r\n\t<li><strong>A-04</strong> Implement permanent product recording procedures.</li>\r\n\t<li><strong>A-05</strong> Enter data and update graphs.</li>\r\n</ul>', 'id': 2, 'count': 10, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT B: Assessment', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz B:&nbsp;ASSESSMENT</strong></p>\r\n\r\n<p style="margin-left:40px"><strong>B-01</strong> Describe the behavior and environment in observable and measurable terms.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-02</strong> Conduct preference assessments.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-03</strong>&nbsp;Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills).</p>\r\n\r\n<p style="margin-left:40px"><strong>B-04</strong> Assist with functional assessment procedures.</p>', 'id': 3, 'count': 20, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT C: Skill Acquisition', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz C: SKILL ACQUISITION</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>C-01</strong> Identify the essential components of a written skill acquisition plan.</li>\r\n\t<li><strong>C-02</strong> Prepare for the session as required by the skill acquisition plan.</li>\r\n\t<li><strong>C-03</strong> Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules).</li>\r\n\t<li><strong>C-04</strong> Implement discrete-trial teaching procedures.</li>\r\n\t<li><strong>C-05</strong> Implement naturalistic teaching procedures (e.g., incidental teaching).</li>\r\n\t<li><strong>C-06</strong> Implement task analyzed chaining procedures.</li>\r\n\t<li><strong>C-07</strong> Implement discrimination training.</li>\r\n\t<li><strong>C-08</strong> Implement stimulus control transfer procedures.</li>\r\n\t<li><strong>C-09</strong> Implement stimulus fading procedures.</li>\r\n\t<li><strong>C-10</strong> Implement prompt and prompt fading procedures.</li>\r\n\t<li><strong>C-11</strong> Implement generalization and maintenance procedures.</li>\r\n\t<li><strong>C-12</strong> Assist with the training of stakeholders (e.g., family, caregivers, other professionals).</li>\r\n</ul>', 'id': 4, 'count': 20, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT D: Behavior Change', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>D-01:</strong>&nbsp;Implement interventions based on modification of antecedents such as motivating / establishing operations and discriminative stimuli</li>\r\n\t<li><strong>D-02:</strong>&nbsp;Implement differential reinforcement procedures (e.g., DRA, DRO)</li>\r\n\t<li><strong>D-03:</strong>&nbsp;Implement extinction procedures</li>\r\n\t<li><strong>D-04:</strong>&nbsp;Implement crisis / emergency procedures according to protocol</li>\r\n</ul>', 'id': 5, 'count': 15, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT E: Documentation and Reporting', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz E: Documentation &amp; Reporting</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>E-01:</strong> Generate objective session notes by describing what occurred during sessions</li>\r\n</ul>', 'id': 6, 'count': 5, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT F: Professional Conduct & Scope of Practice', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>F-01:</strong>&nbsp;Respond appropriately to feedback and maintain or improve performance accordingly.</li>\r\n</ul>', 'id': 7, 'count': 3, 'forms': <QuerySet [<Form: A>]>}]>, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n  <h2> ABA Practice Quiz'>, <IfNode>, <TextNode: '\n'>]>}]
+"GET /quiz/ HTTP/1.1" 200 42759
+(0.001) SELECT "quiz_unit"."unit_name", "quiz_unit"."unit_target", "quiz_unit"."unit_description", "quiz_unit"."id" FROM "quiz_unit"; args=()
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 1; args=(1,)
+(0.001) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 1; args=(1,)
+(0.001) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 6; args=(6,)
+(0.001) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 8; args=(8,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 7; args=(7,)
+(0.001) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 9; args=(9,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2018-08-30 10:35:53.249719' AND "django_session"."session_key" = 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l'); args=('2018-08-30 10:35:53.249719', 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+(0.000) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+Exception while resolving variable 'object' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [object] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x04DFBF18>>, 'request': <WSGIRequest: GET '/quiz/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04E1F0D0>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04E0A190>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'units': <QuerySet [{'unit_name': 'Mock RBT Practice Exam (A)', 'unit_target': 'RBT', 'unit_description': '<p>This is a mock RBT practice exam. Questions on this exam are randomly ordered, derived from the RBT competency goals, and focus heavily on concepts, vocabulary, and general knowledge. This is version A of the test, which has unique (but similar) questions to the other versions of the mock exam.</p>\r\n\r\n<p>The actual RBT exam has 85 questions, 10 of which are &quot;under review&quot; and do not count towards your score (the board is assessing the difficulty of those questions to ensure they are appropriate for the exam). <strong>You would have one hour to complete this exam - however, this quiz is <span class="marker">untimed!</span></strong></p>', 'id': 1, 'count': 48, 'forms': <QuerySet [<Form: A - RBT Practice Exam>, <Form: B - RBT Practice Exam>, <Form: C - RBT Practice Exam>]>}, {'unit_name': 'RBT A: Measurement', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz: A - MEASUREMENT</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>A-01</strong> Prepare for data collection.</li>\r\n\t<li><strong>A-02</strong> Implement continuous measurement procedures (e.g., frequency, duration).</li>\r\n\t<li><strong>A-03</strong> Implement discontinuous measurement procedures (e.g., partial &amp; whole interval, momentary time sampling).</li>\r\n\t<li><strong>A-04</strong> Implement permanent product recording procedures.</li>\r\n\t<li><strong>A-05</strong> Enter data and update graphs.</li>\r\n</ul>', 'id': 2, 'count': 10, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT B: Assessment', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz B:&nbsp;ASSESSMENT</strong></p>\r\n\r\n<p style="margin-left:40px"><strong>B-01</strong> Describe the behavior and environment in observable and measurable terms.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-02</strong> Conduct preference assessments.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-03</strong>&nbsp;Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills).</p>\r\n\r\n<p style="margin-left:40px"><strong>B-04</strong> Assist with functional assessment procedures.</p>', 'id': 3, 'count': 20, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT C: Skill Acquisition', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz C: SKILL ACQUISITION</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>C-01</strong> Identify the essential components of a written skill acquisition plan.</li>\r\n\t<li><strong>C-02</strong> Prepare for the session as required by the skill acquisition plan.</li>\r\n\t<li><strong>C-03</strong> Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules).</li>\r\n\t<li><strong>C-04</strong> Implement discrete-trial teaching procedures.</li>\r\n\t<li><strong>C-05</strong> Implement naturalistic teaching procedures (e.g., incidental teaching).</li>\r\n\t<li><strong>C-06</strong> Implement task analyzed chaining procedures.</li>\r\n\t<li><strong>C-07</strong> Implement discrimination training.</li>\r\n\t<li><strong>C-08</strong> Implement stimulus control transfer procedures.</li>\r\n\t<li><strong>C-09</strong> Implement stimulus fading procedures.</li>\r\n\t<li><strong>C-10</strong> Implement prompt and prompt fading procedures.</li>\r\n\t<li><strong>C-11</strong> Implement generalization and maintenance procedures.</li>\r\n\t<li><strong>C-12</strong> Assist with the training of stakeholders (e.g., family, caregivers, other professionals).</li>\r\n</ul>', 'id': 4, 'count': 20, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT D: Behavior Change', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>D-01:</strong>&nbsp;Implement interventions based on modification of antecedents such as motivating / establishing operations and discriminative stimuli</li>\r\n\t<li><strong>D-02:</strong>&nbsp;Implement differential reinforcement procedures (e.g., DRA, DRO)</li>\r\n\t<li><strong>D-03:</strong>&nbsp;Implement extinction procedures</li>\r\n\t<li><strong>D-04:</strong>&nbsp;Implement crisis / emergency procedures according to protocol</li>\r\n</ul>', 'id': 5, 'count': 15, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT E: Documentation and Reporting', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz E: Documentation &amp; Reporting</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>E-01:</strong> Generate objective session notes by describing what occurred during sessions</li>\r\n</ul>', 'id': 6, 'count': 5, 'forms': <QuerySet [<Form: A>]>}, {'unit_name': 'RBT F: Professional Conduct & Scope of Practice', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>F-01:</strong>&nbsp;Respond appropriately to feedback and maintain or improve performance accordingly.</li>\r\n</ul>', 'id': 7, 'count': 3, 'forms': <QuerySet [<Form: A>]>}]>, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n  <h2> ABA Practice Quiz'>, <IfNode>, <TextNode: '\n'>]>}]
+"GET /quiz/ HTTP/1.1" 200 42808
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 304 0
+"GET /static/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+"GET /static/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 304 0
+"GET /static/js/moment.js HTTP/1.1" 304 0
+"GET /static/js/fontawesome-all.min.js HTTP/1.1" 304 0
+"GET /static/fontawesome/js/all.js HTTP/1.1" 304 0
+"GET /static/js/chart.bundle.min.js HTTP/1.1" 304 0
+"GET /static/css/blog.css HTTP/1.1" 304 0
+"GET /static/fontawesome/css/all.css HTTP/1.1" 304 0
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 1222
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 200 17336
+(0.001) SELECT "quiz_unit"."id", "quiz_unit"."unit_name", "quiz_unit"."unit_description", "quiz_unit"."unit_target" FROM "quiz_unit" WHERE "quiz_unit"."id" = 1; args=(1,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id" FROM "quiz_question" WHERE ("quiz_question"."form_id" = 1 AND "quiz_question"."unit_id" = 1); args=(1, 1)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."id" = 117; args=(117,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2018-08-30 10:35:56.389765' AND "django_session"."session_key" = 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l'); args=('2018-08-30 10:35:56.389765', 'u2gu8x6ahli6xefr74ecjae6mtxwpq5l')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1; args=(1,)
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+Exception while resolving variable 'is_not_authenticated' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+TypeError: 'User' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\utils\functional.py", line 216, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'User' object has no attribute 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'is_not_authenticated'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [is_not_authenticated] in <SimpleLazyObject: <User: admin>>
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.000) SELECT "quiz_choice"."id", "quiz_choice"."question_id", "quiz_choice"."choice_text", "quiz_choice"."votes", "quiz_choice"."is_correct" FROM "quiz_choice" WHERE "quiz_choice"."question_id" = 117; args=(117,)
+Exception while resolving variable 'object' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [object] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: 'VIJbIcWhdODPM0dvTgb6N3GmN8tEroaRTFSz0Y9HKuiQn2WJClkYvkvdEOBbZU0A'>, 'request': <WSGIRequest: GET '/quiz/1/form_1/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04E1B210>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04E1BAF0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'form': 'A', 'form_id': '1', 'question_ids': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42, 43, 44, 45, 46, 47, 48, 110, 111, 112, 113, 114, 115, 116, 117]', 'question': <Question: <p>Sally is an RBT working with a client named Jim. Jim tends to scream and bite his arm forcefully when presented with his token board, and sometimes when Sally opens up her laptop. Sally almost never opens up her laptop unless she&#39;s about to ask Jim to do some of his table work activities.</p>
+
+<p><strong>What do you think the most likely function of Jim&#39;s behavior is?</strong></p>>, 'first_question_id': 117, 'unit_name': <Unit: Mock RBT Practice Exam (A)>, 'unit_id': '1', 'total_questions': 48, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n\n<div class="progress">\n'>, <Variable Node: total_questions>, <TextNode: ' — <small>\n        <span '>, <Variable Node: unit_name>, <TextNode: ' Practice Quiz</span>\n   '>, <Variable Node: form>, <TextNode: '</span>\n      </small>\n  '>, <Variable Node: question.question_text|safe>, <TextNode: '\n    </h6>\n  </div>\n  <br'>, <Variable Node: unit_id>, <TextNode: '/form_'>, <Variable Node: form_id>, <TextNode: '/grade_question/" method='>, <django.template.defaulttags.CsrfTokenNode object at 0x04E2CA50>, <TextNode: '\n      <div id="choices">'>, <For Node: for choice in question.choice_set.all, tail_len: 7>, <TextNode: '\n      </div>\n    </div>\n'>, <Variable Node: question.question_hint|safe>, <TextNode: '\n    </div>\n  </div>\n\n  <'>, <Variable Node: request.build_absolute_uri>, <Variable Node: object.get_absolute_url>, <TextNode: "';\n      this.page.identi">, <Variable Node: unit_id>, <TextNode: "';\n      this.page.title ">, <Variable Node: unit_name>, <TextNode: " Practice Quiz';\n  };\n  \n">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '");\n\n  var max_questions '>, <Variable Node: total_questions>, <TextNode: '");\n  console.log(\'Max qu'>, <Variable Node: unit_id>, <TextNode: '"));\n\n    var incorrect_c'>, <Variable Node: unit_id>, <TextNode: '"));\n    $(\'#score_graph\''>, <Variable Node: question_ids>, <TextNode: '");\n  var first_question_'>, <Variable Node: first_question_id>, <TextNode: '");\n\n  var unit_id = "'>, <Variable Node: unit_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n\n  question_ids = ques'>, <Variable Node: unit_id>, <TextNode: '"));\n        var id = JSO'>, <Variable Node: unit_id>, <TextNode: '/form_"+form_id+"/",\n    '>, <Variable Node: csrf_token>, <TextNode: "', next_question_id : id,">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: choice.id>, <TextNode: '" value="'>, <Variable Node: choice.id>, <TextNode: '" /></td>\n               '>, <Variable Node: choice.choice_text|safe>, <TextNode: '</span></td>\n            '>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>]>}]
+Exception while resolving variable 'choice' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [choice] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: 'VIJbIcWhdODPM0dvTgb6N3GmN8tEroaRTFSz0Y9HKuiQn2WJClkYvkvdEOBbZU0A'>, 'request': <WSGIRequest: GET '/quiz/1/form_1/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04E1B210>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04E1BAF0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'form': 'A', 'form_id': '1', 'question_ids': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42, 43, 44, 45, 46, 47, 48, 110, 111, 112, 113, 114, 115, 116, 117]', 'question': <Question: <p>Sally is an RBT working with a client named Jim. Jim tends to scream and bite his arm forcefully when presented with his token board, and sometimes when Sally opens up her laptop. Sally almost never opens up her laptop unless she&#39;s about to ask Jim to do some of his table work activities.</p>
+
+<p><strong>What do you think the most likely function of Jim&#39;s behavior is?</strong></p>>, 'first_question_id': 117, 'unit_name': <Unit: Mock RBT Practice Exam (A)>, 'unit_id': '1', 'total_questions': 48, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n\n<div class="progress">\n'>, <Variable Node: total_questions>, <TextNode: ' — <small>\n        <span '>, <Variable Node: unit_name>, <TextNode: ' Practice Quiz</span>\n   '>, <Variable Node: form>, <TextNode: '</span>\n      </small>\n  '>, <Variable Node: question.question_text|safe>, <TextNode: '\n    </h6>\n  </div>\n  <br'>, <Variable Node: unit_id>, <TextNode: '/form_'>, <Variable Node: form_id>, <TextNode: '/grade_question/" method='>, <django.template.defaulttags.CsrfTokenNode object at 0x04E2CA50>, <TextNode: '\n      <div id="choices">'>, <For Node: for choice in question.choice_set.all, tail_len: 7>, <TextNode: '\n      </div>\n    </div>\n'>, <Variable Node: question.question_hint|safe>, <TextNode: '\n    </div>\n  </div>\n\n  <'>, <Variable Node: request.build_absolute_uri>, <Variable Node: object.get_absolute_url>, <TextNode: "';\n      this.page.identi">, <Variable Node: unit_id>, <TextNode: "';\n      this.page.title ">, <Variable Node: unit_name>, <TextNode: " Practice Quiz';\n  };\n  \n">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '");\n\n  var max_questions '>, <Variable Node: total_questions>, <TextNode: '");\n  console.log(\'Max qu'>, <Variable Node: unit_id>, <TextNode: '"));\n\n    var incorrect_c'>, <Variable Node: unit_id>, <TextNode: '"));\n    $(\'#score_graph\''>, <Variable Node: question_ids>, <TextNode: '");\n  var first_question_'>, <Variable Node: first_question_id>, <TextNode: '");\n\n  var unit_id = "'>, <Variable Node: unit_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n\n  question_ids = ques'>, <Variable Node: unit_id>, <TextNode: '"));\n        var id = JSO'>, <Variable Node: unit_id>, <TextNode: '/form_"+form_id+"/",\n    '>, <Variable Node: csrf_token>, <TextNode: "', next_question_id : id,">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: choice.id>, <TextNode: '" value="'>, <Variable Node: choice.id>, <TextNode: '" /></td>\n               '>, <Variable Node: choice.choice_text|safe>, <TextNode: '</span></td>\n            '>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>]>}]
+Exception while resolving variable 'choice' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [choice] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: 'VIJbIcWhdODPM0dvTgb6N3GmN8tEroaRTFSz0Y9HKuiQn2WJClkYvkvdEOBbZU0A'>, 'request': <WSGIRequest: GET '/quiz/1/form_1/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04E1B210>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04E1BAF0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'form': 'A', 'form_id': '1', 'question_ids': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42, 43, 44, 45, 46, 47, 48, 110, 111, 112, 113, 114, 115, 116, 117]', 'question': <Question: <p>Sally is an RBT working with a client named Jim. Jim tends to scream and bite his arm forcefully when presented with his token board, and sometimes when Sally opens up her laptop. Sally almost never opens up her laptop unless she&#39;s about to ask Jim to do some of his table work activities.</p>
+
+<p><strong>What do you think the most likely function of Jim&#39;s behavior is?</strong></p>>, 'first_question_id': 117, 'unit_name': <Unit: Mock RBT Practice Exam (A)>, 'unit_id': '1', 'total_questions': 48, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n\n<div class="progress">\n'>, <Variable Node: total_questions>, <TextNode: ' — <small>\n        <span '>, <Variable Node: unit_name>, <TextNode: ' Practice Quiz</span>\n   '>, <Variable Node: form>, <TextNode: '</span>\n      </small>\n  '>, <Variable Node: question.question_text|safe>, <TextNode: '\n    </h6>\n  </div>\n  <br'>, <Variable Node: unit_id>, <TextNode: '/form_'>, <Variable Node: form_id>, <TextNode: '/grade_question/" method='>, <django.template.defaulttags.CsrfTokenNode object at 0x04E2CA50>, <TextNode: '\n      <div id="choices">'>, <For Node: for choice in question.choice_set.all, tail_len: 7>, <TextNode: '\n      </div>\n    </div>\n'>, <Variable Node: question.question_hint|safe>, <TextNode: '\n    </div>\n  </div>\n\n  <'>, <Variable Node: request.build_absolute_uri>, <Variable Node: object.get_absolute_url>, <TextNode: "';\n      this.page.identi">, <Variable Node: unit_id>, <TextNode: "';\n      this.page.title ">, <Variable Node: unit_name>, <TextNode: " Practice Quiz';\n  };\n  \n">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '");\n\n  var max_questions '>, <Variable Node: total_questions>, <TextNode: '");\n  console.log(\'Max qu'>, <Variable Node: unit_id>, <TextNode: '"));\n\n    var incorrect_c'>, <Variable Node: unit_id>, <TextNode: '"));\n    $(\'#score_graph\''>, <Variable Node: question_ids>, <TextNode: '");\n  var first_question_'>, <Variable Node: first_question_id>, <TextNode: '");\n\n  var unit_id = "'>, <Variable Node: unit_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n\n  question_ids = ques'>, <Variable Node: unit_id>, <TextNode: '"));\n        var id = JSO'>, <Variable Node: unit_id>, <TextNode: '/form_"+form_id+"/",\n    '>, <Variable Node: csrf_token>, <TextNode: "', next_question_id : id,">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: choice.id>, <TextNode: '" value="'>, <Variable Node: choice.id>, <TextNode: '" /></td>\n               '>, <Variable Node: choice.choice_text|safe>, <TextNode: '</span></td>\n            '>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>]>}]
+Exception while resolving variable 'choice' in template 'quiz/quiz.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 841, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'choice'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python36-32\lib\site-packages\django\template\base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [choice] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: 'VIJbIcWhdODPM0dvTgb6N3GmN8tEroaRTFSz0Y9HKuiQn2WJClkYvkvdEOBbZU0A'>, 'request': <WSGIRequest: GET '/quiz/1/form_1/'>, 'user': <SimpleLazyObject: <User: admin>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x04E1B210>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x04E1BAF0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'form': 'A', 'form_id': '1', 'question_ids': '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42, 43, 44, 45, 46, 47, 48, 110, 111, 112, 113, 114, 115, 116, 117]', 'question': <Question: <p>Sally is an RBT working with a client named Jim. Jim tends to scream and bite his arm forcefully when presented with his token board, and sometimes when Sally opens up her laptop. Sally almost never opens up her laptop unless she&#39;s about to ask Jim to do some of his table work activities.</p>
+
+<p><strong>What do you think the most likely function of Jim&#39;s behavior is?</strong></p>>, 'first_question_id': 117, 'unit_name': <Unit: Mock RBT Practice Exam (A)>, 'unit_id': '1', 'total_questions': 48, 'pages': <QuerySet [<Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n\n<div class="progress">\n'>, <Variable Node: total_questions>, <TextNode: ' — <small>\n        <span '>, <Variable Node: unit_name>, <TextNode: ' Practice Quiz</span>\n   '>, <Variable Node: form>, <TextNode: '</span>\n      </small>\n  '>, <Variable Node: question.question_text|safe>, <TextNode: '\n    </h6>\n  </div>\n  <br'>, <Variable Node: unit_id>, <TextNode: '/form_'>, <Variable Node: form_id>, <TextNode: '/grade_question/" method='>, <django.template.defaulttags.CsrfTokenNode object at 0x04E2CA50>, <TextNode: '\n      <div id="choices">'>, <For Node: for choice in question.choice_set.all, tail_len: 7>, <TextNode: '\n      </div>\n    </div>\n'>, <Variable Node: question.question_hint|safe>, <TextNode: '\n    </div>\n  </div>\n\n  <'>, <Variable Node: request.build_absolute_uri>, <Variable Node: object.get_absolute_url>, <TextNode: "';\n      this.page.identi">, <Variable Node: unit_id>, <TextNode: "';\n      this.page.title ">, <Variable Node: unit_name>, <TextNode: " Practice Quiz';\n  };\n  \n">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '");\n\n  var max_questions '>, <Variable Node: total_questions>, <TextNode: '");\n  console.log(\'Max qu'>, <Variable Node: unit_id>, <TextNode: '"));\n\n    var incorrect_c'>, <Variable Node: unit_id>, <TextNode: '"));\n    $(\'#score_graph\''>, <Variable Node: question_ids>, <TextNode: '");\n  var first_question_'>, <Variable Node: first_question_id>, <TextNode: '");\n\n  var unit_id = "'>, <Variable Node: unit_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n  var form_id = "'>, <Variable Node: form_id>, <TextNode: '";\n\n  question_ids = ques'>, <Variable Node: unit_id>, <TextNode: '"));\n        var id = JSO'>, <Variable Node: unit_id>, <TextNode: '/form_"+form_id+"/",\n    '>, <Variable Node: csrf_token>, <TextNode: "', next_question_id : id,">, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: choice.id>, <TextNode: '" value="'>, <Variable Node: choice.id>, <TextNode: '" /></td>\n               '>, <Variable Node: choice.choice_text|safe>, <TextNode: '</span></td>\n            '>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>, <Variable Node: unit_id>, <TextNode: '",JSON.stringify(current_'>]>}]
+"GET /quiz/1/form_1/ HTTP/1.1" 200 31143

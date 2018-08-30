@@ -124,17 +124,6 @@
 
 
 <script>
-  /* Warn user before reloading the quiz (and losing all progress!) */
-  window.addEventListener("beforeunload", function (e) {
-    return "";
-  });
-
-  // prevent users from accidentally unloading the window; "" because custom messages are no longer allowed
-  window.onbeforeunload = function ()
-  {
-     return "";
-  };
-
   var dataset = [];
 
   // Score Pie Chart (generates a visualization of their score for the user)
@@ -271,6 +260,12 @@
 
   var end_of_quiz = false;
 
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.onbeforeunload = function ()
+  {
+     return "";
+  };
+
   function grade_question() {
 
       var choice_id  = $('input[name=choice]:checked').attr("id");
@@ -286,7 +281,9 @@
 
         if ( typeof(id) === "undefined" ) {
           end_of_quiz = true;
-          console.log("End of Quiz: ", end_of_quiz);
+          window.onbeforeunload = function () {
+            // blank function do nothing
+          }
         }
 
         console.log(form_id, id, unit_id, q, choice_id);
