@@ -108,11 +108,11 @@
               {% for form in unit.forms %}
                 <li class="nav-item">
                   {% if forloop.first %}
-                  <a class="nav-link active" id="{{unit.unit_target}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                  <a class="nav-link active" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
                     Form {{ form.form_short_name }}
                   </a>
                   {% else %}
-                  <a class="nav-link" id="{{unit.unit_target}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.unit_target}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                  <a class="nav-link" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
                     Form {{ form.form_short_name }}
                   </a>
                   {% endif %}
@@ -124,9 +124,9 @@
             <div class="tab-content" id="RBT-Form-Tabs-Content">
               {% for form in unit.forms %}
                 {% if forloop.first %}
-                  <div class="tab-pane fade show active" id="{{unit.unit_target}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}{{ form.form_short_name }}-tab">
+                  <div class="tab-pane fade show active" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}{{ form.form_short_name }}-tab">
                 {% else %}
-                  <div class="tab-pane fade show" id="{{unit.unit_target}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.unit_target}}-{{ form.form_short_name }}-tab">
+                  <div class="tab-pane fade show" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}-{{ form.form_short_name }}-tab">
                 {% endif %}
                   {% if form.count > 0 %}
                   <a class="list-group-item" style="border: none;">
