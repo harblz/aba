@@ -11,7 +11,10 @@ a:hover {
 
 @media screen and (max-device-width: 480px) {
   h1 {
-    font-size: 2em;
+    font-size: 1.5rem;
+  }
+  h6 {
+    font-size: 1.5rem;
   }
   .col-11 {
     padding-left: 0px;
@@ -28,6 +31,10 @@ a:hover {
     cursor: pointer;
     margin-bottom: 15px;
     font-size: 1.15em;
+}
+
+.selected {
+  background-color: yellow;
 }
 
 /* Bootstrap Carousel Override */

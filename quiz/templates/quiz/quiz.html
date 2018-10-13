@@ -11,14 +11,14 @@
   <div id="results"></div>
 
   <div  id="question_text">
-    <p class="mt-2">
+    <p class="mt-2" style="line-height: 2rem;">
       Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small>
-        <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
-        <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span>
+        <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span><br>
+        <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span><br>
       </small>
     </p>
 
-    <h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">
+    <h6 style="font-size: 1.2rem;font-weight: normal;margin-top: 5px;">
       {{ question.question_text|safe }}
     </h6>
   </div>
@@ -36,9 +36,9 @@
       <div id="choices">
       {% for choice in question.choice_set.all %}
             <label class="quiz-choice-labels">
-              <table>
-                <tr>
-                  <td style="vertical-align: top"><input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" /></td>
+              <table id="table-choices" style="table-layout: fixed;width:100%;">
+                <tr style="width:100%;display:table-row;border-radius: 15px;">
+                  <td style="vertical-align: top;width:15px;"><input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" /></td>
                   <td><span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span></td>
                 </tr>
               </table>
@@ -93,6 +93,18 @@
       this.page.identifier = '{{ unit_id }}';
       this.page.title = '{{ unit_name }} Practice Quiz';
   };
+
+  function highlightAnswers() {
+    $('#table-choices tr').on('click', function() {
+        $('#table-choices tr').each(function(){
+            $(this).css('backgroundColor','white');
+        })
+        $(this).css('backgroundColor','#17a2b8');
+    }); 
+  }
+
+  highlightAnswers();
+
   
   (function() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
@@ -307,26 +319,18 @@
               for (var i = 0; i < response.next_question_choices.length; i++) {
                 $('#choices').append(`
                     <label class="quiz-choice-labels">
-                        <table>
-                          <tr>
-                            <td style="vertical-align: top"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
+                        <table id="table-choices" style="table-layout: fixed;width:100%;">
+                          <tr style="width:100%;display:table-row;border-radius: 15px;">
+                            <td style="vertical-align: top;width:15px;"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
                             <td><span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span></td>
                           </tr>
                         </table>
                       </label><br />
                   `);
-                /*
-                  <table>
-                    <tr>
-                      <td style="vertical-align: top"><input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" /></td>
-                      <td><span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span></td>
-                    </tr>
-                  </table>
-                */
                 }
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span></small></p>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span></small></p>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
               } else {
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
@@ -355,9 +359,9 @@
                     for (var i = 0; i < response.next_question_choices.length; i++) {
                       $('#choices').append(`
                         <label class="quiz-choice-labels">
-                            <table>
-                              <tr>
-                                <td style="vertical-align: top"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
+                            <table id="table-choices" style="table-layout: fixed;width:100%;">
+                              <tr style="width:100%;display:table-row;border-radius: 15px;">
+                                <td style="vertical-align: top;width:15px;"><input type="radio" name="choice" id="`+response.next_question_choices[i].id+`" value="`+i+`" /></td>
                                 <td><span class="quiz-choice-labels" style="font-weight: normal">`+response.next_question_choices[i].choice+`</span></td>
                               </tr>
                             </table>
@@ -365,10 +369,11 @@
                         `);
                     }
                     $('#results').html('<div class="alert alert-warning" role="alert"><b>Oops!</b> You got question #'+(max_questions - id_list.length - 1)+' incorrect. <a href="#" class="redisplay-error-modal" onClick="$(`#error_modal`).modal(`show`);"><b>Wanna see why again?</b></a></div>');
-                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span></p></span></small>' + '<h6 style="font-size: 1.5rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+max_questions+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span></p></span></small>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
                   }
                 }
               }
+              highlightAnswers();
           },
           error : function(xhr,errmsg,err) {
               window.scrollTo(0,0);

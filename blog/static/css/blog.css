@@ -49,6 +49,10 @@ a:hover {
     font-size: 1.15em;
 }
 
+.selected {
+  background-color: yellow;
+}
+
 /* Bootstrap Carousel Override */
 .carousel-indicators li {
   background-color: #999;
