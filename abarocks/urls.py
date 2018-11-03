@@ -17,8 +17,6 @@ from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
 
-from blog.views import post_list
-
 from django.views.generic import RedirectView
 
 from .views import redirect_root, redirect_research, redirect_coffee, redirect_coffee_confirm

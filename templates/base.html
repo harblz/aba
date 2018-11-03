@@ -68,11 +68,6 @@
               </a>
             </div>
           </h2>
-          <!--
-          {% if user.is_not_authenticated %}
-            <button type="button" class="btn btn-dark">Log in</button><br>
-          {% endif %}
-          !-->
       </div>
 
       <!-- Mobile Header !-->
@@ -80,7 +75,7 @@
 
           <h2 class="d-inline" style="text-align: center;">
             <div class="d-inline">
-              <button class="float-left btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <button class="float-left btn btn-dark" type="button" data-toggle="collapse" data-target="#mobileHeader" aria-expanded="false" aria-controls="mobileHeader">
                 <i class="fas fa-bars"></i>
               </button>
             </div>
@@ -90,15 +85,10 @@
               </a>
             </div>
           </h2>
-          <!--
-          {% if user.is_not_authenticated %}
-            <button type="button" class="btn btn-dark">Log in</button><br>
-          {% endif %}
-          !-->
       </div>
 
       <!-- Mobile Sidebar !-->
-      <div class="collapse" id="collapseExample" style="position: fixed; z-index: 1000; margin: 50px 2.5% 0 2.5%; border: 1px solid #ccc; height: 100%; width: 95%;">
+      <div class="collapse" id="mobileHeader" style="position: fixed; z-index: 1000; margin: 50px 2.5% 0 2.5%; border: 1px solid #ccc; height: 100%; width: 95%;">
         <div class="d-lg-none d-md-none">
           {% block mobile-sidebar %}
             <div id="sidebar">
@@ -135,7 +125,7 @@
               </div>
 
               <div id="section-to-print" class="col-md-10" style="margin: 0 auto 0 auto;">
-                <div class="quiz-filler d-block d-sm-block d-md-none" style="min-height: 150px;">
+                <div class="quiz-filler d-block d-sm-block d-md-none" style="min-height: 95px;">
                 </div>
                 {% block quiz-content %}
                 {% endblock %}
@@ -147,19 +137,13 @@
                   <!-- Filler Column !-->
               </div>
 
-              <div id="section-to-print" class="d-none d-md-block d-lg-block col-md-10">
-                <!-- Posts -->
+                <!-- Blog Posts Desktop Content !-->
                 {% block content %}
+                  <div id="section-to-print" class="d-none d-sm-none d-md-block d-lg-block col-md-10">
+                    <!-- Posts -->
+                  </div>
                 {% endblock %}
-              </div>
 
-              <!-- Blog Posts Mobile Content !-->
-              <div id="section-to-print" class="d-block d-sm-block d-md-none col-md-10">
-
-                <!-- Posts -->
-                {% block mobile-content %}
-                {% endblock %}
-              </div>
 
               {% block coffee-content %}
 

@@ -12,6 +12,11 @@ from .forms import PostForm
 from django.shortcuts import redirect
 
 
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.core import serializers
 
 def blog_coffee_checkout(request):
     stripe.api_key = "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7"
@@ -47,10 +52,14 @@ def blog_research(request):
     pages = Pages.objects.order_by('order')
     return render(request, 'blog/blog_research.html', {'pages': pages})
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    pages = Pages.objects.order_by('order')
-    return render(request, 'blog/post_list.html', { 'posts': posts, 'pages': pages })
+def get_post_by_id(request, pk):
+    data = serializers.serialize("json", Post.objects.filter(pk=pk))
+    author = Post.objects.get(pk=pk).author
+    author = author.first_name
+    return JsonResponse({
+            'post'   :  data,
+            'author' :  author,
+        })
 
 def post_details_by_id(request, pk):
     pages = Pages.objects.order_by('order')
