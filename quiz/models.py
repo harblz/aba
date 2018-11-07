@@ -6,7 +6,6 @@ from ckeditor.fields import RichTextField
 
 from django.utils.encoding import python_2_unicode_compatible
 
-
 class Unit(models.Model):
     unit_name           = models.CharField(max_length=50)
     unit_description    = RichTextField()
