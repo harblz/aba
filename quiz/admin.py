@@ -57,7 +57,7 @@ class QuestionAdmin(admin.ModelAdmin):
         return Unit.objects.get(pk=obj.unit_id)
 
     def question_form_name(self, obj):
-        return Form.objects.get(pk=obj.unit_id)
+        return Form.objects.get(pk=obj.form_id)
 
     def has_answer(self, obj):
         choices = Choice.objects.filter(question_id=obj.id)
