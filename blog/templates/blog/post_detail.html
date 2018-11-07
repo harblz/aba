@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block content %}{% block mobile-content %}
-    <div id="post_container" class="post container-fluid" style="display: none;margin-top: 25px;">
+{% block content %}
+    <div id="post_container" class="post container-fluid" style="margin-top: 25px;">
       <div class="row">
 
         <div class="col-md-1" style="padding: 0px;">
@@ -91,7 +91,6 @@
 
             window.onload = function () { 
               resize();
-              document.getElementById('post_container').style.display = 'block';
             }
             /**
             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -116,4 +115,4 @@
 
       </div>
     </div>
-{% endblock %}{% endblock %}
+{% endblock %}
