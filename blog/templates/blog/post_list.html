@@ -173,7 +173,6 @@
 
   function resize() {
     // Resize post container for desktop
-    console.log(window.screen.width);
     if (window.screen.width <= 576) {
       console.log('small');
       document.querySelector("#post_container").style.display = "block";
@@ -202,7 +201,7 @@
           console.log(response);
           author          = response.author;
           current_post_id = response.id;
-          
+
           response        = JSON.parse(response.post);
           response        = response[0].fields;
 
