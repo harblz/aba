@@ -53,12 +53,20 @@ def blog_research(request):
     return render(request, 'blog/blog_research.html', {'pages': pages})
 
 def get_post_by_id(request, pk):
-    data = serializers.serialize("json", Post.objects.filter(pk=pk))
+
+    current_post    = Post.objects.get(pk=pk)
+
+    prev_post       = Post.objects.filter(published_date__date__lt=current_post.published_date).order_by('-published_date')[0:1]
+    
+    data = serializers.serialize("json", prev_post)
+
+
     author = Post.objects.get(pk=pk).author
     author = author.first_name
     return JsonResponse({
-            'post'   :  data,
-            'author' :  author,
+            'post'      :  data,
+            'author'    :  author,
+            'id'        :  prev_post[0].id,
         })
 
 def post_details_by_id(request, pk):
