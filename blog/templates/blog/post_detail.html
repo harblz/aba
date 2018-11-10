@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div id="post_container" class="post container-fluid" style="margin-top: 25px;">
+    <div id="post_container" class="post container-fluid" style="margin-top: 25px;"> 
       <div class="row">
 
         <div class="col-md-1" style="padding: 0px;">
@@ -88,6 +88,11 @@
                 document.querySelector("#post_container").style.display = "block";
               }    
             }
+
+
+            window.onresize = function(event) {
+                resize();
+            };
 
             window.onload = function () { 
               resize();
