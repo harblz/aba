@@ -171,8 +171,8 @@
     } else {
       var el = document.getElementById("sidebar");
 
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.175 + "px";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.175 + "px";
+      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.195 + "px";
+      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.195 + "px";
       document.querySelector("#post_container").style.display = "block";
     }    
   }
@@ -180,6 +180,10 @@
   window.onload = function () { 
     resize();
   }
+
+  window.onresize = function(event) {
+      resize();
+  };
 
 
   function get_next_post() {
