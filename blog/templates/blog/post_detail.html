@@ -1,37 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div id="post_container" class="post container-fluid" style="margin-top: 25px;"> 
+    <div id="post_container" class="post container" style="margin-top: 25px;"> 
       <div class="row">
 
-        <div class="col-md-1" style="padding: 0px;">
-          <time datetime="{{ post.published_date }}" class="icon">
-            <em>{{ post.published_date|date:"l" }}</em>
-            <strong>{{ post.published_date|date:"F" }}</strong>
-            <span style="padding-top: 0.7em">{{ post.published_date|date:"j" }}</span>
-          </time>
-        </div>
 
-        <div class="col-11" style="margin-left: 0px;">
-          <div class="post-info col-12">
-            <h1>
-              {% if user.is_authenticated %}
-                <small><a style="margin: 5px 0px 5px 0px; width: 100%;" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></small>
+
+        <div class="col-12" style="margin-left: 0px;">
+          <div class="post-info row">
+            <div class="col-md-2" style="padding: 0px;">
+              <time datetime="{{ post.published_date }}" class="icon">
+                <em>{{ post.published_date|date:"l" }}</em>
+                <strong>{{ post.published_date|date:"F" }}</strong>
+                <span style="padding-top: 0.7em">{{ post.published_date|date:"j" }}</span>
+              </time>
+            </div>
+
+            <div class="col-md-10" style="text-align: center;padding-top: 3%;">
+              <h1>
+                {{ post.title|safe }}
+                <small style="font-size: 0.5em">
+                     <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
+                </small>
+              </h1>
+
+              {% if post.published_date %}
+                  <div class="date" style="margin-left: 25px;">
+                    Posted by <b>{{post.author}}</b> on {{ post.published_date }}
+                  </div>
               {% endif %}
-              {{ post.title|safe }}
-              <small style="font-size: 0.5em">
-                   <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
-              </small>
-            </h1>
+
+            </div>
           </div>
 
-          <div class="post-date col-12">
-            {% if post.published_date %}
-                <div class="date">
-                  posted by <b>{{post.author}}</b> on {{ post.published_date }}
-                </div>
-            {% endif %}
-          </div>
 
           {% if post.pic %}
           <div class="col-md-12" style="padding: 0px;max-height: 30%;max-width: 30%;margin: 0 auto 0 auto;">
@@ -82,9 +83,6 @@
                 document.querySelector("#post_container").style.display = "block";
               } else {
                 var el = document.getElementById("sidebar");
-
-                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.175 + "px";
-                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.175 + "px";
                 document.querySelector("#post_container").style.display = "block";
               }    
             }
