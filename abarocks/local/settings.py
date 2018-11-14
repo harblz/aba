@@ -1,1 +1,1 @@
-/home/django/abarocks/abarocks/settings.py
+C:/home/django/abarocks/abarocks/settings.py

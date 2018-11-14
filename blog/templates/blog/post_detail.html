@@ -75,26 +75,28 @@
           <br /><br />
 
           <script>
+
+
             function resize() {
               // Resize post container for desktop
-              console.log(window.screen.width);
               if (window.screen.width <= 576) {
-                console.log('small');
                 document.querySelector("#post_container").style.display = "block";
               } else {
                 var el = document.getElementById("sidebar");
+                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
+                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.185 + "px";
                 document.querySelector("#post_container").style.display = "block";
               }    
             }
 
+            window.onload = function () { 
+              resize();
+            }
 
             window.onresize = function(event) {
                 resize();
             };
 
-            window.onload = function () { 
-              resize();
-            }
             /**
             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/

@@ -114,7 +114,13 @@
             </div>
         {% endfor %}        
       </div>
+
+
+      <div id="loading" class="container btn-info">
+        <span class="text-white">Loading next post...</span>
+      </div>
     </div>
+
 
     <!-- Template for Posts Added Dynamically !-->
     <template id="post_template">
@@ -174,13 +180,11 @@
   function resize() {
     // Resize post container for desktop
     if (window.screen.width <= 576) {
-      console.log('small');
       document.querySelector("#post_container").style.display = "block";
     } else {
       var el = document.getElementById("sidebar");
-
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.175 + "px";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.175 + "px";
+      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
+      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.185 + "px";
       document.querySelector("#post_container").style.display = "block";
     }    
   }
@@ -188,6 +192,10 @@
   window.onload = function () { 
     resize();
   }
+
+  window.onresize = function(event) {
+      resize();
+  };
 
 
   function get_next_post() {
@@ -198,7 +206,7 @@
       data: { 'csrfmiddlewaretoken' : '{{csrf_token}}' },
 
       success : function(response) {
-          console.log(response);
+
           author          = response.author;
           current_post_id = response.id;
 
@@ -210,8 +218,6 @@
             var post  = document.querySelector("#post_template");
             var post_container = document.querySelector("#post_container");
             var clone = document.importNode(post.content, true);
-
-            console.log(response.published_date);
 
             qq = clone.querySelector("em");
             qq.textContent = moment(response.published_date).format('dddd');
@@ -255,11 +261,14 @@
             qq.innerHTML = text.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, response.snippet_size).join('');
 
             post_container.appendChild(clone);
+
+            $("#loadMe").modal("hide");
           }
         },
       error : function(xhr, errmsg, err) {
           console.log(xhr.status + ": " + xhr.responseText);
           current_post_id = current_post_id-1;
+          document.querySelector('#loading').style.display = 'none';
         },
      });
   }
