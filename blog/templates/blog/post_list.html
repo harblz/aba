@@ -181,6 +181,9 @@
     // Resize post container for desktop
     if (window.screen.width <= 576) {
       document.querySelector("#post_container").style.display = "block";
+    } else if ( window.screen.width >= 576 && window.screen.width <= 900) {
+      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.10 + "px";
+      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.10 + "px";
     } else {
       var el = document.getElementById("sidebar");
       document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
