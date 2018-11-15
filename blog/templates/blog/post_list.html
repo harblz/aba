@@ -4,6 +4,7 @@
 {% block content %}
 
     <div class="container-fluid">
+
       <!-- Carousel !-->
       <div id="carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -15,7 +16,9 @@
           {% endfor %}
         </ol>
 
+        
         <div class="carousel-inner">
+          <!-- Quiz Default Carousel Item -->
           <div class="carousel-item active text-center p4">
             <div class="container" style="padding-left: 1%;padding-right: 1%;">
               <h1 class="display-4" style="font-size:2.5rem;">Getting Ready for the RBT Exam?</h1>
@@ -32,6 +35,37 @@
             </div><br>
           </div>
 
+          <!-- Add Pinned Posts to the Carousel -->
+          {% for post in posts %}
+            {% if post.is_pinned is True %}
+            <div class="carousel-item text-center p4">
+              <div class="container" style="padding-left: 1%;padding-right: 1%;">
+                <h1 class="display-4" style="font-size:2.5rem;">{{ post.title|safe }}</h1>
+                <p class="lead">
+                  <div class="col-md-12" style="padding: 0px;margin: 0 auto 45px auto;">
+                      <div class="container" >
+                        <a href="/blog/{{post.slug}}">
+                          <img class="mx-auto d-block rounded img-fluid" style="max-width: auto; max-height: 350px;" src="{{post.pic}}">
+                        </a>
+                      </div>
+                  </div>
+                </p>                
+                <p class="lead">
+                  {{ post.text|safe|truncatewords_html:post.snippet_size }}
+                </p>
+                <br />
+                <br />
+              </div>
+              <br>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+
+
+
+          <!-- Post Lists -->
           {% for post in posts %}
             {% if post.is_pinned is True %}
               <div class="carousel-item text-center p4">
@@ -48,7 +82,7 @@
 
         </div>
 
-        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <a class="carousel-control-prev" style="margin-left: 20%;" href="#carousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
@@ -58,7 +92,9 @@
         </a>
       </div>
 
-      <div id="post_container" style="display: none;">
+
+      <div id="post_container" class="container" style="display: none;">
+        <br><br><br><br>
         <h3>Recent Posts</h3>
         <hr>
         {% for post in posts %}
@@ -67,7 +103,7 @@
               <div class="row">
 
                 <div class="post-info row">
-                  <div class="col-md-2" style="padding: 0px;">
+                  <div class="col-md-3" style="padding: 0px;">
                     <time datetime="{{ post.published_date }}" class="icon">
                       <em>{{ post.published_date|date:"l" }}</em>
                       <strong>{{ post.published_date|date:"F" }}</strong>
@@ -75,13 +111,13 @@
                     </time>
                   </div>
 
-                  <div class="col-md-10" style="text-align: left;padding-top: 3%;">
+                  <div class="col-md-9" style="text-align: left;padding-top: 3%;">
                     <a href="/blog/{{ post.slug }}">
                       <h1>
-                      {{ post.title|safe }}
-                      <small style="font-size: 0.5em">
-                           <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
-                      </small>
+                        {{ post.title|safe }}
+                        <small style="font-size: 0.5em">
+                          <span class="badge badge-info">&nbsp <i class="far fa-comment-alt"></i> &nbsp <a class="text-white" href="{% url 'post_details_by_slug' slug=post.slug %}#disqus_thread"></a></span>
+                        </small>
                       </h1>
                     </a>
 
@@ -97,7 +133,7 @@
                 <div class="col-10">
                   <br />
                   {% if post.pic %}
-                  <div class="col-md-12" style="padding: 0px;margin: 0 auto 0 auto;">
+                  <div class="col-md-12" style="padding: 0px;margin: 0 auto 45px auto;">
                       <div class="container" >
                         <a href="/blog/{{post.slug}}">
                           <img class="mx-auto d-block rounded img-fluid" style="max-width: auto; max-height: 350px;" src="{{post.pic}}">
@@ -106,7 +142,7 @@
                   </div>
                   {% endif %}
 
-                  <p>{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
+                  <p style="min-width: 100%;">{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
                   <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
 
@@ -157,7 +193,7 @@
             <div class="col-12">
               <br />
 
-              <div class="template_image_container col-md-12" style="padding: 0px;margin: 0 auto 0 auto;">
+              <div class="template_image_container col-md-12" style="padding: 0px;margin: 0 auto 45px auto;">
                   <div class="container" >
                     <a class="template_post_image_link" href="#">
                       <img class="template_post_image mx-auto d-block rounded img-fluid" style="max-width: auto; max-height: 350px;" src="#">
@@ -184,12 +220,22 @@
     } else if ( window.screen.width >= 576 && window.screen.width <= 900) {
       document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.10 + "px";
       document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.10 + "px";
-    } else {
+    } else if ( window.screen.width >= 900 && window.screen.width <= 1200) {
+      var el = document.getElementById("sidebar");
+      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.165 + "px";
+      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.165 + "px";
+      document.querySelector("#post_container").style.display = "block";
+    } else if ( window.screen.width >= 900 && window.screen.width <= 1200) {
       var el = document.getElementById("sidebar");
       document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
       document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.185 + "px";
       document.querySelector("#post_container").style.display = "block";
-    }    
+    } else {
+      var el = document.getElementById("sidebar");
+      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.225 + "px";
+      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.225 + "px";
+      document.querySelector("#post_container").style.display = "block";
+    }
   }
 
   window.onload = function () { 
