@@ -142,7 +142,9 @@
                   </div>
                   {% endif %}
 
-                  <p style="min-width: 100%;">{{ post.text|safe|truncatewords_html:post.snippet_size }}</p>
+                  <p style="min-width: 100%;">
+                    {{ post.text|safe|truncatewords_html:post.snippet_size }}
+                  </p>
                   <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
 
