@@ -173,7 +173,7 @@
             </div>
 
             <div class="col-md-10" style="text-align: left;padding-top: 3%;">
-              <a href="#">
+              <a class="template_title_link" href="#">
                 <h1>
                   <span class="template_title">Post Title</span>
                   <small style="font-size: 0.5em">
@@ -284,7 +284,7 @@
             qq = clone.querySelector(".template_title");
             qq.innerHTML = response.title;
 
-            qq = clone.querySelector(".template_title");
+            qq = clone.querySelector(".template_title_link");
             qq.href = 'blog/' + response.slug;
 
             qq = clone.querySelector(".template_read_more_btn");
