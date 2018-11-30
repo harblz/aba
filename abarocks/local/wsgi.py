@@ -1,0 +1,1 @@
+C:/home/django/abarocks/abarocks/wsgi.py

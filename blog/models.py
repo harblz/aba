@@ -3,6 +3,8 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 from datetime import datetime
 
+from taggit.managers import TaggableManager
+
 # Blog Categories
 class Category(models.Model):
     category_name           = models.CharField(max_length=75, default='Default Category')
@@ -23,20 +25,15 @@ class Category(models.Model):
 
 # Blog Posts
 class Post(models.Model):
-    CATEGORY_CHOICES = (
-        ('green','GREEN'),
-        ('blue', 'BLUE'),
-        ('red','RED'),
-        ('orange','ORANGE'),
-        ('black','BLACK'),
-    )
+
+    tags = TaggableManager()
 
     author           = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
     title            = models.CharField(max_length=200)
     text             = RichTextField()
     pic              = models.CharField(max_length=200, null=True, blank=True)
     slug             = models.CharField(max_length=200)
-    category         = models.CharField(max_length=75, choices=CATEGORY_CHOICES, default='Default')
+    category         = models.ForeignKey('blog.Category', on_delete=models.CASCADE,default=0)
     meta             = models.CharField(max_length=1000, null=True)
     snippet_size     = models.IntegerField(default=150)
     is_pinned        = models.NullBooleanField(default=False)

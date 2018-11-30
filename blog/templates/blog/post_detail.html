@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div id="post_container" class="post container" style="margin-top: 25px;"> 
+    <div id="post_container" class="post container" style="margin-top: 25px;visibility: hidden;"> 
       <div class="row">
 
 
@@ -16,7 +16,7 @@
               </time>
             </div>
 
-            <div class="col-md-10" style="text-align: center;padding-top: 3%;">
+            <div class="col-md-10" style="text-align: left;padding-top: 3%;">
               <h1>
                 {{ post.title|safe }}
                 <small style="font-size: 0.5em">
@@ -35,7 +35,7 @@
 
 
           {% if post.pic %}
-          <div class="col-md-12" style="padding: 0px;max-height: 30%;max-width: 30%;margin: 0 auto 0 auto;">
+          <div class="col-md-12" style="padding: 0px;max-height: 30%;max-width: 30%;margin: 0 auto 45px auto;">
               <a href="{{post.pic}}">
                 <img class="mx-auto d-block rounded img-fluid" src="{{post.pic}}">
               </a>
@@ -75,26 +75,26 @@
           <br /><br />
 
           <script>
+
+
             function resize() {
               // Resize post container for desktop
-              console.log(window.screen.width);
               if (window.screen.width <= 576) {
-                console.log('small');
-                document.querySelector("#post_container").style.display = "block";
+                document.querySelector("#post_container").style.visibility = "visible";
               } else {
-                var el = document.getElementById("sidebar");
-                document.querySelector("#post_container").style.display = "block";
+                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
+                document.querySelector("#post_container").style.visibility = "visible";
               }    
             }
-
-
-            window.onresize = function(event) {
-                resize();
-            };
 
             window.onload = function () { 
               resize();
             }
+
+            window.onresize = function(event) {
+              resize();
+            };
+
             /**
             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
