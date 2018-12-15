@@ -1,0 +1,764 @@
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:11:39.128930' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:11:39.128930',)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\sqlite3\base.py", line 296, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: blog_post.category_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Harblz\Projects\aba\abarocks\views.py", line 11, in redirect_root
+    last_post_id    = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1][0].id
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\query.py", line 302, in __getitem__
+    qs._fetch_all()
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\query.py", line 1186, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\sql\compiler.py", line 1065, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\backends\sqlite3\base.py", line 296, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: blog_post.category_id
+"GET / HTTP/1.1" 500 137806
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) '^admin/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLPattern '^research/'>], [<URLPattern '^coffee/'>], [<URLPattern '^blog_coffee_checkout/'>], [<URLPattern '^$'>], [<URLResolver <module 'blog.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\blog\\urls.py'> (None:None) '^blog/'>], [<URLResolver <module 'pages.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\pages\\urls.py'> (None:None) '^pages/'>], [<URLResolver <module 'quiz.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\quiz\\urls.py'> (quiz:quiz) '^quiz/'>], [<URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <module 'polls.urls' from 'C:\\Users\\Harblz\\Projects\\aba\\polls\\urls.py'> (polls:polls) '^polls/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2843
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params ())
+(0.001) ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; args=()
+CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_flag" smallint unsigned NOT NULL); (params None)
+(0.000) CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_flag" smallint unsigned NOT NULL); args=None
+INSERT INTO "django_admin_log" ("id", "action_time", "object_id", "object_repr", "change_message", "content_type_id", "user_id", "action_flag") SELECT "id", "action_time", "object_id", "object_repr", "change_message", "content_type_id", "user_id", "action_flag" FROM "django_admin_log__old"; (params ())
+(0.001) INSERT INTO "django_admin_log" ("id", "action_time", "object_id", "object_repr", "change_message", "content_type_id", "user_id", "action_flag") SELECT "id", "action_time", "object_id", "object_repr", "change_message", "content_type_id", "user_id", "action_flag" FROM "django_admin_log__old"; args=()
+DROP TABLE "django_admin_log__old"; (params ())
+(0.001) DROP TABLE "django_admin_log__old"; args=()
+CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id"); args=()
+CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); (params ())
+(0.000) CREATE INDEX "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('admin', '0003_logentry_add_action_flag_choices', '2018-12-15 23:11:53.005362'); args=['admin', '0003_logentry_add_action_flag_choices', '2018-12-15 23:11:53.005362']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL UNIQUE, "slug" varchar(100) NOT NULL UNIQUE); (params None)
+(0.001) CREATE TABLE "taggit_tag" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL UNIQUE, "slug" varchar(100) NOT NULL UNIQUE); args=None
+CREATE TABLE "taggit_taggeditem" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" integer NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "tag_id" integer NOT NULL REFERENCES "taggit_tag" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.001) CREATE TABLE "taggit_taggeditem" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" integer NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "tag_id" integer NOT NULL REFERENCES "taggit_tag" ("id") DEFERRABLE INITIALLY DEFERRED); args=None
+CREATE INDEX "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id"); (params ())
+(0.000) CREATE INDEX "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id"); args=()
+CREATE INDEX "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id"); (params ())
+(0.000) CREATE INDEX "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id"); args=()
+CREATE INDEX "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id"); (params ())
+(0.000) CREATE INDEX "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('taggit', '0001_initial', '2018-12-15 23:11:53.041320'); args=['taggit', '0001_initial', '2018-12-15 23:11:53.041320']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+CREATE INDEX "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id"); (params ())
+(0.001) CREATE INDEX "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('taggit', '0002_auto_20150616_2121', '2018-12-15 23:11:53.069287'); args=['taggit', '0002_auto_20150616_2121', '2018-12-15 23:11:53.069287']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.001) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category" varchar(75) NOT NULL); (params None)
+(0.000) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category" varchar(75) NOT NULL); args=None
+INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category" FROM "blog_post__old"; (params ())
+(0.000) INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category" FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.000) DROP TABLE "blog_post__old"; args=()
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); (params ())
+(0.000) CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); args=()
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.000) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category_id" integer NOT NULL REFERENCES "blog_category" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.000) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category_id" integer NOT NULL REFERENCES "blog_category" ("id") DEFERRABLE INITIALLY DEFERRED); args=None
+INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category" FROM "blog_post__old"; (params ())
+(0.001) INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category" FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.000) DROP TABLE "blog_post__old"; args=()
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); (params ())
+(0.000) CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); args=()
+CREATE INDEX "blog_post_category_id_c326dbf8" ON "blog_post" ("category_id"); (params ())
+(0.001) CREATE INDEX "blog_post_category_id_c326dbf8" ON "blog_post" ("category_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('blog', '0021_auto_20181115_1314', '2018-12-15 23:11:53.132214'); args=['blog', '0021_auto_20181115_1314', '2018-12-15 23:11:53.132214']
+(0.000) PRAGMA foreign_keys = OFF; args=None
+(0.000) BEGIN; args=None
+ALTER TABLE "blog_post" RENAME TO "blog_post__old"; (params ())
+(0.001) ALTER TABLE "blog_post" RENAME TO "blog_post__old"; args=()
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category_id" integer NOT NULL REFERENCES "blog_category" ("id") DEFERRABLE INITIALLY DEFERRED); (params None)
+(0.001) CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "text" text NOT NULL, "created_date" datetime NOT NULL, "published_date" datetime NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "status" varchar(1) NOT NULL, "page_views" integer NOT NULL, "snippet_size" integer NOT NULL, "slug" varchar(200) NOT NULL, "is_pinned" bool NULL, "pic" varchar(200) NULL, "meta" varchar(1000) NULL, "category_id" integer NOT NULL REFERENCES "blog_category" ("id") DEFERRABLE INITIALLY DEFERRED); args=None
+INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id" FROM "blog_post__old"; (params ())
+(0.000) INSERT INTO "blog_post" ("id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id") SELECT "id", "title", "text", "created_date", "published_date", "author_id", "status", "page_views", "snippet_size", "slug", "is_pinned", "pic", "meta", "category_id" FROM "blog_post__old"; args=()
+DROP TABLE "blog_post__old"; (params ())
+(0.000) DROP TABLE "blog_post__old"; args=()
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); (params ())
+(0.001) CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id"); args=()
+CREATE INDEX "blog_post_category_id_c326dbf8" ON "blog_post" ("category_id"); (params ())
+(0.000) CREATE INDEX "blog_post_category_id_c326dbf8" ON "blog_post" ("category_id"); args=()
+(0.000) PRAGMA foreign_keys = ON; args=None
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "django_migrations" ("app", "name", "applied") VALUES ('blog', '0022_auto_20181215_1811', '2018-12-15 23:11:53.169171'); args=['blog', '0022_auto_20181215_1811', '2018-12-15 23:11:53.169171']
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'polls' AND "django_content_type"."model" = 'choice'); args=('polls', 'choice')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'polls' AND "django_content_type"."model" = 'question'); args=('polls', 'question')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8, 7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(8, 7)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view choice', 8, 'view_choice' UNION ALL SELECT 'Can view question', 7, 'view_question'; args=('Can view choice', 8, 'view_choice', 'Can view question', 7, 'view_question')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'polls'; args=('polls',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'choice'); args=('quiz', 'choice')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'question'); args=('quiz', 'question')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'unit'); args=('quiz', 'unit')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'difficulty'); args=('quiz', 'difficulty')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'task'); args=('quiz', 'task')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'quiz' AND "django_content_type"."model" = 'form'); args=('quiz', 'form')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (12, 13, 14, 15, 17, 18) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(12, 13, 14, 15, 17, 18)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view choice', 13, 'view_choice' UNION ALL SELECT 'Can view question', 12, 'view_question' UNION ALL SELECT 'Can view unit', 14, 'view_unit' UNION ALL SELECT 'Can view difficulty', 15, 'view_difficulty' UNION ALL SELECT 'Can view task', 17, 'view_task' UNION ALL SELECT 'Can view form', 18, 'view_form'; args=('Can view choice', 13, 'view_choice', 'Can view question', 12, 'view_question', 'Can view unit', 14, 'view_unit', 'Can view difficulty', 15, 'view_difficulty', 'Can view task', 17, 'view_task', 'Can view form', 18, 'view_form')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'quiz'; args=('quiz',)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'post'); args=('blog', 'post')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'blog' AND "django_content_type"."model" = 'category'); args=('blog', 'category')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (9, 19) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(9, 19)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view post', 9, 'view_post' UNION ALL SELECT 'Can view category', 19, 'view_category'; args=('Can view post', 9, 'view_post', 'Can view category', 19, 'view_category')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'blog'; args=('blog',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'pages' AND "django_content_type"."model" = 'pages'); args=('pages', 'pages')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (16) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(16,)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view pages', 16, 'view_pages'; args=('Can view pages', 16, 'view_pages')
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'pages'; args=('pages',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" = 'logentry'); args=('admin', 'logentry')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1,)
+(0.001) BEGIN; args=None
+(0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view log entry', 1, 'view_logentry'; args=('Can view log entry', 1, 'view_logentry')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'permission'); args=('auth', 'permission')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'group'); args=('auth', 'group')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" = 'user'); args=('auth', 'user')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(2, 3, 4)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view permission', 2, 'view_permission' UNION ALL SELECT 'Can view group', 4, 'view_group' UNION ALL SELECT 'Can view user', 3, 'view_user'; args=('Can view permission', 2, 'view_permission', 'Can view group', 4, 'view_group', 'Can view user', 3, 'view_user')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" = 'contenttype'); args=('contenttypes', 'contenttype')
+(0.001) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view content type', 5, 'view_contenttype'; args=('Can view content type', 5, 'view_contenttype')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',)
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" = 'session'); args=('sessions', 'session')
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can view session', 6, 'view_session'; args=('Can view session', 6, 'view_session')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',)
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'taggit' AND "django_content_type"."model" = 'tag'); args=('taggit', 'tag')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'taggit' AND "django_content_type"."model" = 'tag'); args=('taggit', 'tag')
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('taggit', 'tag'); args=['taggit', 'tag']
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'taggit' AND "django_content_type"."model" = 'taggeditem'); args=('taggit', 'taggeditem')
+(0.001) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'taggit' AND "django_content_type"."model" = 'taggeditem'); args=('taggit', 'taggeditem')
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('taggit', 'taggeditem'); args=['taggit', 'taggeditem']
+(0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (20, 21) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(20, 21)
+(0.000) BEGIN; args=None
+(0.001) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT 'Can add Tag', 20, 'add_tag' UNION ALL SELECT 'Can change Tag', 20, 'change_tag' UNION ALL SELECT 'Can delete Tag', 20, 'delete_tag' UNION ALL SELECT 'Can view Tag', 20, 'view_tag' UNION ALL SELECT 'Can add Tagged Item', 21, 'add_taggeditem' UNION ALL SELECT 'Can change Tagged Item', 21, 'change_taggeditem' UNION ALL SELECT 'Can delete Tagged Item', 21, 'delete_taggeditem' UNION ALL SELECT 'Can view Tagged Item', 21, 'view_taggeditem'; args=('Can add Tag', 20, 'add_tag', 'Can change Tag', 20, 'change_tag', 'Can delete Tag', 20, 'delete_tag', 'Can view Tag', 20, 'view_tag', 'Can add Tagged Item', 21, 'add_taggeditem', 'Can change Tagged Item', 21, 'change_taggeditem', 'Can delete Tagged Item', 21, 'delete_taggeditem', 'Can view Tagged Item', 21, 'view_taggeditem')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'taggit'; args=('taggit',)
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.002) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:14:10.241785' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:14:10.241785',)
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:14:10.240786' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:14:10.240786',)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+Exception while resolving variable 'post' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [post] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A8697C46A8>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A869A4DFD0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A869A3B240>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A86986B080>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'posts': <QuerySet [<Post: Behavior Analysis: an Evolutionary Science>]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>, 'id': 3}, {'block': <Block Node: content. Contents: [<TextNode: '\n\n    <div class="contain'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </ol>\n\n        \n'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </div>\n\n\n\n\n     '>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n\n\n        </div>\n\n      '>, <ForNode: for post in posts, tail_len: 23>, <TextNode: '        \n      </div>\n\n\n '>, <Variable Node: post.published_date>, <TextNode: '" class="icon">\n         '>, <Variable Node: id>, <TextNode: '";\n\n  function resize() {'>, <Variable Node: csrf_token>, <TextNode: "' },\n\n      success : fun">]>}]
+"GET / HTTP/1.1" 200 24380
+"GET /static/css/blog.css HTTP/1.1" 200 11137
+"GET /static/fontawesome/css/all.css HTTP/1.1" 200 45687
+"GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 200 2039
+"GET /static/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 200 67742
+"GET /static/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 200 144877
+"GET /static/js/chart.bundle.min.js HTTP/1.1" 200 197695
+"GET /static/js/moment.js HTTP/1.1" 200 463884
+"GET /static/js/fontawesome-all.min.js HTTP/1.1" 200 680496
+"GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 200 690627
+"GET /static/fontawesome/js/all.js HTTP/1.1" 200 914267
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:14:10.543432' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:14:10.543432',)
+(0.000) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:14:10.542433' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:14:10.542433',)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+Exception while resolving variable 'post' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [post] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A86A2CBC80>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A86A2563C8>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A869A29A20>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A869A2D630>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'posts': <QuerySet [<Post: Behavior Analysis: an Evolutionary Science>]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>, 'id': 3}, {'block': <Block Node: content. Contents: [<TextNode: '\n\n    <div class="contain'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </ol>\n\n        \n'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </div>\n\n\n\n\n     '>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n\n\n        </div>\n\n      '>, <ForNode: for post in posts, tail_len: 23>, <TextNode: '        \n      </div>\n\n\n '>, <Variable Node: post.published_date>, <TextNode: '" class="icon">\n         '>, <Variable Node: id>, <TextNode: '";\n\n  function resize() {'>, <Variable Node: csrf_token>, <TextNode: "' },\n\n      success : fun">]>}]
+"GET / HTTP/1.1" 200 24380
+"GET /static/fontawesome/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 14952
+"GET /static/fontawesome/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 59572
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 1222
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 200 17336
+"GET /quiz HTTP/1.1" 301 0
+(0.001) SELECT "quiz_unit"."unit_name", "quiz_unit"."unit_target", "quiz_unit"."unit_description", "quiz_unit"."id" FROM "quiz_unit"; args=()
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 1; args=(1,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 4; args=(4,)
+(0.001) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 10; args=(10,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 11; args=(11,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 6; args=(6,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 12; args=(12,)
+(0.001) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 8; args=(8,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 7; args=(7,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 9; args=(9,)
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+Exception while resolving variable 'object' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [object] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A86A2F8730>>, 'request': <WSGIRequest: GET '/quiz/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A86A338B00>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A869A32358>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A869A4D198>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'units': <QuerySet [{'unit_name': 'Mock RBT Practice Exam', 'unit_target': 'RBT', 'unit_description': '<p>This is a mock RBT practice exam. Questions on this exam are randomly ordered, derived from the RBT competency goals, and focus heavily on concepts, vocabulary, and general knowledge. This is version A of the test, which has unique (but similar) questions to the other versions of the mock exam.</p>\r\n\r\n<p>The actual RBT exam has 85 questions, 10 of which are &quot;under review&quot; and do not count towards your score (the board is assessing the difficulty of those questions to ensure they are appropriate for the exam). <strong>You would have one hour to complete this exam - however, this quiz is <span class="marker">untimed!</span></strong></p>', 'id': 1, 'count': 57, 'forms': <QuerySet [<Form: A - RBT Practice Exam>, <Form: B - RBT Practice Exam>, <Form: C - RBT Practice Exam>]>}, {'unit_name': 'RBT A: Measurement', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz: A - MEASUREMENT</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>A-01</strong> Prepare for data collection.</li>\r\n\t<li><strong>A-02</strong> Implement continuous measurement procedures (e.g., frequency, duration).</li>\r\n\t<li><strong>A-03</strong> Implement discontinuous measurement procedures (e.g., partial &amp; whole interval, momentary time sampling).</li>\r\n\t<li><strong>A-04</strong> Implement permanent product recording procedures.</li>\r\n\t<li><strong>A-05</strong> Enter data and update graphs.</li>\r\n</ul>', 'id': 2, 'count': 14, 'forms': <QuerySet [<Form: A - RBT A: Measurement>, <Form: B - RBT A: Measurement>]>}, {'unit_name': 'RBT B: Assessment', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz B:&nbsp;ASSESSMENT</strong></p>\r\n\r\n<p style="margin-left:40px"><strong>B-01</strong> Describe the behavior and environment in observable and measurable terms.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-02</strong> Conduct preference assessments.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-03</strong>&nbsp;Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills).</p>\r\n\r\n<p style="margin-left:40px"><strong>B-04</strong> Assist with functional assessment procedures.</p>', 'id': 3, 'count': 39, 'forms': <QuerySet [<Form: A - RBT B: Assessment>, <Form: B - RBT B: Assessment>]>}, {'unit_name': 'RBT C: Skill Acquisition', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz C: SKILL ACQUISITION</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>C-01</strong> Identify the essential components of a written skill acquisition plan.</li>\r\n\t<li><strong>C-02</strong> Prepare for the session as required by the skill acquisition plan.</li>\r\n\t<li><strong>C-03</strong> Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules).</li>\r\n\t<li><strong>C-04</strong> Implement discrete-trial teaching procedures.</li>\r\n\t<li><strong>C-05</strong> Implement naturalistic teaching procedures (e.g., incidental teaching).</li>\r\n\t<li><strong>C-06</strong> Implement task analyzed chaining procedures.</li>\r\n\t<li><strong>C-07</strong> Implement discrimination training.</li>\r\n\t<li><strong>C-08</strong> Implement stimulus control transfer procedures.</li>\r\n\t<li><strong>C-09</strong> Implement stimulus fading procedures.</li>\r\n\t<li><strong>C-10</strong> Implement prompt and prompt fading procedures.</li>\r\n\t<li><strong>C-11</strong> Implement generalization and maintenance procedures.</li>\r\n\t<li><strong>C-12</strong> Assist with the training of stakeholders (e.g., family, caregivers, other professionals).</li>\r\n</ul>', 'id': 4, 'count': 28, 'forms': <QuerySet [<Form: A - RBT C: Skill Acquisition>, <Form: B - RBT C: Skill Acquisition>]>}, {'unit_name': 'RBT D: Behavior Change', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>D-01:</strong>&nbsp;Implement interventions based on modification of antecedents such as motivating / establishing operations and discriminative stimuli</li>\r\n\t<li><strong>D-02:</strong>&nbsp;Implement differential reinforcement procedures (e.g., DRA, DRO)</li>\r\n\t<li><strong>D-03:</strong>&nbsp;Implement extinction procedures</li>\r\n\t<li><strong>D-04:</strong>&nbsp;Implement crisis / emergency procedures according to protocol</li>\r\n</ul>', 'id': 5, 'count': 15, 'forms': <QuerySet [<Form: A - RBT D: Behavior Change>]>}, {'unit_name': 'RBT E: Documentation and Reporting', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz E: Documentation &amp; Reporting</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>E-01:</strong> Generate objective session notes by describing what occurred during sessions</li>\r\n</ul>', 'id': 6, 'count': 5, 'forms': <QuerySet [<Form: A - RBT E: Documentation and Reporting>]>}, {'unit_name': 'RBT F: Professional Conduct & Scope of Practice', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>F-01:</strong>&nbsp;Respond appropriately to feedback and maintain or improve performance accordingly.</li>\r\n</ul>', 'id': 7, 'count': 4, 'forms': <QuerySet [<Form: A - RBT F: Professional Conduct & Scope of Practice>]>}]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n  <h2> ABA Practice Quiz'>, <IfNode>, <TextNode: '\n'>]>}]
+"GET /quiz/ HTTP/1.1" 200 52455
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 200 8192
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 1222
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 500 59
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 500 59
+"GET /static/bootstrap/bootstrap.min.css.map HTTP/1.1" 200 551641
+(0.000) SELECT "quiz_unit"."unit_name", "quiz_unit"."unit_target", "quiz_unit"."unit_description", "quiz_unit"."id" FROM "quiz_unit"; args=()
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 1; args=(1,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 1; args=(1,)
+(0.001) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 1; args=(1,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 2; args=(2,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 10; args=(10,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 3; args=(3,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 11; args=(11,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 4; args=(4,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 6; args=(6,)
+(0.001) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 12; args=(12,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 5; args=(5,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 6; args=(6,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 8; args=(8,)
+(0.000) SELECT "quiz_question"."unit_id" FROM "quiz_question" WHERE "quiz_question"."unit_id" = 7; args=(7,)
+(0.001) SELECT "quiz_form"."id", "quiz_form"."form_name", "quiz_form"."form_short_name", "quiz_form"."form_description", "quiz_form"."form_unit_id" FROM "quiz_form" WHERE "quiz_form"."form_unit_id" = 7; args=(7,)
+(0.000) SELECT "quiz_question"."id", "quiz_question"."question_text", "quiz_question"."unit_id", "quiz_question"."form_id", "quiz_question"."task_list_item_id", "quiz_question"."difficulty_id", "quiz_question"."question_hint", "quiz_question"."pub_date" FROM "quiz_question" WHERE "quiz_question"."form_id" = 9; args=(9,)
+(0.000) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+Exception while resolving variable 'object' in template 'quiz/index.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'object'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [object] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A86A319AE8>>, 'request': <WSGIRequest: GET '/quiz/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A869A20DD8>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A86A3495F8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A86A312A58>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'units': <QuerySet [{'unit_name': 'Mock RBT Practice Exam', 'unit_target': 'RBT', 'unit_description': '<p>This is a mock RBT practice exam. Questions on this exam are randomly ordered, derived from the RBT competency goals, and focus heavily on concepts, vocabulary, and general knowledge. This is version A of the test, which has unique (but similar) questions to the other versions of the mock exam.</p>\r\n\r\n<p>The actual RBT exam has 85 questions, 10 of which are &quot;under review&quot; and do not count towards your score (the board is assessing the difficulty of those questions to ensure they are appropriate for the exam). <strong>You would have one hour to complete this exam - however, this quiz is <span class="marker">untimed!</span></strong></p>', 'id': 1, 'count': 57, 'forms': <QuerySet [<Form: A - RBT Practice Exam>, <Form: B - RBT Practice Exam>, <Form: C - RBT Practice Exam>]>}, {'unit_name': 'RBT A: Measurement', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz: A - MEASUREMENT</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>A-01</strong> Prepare for data collection.</li>\r\n\t<li><strong>A-02</strong> Implement continuous measurement procedures (e.g., frequency, duration).</li>\r\n\t<li><strong>A-03</strong> Implement discontinuous measurement procedures (e.g., partial &amp; whole interval, momentary time sampling).</li>\r\n\t<li><strong>A-04</strong> Implement permanent product recording procedures.</li>\r\n\t<li><strong>A-05</strong> Enter data and update graphs.</li>\r\n</ul>', 'id': 2, 'count': 14, 'forms': <QuerySet [<Form: A - RBT A: Measurement>, <Form: B - RBT A: Measurement>]>}, {'unit_name': 'RBT B: Assessment', 'unit_target': 'RBT', 'unit_description': '<p><strong>Basic Competency Quiz B:&nbsp;ASSESSMENT</strong></p>\r\n\r\n<p style="margin-left:40px"><strong>B-01</strong> Describe the behavior and environment in observable and measurable terms.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-02</strong> Conduct preference assessments.</p>\r\n\r\n<p style="margin-left:40px"><strong>B-03</strong>&nbsp;Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills).</p>\r\n\r\n<p style="margin-left:40px"><strong>B-04</strong> Assist with functional assessment procedures.</p>', 'id': 3, 'count': 39, 'forms': <QuerySet [<Form: A - RBT B: Assessment>, <Form: B - RBT B: Assessment>]>}, {'unit_name': 'RBT C: Skill Acquisition', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz C: SKILL ACQUISITION</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>C-01</strong> Identify the essential components of a written skill acquisition plan.</li>\r\n\t<li><strong>C-02</strong> Prepare for the session as required by the skill acquisition plan.</li>\r\n\t<li><strong>C-03</strong> Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules).</li>\r\n\t<li><strong>C-04</strong> Implement discrete-trial teaching procedures.</li>\r\n\t<li><strong>C-05</strong> Implement naturalistic teaching procedures (e.g., incidental teaching).</li>\r\n\t<li><strong>C-06</strong> Implement task analyzed chaining procedures.</li>\r\n\t<li><strong>C-07</strong> Implement discrimination training.</li>\r\n\t<li><strong>C-08</strong> Implement stimulus control transfer procedures.</li>\r\n\t<li><strong>C-09</strong> Implement stimulus fading procedures.</li>\r\n\t<li><strong>C-10</strong> Implement prompt and prompt fading procedures.</li>\r\n\t<li><strong>C-11</strong> Implement generalization and maintenance procedures.</li>\r\n\t<li><strong>C-12</strong> Assist with the training of stakeholders (e.g., family, caregivers, other professionals).</li>\r\n</ul>', 'id': 4, 'count': 28, 'forms': <QuerySet [<Form: A - RBT C: Skill Acquisition>, <Form: B - RBT C: Skill Acquisition>]>}, {'unit_name': 'RBT D: Behavior Change', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>D-01:</strong>&nbsp;Implement interventions based on modification of antecedents such as motivating / establishing operations and discriminative stimuli</li>\r\n\t<li><strong>D-02:</strong>&nbsp;Implement differential reinforcement procedures (e.g., DRA, DRO)</li>\r\n\t<li><strong>D-03:</strong>&nbsp;Implement extinction procedures</li>\r\n\t<li><strong>D-04:</strong>&nbsp;Implement crisis / emergency procedures according to protocol</li>\r\n</ul>', 'id': 5, 'count': 15, 'forms': <QuerySet [<Form: A - RBT D: Behavior Change>]>}, {'unit_name': 'RBT E: Documentation and Reporting', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz E: Documentation &amp; Reporting</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>E-01:</strong> Generate objective session notes by describing what occurred during sessions</li>\r\n</ul>', 'id': 6, 'count': 5, 'forms': <QuerySet [<Form: A - RBT E: Documentation and Reporting>]>}, {'unit_name': 'RBT F: Professional Conduct & Scope of Practice', 'unit_target': 'RBT', 'unit_description': '<p><strong>RBT Competency Quiz D: Behavior Reduction</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>F-01:</strong>&nbsp;Respond appropriately to feedback and maintain or improve performance accordingly.</li>\r\n</ul>', 'id': 7, 'count': 4, 'forms': <QuerySet [<Form: A - RBT F: Professional Conduct & Scope of Practice>]>}]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>}, {'block': <Block Node: quiz-content. Contents: [<TextNode: '\n  <h2> ABA Practice Quiz'>, <IfNode>, <TextNode: '\n'>]>}]
+"GET /quiz/ HTTP/1.1" 200 52902
+"GET /static/bootstrap/bootstrap.min.css HTTP/1.1" 304 0
+"GET /static/css/blog.css HTTP/1.1" 304 0
+"GET /static/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 304 0
+"GET /static/bootstrap/bootstrap.bundle.min.js HTTP/1.1" 304 0
+"GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 304 0
+"GET /static/js/chart.bundle.min.js HTTP/1.1" 304 0
+"GET /static/js/moment.js HTTP/1.1" 304 0
+"GET /static/js/fontawesome-all.min.js HTTP/1.1" 304 0
+"GET /static/fontawesome/js/all.js HTTP/1.1" 304 0
+"GET /static/fontawesome/css/all.css HTTP/1.1" 200 45687
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 200 8192
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 200 1222
+"GET /static/favicon/android-icon-192x192.png HTTP/1.1" 500 59
+"GET /static/favicon/favicon-16x16.png HTTP/1.1" 500 59
+"GET /static/bootstrap/bootstrap.min.css.map HTTP/1.1" 304 0
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:15:36.042125' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:15:36.042125',)
+(0.000) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:15:36.042125' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:15:36.042125',)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+Exception while resolving variable 'post' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [post] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A869A37B70>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A86A25E1D0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A86A373E80>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A86A349748>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'posts': <QuerySet [<Post: Behavior Analysis: an Evolutionary Science>]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>, 'id': 3}, {'block': <Block Node: content. Contents: [<TextNode: '\n\n    <div class="contain'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </ol>\n\n        \n'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </div>\n\n\n\n\n     '>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n\n\n        </div>\n\n      '>, <ForNode: for post in posts, tail_len: 23>, <TextNode: '        \n      </div>\n\n\n '>, <Variable Node: post.published_date>, <TextNode: '" class="icon">\n         '>, <Variable Node: id>, <TextNode: '";\n\n  function resize() {'>, <Variable Node: csrf_token>, <TextNode: "' },\n\n      success : fun">]>}]
+"GET / HTTP/1.1" 200 24380
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:15:36.177967' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:15:36.177967',)
+"GET /static/fontawesome/css/all.css HTTP/1.1" 200 45687
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC; args=()
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."published_date" <= '2018-12-15 23:15:36.177967' ORDER BY "blog_post"."published_date" DESC  LIMIT 1; args=('2018-12-15 23:15:36.177967',)
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+Exception while resolving variable 'post' in template 'blog/post_list.html'.
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'post'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\template\base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [post] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x000001A8699C5950>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x000001A86A34CA90>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x000001A86A353160>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x000001A86A353438>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}}, {}, {'posts': <QuerySet [<Post: Behavior Analysis: an Evolutionary Science>]>, 'pages': <QuerySet [<Pages: Support ABA.Rocks!>, <Pages: What is ABA?>, <Pages: Behavioral Basics>, <Pages: About This Site>, <Pages: Resources>, <Pages: YouTube Channel>]>, 'id': 3}, {'block': <Block Node: content. Contents: [<TextNode: '\n\n    <div class="contain'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </ol>\n\n        \n'>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n        </div>\n\n\n\n\n     '>, <ForNode: for post in posts, tail_len: 3>, <TextNode: '\n\n\n        </div>\n\n      '>, <ForNode: for post in posts, tail_len: 23>, <TextNode: '        \n      </div>\n\n\n '>, <Variable Node: post.published_date>, <TextNode: '" class="icon">\n         '>, <Variable Node: id>, <TextNode: '";\n\n  function resize() {'>, <Variable Node: csrf_token>, <TextNode: "' },\n\n      success : fun">]>}]
+"GET / HTTP/1.1" 200 24380
+"GET /static/bootstrap/bootstrap.min.css.map HTTP/1.1" 304 0
+(0.001) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."slug" = 'behavior-analysis-an-evolutionary-science'  LIMIT 1; args=('behavior-analysis-an-evolutionary-science',)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."id" = 3; args=(3,)
+(0.000) BEGIN; args=None
+(0.001) SELECT "pages_pages"."id", "pages_pages"."author_id", "pages_pages"."title", "pages_pages"."slug", "pages_pages"."text", "pages_pages"."order", "pages_pages"."icon", "pages_pages"."status", "pages_pages"."created_date", "pages_pages"."published_date", "pages_pages"."page_views" FROM "pages_pages" ORDER BY "pages_pages"."order" ASC  LIMIT 21; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post"  LIMIT 21; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post"  LIMIT 21; args=()
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."id" = 3  LIMIT 21; args=(3,)
+(0.000) SELECT "blog_post"."id", "blog_post"."author_id", "blog_post"."title", "blog_post"."text", "blog_post"."pic", "blog_post"."slug", "blog_post"."category_id", "blog_post"."meta", "blog_post"."snippet_size", "blog_post"."is_pinned", "blog_post"."status", "blog_post"."created_date", "blog_post"."published_date", "blog_post"."page_views" FROM "blog_post" WHERE "blog_post"."id" = 3  LIMIT 21; args=(3,)
+Internal Server Error: /blog/behavior-analysis-an-evolutionary-science
+Traceback (most recent call last):
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Harblz\Projects\aba\blog\views.py", line 84, in post_details_by_slug
+    post.save()
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\base.py", line 718, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\base.py", line 748, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\base.py", line 812, in _save_table
+    forced_update)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\base.py", line 861, in _do_update
+    return filtered._update(values) > 0
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\query.py", line 712, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\sql\compiler.py", line 1383, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\sql\compiler.py", line 1052, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\sql\compiler.py", line 1349, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\fields\related.py", line 937, in get_db_prep_save
+    return self.target_field.get_db_prep_save(value, connection=connection)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\fields\__init__.py", line 790, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\fields\__init__.py", line 956, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\Users\Harblz\AppData\Local\Programs\Python\Python37\lib\site-packages\django\db\models\fields\__init__.py", line 965, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'green'
+"GET /blog/behavior-analysis-an-evolutionary-science HTTP/1.1" 500 153374
+"GET /static/bootstrap/bootstrap.min.css.map HTTP/1.1" 304 0
