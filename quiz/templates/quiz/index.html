@@ -94,7 +94,7 @@
 
   {% if units|length > 0 %}
   <div class="tab-content" id="myTabContent">
-
+    <!-- Begin RBT Quiz Block -->
     <div class="tab-pane fade show active" id="RBT" role="tabpanel" aria-labelledby="RBT-tab">
       <div class="container-fluid">
         <br><h3>RBT Practice Quizzes:</h3>
@@ -181,79 +181,173 @@
     <!-- End RBT Quiz Block -->
 
 
-    <div class="tab-pane fade" id="BCaBA" role="tabpanel" aria-labelledby="BCaBA-tab">
+    <!-- Begin BCaBA Quiz Block -->
+    <div class="tab-pane fade show active" id="BCaBA" role="tabpanel" aria-labelledby="BCaBA-tab">
       <div class="container-fluid">
-        <br><h3>BCaBA Practice Quizzes</h3>
+        <br><h3>BCaBA Practice Quizzes:</h3>
         <br>
         <ul class="list-group">
         {% for unit in units %}
           {% if unit.count != 0 and unit.unit_target == "BCaBA" %}
-            <a class="list-group-item" style="cursor: pointer;">
-                <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCaBA-Collapse-{{unit.id}}">
-                  <div class="btn btn-success" onClick="window.location='{{unit.id}}'"><i class="fas fa-play"></i></div>
-                  {{ unit.unit_name }}
-                  <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                  <small style="font-size: 0.5em;" class="text-muted">{{ unit.count }} questions</small>
-                  <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
-                    Click the title to toggle quiz details; click the green play button to start the quiz.
-                  </small>
-                </h4>
-              <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCaBA-Collapse-{{unit.id}}">
-                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
-                  <br>
-                  <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
-                </p>
-                <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
-              </span>
-            </a>
 
-          {% else %}
-            {% if forloop.last %}
-                <br>
-                <p style="font-size: 5.0em">&#x1f629;</p>
-                <h4>No quizzes here just yet...</h4>
-                <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
-            {% endif %}
-          {% endif %}
+            
+            <ul class="nav nav-tabs" id="BCaBA-Form-Tabs" role="tablist">
+              {% for form in unit.forms %}
+                <li class="nav-item">
+                  {% if forloop.first %}
+                  <a class="nav-link active" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
+                  </a>
+                  {% else %}
+                  <a class="nav-link" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
+                  </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+
+
+            <div class="tab-content" id="BCaBA-Form-Tabs-Content">
+              {% for form in unit.forms %}
+                {% if forloop.first %}
+                  <div class="tab-pane fade show active" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}{{ form.form_short_name }}-tab">
+                {% else %}
+                  <div class="tab-pane fade show" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}-{{ form.form_short_name }}-tab">
+                {% endif %}
+                  {% if form.count > 0 %}
+                  <a class="list-group-item" style="border: none;">
+                    <div>
+                      <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCaBA-Collapse-{{form.form_short_name}}-{{unit.id}}">
+                        <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
+                        Form {{ form.form_short_name }} - {{ unit.unit_name }}
+                        <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
+                        <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
+                          Click the title to toggle quiz details; click the green play button to start the quiz.
+                        </small>
+                      </h4>
+                    </div>
+                    <div style="color: #000;" class="collapse" href="{{form.form_short_name}}-{{unit.id}}" id="BCaBA-Collapse-{{form.form_short_name}}-{{unit.id}}">
+                      <p class="list-group-item-text" style="font-size: 1.25em">
+                        {% if form.form_description %} 
+                          {{ form.form_description |safe}} 
+                        {% endif %}
+                        {{ unit.unit_description |safe}} 
+                        <br>
+                        <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
+                      </p>
+                      <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+                    </div>
+                  </a>
+                  {% else %}
+                  <a class="list-group-item" style="border: none;">
+                    <div class="container">
+                      <h3>
+                        Oops - Well, no surprise here - I've been slacking!
+                      </h3>
+
+                      <strong>I haven't made any quizzes for this form, yet. <a style="padding: .75rem 0rem 0.75rem 1.25rem;" href="mailto:alex@behaviorist.tech">Email me </a> and that might help get me back to work and off Netflix.
+                      </strong>
+                      
+                      <p style="padding: .75rem 1.25rem;">In any event, eventually, someday soon, I'll finish working on this quiz. I just gotta make another pot of coffee first, I promise. <i class="fas fa-coffee"></i></p>
+                      <h4><strong>Check back soon, and good luck studying!</strong></h4>
+                    </div>
+                  </a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+
+          {%endif %}
+          &nbsp
         {% endfor %}
         </ul>
       </div>
     </div>
     <!-- End BCaBA Quiz Block -->
-    
-    <div class="tab-pane fade" id="BCBA" role="tabpanel" aria-labelledby="BCBA-tab">
+
+
+    <!-- Begin BCBA Quiz Block -->
+    <div class="tab-pane fade show active" id="BCBA" role="tabpanel" aria-labelledby="BCBA-tab">
       <div class="container-fluid">
-        <br><h3>BCBA Practice Quizzes</h3>
+        <br><h3>BCBA Practice Quizzes:</h3>
         <br>
         <ul class="list-group">
         {% for unit in units %}
           {% if unit.count != 0 and unit.unit_target == "BCBA" %}
-            <a class="list-group-item" href="{{unit.id}}" style="cursor: pointer;">
-              <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCBA-Collapse-{{unit.id}}">
-                <div class="btn btn-success" onClick="window.location='{{unit.id}}'"><i class="fas fa-play"></i></div>
-                {{ unit.unit_name }}
-                <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                <small style="font-size: 0.5em;" class="text-muted">{{ unit.count }} questions</small>
-                <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
-                  Click the title to toggle quiz details; click the green play button to start the quiz.
-                </small>
-              </h4>
-              <span style="color: #000;" class="collapse" href="{{unit.id}}" id="BCBA-Collapse-{{unit.id}}">
-                <p class="list-group-item-text" style="font-size: 1.25em"> {{ unit.unit_description |safe}} 
-                  <br>
-                  <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
-                </p>
-                <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
-              </span>
-            </a>
-          {% else %}
-            {% if forloop.last %}
-                <br>
-                <p style="font-size: 5.0em">&#x1f629;</p>
-                <h4>No quizzes here just yet...</h4>
-                <p style="padding: 5px; margin-top: 15px;">I promise I'm working on it - takes time to make these quizzes, and more time to research them to make sure they're OK. If you'd like, <b>leave a comment</b> below to urge me along. Sometimes a little extra motivation really helps</p>.
-            {% endif %}
-          {% endif %}
+
+            
+            <ul class="nav nav-tabs" id="BCBA-Form-Tabs" role="tablist">
+              {% for form in unit.forms %}
+                <li class="nav-item">
+                  {% if forloop.first %}
+                  <a class="nav-link active" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
+                  </a>
+                  {% else %}
+                  <a class="nav-link" id="{{unit.id}}-{{form.form_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ form.form_short_name }}" role="tab" aria-controls="home" aria-selected="true">
+                    Form {{ form.form_short_name }}
+                  </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+
+
+            <div class="tab-content" id="BCBA-Form-Tabs-Content">
+              {% for form in unit.forms %}
+                {% if forloop.first %}
+                  <div class="tab-pane fade show active" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}{{ form.form_short_name }}-tab">
+                {% else %}
+                  <div class="tab-pane fade show" id="{{unit.id}}-{{ form.form_short_name }}" role="tabpanel" aria-labelledby="{{unit.id}}-{{ form.form_short_name }}-tab">
+                {% endif %}
+                  {% if form.count > 0 %}
+                  <a class="list-group-item" style="border: none;">
+                    <div>
+                      <h4 data-toggle="collapse" class="text-primary font-weight-bold" style="cursor: pointer;" href="#BCBA-Collapse-{{form.form_short_name}}-{{unit.id}}">
+                        <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
+                        Form {{ form.form_short_name }} - {{ unit.unit_name }}
+                        <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
+                        <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
+                          Click the title to toggle quiz details; click the green play button to start the quiz.
+                        </small>
+                      </h4>
+                    </div>
+                    <div style="color: #000;" class="collapse" href="{{form.form_short_name}}-{{unit.id}}" id="BCBA-Collapse-{{form.form_short_name}}-{{unit.id}}">
+                      <p class="list-group-item-text" style="font-size: 1.25em">
+                        {% if form.form_description %} 
+                          {{ form.form_description |safe}} 
+                        {% endif %}
+                        {{ unit.unit_description |safe}} 
+                        <br>
+                        <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
+                      </p>
+                      <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+                    </div>
+                  </a>
+                  {% else %}
+                  <a class="list-group-item" style="border: none;">
+                    <div class="container">
+                      <h3>
+                        Oops - Well, no surprise here - I've been slacking!
+                      </h3>
+
+                      <strong>I haven't made any quizzes for this form, yet. <a style="padding: .75rem 0rem 0.75rem 1.25rem;" href="mailto:alex@behaviorist.tech">Email me </a> and that might help get me back to work and off Netflix.
+                      </strong>
+                      
+                      <p style="padding: .75rem 1.25rem;">In any event, eventually, someday soon, I'll finish working on this quiz. I just gotta make another pot of coffee first, I promise. <i class="fas fa-coffee"></i></p>
+                      <h4><strong>Check back soon, and good luck studying!</strong></h4>
+                    </div>
+                  </a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+
+          {%endif %}
+          &nbsp
         {% endfor %}
         </ul>
       </div>
