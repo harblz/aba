@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+
+{% block quiz-content %}
+
+
+
+  <!-- Displays the Quiz Results at the end !-->
+  <div id="results"></div>
+
+
+  <div class="container" id="flashcard_container"> 
+
+    <div class="progress">
+      <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <div id="flashcard">
+    </div>
+
+    <br />
+  </div>
+
+  <br /><br />
+  <div class="container" style="text-align: center;">
+    <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
+      <i class="far fa-comment"></i>
+      Toggle Comments
+    </button>
+  </div>
+
+  
+
+  <!-- Disqus Code !-->
+  <div id="disqus_thread" class="collapse col-12"></div>
+
+
+  <template id="flashcard_template">
+    <div class="card" style="width: 100%;margin: 0 auto 0 auto; padding: 5%;">
+      <div class="card-body">
+        <h3 class="card-title">Flashcard title</h3>
+        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best?</h6>
+
+        <br />
+
+        <div class="flashcard_options_container">
+
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="flashcard_options_template">
+
+    <div class="form-check flashcard_template_option" style="cursor: pointer;">
+
+      <label style="cursor: pointer;">
+        <table style="table-layout: fixed;" class="table table-hover" >
+          <tr style="display:table-row;border-radius: 15px;cursor: pointer;">
+            <td style="vertical-align: top;width:15px;" onClick=gradeMe()>
+              <input style="margin-left: 5px; margin-right: 8px;" class="form-check-input flashcard_input" type="radio" name="choice">
+            </td>
+            <td>
+              <span class="form-check-label flashcard_input_label" style="font-weight: normal"></span>
+            </td>
+          </tr>
+        </table>
+      </label>
+
+    </div>
+
+  </template>
+
+
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+      this.page.url = '{{ request.build_absolute_uri }}{{ object.get_absolute_url }}';
+      this.page.identifier = 'fluency_{{ unit_id }}';
+      this.page.title = 'Timed Fluency {{ unit_name }} Practice Flashcards';
+  };
+
+  function highlightAnswers() {
+    $('#table-choices tr').on('click', function() {
+        $('#table-choices tr').each(function(){
+            $(this).css('backgroundColor','white');
+        })
+        $(this).css('backgroundColor','#17a2b8');
+    }); 
+  }
+
+  highlightAnswers();
+
+  
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-aba-rocks.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <div id="error_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="flashcard Hint" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title alert alert-danger" style='width: 100%;'><b>Oops!</b> That answer was not correct</h4>
+        </div>
+        <div class="modal-body" style="font-size: 14px;">
+          <div id="error_modal_message">
+          </div>
+        </body>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
+      </div>
+    </div>
+  </div>
+
+
+
+<script>
+
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.onbeforeunload = function ()
+  {
+     return "";
+  };
+  
+  var current_score         = [];
+  var flashcards_correct    = 0;
+  var flashcards_incorrect  = 0;
+  var max_flashcards        = Number("{{total_flashcards}}");
+
+  var flashcards          = `{{ flashcards|safe }}`;
+  flashcards = JSON.parse(flashcards)
+
+  console.log("flashcards: ", flashcards)
+
+  var unit_id = "{{unit_id}}";
+  var form_id = "{{form_id}}";
+
+  function gradeMe() {
+    var correct = event.target.getAttribute("correct");
+    if ( correct == 'true' ) {
+      console.log('true');
+      flashcards_correct += 1;
+    } else {
+      flashcards_incorrect += 1;
+    }
+    calculateScore();
+    flashcards.shift();
+
+    console.log(flashcards.length)
+    if ( flashcards.length == 0 ) {
+      displayScore();
+    } else {
+      next_flashcard();
+    }
+  }
+
+  console.log("Unit ID: {{ unit_id }} ", " Unit Name: {{ quiz_name }}");
+
+  console.log('Max flashcards: ', max_flashcards)
+
+  function calculateScore() {
+
+    var score = flashcards_correct/(flashcards_correct+flashcards_incorrect);
+
+    $('#progress_bar_correct').css('width', (flashcards_correct/max_flashcards*100)+'%').attr('aria-valuenow', (score.correct/max_flashcards*100));
+    $('#progress_bar_incorrect').css('width', (flashcards_incorrect/max_flashcards*100)+'%').attr('aria-valuenow', (score.incorrect/max_flashcards*100));
+
+    return score;
+  }
+
+  function displayScore() {
+    $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
+    $('#flashcard').css('display', 'none');
+
+    var final_score = flashcards_correct/(flashcards_incorrect+flashcards_correct);
+    if ( final_score >= 0.8 ) {
+      window.scrollTo(0,0);
+      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+    } else {
+      window.scrollTo(0,0);
+      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+    }
+    myChart.data.datasets[0].data[1] = flashcards_correct;
+    myChart.data.datasets[0].data[0] = flashcards_incorrect;
+    myChart.update();
+  }
+
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.onbeforeunload = function ()
+  {
+     //return "";
+  };
+
+  window.onload = function() {
+
+    next_flashcard();
+
+  }
+
+  function next_flashcard() {
+    document.querySelector("#flashcard").innerHTML = '';
+    var flashcard_template  = document.querySelector("#flashcard_template")
+
+    var flashcard = document.querySelector("#flashcard")
+
+    var clone = document.importNode(flashcard_template.content, true)
+
+    choices = flashcards[0]["fields"]["flashcard_choices"];
+    choices = choices.substr(2,choices.length);
+    choices = choices.substr(0,choices.length-2);
+
+    choices = choices.split("), (");
+
+    var option = new Object();
+    var options = [];
+
+    for (i = 0; i < choices.length; i++) {
+      console.log(choices[i]);
+      option.id               = parseInt(choices[i].substr(0, choices[i].indexOf("'")-2))
+      option.content          = choices[i].substr(choices[i].indexOf("'")+1, choices[i].lastIndexOf(",")-5)
+      option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(",")+2, choices[i].length).toLowerCase())
+
+      var options_template = document.importNode(flashcard_options_template.content, true)
+
+      options_template.querySelector(".flashcard_input_label").innerHTML = option.content
+      options_template.querySelector(".flashcard_input").setAttribute('correct', option.is_correct);
+
+
+      clone.querySelector('.flashcard_options_container').appendChild(options_template)
+
+
+      options.push(option);
+    }
+
+    console.log(flashcards[0]["fields"]);
+    clone.querySelector(".card-title").innerHTML = flashcards[0]["fields"]["flashcard_text"]
+
+    flashcard.appendChild(clone)
+  }
+
+  // Score Pie Chart (generates a visualization of their score for the user)
+  var dataset = [];
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: ["Incorrect", "Correct"],
+          datasets: [{
+              label: 'Score Report',
+              data: dataset,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(75, 192, 192, 1)',
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(75, 192, 192, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+</script>
+
+{% endblock %}

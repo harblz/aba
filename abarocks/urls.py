@@ -19,20 +19,20 @@ from django.contrib import admin
 
 from django.views.generic import RedirectView
 
-from .views import redirect_root, redirect_research, redirect_coffee, redirect_coffee_confirm
+from .views import redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    #url(r'^',  include('blog.urls')),
-    #path('', include('blog.urls')),
     url(r'^research/', redirect_research),
     url(r'^coffee/', redirect_coffee),
     url(r'^blog_coffee_checkout/', redirect_coffee_confirm),
+    url(r'^study/', redirect_study),
     url(r'^$', redirect_root),
     url(r'^blog/', include('blog.urls')),
     url(r'^pages/', include('pages.urls')),
     url(r'^quiz/', include('quiz.urls')),
     url(r'^polls/', include('polls.urls')),
+    url(r'^fluency/', include('fluency.urls')),
 ]
 
 admin.site.site_title  = 'ABA.rocks Administration'
