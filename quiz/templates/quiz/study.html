@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block quiz-content %}
+  <h2> ABA Practice Materials</h2>
+  <br />
+  <p>
+    This site is dedicated to providing free, useful practice quizzes for folks looking forward to taking the big ABA exam(s)! Whether you're sitting for the RBT exam, trying to brush up on terminology and basic principles for supervision, or you're hunkering down and preparing for the big BCBA test, I'm doing my best to gather some useful practice materials for ya here!<br /><br />
+
+    Check back regularly as I try to add a new set of quiz questions every Sunday!<br /><br />
+  </p>
+
+  <div class="alert alert-info mb-5" role="alert">
+    <h4 class="alert-heading font-weight-bold"><span class="badge badge-secondary">New feature available.</span> INTRODUCING: SAFEMEDS!</h4>
+    <p><a href="/fluency"><b>S.A.F.M.E.D.S.</b></a> -- Say all fast, minute every day, shuffled! Untimed and timed (fluency) versions available. Be patient with me - I will build vocabulary decks as soon as possible. Please email me if you find any bugs!<br />
+    <a href="/fluency">Check em' out!</a> Good luck, and happy studying!</p>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+
+        <div class="card" style="width: 75%;">
+          <a href="/quiz"><img class="card-img-top" src="/static/img/studying_quiz.png" alt="Card image cap"></a>
+          <div class="card-body">
+            <h5 class="card-title">Practice Quizzes</h5>
+            <p class="card-text">Quizzes that I've aligned with the BACB's task lists as well as ethics, verbal behavior, and other important topics. Multiple forms available so that you can practice new questions once you master the first set!</p>
+            <a href="/quiz" class="btn btn-primary">Go to <b>Quizzes</b></a>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm">
+
+        <div class="card" style="width: 75%;">
+          <a href="/fluency"><img class="card-img-top" src="/static/img/study_flashcards.png" alt="Card image cap"></a>
+          <div class="card-body">
+            <h5 class="card-title">SAFMEDS Decks</h5>
+            <p class="card-text">Flashcards for building vocabulary - timed and untimed versions available. Practice the untimed versions until you're ready, then try to complete the deck in the time requirement!</p>
+            <a href="/fluency" class="btn btn-primary">Go to <b>S.A.F.M.E.D.S.</b></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br /><br />
+
+  <div class="alert alert-success mb-5" role="alert">
+    <h4 class="alert-heading font-weight-bold"><span class="badge badge-secondary">New</span> Hey there!</h4>
+    <p>I added 50 quiz questions over the last two weeks, and plan on adding another 150 over winter break. That's a lot of new material for y'all to prep with! While you're busy studying (or doing whatever), maybe you need something to hold your coffee or tea? </p>
+    <p>
+      <b><a href="https://teespring.com/aba-rocks-coffee-mug?ik8m2#pid=658&cid=102908&sid=front">Support ABA.rocks with this classy coffee mug!</a></b> While you're at it, keep your toesies warm with <b><a href="https://teespring.com/aba-rocks-my-socks?tsmac=store&tsmic=abarocks#pid=636&cid=102622&sid=front">these stylish socks!</a></b> Boldly orange, you will surely get lots of attention at that next office party.</p>
+    </p>
+    <hr>
+    <p class="mb-0">THANK YOU FOR YOUR SUPPORT! 😃 Anyways, good luck and happy studying! &nbsp&nbsp <i class="fas fa-pencil-alt"></i> &nbsp&nbsp  <i class="fas fa-coffee"></i> </p>
+  </div>
+
+  <br><br>
+
+
+
+  <div>
+    <h2> Structure & Content of the RBT Exam</h2>
+    <p style="margin-left: 10px;">A lot of our users are preparing for the RBT exam. Are you one of them, and do you wanna know what it might be like?</p>
+    <p style="margin-left: 10px;">The RBT exam is 2 hours long, and there will be 75 total questions across 6 content areas:"</p>
+    <table style="width: 95%; margin: 1.5%;" class="table table-striped table-hover table-sm">
+    <caption><small><b>Structure & Content of the RBT Exam</b>. Source: <a class="font-weight-bold" href="https://www.bacb.com/rbt/rbt-exam/">BACB Website</a>. Last Updated 7.15.18<br>** Please note, your exam may include "Trial questions" which are questions the BACB is evaluating for future tests - missing these questions won't count against you. They are not marked as trial questions on the actual exam.</small></caption>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Content Area</th>
+        <th scope="col"># of Questions on the BACB RBT Exam</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">A. Measurement</th>
+        <td>10</td>
+      </tr>
+
+      <tr>
+        <th scope="row">B. Assessment</th>
+        <td>8</td>
+      </tr>
+
+      <tr>
+        <th scope="row">C. Skill Acquisition</th>
+        <td>24</td>
+      </tr>
+
+      <tr>
+        <th scope="row">D. Behavior Reduction</th>
+        <td>12</td>
+      </tr>
+
+      <tr>
+        <th scope="row">E. Documentation and Reporting</th>
+        <td>10</td>
+      </tr>
+
+      <tr>
+        <th scope="row">F. Professional Conduct and Scope of Practice</th>
+        <td>11</td>
+      </tr>
+
+      <tr>
+        <th class="font-weight-bold" scope="row">Total Number of Questions</th>
+        <td class="font-weight-bold">75 <small>(+10 trial** questions)</small></td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+
+  <div class="container" style="text-align: center;">
+    <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
+      <i class="far fa-comment"></i>
+      Toggle Comments
+    </button>
+  </div>
+
+  <br /><br />
+
+  <!-- Disqus Code !-->
+  <div id="disqus_thread" class="collapse show col-12"></div>
+
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  
+  var disqus_config = function () {
+      this.page.url = '{{ request.build_absolute_uri }}{{ object.get_absolute_url }}';
+      this.page.identifier = 'study';
+      this.page.title = 'Study Index';
+  };
+            
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://https-aba-rocks.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+
+{% endblock %}
+

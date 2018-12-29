@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='difficulty',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='quiz.Difficulty'),
+            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='quiz.Difficulty'),
             preserve_default=False,
         ),
     ]
