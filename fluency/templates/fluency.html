@@ -5,7 +5,9 @@
 
 
   <!-- Displays the Quiz Results at the end !-->
-  <div id="results"></div>
+  <span class="confetti_wrapper">
+    <div id="results"></div>
+  </span>
 
 
   <div class="container" id="flashcard_container"> 
@@ -130,6 +132,25 @@
 
 <script>
 
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.onbeforeunload = function ()
   {
@@ -190,6 +211,9 @@
     if ( final_score >= 0.8 ) {
       window.scrollTo(0,0);
       $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+      for (var i = 0; i < 250; i++) {
+        create(i);
+      }
     } else {
       window.scrollTo(0,0);
       $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
@@ -225,6 +249,8 @@
 
     choices = choices.split("), (");
 
+    choices = shuffle(choices);
+
     var option = new Object();
     var options = [];
 
@@ -251,7 +277,6 @@
 
     flashcard.appendChild(clone)
   }
-
   // Score Pie Chart (generates a visualization of their score for the user)
   var dataset = [];
   var ctx = document.getElementById("myChart");
@@ -283,6 +308,51 @@
           }
       }
   });
+
+  function create(i) {
+    var width = Math.random() * 8;
+    var height = width * 0.4;
+    var colourIdx = Math.ceil(Math.random() * 3);
+    var colour = "red";
+    switch(colourIdx) {
+      case 1:
+        colour = "yellow";
+        break;
+      case 2:
+        colour = "blue";
+        break;
+      default:
+        colour = "red";
+    }
+    $('<div class="confetti-'+i+' '+colour+'"></div>').css({
+      "width" : width+"px",
+      "height" : height+"px",
+      "top" : -Math.random()*20+"%",
+      "left" : Math.random()*100+"%",
+      "opacity" : Math.random()+0.5,
+      "transform" : "rotate("+Math.random()*360+"deg)"
+    }).appendTo('.confetti_wrapper');  
+    
+    drop(i);
+  }
+
+  function drop(x) {
+    $('.confetti-'+x).animate({
+      top: "100%",
+      left: "+="+Math.random()*15+"%"
+    }, Math.random()*3000 + 3000, function() {
+      reset(x);
+    });
+  }
+
+  function reset(x) {
+    $('.confetti-'+x).animate({
+      "top" : -Math.random()*20+"%",
+      "left" : "-="+Math.random()*15+"%"
+    }, 0, function() {
+      drop(x);             
+    });
+  }
 </script>
 
 {% endblock %}
