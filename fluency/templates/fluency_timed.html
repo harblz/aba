@@ -151,6 +151,25 @@
      return "";
   };
   
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   // visual timer
   var stop = false;
   var deck_timed_duration   = `{{ deck_timed_duration }}`; /* how long the timer will run (seconds) */
@@ -273,6 +292,8 @@
     choices = choices.substr(0,choices.length-2);
 
     choices = choices.split("), (");
+
+    choices = shuffle(choices);
 
     var option = new Object();
     var options = [];

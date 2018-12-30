@@ -288,6 +288,25 @@
      return "";
   };
 
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   function grade_question() {
 
       var choice_id  = $('input[name=choice]:checked').attr("id");
@@ -326,6 +345,7 @@
               localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
               calculateScore();
               $('#choices').html('');
+              response.next_question_choices = shuffle(response.next_question_choices);
               for (var i = 0; i < response.next_question_choices.length; i++) {
                 $('#choices').append(`
                     <label class="quiz-choice-labels">
