@@ -77,7 +77,7 @@
       <label style="cursor: pointer;">
         <table style="table-layout: fixed;" class="table table-hover" >
           <tr style="display:table-row;border-radius: 15px;cursor: pointer;">
-            <td style="vertical-align: top;width:15px;" onClick=gradeMe()>
+            <td style="vertical-align: top;width:15px;" onClick=gradeMe(event)>
               <input style="margin-left: 5px; margin-right: 8px;" class="form-check-input flashcard_input" type="radio" name="choice">
             </td>
             <td>
@@ -170,7 +170,7 @@
   var unit_id = "{{unit_id}}";
   var deck_id = "{{deck_id}}";
 
-  function gradeMe() {
+  function gradeMe(event) {
     var correct = event.target.getAttribute("correct");
     if ( correct == 'true' ) {
       console.log('true');
