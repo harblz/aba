@@ -42,12 +42,17 @@
         
         <div class="col-12 alert-oot">
           <br>
-          <div class="alert alert-warning flashcard-oot" style="display:none;">You ran out of time - do you want to try again?</div>
+          <div class="alert alert-warning flashcard-oot" style="display:none;">You ran out of time - do you want to <a href=".">try again?</a></div>
         </div>
 
         <div class="col-12 score_graph_container">
           <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
             <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+          <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
+            <a href="." class="btn btn-info">Restart Quiz</a>
+            <a href="/fluency" class="btn btn-success">Back to SAFMEDS Menu</a>
+            <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
           </div>
         </div>
 
@@ -81,10 +86,16 @@
     <div class="card" style="width: 100%;margin: 0 auto 0 auto; padding: 5%;">
       <div class="card-body">
         <h3 class="card-title">Flashcard title</h3>
-        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best?</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best? <a href="#" onClick="showHint()">Want a hint?</a></h6>
 
+        <div id="flashcard_positive_feedback" class="flashcard_feedback alert alert-success" style="display: none;">
+          Nice job! You got it right.
+        </div>
 
-        <div id="flashcard_prompt" class="flashcard_prompt alert alert-warning" style="display: none;"> Test
+        <div id="flashcard_negative_feedback" class="flashcard_feedback alert alert-warning" style="display: none;">
+        </div>
+
+        <div id="flashcard_prompt" class="flashcard_prompt alert alert-warning" style="display: none;">
         </div>
 
         <br />
@@ -185,16 +196,16 @@
   var deck_timed_duration   = `{{ deck_timed_duration }}`; /* how long the timer will run (seconds) */
   var elapsed_time = 0;
 
-  var current_score         = [];
-  var flashcards_correct    = 0;
-  var flashcards_incorrect  = 0;
-  var max_flashcards        = Number("{{total_flashcards}}");
+  var current_score           = [];
+  var flashcards_correct      = 0;
+  var flashcards_incorrect    = 0;
+  var show_negative_feedback  = false;
+  var max_flashcards          = Number("{{total_flashcards}}");
 
   var flashcards            = `{{ flashcards|safe }}`;
   flashcards = JSON.parse(flashcards)
 
 
-  console.log("flashcards: ", flashcards)
 
   var unit_id = "{{unit_id}}";
   var deck_id = "{{deck_id}}";
@@ -203,11 +214,10 @@
   function gradeMe(event) {
     var correct = event.target.getAttribute("correct");
     if ( correct == 'true' ) {
-      console.log('true');
       flashcards_correct += 1;
     } else {
-      document.getElementById("flashcard_prompt").style.display = 'block';
       flashcards_incorrect += 1;
+      show_negative_feedback = true;
     }
     calculateScore();
     flashcards.shift();
@@ -219,10 +229,6 @@
       next_flashcard();
     }
   }
-
-  console.log("Unit ID: {{ unit_id }} ", " Unit Name: {{ quiz_name }}");
-
-  console.log('Max flashcards: ', max_flashcards)
 
   function calculateScore() {
 
@@ -236,18 +242,19 @@
 
   function displayScore() {
     $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
+    $('#score_graph_options').fadeIn().removeClass('fade').css('display', 'block');
     $('#flashcard').css('display', 'none');
 
     var final_score = flashcards_correct/(flashcards_incorrect+flashcards_correct);
     if ( final_score >= 0.8 ) {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds!</div>');
+      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
       for (var i = 0; i < 250; i++) {
         create(i);
       }
     } else {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds!</div>');
+      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
     }
     myChart.data.datasets[0].data[1] = flashcards_correct;
     myChart.data.datasets[0].data[0] = flashcards_incorrect;
@@ -283,7 +290,6 @@
             clearInterval(interval);
             return;
           }
-            console.log('qq');
           $('.circle_animation').css('stroke-dashoffset', initialOffset-((elapsed_time+1)*(initialOffset/deck_timed_duration)));
           elapsed_time++;  
       }, 1000);
@@ -310,7 +316,6 @@
     var options = [];
 
     for (i = 0; i < choices.length; i++) {
-      console.log(choices[i]);
       option.id               = parseInt(choices[i].substr(0, choices[i].indexOf("'")-2))
       option.content          = choices[i].substr(choices[i].indexOf("'")+1, choices[i].lastIndexOf(",")-5)
       option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(",")+2, choices[i].length).toLowerCase())
@@ -327,10 +332,20 @@
       options.push(option);
     }
 
-    console.log(flashcards[0]["fields"]);
     clone.querySelector(".card-title").innerHTML = flashcards[0]["fields"]["flashcard_text"]
 
+    var hint = flashcards[0]["fields"]["flashcard_hint"];
+    clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
+    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + hint.substr(3,hint.length) + "</p>";
+
     flashcard.appendChild(clone)
+    if ( show_negative_feedback == true ) {
+      document.getElementById('flashcard_negative_feedback').style.display = 'block';
+    }
+  }
+
+  function showHint() {
+    document.querySelector(".flashcard_prompt").style.display = "block";
   }
 
   // Score Pie Chart (generates a visualization of their score for the user)
