@@ -3,25 +3,49 @@
 {% block quiz-content %}
 
 
-
-  <!-- Displays the Quiz Results at the end !-->
   <span class="confetti_wrapper">
+    <!-- Displays the Quiz Results at the end !-->
     <div id="results"></div>
-  </span> 
 
+    <div class="container">
 
-  <div class="container" id="flashcard_container"> 
-
-    <div class="progress">
-      <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-      <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
-    <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
-      <canvas id="myChart" width="400" height="400"></canvas>
-    </div>
+  <div class="container-fluid" id="flashcard_container"> 
 
-    <div id="flashcard">
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="col-12 progress_bar_container">
+          <div class="progress">
+            <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>    
+
+        
+        <div class="col-12 alert-oot">
+          <br>
+          <div class="alert alert-warning flashcard-oot" style="display:none;">You ran out of time - do you want to <a href=".">try again?</a></div>
+        </div>
+
+        <div class="col-12 score_graph_container">
+          <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+          <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
+            <a href="." class="btn btn-info">Restart Quiz</a>
+            <a href="/fluency" class="btn btn-success">Back to SAFMEDS Menu</a>
+            <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
+          </div>
+        </div>
+
+        <div class="col-12 flashcard_wrapper">
+          <div id="flashcard" class="flashcard">
+          </div>
+        </div>
+      </div>
     </div>
 
     <br />
@@ -34,6 +58,8 @@
       Toggle Comments
     </button>
   </div>
+  </span>
+
 
   
 
@@ -45,13 +71,25 @@
     <div class="card" style="width: 100%;margin: 0 auto 0 auto; padding: 5%;">
       <div class="card-body">
         <h3 class="card-title">Flashcard title</h3>
-        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best?</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best? <a href="#" onClick="showHint()">Want a hint?</a></h6>
+
+        <div id="flashcard_positive_feedback" class="flashcard_feedback alert alert-success" style="display: none;">
+          Nice job! You got it right.
+        </div>
+
+        <div id="flashcard_negative_feedback" class="flashcard_feedback alert alert-warning" style="display: none;">
+        </div>
+
+        <div id="flashcard_prompt" class="flashcard_prompt alert alert-warning" style="display: none;">
+        </div>
 
         <br />
+
 
         <div class="flashcard_options_container">
 
         </div>
+
       </div>
     </div>
   </template>
@@ -85,7 +123,7 @@
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
   var disqus_config = function () {
       this.page.url = '{{ request.build_absolute_uri }}{{ object.get_absolute_url }}';
-      this.page.identifier = 'fluency_{{ unit_id }}';
+      this.page.identifier = 'fluency_timed_{{ unit_id }}';
       this.page.title = 'Timed Fluency {{ unit_name }} Practice Flashcards';
   };
 
@@ -100,7 +138,6 @@
 
   highlightAnswers();
 
-  
   (function() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
     s.src = 'https://https-aba-rocks.disqus.com/embed.js';
@@ -110,28 +147,16 @@
   </script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-  <div id="error_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="flashcard Hint" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title alert alert-danger" style='width: 100%;'><b>Oops!</b> That answer was not correct</h4>
-        </div>
-        <div class="modal-body" style="font-size: 14px;">
-          <div id="error_modal_message">
-          </div>
-        </body>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
-      </div>
-    </div>
-  </div>
-
 
 
 <script>
 
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.onbeforeunload = function ()
+  {
+     return "";
+  };
+  
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -151,47 +176,44 @@
     return array;
   }
 
-  /* Warn user before reloading the quiz (and losing all progress!) */
-  window.onbeforeunload = function ()
-  {
-     return "";
-  };
-  
-  var current_score         = [];
-  var flashcards_correct    = 0;
-  var flashcards_incorrect  = 0;
-  var max_flashcards        = Number("{{total_flashcards}}");
+  // visual timer
+  var stop = false;
+  var deck_timed_duration   = `{{ deck_timed_duration }}`; /* how long the timer will run (seconds) */
+  var elapsed_time = 0;
 
-  var flashcards          = `{{ flashcards|safe }}`;
+  var current_score           = [];
+  var flashcards_correct      = 0;
+  var flashcards_incorrect    = 0;
+  var show_negative_feedback  = false;
+  var max_flashcards          = Number("{{total_flashcards}}");
+
+  var flashcards            = `{{ flashcards|safe }}`;
   flashcards = JSON.parse(flashcards)
 
-  console.log("flashcards: ", flashcards)
+
 
   var unit_id = "{{unit_id}}";
-  var form_id = "{{form_id}}";
+  var deck_id = "{{deck_id}}";
+
 
   function gradeMe(event) {
     var correct = event.target.getAttribute("correct");
     if ( correct == 'true' ) {
-      console.log('true');
       flashcards_correct += 1;
     } else {
       flashcards_incorrect += 1;
+      show_negative_feedback = true;
     }
     calculateScore();
     flashcards.shift();
 
-    console.log(flashcards.length)
     if ( flashcards.length == 0 ) {
       displayScore();
+      stop = true;
     } else {
       next_flashcard();
     }
   }
-
-  console.log("Unit ID: {{ unit_id }} ", " Unit Name: {{ quiz_name }}");
-
-  console.log('Max flashcards: ', max_flashcards)
 
   function calculateScore() {
 
@@ -205,18 +227,19 @@
 
   function displayScore() {
     $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
+    $('#score_graph_options').fadeIn().removeClass('fade').css('display', 'block');
     $('#flashcard').css('display', 'none');
 
     var final_score = flashcards_correct/(flashcards_incorrect+flashcards_correct);
     if ( final_score >= 0.8 ) {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b> .</div>');
       for (var i = 0; i < 250; i++) {
         create(i);
       }
     } else {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b>.</div>');
     }
     myChart.data.datasets[0].data[1] = flashcards_correct;
     myChart.data.datasets[0].data[0] = flashcards_incorrect;
@@ -255,7 +278,6 @@
     var options = [];
 
     for (i = 0; i < choices.length; i++) {
-      console.log(choices[i]);
       option.id               = parseInt(choices[i].substr(0, choices[i].indexOf("'")-2))
       option.content          = choices[i].substr(choices[i].indexOf("'")+1, choices[i].lastIndexOf(",")-5)
       option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(",")+2, choices[i].length).toLowerCase())
@@ -272,11 +294,22 @@
       options.push(option);
     }
 
-    console.log(flashcards[0]["fields"]);
     clone.querySelector(".card-title").innerHTML = flashcards[0]["fields"]["flashcard_text"]
 
+    var hint = flashcards[0]["fields"]["flashcard_hint"];
+    clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
+    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + hint.substr(3,hint.length) + "</p>";
+
     flashcard.appendChild(clone)
+    if ( show_negative_feedback == true ) {
+      document.getElementById('flashcard_negative_feedback').style.display = 'block';
+    }
   }
+
+  function showHint() {
+    document.querySelector(".flashcard_prompt").style.display = "block";
+  }
+
   // Score Pie Chart (generates a visualization of their score for the user)
   var dataset = [];
   var ctx = document.getElementById("myChart");

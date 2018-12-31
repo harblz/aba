@@ -23,10 +23,19 @@
         {{ question.question_text|safe }}
       </h6>
     </div>
+
     <br>
+
     <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
       <canvas id="myChart" width="400" height="400"></canvas>
     </div>
+
+    <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
+      <a href="." class="btn btn-info">Restart Quiz</a>
+      <a href="/fluency" class="btn btn-success">Back to SAFMEDS Menu</a>
+      <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
+    </div>
+
     <div id="choice_menu" class="panel panel-primary">
       <div class="panel-heading">
         <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
@@ -229,6 +238,7 @@
   function displayScore() {
     var score = JSON.parse(localStorage.getItem("{{unit_id}}"));
     $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
+    $('#score_graph_options').fadeIn().removeClass('fade').css('display', 'block');
     var incorrect_count = 0;
     var correct_count   = 0;
     for (i = 0; i < score.length; i++ ) {
