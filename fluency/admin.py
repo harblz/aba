@@ -20,9 +20,22 @@ class UnitInline(admin.TabularInline):
     model = Unit
 admin.site.register(Unit)
 
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-admin.site.register(Choice)
+
+class ChoiceAdmin(admin.ModelAdmin):
+    list_display = ('id', 'escaped_choice_text', 'votes', 'is_correct', 'flashcard_id')
+    list_per_page = 100000
+    list_filter = ('flashcard_id',)
+
+    def escaped_choice_text(self, obj):
+        return format_html(obj.choice_text)
+    
+    escaped_choice_text.short_description = 'Flashcard text'
+
+    search_fields = [  'choice_text' ]
+
+admin.site.register(Choice, ChoiceAdmin)
+
+
 
 class DeckAdmin(admin.ModelAdmin):
     list_display = ['deck_name', 'deck_short_name', 'deck_unit_id', 'deck_description']
