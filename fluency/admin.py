@@ -20,6 +20,9 @@ class UnitInline(admin.TabularInline):
     model = Unit
 admin.site.register(Unit)
 
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+admin.site.register(Choice)
 
 class DeckAdmin(admin.ModelAdmin):
     list_display = ['deck_name', 'deck_short_name', 'deck_unit_id', 'deck_description']

@@ -83,6 +83,7 @@
 
   {% if units|length > 0 %}
   <div class="tab-content" id="myTabContent">
+
     <!-- Begin RBT Quiz Block -->
     <div class="tab-pane fade show active" id="RBT" role="tabpanel" aria-labelledby="RBT-tab">
       <div class="container-fluid">
@@ -98,11 +99,11 @@
                 <li class="nav-item">
                   {% if forloop.first %}
                   <a class="nav-link active" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% else %}
                   <a class="nav-link" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% endif %}
                 </li>
@@ -191,11 +192,11 @@
                 <li class="nav-item">
                   {% if forloop.first %}
                   <a class="nav-link active" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% else %}
                   <a class="nav-link" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% endif %}
                 </li>
@@ -279,11 +280,11 @@
                 <li class="nav-item">
                   {% if forloop.first %}
                   <a class="nav-link active" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% else %}
                   <a class="nav-link" id="{{unit.id}}-{{deck.deck_short_name}}-tab" data-toggle="tab" href="#{{unit.id}}-{{ deck.deck_short_name }}" role="tab" aria-controls="home" aria-selected="true">
-                    deck {{ deck.deck_short_name }}
+                    Deck {{ deck.deck_short_name }}
                   </a>
                   {% endif %}
                 </li>
