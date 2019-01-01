@@ -22,7 +22,7 @@ class Unit(models.Model):
 
 
 class Deck(models.Model):
-    deck_name           = models.CharField(max_length=75, default='A')
+    deck_name           = models.CharField(max_length=75, default='1')
     deck_short_name     = models.CharField(max_length=75, blank=True, null=True)
     deck_description    = RichTextField(null=True)
     deck_unit           = models.ForeignKey(Unit, on_delete=models.CASCADE)
@@ -61,8 +61,8 @@ class Difficulty(models.Model):
 class Task(models.Model):
     task_name               = models.CharField(max_length=50)
     task_list_description   = RichTextField()
-    certification           = models.CharField(max_length=25, default='BCBA')
-    task_version            = models.CharField(max_length=50, default='2017')    
+    certification           = models.CharField(max_length=25, default='RBT')
+    task_version            = models.CharField(max_length=50, default='2019')    
 
     def __str__(self):
         return self.task_name
