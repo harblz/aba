@@ -80,7 +80,7 @@
         <div id="flashcard_negative_feedback" class="flashcard_feedback alert alert-warning" style="display: none;">
         </div>
 
-        <div id="flashcard_prompt" class="flashcard_prompt alert alert-warning" style="display: none;">
+        <div id="flashcard_prompt" class="flashcard_prompt alert alert-info" style="display: none;">
         </div>
 
         <br />
@@ -157,23 +157,12 @@
      return "";
   };
   
-  function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+  function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
   }
 
   // visual timer
@@ -185,16 +174,34 @@
   var flashcards_correct      = 0;
   var flashcards_incorrect    = 0;
   var show_negative_feedback  = false;
+
+  var current_flashcard       = 0;
   var max_flashcards          = Number("{{total_flashcards}}");
 
   var flashcards            = `{{ flashcards|safe }}`;
   flashcards = JSON.parse(flashcards)
+  flashcards                  = shuffle(flashcards);
 
 
 
   var unit_id = "{{unit_id}}";
   var deck_id = "{{deck_id}}";
 
+  /*
+  function tally_vote(id) {
+        $.ajax({
+          url : "/quiz/{{unit_id}}/form_"+form_id+"/",
+          type : "POST",
+          data : { 'csrfmiddlewaretoken': '{{csrf_token}}', selected_choice_id : id },
+          success : function(response) {
+
+              highlightAnswers();
+          },
+          error : function(xhr,errmsg,err) {
+
+          }
+  }
+  */
 
   function gradeMe(event) {
     var correct = event.target.getAttribute("correct");
@@ -205,9 +212,12 @@
       show_negative_feedback = true;
     }
     calculateScore();
-    flashcards.shift();
 
-    if ( flashcards.length == 0 ) {
+    current_flashcard = current_flashcard + 1;
+
+    console.log(current_flashcard, max_flashcards);
+
+    if ( current_flashcard == max_flashcards ) {
       displayScore();
       stop = true;
     } else {
@@ -266,7 +276,7 @@
 
     var clone = document.importNode(flashcard_template.content, true)
 
-    choices = flashcards[0]["fields"]["flashcard_choices"];
+    choices = flashcards[current_flashcard]["fields"]["flashcard_choices"];
     choices = choices.substr(2,choices.length);
     choices = choices.substr(0,choices.length-2);
 
@@ -279,13 +289,15 @@
 
     for (i = 0; i < choices.length; i++) {
       option.id               = parseInt(choices[i].substr(0, choices[i].indexOf("'")-2))
-      option.content          = choices[i].substr(choices[i].indexOf("'")+1, choices[i].lastIndexOf(",")-5)
+      option.content          = choices[i].substr(choices[i].indexOf("'")+4, choices[i].length)
+      option.content          = option.content.substr(0, option.content.indexOf("'")-4)
       option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(",")+2, choices[i].length).toLowerCase())
 
       var options_template = document.importNode(flashcard_options_template.content, true)
 
       options_template.querySelector(".flashcard_input_label").innerHTML = option.content
       options_template.querySelector(".flashcard_input").setAttribute('correct', option.is_correct);
+      options_template.querySelector(".flashcard_input").setAttribute('pk', option.id);
 
 
       clone.querySelector('.flashcard_options_container').appendChild(options_template)
@@ -294,15 +306,23 @@
       options.push(option);
     }
 
-    clone.querySelector(".card-title").innerHTML = flashcards[0]["fields"]["flashcard_text"]
+    clone.querySelector(".card-title").innerHTML = flashcards[current_flashcard]["fields"]["flashcard_text"]
 
-    var hint = flashcards[0]["fields"]["flashcard_hint"];
+    if ( current_flashcard != 0 ) {
+      var correction = flashcards[current_flashcard-1]["fields"]["flashcard_hint"];
+    } else {
+      var correction = flashcards[current_flashcard]["fields"]["flashcard_hint"];
+    }
+    var hint = flashcards[current_flashcard]["fields"]["flashcard_hint"];
+
     clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
-    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + hint.substr(3,hint.length) + "</p>";
+    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length) + "</p>";
 
     flashcard.appendChild(clone)
+
     if ( show_negative_feedback == true ) {
       document.getElementById('flashcard_negative_feedback').style.display = 'block';
+      show_negative_feedback == false;
     }
   }
 
