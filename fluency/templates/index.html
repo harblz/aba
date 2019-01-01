@@ -133,7 +133,7 @@
                         </small><br />                 
                         <br />
                         <small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
-                          Click the title to toggle quiz details; click the green &nbsp <i class="fas fa-play"></i> play button to start the quiz OR the clock icon to start a &nbsp <i class="fas fa-clock"></i> fluency quiz.
+                          Click the title to toggle quiz details; click the green &nbsp <i class="fas fa-play"></i> 'play' button to start the quiz OR the blue clock button to start a &nbsp <i class="fas fa-clock"></i>  fluency quiz.
                         </small>
                       </h4>
                     </div>
@@ -146,7 +146,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/deck_{{deck.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ deck.count }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}
@@ -221,8 +221,7 @@
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
                         <small style="font-size: 0.5em;" class="text-muted">{{ deck.count }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
-                          Click the title to toggle quiz details; click the green play button to start the quiz.
-                        </small>
+                          Click the title to toggle quiz details; click the green &nbsp <i class="fas fa-play"></i> 'play' button to start the quiz OR the blue clock button to start a &nbsp <i class="fas fa-clock"></i>  fluency quiz.                        </small>
                       </h4>
                     </div>
                     <div style="color: #000;" class="collapse" href="{{deck.deck_short_name}}-{{unit.id}}" id="BCaBA-Collapse-{{deck.deck_short_name}}-{{unit.id}}">
@@ -234,7 +233,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/deck_{{deck.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ deck.count }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}
@@ -309,8 +308,7 @@
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
                         <small style="font-size: 0.5em;" class="text-muted">{{ deck.count }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
-                          Click the title to toggle quiz details; click the green play button to start the quiz.
-                        </small>
+                          Click the title to toggle quiz details; click the green &nbsp <i class="fas fa-play"></i> 'play' button to start the quiz OR the blue clock button to start a &nbsp <i class="fas fa-clock"></i>  fluency quiz.                        </small>
                       </h4>
                     </div>
                     <div style="color: #000;" class="collapse" href="{{deck.deck_short_name}}-{{unit.id}}" id="BCBA-Collapse-{{deck.deck_short_name}}-{{unit.id}}">
@@ -322,7 +320,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/deck_{{deck.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ unit.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ deck.count }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}

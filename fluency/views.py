@@ -38,12 +38,14 @@ def fluency_index(request):
         'pages': pages
     })
 
-def count_vote(request, quiz_id, form_id ):
-    attempt_id = request.POST.get('selected_choice_id')
+def tally_vote(request, choice_id):
+    choice_id = request.POST.get('choice_id')
 
-    if request.method == 'POST':
-        Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
+    choice = Choice.objects.filter(pk=choice_id).update(votes=F('votes')+1)
 
+    return JsonResponse({
+            'choice' : choice,
+        })
 
 def fluency_timed_view(request, quiz_id, deck_id ):
     pages = Pages.objects.order_by('order')
