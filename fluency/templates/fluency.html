@@ -188,22 +188,25 @@
   var deck_id = "{{deck_id}}";
 
   
-  function tally_vote(id) {
-        $.ajax({
-          url : "/quiz/{{unit_id}}/form_"+form_id+"/",
-          type : "POST",
-          data : { 'csrfmiddlewaretoken': '{{csrf_token}}', selected_choice_id : id },
-          success : function(response) {
-
-              highlightAnswers();
-          },
-          error : function(xhr,errmsg,err) {
-
-          }
+  function tally_vote(choice_id) {
+    console.log(choice_id);
+    $.ajax({
+      url : "/fluency/"+choice_id+"/tally/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
+      success : function(response) {
+        //console.log(response);
+      },
+      error : function(xhr,errmsg,err) {
+        // error message?
+      }
+    });
   }
   
 
   function gradeMe(event) {
+    tally_vote(event.target.getAttribute("pk"));
+
     var correct = event.target.getAttribute("correct");
     if ( correct == 'true' ) {
       flashcards_correct += 1;
@@ -214,8 +217,6 @@
     calculateScore();
 
     current_flashcard = current_flashcard + 1;
-
-    console.log(current_flashcard, max_flashcards);
 
     if ( current_flashcard == max_flashcards ) {
       displayScore();

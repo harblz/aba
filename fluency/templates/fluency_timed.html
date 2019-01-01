@@ -200,9 +200,26 @@
 
   var unit_id = "{{unit_id}}";
   var deck_id = "{{deck_id}}";
-
+  
+  function tally_vote(choice_id) {
+    console.log(choice_id);
+    $.ajax({
+      url : "/fluency/"+choice_id+"/tally/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
+      success : function(response) {
+        //console.log(response);
+      },
+      error : function(xhr,errmsg,err) {
+        // error message?
+      }
+    });
+  }
+  
 
   function gradeMe(event) {
+    tally_vote(event.target.getAttribute("pk"));
+    
     var correct = event.target.getAttribute("correct");
     if ( correct == 'true' ) {
       flashcards_correct += 1;
@@ -319,6 +336,7 @@
 
       options_template.querySelector(".flashcard_input_label").innerHTML = option.content
       options_template.querySelector(".flashcard_input").setAttribute('correct', option.is_correct);
+      options_template.querySelector(".flashcard_input").setAttribute('pk', option.id);
 
 
       clone.querySelector('.flashcard_options_container').appendChild(options_template)
