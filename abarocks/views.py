@@ -32,8 +32,10 @@ def redirect_error_report(request):
     description = request.POST.get("description")
     categories  = request.POST.get("categories")
 
+    question_id = 1
+
     send_mail('ABA.Rocks - Problem Reported',
-        'Hey there - a user reported a problem on question with this description: ' + description,
+        'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were '+categories,
         'alex@behaviorist.tech',
         ['alex@behaviorist.tech'],
         fail_silently=False,
