@@ -30,14 +30,6 @@ ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1', '192.16
 
 CACHED_STORAGE = False
 
-# Email Settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.behaviorist.tech'
-EMAIL_HOST_USER = 'alex@behaviorist.tech'
-EMAIL_HOST_PASSWORD = '@1PointIRemembered'
-EMAIL_PORT = 587
-
 # send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
 
 
