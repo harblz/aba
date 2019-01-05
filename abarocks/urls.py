@@ -19,9 +19,10 @@ from django.contrib import admin
 
 from django.views.generic import RedirectView
 
-from .views import redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm
+from .views import redirect_error_report, redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm
 
 urlpatterns = [
+    url(r'^error/report', redirect_error_report),
     url(r'^admin/', admin.site.urls),
     url(r'^research/', redirect_research),
     url(r'^coffee/', redirect_coffee),
