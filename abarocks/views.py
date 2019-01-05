@@ -6,6 +6,9 @@ from django.utils import timezone
 from pages.models import Pages
 from blog.models import Post
 
+from django.http import JsonResponse
+from django.core import serializers
+
 from django.core.mail import send_mail
 
 def redirect_root(request):
@@ -25,10 +28,20 @@ def redirect_research(request):
 
 def redirect_error_report(request):
 
-    send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
+    #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
+    description = request.POST.get("description")
+    categories  = request.POST.get("categories")
+
+    send_mail('ABA.Rocks - Problem Reported',
+        'Hey there - a user reported a problem on question with this description: ' + description,
+        'alex@behaviorist.tech',
+        ['alex@behaviorist.tech'],
+        fail_silently=False,
+    )
 
     return JsonResponse({
-            'choice' : choice,
+            'description' : description,
+            'categories' : categories,
         })
 
 def redirect_coffee(request):
