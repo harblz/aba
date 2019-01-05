@@ -97,6 +97,9 @@ class Flashcard(models.Model):
     def __str__(self):
         return self.flashcard_text
 
+    def flashcard_id(self):
+        return self.id
+
     def get_unit_id(self):
         return self.unit_id
 

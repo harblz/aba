@@ -6,6 +6,8 @@ from django.utils import timezone
 from pages.models import Pages
 from blog.models import Post
 
+from django.core.mail import send_mail
+
 def redirect_root(request):
     posts           = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1]
     last_post_id    = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1][0].id
@@ -21,6 +23,13 @@ def redirect_research(request):
     pages = Pages.objects.order_by('order')
     return render(request, 'blog/blog_research.html', { 'pages': pages })
 
+def redirect_error_report(request):
+
+    send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
+
+    return JsonResponse({
+            'choice' : choice,
+        })
 
 def redirect_coffee(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
