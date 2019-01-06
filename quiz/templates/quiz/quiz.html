@@ -15,7 +15,9 @@
       <p class="mt-2" style="line-height: 2rem;">
         Question #<span id="questionNumber">1 </span> of {{ total_questions }} — <small>
           <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span><br>
-          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span><br>
+          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
+          &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a>
+          <br>
         </small>
       </p>
 
@@ -95,6 +97,47 @@
   </div>
 
   <br /><br />
+
+  <!-- Report Question as Erroneous Modal !-->
+  <div class="modal fade" id="error_report_modal" tabindex="-1" role="dialog" aria-labelledby="error_report_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Spot something fishy? &nbsp <i class="fas fa-fish"></i></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <br />
+          <h5>See something wrong with this question?</h5>
+          <p class="text-muted"><b>Thank you for your feedback!</b><br /> Report the type of error below, and I'll get an email prompting me to fix it from the server. Thank you in advance for your time and patience while I work to improve this site - and best of luck studying!</p>
+
+        <form>
+          <div class="form-group">
+            <label for="error_type">What's wrong?</label>
+            <select multiple class="form-control" id="error_type">
+              <option>Glitch / Bug</option>
+              <option>Typo / Spelling & Grammar</option>
+              <option>Question / Choices are wrong (please describe below)</option>
+              <option>This question / series is too difficult</option>
+              <option>Other (please describe below)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Please take a moment to summarize the problem:</label>
+            <textarea class="form-control" id="error_description" rows="3"></textarea>
+          </div>
+        </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary" onClick="submitReport()">Submit the report</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Disqus Code !-->
   <div id="disqus_thread" class="collapse col-12"></div>
@@ -234,6 +277,7 @@
     return score;
   }
 
+
   function displayScore() {
     var score = JSON.parse(localStorage.getItem("{{unit_id}}"));
     $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
@@ -279,8 +323,10 @@
   };
 
 
-  var question_ids      = JSON.parse("{{question_ids}}");
-  var first_question_id = JSON.parse("{{first_question_id}}");
+  var question_ids        = JSON.parse("{{question_ids}}");
+  var first_question_id   = JSON.parse("{{first_question_id}}");
+  var current_question_id = first_question_id;
+  console.log(current_question_id);
 
   var unit_id = "{{unit_id}}";
   var form_id = "{{form_id}}";
@@ -296,6 +342,30 @@
   {
      return "";
   };
+
+
+  function submitReport() {
+    var error_type = document.getElementById("error_type");
+    var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
+    var error_description = document.getElementById("error_description").value;
+
+    $.ajax({
+      url : "/error/report",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: current_question_id, module: 'quiz', categories: JSON.stringify(selected), description: error_description },
+      success : function(response) {
+        console.log(response);
+
+        $('#error_report_modal').modal('toggle')
+        alert('Error successfully reported! Thank you!')
+      },
+      error : function(xhr,errmsg,err) {
+        alert('There was an error submitting this error report :(')
+      }
+    });
+
+  }
+
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -324,6 +394,8 @@
       if ( typeof(choice_id) !== 'undefined' ) {
         var current_score = JSON.parse(localStorage.getItem("{{unit_id}}"));
         var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
+        current_question_id = id;
+        console.log(current_question_id);
         var id_list = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
         //console.log(id_list, id);
 
