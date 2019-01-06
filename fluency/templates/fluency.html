@@ -246,12 +246,12 @@
     var error_type = document.getElementById("error_type");
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
     var error_description = document.getElementById("error_description").value;
-    console.log(error_description, selected)
+    console.log(error_description, JSON.stringify(selected))
 
     $.ajax({
       url : "/error/report",
       type : "POST",
-      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', categories: selected, description: error_description },
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
         //console.log(response);
       },
