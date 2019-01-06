@@ -218,7 +218,6 @@
   var max_flashcards          = Number("{{total_flashcards}}");
 
   var flashcards            = `{{ flashcards|safe }}`;
-  flashcards = JSON.parse(flashcards)
   flashcards                  = shuffle(flashcards);
 
 
@@ -242,22 +241,20 @@
   }
 
   function submitReport() {
-    console.log(flashcards[current_flashcard]["fields"]);
     var flashcard_id = flashcards[current_flashcard].pk;
     var error_type = document.getElementById("error_type");
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
     var error_description = document.getElementById("error_description").value;
-    console.log(error_description, flashcard_id, JSON.stringify(selected))
 
     $.ajax({
       url : "/error/report",
       type : "POST",
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: flashcard_id, module: 'fluency', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
-        //console.log(response);
+        console.log(response);
       },
       error : function(xhr,errmsg,err) {
-        // error message?
+        alert('There was an error submitting this error report... ¯\_(ツ)_/¯');
       }
     });
 

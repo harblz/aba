@@ -48,7 +48,9 @@ def redirect_error_report(request):
 
     message = 'Hey there - a user reported a problem on <b>question ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />The user provided this description: <b>' + description + '</b> and categorized the bug as follows ' + categories[0]
 
-    send_mail('ABA.Rocks - Problem Reported',
+    subject = 'ABA.Rocks - Problem Reported' + module + ', #' + item_id
+
+    send_mail(subject,
         'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were ' + categories[0],
         'alex@behaviorist.tech',
         ['alex@behaviorist.tech'],
