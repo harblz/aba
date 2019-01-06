@@ -30,20 +30,26 @@ def redirect_error_report(request):
 
     #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
     description = request.POST.get("description")
-    categories  = request.POST.get("categories")
+    categories  = request.POST.getlist("categories")
 
-    question_id = 1
+    question_id = str(1)
 
+    message = 'Hey there - a user reported a problem on question ID '+ question_id +' with this description: <b>' + description + '</b> and the following categories were ' + categories[0]
+
+    
     send_mail('ABA.Rocks - Problem Reported',
-        'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were '+categories,
+        'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were ' + '2',
         'alex@behaviorist.tech',
         ['alex@behaviorist.tech'],
         fail_silently=False,
+        html_message=message,
     )
+    
 
     return JsonResponse({
             'description' : description,
-            'categories' : categories,
+            'categories' : categories[0],
+            'message' : message,
         })
 
 def redirect_coffee(request):
