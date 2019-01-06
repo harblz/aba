@@ -30,9 +30,6 @@ ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1', '192.16
 
 CACHED_STORAGE = False
 
-# send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
-
-
 # Google Analytics
 GOOGLE_ANALYTICS_PROPERTY_ID = "UA-98470698-1"
 GOOGLE_ANALYTICS_DOMAIN = 'aba.rocks'
