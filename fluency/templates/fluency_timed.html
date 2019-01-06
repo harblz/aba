@@ -77,7 +77,7 @@
 
 
   <!-- Report Question as Erroneous Modal !-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="error_report_modal tabindex="-1" role="dialog" aria-labelledby="error_report_modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -126,7 +126,7 @@
       <div class="card-body">
         <h3 class="card-title">Flashcard title</h3>
         <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best - <a href="#" class="text-info font-weight-bold" onClick="showHint()">want a hint?</a> &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#exampleModal" href="#"><i class="fas fa-flag"></i> Report Question </a></h6>
-        
+
         <div id="flashcard_positive_feedback" class="flashcard_feedback alert alert-success" style="display: none;">
           Nice job! You got it right.
         </div>
@@ -268,10 +268,10 @@
       type : "POST",
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: flashcard_id, module: 'fluency', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
-        //console.log(response);
+        console.log(response);
       },
       error : function(xhr,errmsg,err) {
-        // error message?
+        alert('There was an error submitting this error report :(')
       }
     });
 

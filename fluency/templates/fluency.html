@@ -61,7 +61,7 @@
   </span>
 
   <!-- Report Question as Erroneous Modal !-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="error_report_modal" tabindex="-1" role="dialog" aria-labelledby="error_report_modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -234,6 +234,8 @@
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
       success : function(response) {
         console.log(response);
+        $('#error_report_modal').modal('hide')
+        alert('Error successfully reported! Thank you!')
       },
       error : function(xhr,errmsg,err) {
         alert('There was an error submitting this error report :(')
