@@ -248,8 +248,8 @@
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
       success : function(response) {
         console.log(response);
-        $('#error_report_modal').modal('toggle')
-        alert('Error successfully reported! Thank you!')
+/*        $('#error_report_modal').modal('toggle')
+        alert('Error successfully reported! Thank you!') */
       },
       error : function(xhr,errmsg,err) {
         alert('There was an error submitting this error report... ¯\_(ツ)_/¯');
@@ -271,6 +271,9 @@
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: flashcard_id, module: 'fluency', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
         console.log(response);
+
+        $('#error_report_modal').modal('toggle')
+        alert('Error successfully reported! Thank you!')
       },
       error : function(xhr,errmsg,err) {
         alert('There was an error submitting this error report :(')
