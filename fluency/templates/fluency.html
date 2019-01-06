@@ -234,7 +234,7 @@
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
       success : function(response) {
         console.log(response);
-        $('#error_report_modal').modal('hide')
+        $('#error_report_modal').modal('toggle')
         alert('Error successfully reported! Thank you!')
       },
       error : function(xhr,errmsg,err) {
