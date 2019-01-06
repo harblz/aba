@@ -5,6 +5,8 @@ from django.utils import timezone
 
 from pages.models import Pages
 from blog.models import Post
+from quiz.models import Question
+from fluency.models import Flashcard
 
 from django.http import JsonResponse
 from django.core import serializers
@@ -31,25 +33,36 @@ def redirect_error_report(request):
     #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
     description = request.POST.get("description")
     categories  = request.POST.getlist("categories")
+    module      = request.POST.get("module")
+    item_id     = request.POST.get("id")
+    item        = item_id
 
-    question_id = str(1)
+    question_id = str(item_id)
 
-    message = 'Hey there - a user reported a problem on question ID '+ question_id +' with this description: <b>' + description + '</b> and the following categories were ' + categories[0]
+    if module == "quiz":
+        question = Question.objects.filter(pk=item_id)
+        item = str(question[0])
+    else:
+        flashcard = Flashcard.objects.filter(pk=item_id)
+        item = str(flashcard[0])
 
-    
+    message = 'Hey there - a user reported a problem on <b>question ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />The user provided this description: <b>' + description + '</b> and categorized the bug as follows ' + categories[0]
+
     send_mail('ABA.Rocks - Problem Reported',
-        'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were ' + '2',
+        'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were ' + categories[0],
         'alex@behaviorist.tech',
         ['alex@behaviorist.tech'],
         fail_silently=False,
         html_message=message,
     )
-    
 
     return JsonResponse({
             'description' : description,
             'categories' : categories[0],
             'message' : message,
+            'module' : module,
+            'item_id' : item_id,
+            'item' : item,
         })
 
 def redirect_coffee(request):
