@@ -218,6 +218,7 @@
   var max_flashcards          = Number("{{total_flashcards}}");
 
   var flashcards            = `{{ flashcards|safe }}`;
+  flashcards = JSON.parse(flashcards)
   flashcards                  = shuffle(flashcards);
 
 
@@ -232,10 +233,10 @@
       type : "POST",
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
       success : function(response) {
-        //console.log(response);
+        console.log(response);
       },
       error : function(xhr,errmsg,err) {
-        // error message?
+        alert('There was an error submitting this error report :(')
       }
     });
   }
@@ -254,7 +255,7 @@
         console.log(response);
       },
       error : function(xhr,errmsg,err) {
-        alert('There was an error submitting this error report... ¯\_(ツ)_/¯');
+        alert('There was an error submitting this report... almost ironic');
       }
     });
 
