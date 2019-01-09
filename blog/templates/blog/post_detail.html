@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div id="post_container" class="post container" style="margin-top: 25px;visibility: hidden;"> 
+    <div id="post_container" class="post container" style="padding: 10px;margin-top: 25px;visibility: hidden;"> 
       <div class="row">
 
 
 
-        <div class="col-12" style="margin-left: 0px;">
+        <div class="col-12" style="margin-left: 0px;padding: 20px;">
           <div class="post-info row">
             <div class="col-md-2" style="padding: 0px;">
               <time datetime="{{ post.published_date }}" class="icon">
@@ -76,15 +76,27 @@
 
           <script>
 
-
             function resize() {
               // Resize post container for desktop
               if (window.screen.width <= 576) {
                 document.querySelector("#post_container").style.visibility = "visible";
-              } else {
+              } else if ( window.screen.width > 576 && window.screen.width <= 900) {
+                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.22 + "px";
+                document.querySelector("#post_container").style.visibility = "visible";
+                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.22 + "px";
+              } else if ( window.screen.width > 900 && window.screen.width <= 1200) {
+                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.165 + "px";
+                document.querySelector("#post_container").style.visibility = "visible";
+                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.165 + "px";
+              } else if ( window.screen.width >= 900 && window.screen.width <= 1200) {
                 document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
                 document.querySelector("#post_container").style.visibility = "visible";
-              }    
+                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.185 + "px";
+              } else {
+                document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.125 + "px";
+                document.querySelector("#post_container").style.visibility = "visible";
+                document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.125 + "px";
+              }
             }
 
             window.onload = function () { 

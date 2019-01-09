@@ -52,6 +52,7 @@
                 </p>                
                 <p class="lead">
                   {{ post.text|safe|truncatewords_html:post.snippet_size }}
+                  <a href="{% url 'post_details_by_slug' slug=post.slug %}" class="btn btn-primary font-weight-bold">Read more &nbsp <i class="fas fa-arrow-circle-right"></i></a>
                 </p>
                 <br />
                 <br />
