@@ -60,7 +60,7 @@ def redirect_error_report(request):
     else:
         description = 'The user provided this description: <b>' + description + '</b>'
 
-    message = 'Hey there - a user reported a problem in the '+ module +' module, for <b>item ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />'+ description +'<br/><br/> They categorized the bug as follows ' + categories[0]
+    message = 'Hey there - a user reported a problem in the <b><u>'+ module +'</b></u> module, for <b>item ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />'+ description +'<br/><br/> They categorized the bug as follows ' + categories[0]
 
     subject = 'ABA.Rocks - Problem Reported' + module + ', #' + item_id
 
