@@ -42,7 +42,7 @@ def redirect_error_report(request):
     if module == "quiz":
         question = Question.objects.filter(pk=item_id)
         item = str(question[0])
-        
+
         question = Question.objects.get(pk=item_id)
         question.error_reports += 1
         question.save()
@@ -55,7 +55,7 @@ def redirect_error_report(request):
         flashcard.save()
 
 
-    if description == None:
+    if not description.strip():
         description = "<b>The user did not provide a description.</b>"
     else:
         description = 'The user provided this description: <b>' + description + '</b>'
