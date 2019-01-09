@@ -15,9 +15,10 @@ from django.core.mail import send_mail
 
 def redirect_root(request):
     posts           = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1]
+    pinned_posts    = Post.objects.filter(published_date__lte=timezone.now(),is_pinned=True).order_by('-published_date')
     last_post_id    = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1][0].id
     pages           = Pages.objects.order_by('order')
-    return render(request, 'blog/post_list.html', { 'posts': posts, 'pages': pages, 'id' : last_post_id })
+    return render(request, 'blog/post_list.html', { 'posts': posts, 'pinned_posts' : pinned_posts, 'pages': pages, 'id' : last_post_id })
 
 def redirect_study(request):
     pages           = Pages.objects.order_by('order')

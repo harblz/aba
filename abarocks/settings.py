@@ -25,7 +25,7 @@ SECRET_KEY = 'g*ihxgugp)-k2f!1&7^oeh05h0p7i2_4#7@vtaf#gw))44_=$n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1', '192.168.0.111', '10.0.0.243']
+ALLOWED_HOSTS = ['www.aba.rocks', 'aba.rocks', 'localhost', '127.0.0.1', '192.168.0.110', '10.0.0.243']
 
 
 CACHED_STORAGE = False

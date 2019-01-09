@@ -9,7 +9,7 @@
       <div id="carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carousel" style="min-height: 5px;" data-slide-to="0" class="active"></li>
-          {% for post in posts %}
+          {% for post in pinned_posts %}
             {% if post.is_pinned is True %}
               <li data-target="#carousel" style="min-height: 5px;" data-slide-to="{{ forloop.counter0 }}"></li>
             {% endif %}
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Add Pinned Posts to the Carousel -->
-          {% for post in posts %}
+          {% for post in pinned_posts %}
             {% if post.is_pinned is True %}
             <div class="carousel-item text-center p4">
               <div class="container" style="padding-left: 1%;padding-right: 1%;">
@@ -319,6 +319,15 @@
         },
      });
   }
+
+
+
+  window.onscroll = function(ev) {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          // you're at the bottom of the page
+         get_next_post();
+      }
+  };
 
   $(window).scroll(function() {
      if($(window).scrollTop() + $(window).height() == $(document).height()) {
