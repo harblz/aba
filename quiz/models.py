@@ -88,7 +88,8 @@ class Question(models.Model):
     form            = models.ForeignKey(Form, on_delete=models.CASCADE)
     task_list_item  = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     difficulty      = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
-    question_hint   = RichTextField()
+    question_hint   = RichTextField()    
+    error_reports   = models.IntegerField(default=0)
     pub_date        = models.DateTimeField('date published')
 
 
@@ -111,9 +112,12 @@ class Question(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
+    
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
+
+    error_reports.short_description = '# of Error Reports'
 
 
 

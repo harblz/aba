@@ -92,6 +92,7 @@ class Flashcard(models.Model):
     flashcard_hint      = RichTextField()
     pub_date            = models.DateTimeField('date published')
     flashcard_choices   = models.CharField(default=None, max_length=50, null=True)
+    error_reports       = models.IntegerField(default=0)
 
 
     def __str__(self):

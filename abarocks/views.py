@@ -42,11 +42,25 @@ def redirect_error_report(request):
     if module == "quiz":
         question = Question.objects.filter(pk=item_id)
         item = str(question[0])
+        
+        question = Question.objects.get(pk=item_id)
+        question.error_reports += 1
+        question.save()
     else:
         flashcard = Flashcard.objects.filter(pk=item_id)
         item = str(flashcard[0])
 
-    message = 'Hey there - a user reported a problem on <b>question ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />The user provided this description: <b>' + description + '</b> and categorized the bug as follows ' + categories[0]
+        flashcard = Flashcard.objects.get(pk=item_id)
+        flashcard.error_reports += 1
+        flashcard.save()
+
+
+    if description == None:
+        description = "<b>The user did not provide a description.</b>"
+    else:
+        description = 'The user provided this description: <b>' + description + '</b>'
+
+    message = 'Hey there - a user reported a problem in the '+ module +' module, for <b>item ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />'+ description +'<br/><br/> They categorized the bug as follows ' + categories[0]
 
     subject = 'ABA.Rocks - Problem Reported' + module + ', #' + item_id
 

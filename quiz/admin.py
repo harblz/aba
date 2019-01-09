@@ -46,7 +46,7 @@ change_difficulty_RBT.short_description = "Change selected questions difficulty 
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('escaped_question_text', 'question_unit_name', 'question_form_name', 'has_answer', 'question_difficulty', 'task_list_item', 'pub_date', 'was_published_recently')
+    list_display = ('escaped_question_text', 'question_unit_name', 'question_form_name', 'has_answer', 'error_reports', 'question_difficulty', 'task_list_item', 'pub_date', 'was_published_recently')
     list_per_page = 100000
     list_filter = ('unit_id', 'task_list_item', 'form_id', 'pub_date')
     #list_filter = ('unit_id', RelatedDropdownFilter) # https://github.com/mrts/django-admin-list-filter-dropdown/issues/5
