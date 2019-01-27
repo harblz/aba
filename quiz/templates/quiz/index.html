@@ -133,7 +133,7 @@
                         <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
                         Form {{ form.form_short_name }} - {{ unit.unit_name }}
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count|add:"-1" }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
                           Click the title to toggle quiz details; click the green play button to start the quiz.
                         </small>
@@ -148,7 +148,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ form.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ form.count|add:"-1" }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}
@@ -220,7 +220,7 @@
                         <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
                         Form {{ form.form_short_name }} - {{ unit.unit_name }}
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count|add:"-1" }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
                           Click the title to toggle quiz details; click the green play button to start the quiz.
                         </small>
@@ -235,7 +235,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ form.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ form.count|add:"-1" }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}
@@ -307,7 +307,7 @@
                         <div class="btn btn-success" onClick="window.location='{{unit.id}}/form_{{form.id}}'"><i class="fas fa-play"></i></div>
                         Form {{ form.form_short_name }} - {{ unit.unit_name }}
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count }} questions</small>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ form.count|add:"-1" }} questions</small>
                         <br><small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
                           Click the title to toggle quiz details; click the green play button to start the quiz.
                         </small>
@@ -322,7 +322,7 @@
                         <br>
                         <div onClick="window.location='{{unit.id}}/form_{{form.id}}'" class="btn btn-success font-weight-bold">Start Quiz</div>
                       </p>
-                      <p class="list-group-item-text text-muted">{{ form.count }} question quiz.</p>
+                      <p class="list-group-item-text text-muted">{{ form.count|add:"-1" }} question quiz.</p>
                     </div>
                   </a>
                   {% else %}
