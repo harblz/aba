@@ -286,7 +286,7 @@
     tally_vote(event.target.getAttribute("pk"));
     
     var correct = event.target.getAttribute("correct");
-    if ( correct == 'true' ) {
+    if ( correct === 'true' ) {
       flashcards_correct += 1;
     } else {
       flashcards_incorrect += 1;
