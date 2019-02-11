@@ -273,6 +273,7 @@
     console.log(correct);
     if ( correct === 'true' ) {
       flashcards_correct += 1;
+      show_negative_feedback = false;
     } else {
       flashcards_incorrect += 1;
       show_negative_feedback = true;
@@ -393,7 +394,7 @@
 
     if ( show_negative_feedback == true ) {
       document.getElementById('flashcard_negative_feedback').style.display = 'block';
-      show_negative_feedback == false;
+      show_negative_feedback = false;
     }
   }
 
