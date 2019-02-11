@@ -218,6 +218,10 @@
   var max_flashcards          = Number("{{total_flashcards}}");
 
   var flashcards            = `{{ flashcards|safe }}`;
+  // for valid JSON, trim away line breaks
+  flashcards = flashcards.trim();
+  flashcards = flashcards.replace(/(\r\n|\n|\r)/gm, "");
+  console.log(flashcards);
   flashcards = JSON.parse(flashcards)
   flashcards                  = shuffle(flashcards);
 
