@@ -126,7 +126,7 @@
                         <div class="btn btn-primary" title="Timed Flashcards" onClick="window.location='{{unit.id}}/deck_{{deck.id}}/timed'"><i class="fas fa-clock"></i></div> 
                         Deck {{ deck.deck_short_name }} - {{ unit.unit_name }}
                         <i data-toggle="tooltip" data-placement="top" title="Click to show details" class="fas fa-chevron-circle-down"></i>
-                        <small style="font-size: 0.5em;" class="text-muted">{{ deck.count }} questions</small>
+                        <small style="font-size: 0.5em;" class="text-muted">{{ deck.count|add:"-2" }} questions</small>
                         <br>
                         <small style="margin-left: 5%;font-size: 0.5em;" class="text-muted">
                           First, master the &nbsp <i class="fas fa-play"></i> <b>acquisition</b> quiz. &nbsp Then, take the &nbsp <i class="fas fa-clock"></i> <b>fluency</b> quiz until you master it within the time limit!
