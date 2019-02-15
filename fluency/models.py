@@ -84,6 +84,7 @@ class Task(models.Model):
 
  
 class Flashcard(models.Model):
+    id                  = models.AutoField(primary_key=True, editable=False)
     flashcard_text      = RichTextField()
     unit                = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck                = models.ForeignKey(Deck, on_delete=models.CASCADE)

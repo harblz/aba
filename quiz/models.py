@@ -83,6 +83,7 @@ class Task(models.Model):
 
  
 class Question(models.Model):
+    id              = models.AutoField(primary_key=True, editable=False)
     question_text   = RichTextField()
     unit            = models.ForeignKey(Unit, on_delete=models.CASCADE)
     form            = models.ForeignKey(Form, on_delete=models.CASCADE)

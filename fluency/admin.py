@@ -62,7 +62,8 @@ change_difficulty_RBT.short_description = "Change selected flashcards difficulty
 
 
 class FlashcardAdmin(admin.ModelAdmin):
-    list_display = ('escaped_flashcard_text', 'flashcard_unit_name', 'flashcard_deck_name', 'has_answer', 'error_reports', 'flashcard_difficulty', 'task_list_item', 'pub_date', 'was_published_recently')
+    readonly_fields = ('id',)
+    list_display = ('id', 'escaped_flashcard_text', 'flashcard_unit_name', 'flashcard_deck_name', 'has_answer', 'error_reports', 'flashcard_difficulty', 'task_list_item', 'pub_date', 'was_published_recently')
     list_per_page = 100000
     list_filter = ('unit_id', 'task_list_item', 'deck_id', 'pub_date')
     #list_filter = ('unit_id', RelatedDropdownFilter) # https://github.com/mrts/django-admin-list-filter-dropdown/issues/5
@@ -118,5 +119,5 @@ class FlashcardAdmin(admin.ModelAdmin):
         ('Date information', {'fields': ['pub_date'], 'classes': ['']}),
     ]
     inlines = [ChoiceInline]
-    search_fields = [  'flashcard_text' ]
+    search_fields = [ 'id', 'flashcard_text', 'choice__choice_text', 'flashcard_hint']
 admin.site.register(Flashcard, FlashcardAdmin)
