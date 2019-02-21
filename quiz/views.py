@@ -32,6 +32,21 @@ def quiz_index(request):
         'pages': pages
     })
 
+def quiz_question_inspector(request, question_id):
+
+    pages = Pages.objects.order_by('order')
+    question  = get_object_or_404(Question, pk=question_id)
+
+    correct_choice = list(Choice.objects.filter(question_id=question.id, is_correct=True).values_list('id', 'choice_text', 'is_correct'))
+
+
+
+    return render(request, 'quiz/quiz_question_inspector.html', {
+        'question'          : question,
+        'correct_choice'    : correct_choice,
+        'pages'             : pages,
+    })
+
 def quiz_view(request, quiz_id, form_id ):
     pages = Pages.objects.order_by('order')
     # get

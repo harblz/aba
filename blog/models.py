@@ -38,7 +38,7 @@ class Post(models.Model):
     snippet_size     = models.IntegerField(default=150)
     is_pinned        = models.NullBooleanField(default=False)
 
-    pic.help_text           = "This is the 'splash' picture that will be shown to the user as a header for each post. You can leave it blank."
+    pic.help_text           = "This is the 'splash' picture that will be shown to the user as a header for each post. You can leave it blank. FOR POSTS SERVED UP ON THE SITE, THEY SHOULD START WITH /static/img/"
 
     is_pinned.help_text     = "Pinning a blog post makes it stick to the 'pinned items' bar on the front page of the site. Try not to pin too many posts because it'll look crazy"
 

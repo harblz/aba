@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+
+{% block quiz-content %}
+  <span class="confetti_wrapper">
+
+    <div class="progress">
+      <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Displays the Quiz Results at the end !-->
+    <div id="results"></div>
+
+    <div  id="question_text">
+      <p class="mt-2" style="line-height: 2rem;">
+        Question #<span id="questionNumber">1 </span> of {{ total_questions|add:"1" }} — <b>QUESTION INSPECTOR</b> <small>
+          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span><br>
+          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
+          &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a>
+          <br>
+        </small>
+      </p>
+
+      <h6 style="font-size: 1.2rem;font-weight: normal;margin-top: 5px;">
+        {{ question.question_text|safe }}
+      </h6>
+    </div>
+
+    <br>
+
+    <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
+      <a href="." class="btn btn-info">Restart Quiz</a>
+      <a href="/quiz" class="btn btn-success">Back to Quiz Menu</a>
+      <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
+    </div>
+
+    <div id="choice_menu" class="panel panel-primary">
+      <div class="panel-heading">
+        <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
+      </div>
+      <div class="panel-body">
+        <form action="/quiz/{{ unit_id }}/form_{{form_id}}/grade_question/" method="POST" id="post-form">
+        {% csrf_token %}
+        <div id="choices">
+        {% for choice in question.choice_set.all %}
+              <label class="quiz-choice-labels">
+                <table id="table-choices" style="table-layout: fixed;width:100%;">
+                  <tr style="width:100%;display:table-row;border-radius: 15px;">
+                    <td style="vertical-align: top;width:15px;">
+                      <input type="radio" name="choice" id="{{ choice.id }}" is_correct="{{ choice.is_correct }}" value="{{ choice.id }}" />
+                    </td>
+                    <td>
+                      <span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span>
+                    </td>
+                  </tr>
+                </table>
+              </label>
+              <br />
+        {% endfor %}
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" data-toggle="collapse" data-target="#hint" class="btn btn-default">Give me a hint!</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="submit" id="post-form" class="btn btn-info"><b>Submit Answer</b></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="hint">
+      <div style="margin: 25px;">
+        <h3>Here's a hint:</h3>
+        {{ question.question_hint|safe }}
+      </div>
+    </div>
+
+    <br /><br />
+    <br /><br />
+
+  </span>
+
+  <br /><br />
+
+  <!-- Report Question as Erroneous Modal !-->
+  <div class="modal fade" id="error_report_modal" tabindex="-1" role="dialog" aria-labelledby="error_report_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Spot something fishy? &nbsp <i class="fas fa-fish"></i></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <br />
+          <h5>See something wrong with this question?</h5>
+          <p class="text-muted"><b>Thank you for your feedback!</b><br /> Report the type of error below, and I'll get an email prompting me to fix it from the server. Thank you in advance for your time and patience while I work to improve this site - and best of luck studying!</p>
+
+        <form>
+          <div class="form-group">
+            <label for="error_type">What's wrong?</label>
+            <select multiple class="form-control" id="error_type">
+              <option>Glitch / Bug</option>
+              <option>Typo / Spelling & Grammar</option>
+              <option>Question / Choices are wrong (please describe below)</option>
+              <option>This question / series is too difficult</option>
+              <option>Other (please describe below)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Please take a moment to summarize the problem:</label>
+            <textarea class="form-control" id="error_description" rows="3"></textarea>
+          </div>
+        </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary" onClick="submitReport()">Submit the report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div id="error_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="Question Hint" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title alert alert-danger" style='width: 100%;'><b>Oops!</b> That answer was not correct</h4>
+        </div>
+        <div class="modal-body" style="font-size: 14px;">
+          <div id="error_modal_message">
+            {{ question.question_hint }}
+          </div>
+        </body>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary font-weight-bold" style='cursor: pointer;width: 100%'; data-dismiss="modal">OK, I got it</button>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+
+  function highlightAnswers() {
+    $('#table-choices tr').on('click', function() {
+        $('#table-choices tr').each(function(){
+            $(this).css('backgroundColor','white');
+        })
+        $(this).css('backgroundColor','#17a2b8');
+    }); 
+  }
+
+  highlightAnswers();
+
+  var dataset = [];
+
+  // Score Pie Chart (generates a visualization of their score for the user)
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: ["Incorrect", "Correct"],
+          datasets: [{
+              label: 'Score Report',
+              data: dataset,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(75, 192, 192, 1)',
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(75, 192, 192, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+
+  $('#post-form').on('submit', function(event){
+      event.preventDefault();
+      grade_question();
+  });
+
+  var current_score = [];
+
+  var max_questions = 1;
+ 
+  function calculateScore() {
+    var score = JSON.parse(localStorage.getItem("{{unit_id}}"));
+
+    var incorrect_count = 0;
+    var correct_count   = 0;
+    for (i = 0; i < score.length; i++ ) {
+      if ( score[i] == "correct" ) {
+        correct_count++;
+      } else {
+        incorrect_count++;
+      }
+    }
+    var total_score = correct_count/(incorrect_count+correct_count);
+
+    var score = new Object();
+    score.correct = correct_count;
+    score.incorrect = incorrect_count;
+    score.percent_correct = total_score;
+    score.max_questions = Number(max_questions);
+
+    $('#progress_bar_correct').css('width', (score.correct/score.max_questions*100)+'%').attr('aria-valuenow', (score.correct/score.max_questions*100));
+    $('#progress_bar_incorrect').css('width', (score.incorrect/score.max_questions*100)+'%').attr('aria-valuenow', (score.incorrect/score.max_questions*100));
+
+    return score;
+  }
+
+
+  function displayScore() {
+    var score = JSON.parse(localStorage.getItem("{{unit_id}}"));
+    $('#score_graph').fadeIn().removeClass('fade').css('display', 'block');
+    $('#score_graph_options').fadeIn().removeClass('fade').css('display', 'block');
+
+    var final_score = correct_count/(incorrect_count+correct_count);
+    if ( final_score >= 0.8 ) {
+      window.scrollTo(0,0);
+      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+        for (var i = 0; i < 250; i++) {
+          create(i);
+        }
+    } else {
+      window.scrollTo(0,0);
+      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b></div>');
+    }
+    myChart.data.datasets[0].data[1] = correct_count;
+    myChart.data.datasets[0].data[0] = incorrect_count;
+    myChart.update();
+  }
+
+  Array.prototype.randomElement = function () {
+      return this[Math.floor(Math.random() * this.length)]
+  }
+
+  Array.prototype.remove = function() {
+      var what, a = arguments, L = a.length, ax;
+      while (L && this.length) {
+          what = a[--L];
+          while ((ax = this.indexOf(what)) !== -1) {
+              this.splice(ax, 1);
+          }
+      }
+      return this;
+  };
+
+
+  var question            = "{{question|safe}}";
+  var correct_choice      = "{{correct_choice|safe}}";
+  correct_choice = correct_choice.substr(correct_choice.indexOf("'")+1,correct_choice.length);
+  correct_choice = correct_choice.substr(0,correct_choice.indexOf("'"));
+
+  console.log(correct_choice)
+
+  var unit_id = "{{unit_id}}";
+  var form_id = "{{form_id}}";
+
+  var end_of_quiz = false;
+
+  /* Warn user before reloading the quiz (and losing all progress!) */
+  window.onbeforeunload = function ()
+  {
+     return "";
+  };
+
+
+  function submitReport() {
+    var error_type = document.getElementById("error_type");
+    var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
+    var error_description = document.getElementById("error_description").value;
+
+    $.ajax({
+      url : "/error/report",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: current_question_id, module: 'quiz', categories: JSON.stringify(selected), description: error_description },
+      success : function(response) {
+        console.log(response);
+
+        $('#error_report_modal').modal('toggle')
+        alert('Error successfully reported! Thank you!')
+      },
+      error : function(xhr,errmsg,err) {
+        alert('There was an error submitting this error report :(')
+      }
+    });
+
+  }
+
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  var incorrect_count = 0;
+  var correct_count   = 0;
+
+  function grade_question() {
+    var is_choice_correct     = $('input[name=choice]:checked');
+    var is_choice_correct     = is_choice_correct[0];
+    is_choice_correct         = $(is_choice_correct).attr('is_correct')
+    if (is_choice_correct == 'True') {
+      correct_count++;
+    } else {
+      incorrect_count++;
+      $(`#error_modal`).modal(`show`);
+    }
+    displayScore();
+  }
+
+   
+
+  function create(i) {
+    var width = Math.random() * 8;
+    var height = width * 0.4;
+    var colourIdx = Math.ceil(Math.random() * 3);
+    var colour = "red";
+    switch(colourIdx) {
+      case 1:
+        colour = "yellow";
+        break;
+      case 2:
+        colour = "blue";
+        break;
+      default:
+        colour = "red";
+    }
+    $('<div class="confetti-'+i+' '+colour+'"></div>').css({
+      "width" : width+"px",
+      "height" : height+"px",
+      "top" : -Math.random()*20+"%",
+      "left" : Math.random()*100+"%",
+      "opacity" : Math.random()+0.5,
+      "transform" : "rotate("+Math.random()*360+"deg)"
+    }).appendTo('.confetti_wrapper');  
+    
+    drop(i);
+  }
+
+  function drop(x) {
+    $('.confetti-'+x).animate({
+      top: "100%",
+      left: "+="+Math.random()*15+"%"
+    }, Math.random()*3000 + 3000, function() {
+      reset(x);
+    });
+  }
+
+  function reset(x) {
+    $('.confetti-'+x).animate({
+      "top" : -Math.random()*20+"%",
+      "left" : "-="+Math.random()*15+"%"
+    }, 0, function() {
+      drop(x);             
+    });
+  }
+
+</script>
+
+{% endblock %}
