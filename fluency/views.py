@@ -114,3 +114,18 @@ def fluency_view(request, quiz_id, deck_id ):
             'total_flashcards'   	: max_flashcards,
             'pages'             	: pages,
         })
+
+def fluency_flashcard_inspector(request, flashcard_id ):
+    pages = Pages.objects.order_by('order')
+    # get
+    if request.method == 'GET':
+
+        flashcard  = get_object_or_404(Flashcard, pk=flashcard_id)
+        correct_choice = list(Choice.objects.filter(flashcard_id=flashcard.id).values_list('id', 'choice_text', 'is_correct'))
+
+
+        return render(request, 'fluency_flashcard_inspector.html', {
+            'flashcard' : flashcard,
+            'choices'   : correct_choice,
+            'pages'     : pages,
+        })

@@ -337,6 +337,10 @@
   var correct_count   = 0;
 
   function grade_question() {
+
+    incorrect_count = 0;
+    correct_count   = 0;
+    
     var is_choice_correct     = $('input[name=choice]:checked');
     var is_choice_correct     = is_choice_correct[0];
     is_choice_correct         = $(is_choice_correct).attr('is_correct')
