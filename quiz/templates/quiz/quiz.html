@@ -401,14 +401,16 @@
         //console.log(id_list, id);
 
         localStorage.setItem(unit_id + "_question_ids", JSON.stringify(id_list));
-
+        
         if ( typeof(id) === "undefined" ) {
           end_of_quiz = true;
+          /*
           window.onbeforeunload = function () {
             // blank function do nothing
           }
+          */
         }
-
+        
         console.log(form_id, id, unit_id, q, choice_id);
         $.ajax({
           url : "/quiz/{{unit_id}}/form_"+form_id+"/",
