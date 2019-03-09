@@ -14,7 +14,9 @@
     <div  id="question_text">
       <p class="mt-2" style="line-height: 2rem;">
         Question #<span id="questionNumber">1 </span> of {{ total_questions|add:"2" }} — <small>
-          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">Form {{ form }}</span><br>
+          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">
+            Form {{ form }} &nbsp&nbsp {{ task_item }}
+          </span><br>
           <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
           &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a>
           <br>
@@ -438,9 +440,10 @@
                       </label><br />
                   `);
                 }
+
                 window.scrollTo(0,0);
                 $('#results').html('<div class="alert alert-success" role="alert"><b>Well done!</b> You got the previous question correct.</div>');
-                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+(max_questions+2)+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span>&nbsp&nbsp&nbsp<a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a></small></p>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+(max_questions+2)+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +' &nbsp&nbsp '+ response.task_item +'</span>&nbsp&nbsp&nbsp<a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a></small></p>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
               } else {
                 if ( end_of_quiz == true && response.is_correct == true) {
                   current_score.push("correct");
@@ -479,7 +482,7 @@
                         `);
                     }
                     $('#results').html('<div class="alert alert-warning" role="alert"><b>Oops!</b> You got question #'+(max_questions - id_list.length - 1)+' incorrect. <a href="#" class="redisplay-error-modal" onClick="$(`#error_modal`).modal(`show`);"><b>Wanna see why again?</b></a></div>');
-                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+(max_questions+2)+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name +'</span>&nbsp&nbsp&nbsp<a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a></p></span></small>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
+                    $('#question_text').html('<p class="mt-2">Question #<span id="questionNumber">'+(max_questions - id_list.length)+'</span> of '+(max_questions+2)+'  — <small><span class="p-1 border-info rounded text-white bg-primary font-weight-bold" style="margin-right: 5px;">'+response.unit_name+' Practice Quiz</span><span class="p-1 border-info rounded text-white bg-info font-weight-bold"> Form '+ response.form_short_name  +' &nbsp&nbsp '+ response.task_item +'</span>&nbsp&nbsp&nbsp<a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a></p></span></small>' + '<h6 style="font-size: 1.2rem;font-weight: normal"style="margin-top: 5px;">' + response.next_question_text + '</h6>');
                   }
                 }
               }

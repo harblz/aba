@@ -13,7 +13,7 @@ import random
 
 from django.utils import timezone
 
-from .models import Unit, Form, Choice, Question
+from .models import Unit, Form, Choice, Question, Task
 from pages.models import Pages
 
 def quiz_index(request):
@@ -58,11 +58,13 @@ def quiz_view(request, quiz_id, form_id ):
         question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
         unit_id             = quiz_id
+        task_item           = Task.objects.get(pk=question.task_list_item_id).task_name
         max_questions       = len(queryset_ids)
 
         return render(request, 'quiz/quiz.html', {
             'form'              : form_name,
             'form_id'           : form_id,
+            'task_item'         : task_item,
             'question_ids'      : json.dumps(list(queryset_ids), cls=DjangoJSONEncoder),
             'question'          : question,
             'first_question_id' : first_question_id,
@@ -109,6 +111,8 @@ def quiz_view(request, quiz_id, form_id ):
             next_question_question_hint = next_question.question_hint
 
 
+        task_item               = Task.objects.get(pk=next_question.task_list_item_id).task_name
+
         return JsonResponse({
             'form'                  : form_name,
             'form_id'               : form_id,
@@ -124,5 +128,6 @@ def quiz_view(request, quiz_id, form_id ):
             'prev_question_choice'  : prev_question_choice,
             'next_question_id'      : next_question_id,
             'next_question_text'    : next_question_question_text,
-            'next_question_choices' : next_question_choices
+            'next_question_choices' : next_question_choices,
+            'task_item'         : task_item
             })
