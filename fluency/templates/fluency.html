@@ -354,6 +354,7 @@
     var clone = document.importNode(flashcard_template.content, true)
 
     choices = flashcards[current_flashcard]["fields"]["flashcard_choices"];
+    console.log('qq',choices);
     choices = choices.substr(2,choices.length);
     choices = choices.substr(0,choices.length-2);
 

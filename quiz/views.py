@@ -78,21 +78,15 @@ def quiz_view(request, quiz_id, form_id ):
     else:
         form_name               = Form.objects.get(pk=form_id).form_name
         form_short_name         = Form.objects.get(pk=form_id).form_short_name
-        attempt                 = request.POST.get('selected_choice')
-        attempt_id              = request.POST.get('selected_choice_id')
-        prev_question_choice    = Choice.objects.get(id=attempt_id).choice_text
         next_question_id        = request.POST.get('next_question_id')
+        prev_question_id        = request.POST.get('prev_question_id')
         quiz_id                 = request.POST.get('unit_id')
 
         quiz_name               = Unit.objects.get(id=quiz_id)
 
-        Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
+        #Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
 
-        selected_choice     = Choice.objects.get(pk=attempt_id)
-        prev_question_id    = selected_choice.question_id 
-        prev_question       = Question.objects.get(pk=prev_question_id)
-        correct_choice      = Choice.objects.get(question_id=prev_question_id, is_correct=1).choice_text
-
+        #1 at the end of the test, don't worry if there is no next question
         try:
             next_question               = Question.objects.get(pk=next_question_id)
             
@@ -107,27 +101,34 @@ def quiz_view(request, quiz_id, form_id ):
             next_question               = Question.objects.get(pk=next_question_id)
             next_question_choices       = Choice.objects.filter(question_id=next_question_id)
             next_question_choices       = [{'id' : item.id, 'choice': item.choice_text} for item in next_question_choices]
-            next_question_question_text = next_question.question_text
-            next_question_question_hint = next_question.question_hint
+            next_question               = list(Question.objects.filter(pk=next_question_id).values_list('id', 'question_text', 'question_hint', 'task_list_item_id'))
+
+    
+        #2 at the start of the test, don't worry if there is no prev question
+        try:
+            prev_question       = Question.objects.get(pk=prev_question_id)
+
+        except(KeyError, Question.DoesNotExist):
+            prev_question = None
+
+        if ( prev_question == None):
+            choices         = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
+            prev_question   = None 
+
+        else:
+            choices = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
+            prev_question = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text'))
 
 
-        task_item               = Task.objects.get(pk=next_question.task_list_item_id).task_name
+        task_item     = Task.objects.get(pk=next_question[0][3]).task_name
 
         return JsonResponse({
             'form'                  : form_name,
             'form_id'               : form_id,
             'form_short_name'       : form_short_name,
             'unit_name'             : quiz_name.unit_name,
-            'question_id'           : next_question_id,
-            'question_hint'         : next_question_question_hint,
-            'choice_text'           : prev_question_choice,
-            'is_correct'            : selected_choice.is_correct,
-            'correct_choice_text'   : correct_choice,
-            'prev_question_was'     : prev_question.question_text,
-            'prev_question_hint'    : prev_question.question_hint,
-            'prev_question_choice'  : prev_question_choice,
-            'next_question_id'      : next_question_id,
-            'next_question_text'    : next_question_question_text,
-            'next_question_choices' : next_question_choices,
-            'task_item'         : task_item
+            'choices'               : choices,
+            'next_question'         : next_question,
+            'prev_question'         : prev_question,
+            'task_item'             : task_item
             })

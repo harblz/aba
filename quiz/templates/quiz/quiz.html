@@ -11,22 +11,9 @@
     <!-- Displays the Quiz Results at the end !-->
     <div id="results"></div>
 
-    <div  id="question_text">
-      <p class="mt-2" style="line-height: 2rem;">
-        Question #<span id="questionNumber">1 </span> of {{ total_questions|add:"2" }} — <small>
-          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">
-            Form {{ form }} &nbsp&nbsp {{ task_item }}
-          </span><br>
-          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold">{{ unit_name }} Practice Quiz</span>
-          &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a>
-          <br>
-        </small>
-      </p>
-
-      <h6 style="font-size: 1.2rem;font-weight: normal;margin-top: 5px;">
-        {{ question.question_text|safe }}
-      </h6>
+    <div id="question_text_wrapper">
     </div>
+
 
     <br>
 
@@ -40,56 +27,15 @@
       <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
     </div>
 
-    <div id="choice_menu" class="panel panel-primary">
-      <div class="panel-heading">
-        <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
-      </div>
-      <div class="panel-body">
-        <form action="/quiz/{{ unit_id }}/form_{{form_id}}/grade_question/" method="POST" id="post-form">
-        {% csrf_token %}
-        <div id="choices">
-        {% for choice in question.choice_set.all %}
-              <label class="quiz-choice-labels">
-                <table id="table-choices" style="table-layout: fixed;width:100%;">
-                  <tr style="width:100%;display:table-row;border-radius: 15px;">
-                    <td style="vertical-align: top;width:15px;">
-                      <input type="radio" name="choice" id="{{ choice.id }}" value="{{ choice.id }}" />
-                    </td>
-                    <td>
-                      <span class="quiz-choice-labels" style="font-weight: normal">{{ choice.choice_text|safe }}</span>
-                    </td>
-                  </tr>
-                </table>
-              </label>
-              <br />
-        {% endfor %}
-        </div>
-      </div>
-      <div class="panel-footer">
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-          <div class="btn-group" role="group">
-            <button type="button" data-toggle="collapse" data-target="#hint" class="btn btn-default">Give me a hint!</button>
-          </div>
-          <div class="btn-group" role="group">
-            <button type="submit" id="post-form" class="btn btn-info"><b>Submit Answer</b></button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div id="choice_menu_wrapper">
     </div>
 
-    <div class="collapse" id="hint">
-      <div style="margin: 25px;">
-        <h3>Here's a hint:</h3>
-        {{ question.question_hint|safe }}
-      </div>
+    <div id="hint_wrapper">
     </div>
 
     <br /><br />
     <br /><br />
-
   </span>
-
 
   <div class="container" style="text-align: center;">
     <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
@@ -144,6 +90,78 @@
   <!-- Disqus Code !-->
   <div id="disqus_thread" class="collapse col-12"></div>
 
+
+  <template id="question_text_template">
+    <div id="question_template_text">
+      <p class="mt-2" style="line-height: 2rem;">
+        Question #<span id="questionNumber">1 </span> of <span id="template_question_max"></span> — <small>
+          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">
+            <span id="template_question_form">Form</span>
+          </span><br>
+          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold"><span id="template_unit_name"></span> Practice Quiz</span>
+          &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a>
+          <br>
+        </small>
+      </p>
+
+      <h6 style="font-size: 1.2rem;font-weight: normal;margin-top: 5px;">
+        <span id="template_question_text"></span>
+      </h6>
+    </div>
+  </template>
+
+  <template id="hint_template">
+    <div id="hint" class="collapse" style="margin: 25px;">
+      <h3>Here's a hint:</h3>
+      <span id="hint_template_text">Hint is still loading...</span>
+    </div>
+  </template>
+
+  <!-- Choice Wrapper Template !-->
+  <template id="choice_text_template">
+    <div id="choice_menu" class="panel panel-primary">
+      <div class="panel-heading">
+        <h5 style="font-size: 1rem;font-weight: normal" class="font-italic panel-title">Select the best answer from these choices:</h5>
+      </div>
+      <div class="panel-body">
+        <form id="choice_form" action="/quiz/{{ unit_id }}/form_{{form_id}}/grade_question/" method="POST" id="post-form">
+        <!-- CSRF Token !-->
+        <span id="csrf_token"></span>
+        <div id="choices_wrapper">
+          <!-- Options Template Goes Here !-->
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" data-toggle="collapse" data-target="#hint" class="btn btn-default">Give me a hint!</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="submit" id="post-form" onClick="grade_question(event)" class="btn btn-info"><b>Submit Answer</b></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Option Template !-->
+  <template id="choice_template">
+    <label class="quiz-choice-labels">
+      <table id="table-choices" style="table-layout: fixed;width:100%;">
+        <tr style="width:100%;display:table-row;border-radius: 15px;">
+          <td style="vertical-align: top;width:15px;">
+            <input type="radio" name="choice" id="choice_template_input" is_correct="false" />
+          </td>
+          <td>
+            <span id="choice_template_text" class="quiz-choice-labels" style="font-weight: normal"></span>
+          </td>
+        </tr>
+      </table>
+    </label>
+    <br />
+  </template>
+
   <script>
 
   /**
@@ -195,6 +213,8 @@
   </div>
 
 
+
+
 <script>
   var dataset = [];
 
@@ -231,7 +251,7 @@
 
   $('#post-form').on('submit', function(event){
       event.preventDefault();
-      grade_question();
+      grade_question(event);
   });
 
   var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
@@ -247,8 +267,9 @@
   });
 
   var current_score = [];
+
+  var unit_id = "{{unit_id}}";
   localStorage.setItem("{{unit_id}}",JSON.stringify(current_score));
-  console.log("Unit ID: {{unit_id}}");
 
   var max_questions = Number("{{total_questions}}");
  
@@ -274,6 +295,16 @@
 
     $('#progress_bar_correct').css('width', (score.correct/score.max_questions*100)+'%').attr('aria-valuenow', (score.correct/score.max_questions*100));
     $('#progress_bar_incorrect').css('width', (score.incorrect/score.max_questions*100)+'%').attr('aria-valuenow', (score.incorrect/score.max_questions*100));
+
+    /* Check for End of Quiz */
+    var remaining_questions = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).length;
+    if (remaining_questions == 0 ) {
+      displayScore();
+      document.querySelector("#question_text_wrapper").remove();
+      document.querySelector("#hint_wrapper").remove();
+      document.querySelector("#choice_menu_wrapper").remove();
+    }
+
 
     return score;
   }
@@ -325,15 +356,13 @@
 
 
   var question_ids        = JSON.parse("{{question_ids}}");
-  var first_question_id   = JSON.parse("{{first_question_id}}");
-  var current_question_id = first_question_id;
-  console.log(current_question_id);
 
+  var prev_question_id = 0;
   var unit_id = "{{unit_id}}";
   var form_id = "{{form_id}}";
   var form_id = "{{form_id}}";
+  var csrf    = "{{csrf_token}}";
 
-  question_ids = question_ids.remove(first_question_id);
   localStorage.setItem(unit_id + "_question_ids",JSON.stringify(question_ids));
 
   var end_of_quiz = false;
@@ -355,8 +384,6 @@
       type : "POST",
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: current_question_id, module: 'quiz', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
-        console.log(response);
-
         $('#error_report_modal').modal('toggle')
         alert('Error successfully reported! Thank you!')
       },
@@ -364,7 +391,6 @@
         alert('There was an error submitting this error report :(')
       }
     });
-
   }
 
 
@@ -387,6 +413,7 @@
     return array;
   }
 
+  /*
   function grade_question() {
 
       var choice_id  = $('input[name=choice]:checked').attr("id");
@@ -401,17 +428,13 @@
         //console.log(id_list, id);
 
         localStorage.setItem(unit_id + "_question_ids", JSON.stringify(id_list));
-        
+
         if ( typeof(id) === "undefined" ) {
           end_of_quiz = true;
-          /*
           window.onbeforeunload = function () {
             // blank function do nothing
           }
-          */
         }
-        
-        console.log(form_id, id, unit_id, q, choice_id);
         $.ajax({
           url : "/quiz/{{unit_id}}/form_"+form_id+"/",
           type : "POST",
@@ -420,7 +443,7 @@
               $('#results').html('');
               $('#questionNumber').html(max_questions - id_list.length);
               if ( end_of_quiz == false ) { 
-                //$('#hint').collapse('hide').html("<br><h3>Here's a hint:</h3>" + response.question_hint);
+                $('#hint').collapse('hide').html("<br><h3>Here's a hint:</h3>" + response.question_hint);
               } else {
                 $('#hint').html('');
               }
@@ -503,7 +526,122 @@
         $('#results').html('<div class="alert alert-warning" role="alert"><b>Did you forget to make a choice??<br/> <strong>You clicked submit without picking a choice!</submit></div>');
       }
   };
+  */
 
+  function grade_question(event) {
+    var status = document.querySelector('input[name="choice"]:checked').is_correct;
+    console.log(status);
+
+    if ( status === true ) {
+      console.log('Nice job!')
+      current_score.push("correct");              
+      localStorage.setItem(unit_id,JSON.stringify(current_score));
+      calculateScore();
+    } else {
+      console.log('qq');
+      current_score.push("incorrect");              
+      localStorage.setItem(unit_id,JSON.stringify(current_score));
+      calculateScore();
+    }
+
+
+    get_next_question();
+    
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    // Handler when the DOM is fully loaded
+    get_next_question();
+  });
+
+  function get_next_question() {
+    var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
+    JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
+    var id_list = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
+    localStorage.setItem(unit_id + "_question_ids", JSON.stringify(id_list));
+
+    $.ajax({
+      url : "/quiz/{{unit_id}}/form_"+form_id+"/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': csrf, next_question_id : id, prev_question_id: prev_question_id, unit_id: unit_id, form_id: form_id },
+      success : function(response) {
+
+        console.log(response);
+
+        /* Question Text Template */
+        document.querySelector("#question_text_wrapper").innerHTML = '';
+
+        var question_template  = document.querySelector("#question_text_template")
+
+        var question_text_wrapper = document.querySelector("#question_text_wrapper")
+
+        var clone = document.importNode(question_template.content, true)
+        
+
+        clone.querySelector("#template_question_form").innerHTML = 'Form ' + response.form_short_name + ' &nbsp&nbsp ' + response.task_item;
+        clone.querySelector("#template_unit_name").innerHTML = response.unit_name;
+        clone.querySelector("#template_question_max").innerHTML = max_questions;
+        clone.querySelector("#template_question_text").innerHTML = response.next_question[0][1];
+        prev_question_id = response.next_question[0][0];
+        question_text_wrapper.appendChild(clone)
+
+
+        /* Hint Text Template */
+        document.querySelector("#hint_wrapper").innerHTML = '';
+
+        var hint_template  = document.querySelector("#hint_template")
+
+        var hint_wrapper = document.querySelector("#hint_wrapper")
+
+        var clone = document.importNode(hint_template.content, true)
+
+        clone.querySelector("#hint_template_text").innerHTML = response.next_question[0][2]
+
+        hint_wrapper.appendChild(clone)
+        
+
+
+        /* Choice Wrapper Template */
+        document.querySelector("#choice_menu_wrapper").innerHTML = ''
+
+        var choice_wrapper_template  = document.querySelector("#choice_text_template")
+
+        var choice_menu_wrapper = document.querySelector("#choice_menu_wrapper")
+
+        var clone = document.importNode(choice_wrapper_template.content, true)
+
+        choices = response.choices;
+        console.log(choices);
+
+        clone.querySelector("#choice_form").action = '/quiz/'+unit_id+'/form_'+form_id+'/grade_question/'
+          
+        clone.querySelector("#choices_wrapper").innerHTML = ''
+        for (i = 0; i < choices.length; i++) {
+
+          /* Choice Template */
+          var choice_template  = document.querySelector("#choice_template")
+
+          var choices_wrapper = clone.querySelector("#choices_wrapper")
+
+          var choice_clone = document.importNode(choice_template.content, true)
+          choice_clone.querySelector('#choice_template_text').innerHTML = response.choices[i][1]
+          choice_clone.querySelector('#choice_template_input').is_correct = response.choices[i][2]
+
+          choices_wrapper.appendChild(choice_clone)
+
+        }
+
+
+        choice_menu_wrapper.appendChild(clone)
+
+      },
+      error : function(xhr,errmsg,err) {
+
+      }
+    });
+    highlightAnswers();
+    window.scrollTo(0,0);
+  }
 
   function create(i) {
     var width = Math.random() * 8;
