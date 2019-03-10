@@ -112,12 +112,14 @@ def quiz_view(request, quiz_id, form_id ):
             prev_question = None
 
         if ( prev_question == None):
-            choices         = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
-            prev_question   = None 
+            choices             = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
+            prev_question       = None
+            prev_correct_choice = None
 
         else:
             choices = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
-            prev_question = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text'))
+            prev_question = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text', 'question_hint', 'task_list_item_id'))
+            prev_correct_choice = list(Choice.objects.filter(question_id=prev_question_id, is_correct=True).values_list('choice_text'))
 
 
         task_item     = Task.objects.get(pk=next_question[0][3]).task_name
@@ -130,5 +132,6 @@ def quiz_view(request, quiz_id, form_id ):
             'choices'               : choices,
             'next_question'         : next_question,
             'prev_question'         : prev_question,
+            'prev_correct_choice'   : prev_correct_choice,
             'task_item'             : task_item
             })
