@@ -61,9 +61,9 @@ def redirect_error_report(request):
     else:
         description = 'The user provided this description: <b>' + description + '</b>'
 
-    message = 'Hey there - a user reported a problem in the <b><u>'+ upper(module) +'</b></u> module, for <b>item ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />'+ description +'<br/><br/> They categorized the bug as follows ' + categories[0]
+    message = 'Hey there - a user reported a problem in the <b><u>'+ module.upper() +'</b></u> module, for <b>item ID '+ question_id +'</b>, which reads: <br /><br /> '+item+' <br /><br />'+ description +'<br/><br/> They categorized the bug as follows ' + categories[0]
 
-    subject = 'ABA.Rocks - Problem Reported in ' + upper(module) + ' module, #' + item_id
+    subject = 'ABA.Rocks - Problem Reported in ' + module.upper() + ' module, #' + item_id
 
     send_mail(subject,
         'Hey there - a user reported a problem on question ID '+ question_id +' with this description: ' + description + 'and the following categories were ' + categories[0],
