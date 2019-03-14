@@ -389,6 +389,8 @@
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
     var error_description = document.getElementById("error_description").value;
 
+    console.log(current_question_id, selected, error_description);
+
     $.ajax({
       url : "/error/report",
       type : "POST",
@@ -440,8 +442,8 @@
       current_score.push("incorrect");              
       localStorage.setItem(unit_id,JSON.stringify(current_score));
       calculateScore();
-      //$('#error_modal').modal('toggle')
-      document.getElementById("error_modal_button").click();
+      $('#error_modal').modal('toggle')
+      //document.getElementById("error_modal_button").click();
     }
 
 
@@ -456,7 +458,8 @@
 
   function get_next_question() {
     var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
-    var current_question_id = id; /* This is for the error report modal */
+    console.log(id);
+    current_question_id = id; /* This is for the error report modal */
     JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
     var id_list = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
     localStorage.setItem(unit_id + "_question_ids", JSON.stringify(id_list));
