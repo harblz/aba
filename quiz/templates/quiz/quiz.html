@@ -495,7 +495,7 @@
         document.querySelector('#error_modal_message').innerHTML = '';
         document.querySelector('#error_modal_message').innerHTML += "<span style='color: red;'>Your answer was... <b> " + selected_choice + "</b></span><br><br>";
         document.querySelector('#error_modal_message').innerHTML += "<span style='color: green;'>The correct response was... <b> " + response.prev_correct_choice + "</b></span><br>";
-        document.querySelector('#error_modal_message').innerHTML += response.next_question[0][2];
+        document.querySelector('#error_modal_message').innerHTML += response.prev_question_hint;
         question_text_wrapper.appendChild(clone)
 
 

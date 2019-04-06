@@ -115,12 +115,13 @@ def quiz_view(request, quiz_id, form_id ):
             choices             = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
             prev_question       = None
             prev_correct_choice = None
+            prev_question_hint   = None
 
         else:
-            choices = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
-            prev_question = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text', 'question_hint', 'task_list_item_id'))
+            choices             = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
+            prev_question       = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text', 'question_hint', 'task_list_item_id'))
             prev_correct_choice = list(Choice.objects.filter(question_id=prev_question_id, is_correct=True).values_list('choice_text'))
-
+            prev_question_hint   = prev_question[0][2]
 
         task_item     = Task.objects.get(pk=next_question[0][3]).task_name
 
@@ -132,6 +133,7 @@ def quiz_view(request, quiz_id, form_id ):
             'choices'               : choices,
             'next_question'         : next_question,
             'prev_question'         : prev_question,
+            'prev_question_hint'    : prev_question_hint,
             'prev_correct_choice'   : prev_correct_choice,
             'task_item'             : task_item
             })
