@@ -27,13 +27,14 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 
-from .views import redirect_error_report, redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm
+from .views import redirect_error_report, redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm, redirect_thanks
 
 urlpatterns = [
     url(r'^error/report', redirect_error_report),
     url(r'^admin/', admin.site.urls),
     url(r'^research/', redirect_research),
     url(r'^coffee/', redirect_coffee),
+    url(r'^thanks/', redirect_thanks),
     url(r'^blog_coffee_checkout/', redirect_coffee_confirm),
     url(r'^study/', redirect_study),
     url(r'^$', redirect_root),

@@ -12,5 +12,6 @@ urlpatterns = [
     path('<slug:slug>', views.post_details_by_slug, name='post_details_by_slug'),
     url(r'^research$', views.blog_research, name='research'),
     url(r'^coffee$', views.blog_coffee, name='coffee'),
-    url(r"^blog_coffee_checkout$", views.blog_coffee_checkout, name="blog_coffee_checkout")
+    url(r"^blog_coffee_checkout$", views.blog_coffee_checkout, name="blog_coffee_checkout"),
+    url(r"^thanks$", views.thanks, name="thanks")
 ]

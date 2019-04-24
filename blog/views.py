@@ -19,6 +19,7 @@ from django.http import JsonResponse
 from django.core import serializers
 
 def blog_coffee_checkout(request):
+    pages = Pages.objects.order_by('order')
     stripe.api_key = "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7"
 
     if request.method == "POST":
@@ -41,8 +42,14 @@ def blog_coffee_checkout(request):
     else:
         #new_car.save()
         donation = int(donation) / 100.00
-        return render(request, 'blog/thanks.html', { 'donation' : donation })
+        return render(request, 'blog/thanks.html', { 'pages': pages, 'donation' : donation })
         # The payment was successfully processed & the user's card was charged - confirm with them how much
+
+def thanks(request):
+    pages = Pages.objects.order_by('order')
+    return render(request, 'blog/thanks.html', { 'pages': pages })
+
+
 
 def blog_coffee(request):
     pages = Pages.objects.order_by('order')

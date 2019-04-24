@@ -42,10 +42,28 @@
 
 		        <br />
 
-		    	<p>If you'd like to buy me a cup of coffee, type your donation in below</p>
+		    	<p>If you'd like to show ABA.Rocks some love, buy me a cup of coffee, we have 2 methods:</p>
 
+		    	<br />
+		    	<hr>
+		    	<br />
+	        	<h3>Support ABA.Rocks through PayPal</h3>
 
-	        	<br />
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="HAENFYZRBLQM2" />
+					<input type="image" src="https://aba.rocks/static/img/paypal-logo-small.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /> &nbsp&nbsp <br /><br />
+					<a type="button" href="https://www.paypal.com/donate/?token=2iIiZCGNmyMVjqr_JXgoUCwUxiBpzfEbYPBbAyR6scLKwrL1YunAJXJaF2Qi3mf03b1iMG&country.x=US&locale.x=US&Z3JncnB0=" class="btn btn-primary font-weight-bold" alt="Donate with PayPal button" >Donate with PayPal</a>
+					<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+				</form>
+		    	<br />
+	        	<hr>
+		    	<br />
+	        	<h3>Show Some Love via Stripe</h3>
+
+	        	<img alt="Donate with Stripe button" border="0" src="https://aba.rocks/static/img/stripe-preview-web.png" title="Stripe - the new standard in online payments" height="50" width="75" />
+		    	<br />
+		    	<br />
 
 				<form action="/blog_coffee_checkout/" method="post" id="payment-form">
 				    <div class="form-row">
@@ -76,7 +94,8 @@
 
 					<br /><br />
 
-			  		<button class="btn btn-primary">Donate</button>
+			  		<button class="btn btn-primary font-weight-bold">Submit Domation</button>
+			  		<h4 class="subtitle font-weight-boldt text-muted mt-2">You'll get a chance to review your details before submitting!</h4>
 				</form>
 
 				<script language='javascript' type='text/javascript'>

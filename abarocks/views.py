@@ -24,6 +24,10 @@ def redirect_study(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'quiz/study.html', { 'pages': pages })
 
+def redirect_thanks(request):
+    pages           = Pages.objects.order_by('order')
+    return render(request, 'quiz/thanks.html', { 'pages': pages })
+
 def redirect_research(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     pages = Pages.objects.order_by('order')

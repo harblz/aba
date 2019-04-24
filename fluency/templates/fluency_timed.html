@@ -232,7 +232,7 @@
   var current_flashcard       = 0;
   var max_flashcards          = Number("{{total_flashcards}}");
 
-  var flashcards              = `{{ flashcards|safe }}`;
+  var flashcards              = `{{ flashcards|escapejs }}`;
   flashcards = JSON.parse(flashcards);
   flashcards                  = shuffle(flashcards);
 
@@ -433,7 +433,12 @@
   }
 
   function showHint() {
-    document.querySelector(".flashcard_prompt").style.display = "block";
+    var feedback_display_state = document.querySelector(".flashcard_prompt").style.display;
+    if (feedback_display_state == 'block') {
+       feedback_display_state = 'none;';
+    } else {
+      feedback_display_state = 'block;';
+    }
   }
 
   // Score Pie Chart (generates a visualization of their score for the user)

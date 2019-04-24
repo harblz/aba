@@ -81,6 +81,12 @@ class Task(models.Model):
     def get_task_id(self):
         return self.task_id
 
+
+class Quiz_Scores(models.Model):
+    id              = models.AutoField(primary_key=True, editable=False)
+    unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    form_id         = models.ForeignKey(Form, on_delete=models.CASCADE)
+    date            = models.DateTimeField(auto_now_add=True)
  
 class Question(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)

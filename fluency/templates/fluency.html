@@ -218,7 +218,7 @@
   var current_flashcard       = 0;
   var max_flashcards          = Number("{{total_flashcards}}");
 
-  var flashcards            = `{{ flashcards|safe }}`;
+  var flashcards            = `{{ flashcards|escapejs }}`;
   // for valid JSON, trim away line breaks
   flashcards = flashcards.trim();
   flashcards = flashcards.replace(/(\r\n|\n|\r)/gm, "");
@@ -394,7 +394,7 @@
     var hint = flashcards[current_flashcard]["fields"]["flashcard_hint"];
 
     clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
-    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length) + "</p>";
+    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length) + "</p><p><button onClick='hideFeedback()' class='btn btn-danger'>OK, I got it</button></p>";
 
     flashcard.appendChild(clone)
 
@@ -404,8 +404,18 @@
     }
   }
 
+
   function showHint() {
-    document.querySelector(".flashcard_prompt").style.display = "block";
+    var feedback_display_state = document.querySelector(".flashcard_prompt").style.display;
+    if (feedback_display_state == 'block') {
+       document.querySelector(".flashcard_prompt").style.display = 'none';
+    } else {
+      document.querySelector(".flashcard_prompt").style.display = 'block';
+    }
+  }
+
+  function hideFeedback() {
+    document.getElementById('flashcard_negative_feedback').style.display = 'none';
   }
 
   // Score Pie Chart (generates a visualization of their score for the user)
