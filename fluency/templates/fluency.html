@@ -35,9 +35,10 @@
             <canvas id="myChart" width="400" height="400"></canvas>
           </div>
           <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
-            <a href="." class="btn btn-info">Restart Quiz</a>
-            <a href="/fluency" class="btn btn-success">Back to SAFMEDS Menu</a>
-            <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
+            <a href="." class="btn btn-info font-weight-bold">Restart Flashcards</a>
+            <a href="timed" class="btn btn-primary font-weight-bold">Get Fluent!</a>
+            <a href="/fluency" class="btn btn-success font-weight-bold">Back to SAFMEDS Menu</a>
+            <a href="/study" class="btn btn-secondary font-weight-bold">Back to Study Portal</a>
           </div>
         </div>
 
@@ -95,7 +96,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
-          <button type="button" class="btn btn-primary" onClick="submitReport()">Submit the report</button>
+          <button type="button" class="btn btn-primary" onClick="submitErrorReport())">Submit the report</button>
         </div>
       </div>
     </div>
@@ -248,7 +249,7 @@
     });
   }
 
-  function submitReport() {
+  function submitErrorReport() {
     var flashcard_id = flashcards[current_flashcard].pk;
     var error_type = document.getElementById("error_type");
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
@@ -270,7 +271,6 @@
 
   }
   
-
   function gradeMe(event) {
     tally_vote(event.target.getAttribute("pk"));
 
@@ -283,16 +283,33 @@
       flashcards_incorrect += 1;
       show_negative_feedback = true;
     }
-    calculateScore();
+    score = calculateScore();
+    console.log(score);
 
     current_flashcard = current_flashcard + 1;
 
     if ( current_flashcard == max_flashcards ) {
+      stop = true; // stop the quiz
       displayScore();
-      stop = true;
+      submitScore(score);
     } else {
       next_flashcard();
     }
+  }
+
+  function submitScore(score) {
+    console.log('submitting score')
+    $.ajax({
+      url : "/fluency/score/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', unit_id: unit_id, module: 'fluency_untimed', deck_id: deck_id, fluency_score: score },
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(xhr,errmsg,err) {
+        console.log('Error - ', xhr, errmsg, err)
+      }
+    });
   }
 
   function calculateScore() {

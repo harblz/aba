@@ -307,9 +307,12 @@
     var remaining_questions = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).length;
     if (remaining_questions == 0 ) {
       displayScore();
+      submitScore(total_score);
       document.querySelector("#question_text_wrapper").remove();
       document.querySelector("#hint_wrapper").remove();
       document.querySelector("#choice_menu_wrapper").remove();
+    } else {
+      get_next_question();
     }
 
 
@@ -370,7 +373,6 @@
 
   var unit_id = "{{unit_id}}";
   var form_id = "{{form_id}}";
-  var form_id = "{{form_id}}";
   var csrf    = "{{csrf_token}}";
 
   localStorage.setItem(unit_id + "_question_ids",JSON.stringify(question_ids));
@@ -383,6 +385,21 @@
      return "";
   };
 
+
+  function submitScore(score) {
+      console.log('submitting score')
+    $.ajax({
+      url : "/quiz/score/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', unit_id: unit_id, module: 'quiz', form_id: form_id, quiz_score: score },
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(xhr,errmsg,err) {
+        console.log('Error - ', xhr, errmsg, err)
+      }
+    });
+  }
 
   function submitReport() {
     var error_type = document.getElementById("error_type");
@@ -445,9 +462,6 @@
       $('#error_modal').modal('toggle')
       //document.getElementById("error_modal_button").click();
     }
-
-
-    get_next_question();
     
   }
 

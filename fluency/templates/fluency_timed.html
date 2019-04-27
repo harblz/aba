@@ -50,9 +50,10 @@
             <canvas id="myChart" width="400" height="400"></canvas>
           </div>
           <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
-            <a href="." class="btn btn-info">Restart Quiz</a>
-            <a href="/fluency" class="btn btn-success">Back to SAFMEDS Menu</a>
-            <a href="/study" class="btn btn-secondary">Back to Study Portal</a>
+            <a href="." class="btn btn-info font-weight-bold">Restart Fluency</a>
+            <a href="../" class="btn btn-warning font-weight-bold">Practice Untimed</a>
+            <a href="/fluency" class="btn btn-success font-weight-bold">Back to SAFMEDS Menu</a>
+            <a href="/study" class="btn btn-secondary font-weight-bold">Back to Study Portal</a>
           </div>
         </div>
 
@@ -293,18 +294,34 @@
       flashcards_incorrect += 1;
       show_negative_feedback = true;
     }
-    calculateScore();
+    score = calculateScore();
 
     current_flashcard = current_flashcard + 1;
 
     console.log(current_flashcard, max_flashcards);
 
     if ( current_flashcard == max_flashcards ) {
+      stop = true; // stop the quiz
       displayScore();
-      stop = true;
+      submitScore(score);
     } else {
       next_flashcard();
     }
+  }
+
+  function submitScore(score, time) {
+    console.log('submitting score')
+    $.ajax({
+      url : "/fluency/score/",
+      type : "POST",
+      data : { 'csrfmiddlewaretoken': '{{csrf_token}}', unit_id: unit_id, time: elapsed_time, module: 'fluency_timed', deck_id: deck_id, fluency_score: score },
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(xhr,errmsg,err) {
+        console.log('Error - ', xhr, errmsg, err)
+      }
+    });
   }
 
   function calculateScore() {

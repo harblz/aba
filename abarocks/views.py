@@ -13,6 +13,7 @@ from django.core import serializers
 
 from django.core.mail import send_mail
 
+
 def redirect_root(request):
     posts           = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1]
     pinned_posts    = Post.objects.filter(published_date__lte=timezone.now(),is_pinned=True).order_by('-published_date')
@@ -20,13 +21,16 @@ def redirect_root(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'blog/post_list.html', { 'posts': posts, 'pinned_posts' : pinned_posts, 'pages': pages, 'id' : last_post_id })
 
+
 def redirect_study(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'quiz/study.html', { 'pages': pages })
 
+
 def redirect_thanks(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'quiz/thanks.html', { 'pages': pages })
+
 
 def redirect_research(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -34,7 +38,6 @@ def redirect_research(request):
     return render(request, 'blog/blog_research.html', { 'pages': pages })
 
 def redirect_error_report(request):
-
     #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
     description = request.POST.get("description")
     categories  = request.POST.getlist("categories")
@@ -85,6 +88,7 @@ def redirect_error_report(request):
             'item_id' : item_id,
             'item' : item,
         })
+
 
 def redirect_coffee(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')

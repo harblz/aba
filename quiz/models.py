@@ -82,11 +82,12 @@ class Task(models.Model):
         return self.task_id
 
 
-class Quiz_Scores(models.Model):
+class QuizScore(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)
+    score           = models.DecimalField(blank=True, null=True, decimal_places=3,max_digits=4)
     unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
     form_id         = models.ForeignKey(Form, on_delete=models.CASCADE)
-    date            = models.DateTimeField(auto_now_add=True)
+    date            = models.DateTimeField()
  
 class Question(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)

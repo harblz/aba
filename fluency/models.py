@@ -83,6 +83,23 @@ class Task(models.Model):
         return self.task_id
 
  
+class FluencyUntimedScore(models.Model):
+    id              = models.AutoField(primary_key=True, editable=False)
+    score           = models.DecimalField(blank=True, null=True, decimal_places=3,max_digits=4)
+    unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    deck_id         = models.ForeignKey(Deck, on_delete=models.CASCADE)
+    date            = models.DateTimeField()
+ 
+
+class FluencyTimedScore(models.Model):
+    id              = models.AutoField(primary_key=True, editable=False)
+    score           = models.DecimalField(blank=True, null=True, decimal_places=3,max_digits=4)
+    time_elapsed    = models.DecimalField(blank=True, null=True, decimal_places=3,max_digits=4) # time elapsed to complete quiz in seconds
+    unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    deck_id         = models.ForeignKey(Deck, on_delete=models.CASCADE)
+    date            = models.DateTimeField()
+
+
 class Flashcard(models.Model):
     id                  = models.AutoField(primary_key=True, editable=False)
     flashcard_text      = RichTextField()
@@ -123,9 +140,6 @@ class Flashcard(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 
-
-
- 
 class Choice(models.Model):
     flashcard   = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
     choice_text = RichTextField()

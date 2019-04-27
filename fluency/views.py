@@ -18,9 +18,10 @@ from django.db.models import F
 import random
 
 from django.utils import timezone
+from datetime import datetime    
 
 from pages.models import Pages
-from .models import Unit, Deck, Choice, Flashcard
+from .models import Unit, Deck, Choice, Flashcard, FluencyTimedScore, FluencyUntimedScore
 
 def fluency_index(request):
     pages = Pages.objects.order_by('order')
@@ -45,6 +46,34 @@ def tally_vote(request, choice_id):
 
     return JsonResponse({
             'choice' : choice,
+        })
+
+def submit_score_report(request):
+    #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
+    time_elapsed    = request.POST.get("time")
+    score           = request.POST.get("fluency_score")
+
+    unit_id         = request.POST.get("unit_id")
+    unit            = Unit.objects.get(pk=unit_id)
+
+    deck_id         = request.POST.get("deck_id")
+    deck            = Deck.objects.get(pk=deck_id)
+
+    module          = request.POST.get("module")
+
+    if module == 'fluency_timed':
+        results         = FluencyTimedScore(score=score, time_elapsed=time_elapsed, unit_id=unit, deck_id=deck, date=datetime.now())
+        results.save()
+    
+    if module == 'fluency_untimed':
+        results         = FluencyUntimedScore(score=score, unit_id=unit, deck_id=deck, date=datetime.now())
+        results.save()        
+
+    return JsonResponse({
+            'module'    : module,
+            'unit_id'   : unit_id,
+            'deck_id'   : deck_id,
+            'score'     : score,
         })
 
 def fluency_timed_view(request, quiz_id, deck_id ):
@@ -82,6 +111,7 @@ def fluency_timed_view(request, quiz_id, deck_id ):
             'pages'             	: pages,
         })
 
+
 def fluency_view(request, quiz_id, deck_id ):
     pages = Pages.objects.order_by('order')
     # get
@@ -114,6 +144,7 @@ def fluency_view(request, quiz_id, deck_id ):
             'total_flashcards'   	: max_flashcards,
             'pages'             	: pages,
         })
+
 
 def fluency_flashcard_inspector(request, flashcard_id ):
     pages = Pages.objects.order_by('order')

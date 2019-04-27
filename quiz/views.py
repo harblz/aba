@@ -12,8 +12,9 @@ from django.db.models import F
 import random
 
 from django.utils import timezone
+from datetime import datetime    
 
-from .models import Unit, Form, Choice, Question, Task
+from .models import Unit, Form, Choice, Question, Task, QuizScore
 from pages.models import Pages
 
 def quiz_index(request):
@@ -32,6 +33,7 @@ def quiz_index(request):
         'pages': pages
     })
 
+
 def quiz_question_inspector(request, question_id):
 
     pages = Pages.objects.order_by('order')
@@ -39,13 +41,32 @@ def quiz_question_inspector(request, question_id):
 
     correct_choice = list(Choice.objects.filter(question_id=question.id, is_correct=True).values_list('id', 'choice_text', 'is_correct'))
 
-
-
     return render(request, 'quiz/quiz_question_inspector.html', {
         'question'          : question,
         'correct_choice'    : correct_choice,
         'pages'             : pages,
     })
+
+
+def submit_score_report(request):
+    #send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
+    score           = request.POST.get("quiz_score")
+
+    unit_id         = request.POST.get("unit_id")
+    unit            = Unit.objects.get(pk=unit_id)
+
+    form_id         = request.POST.get("form_id")
+    form            = Form.objects.get(pk=form_id)
+
+    results         = QuizScore(score=score, unit_id=unit, form_id=form, date=datetime.now())
+    results.save()
+
+    return JsonResponse({
+            'unit_id'   : unit_id,
+            'form_id'   : form_id,
+            'score'     : score,
+        })
+
 
 def quiz_view(request, quiz_id, form_id ):
     pages = Pages.objects.order_by('order')

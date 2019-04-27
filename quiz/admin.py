@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 from django.contrib.admin import SimpleListFilter
 
-from .models import Unit, Form, Difficulty, Choice, Question, Task
+from .models import Unit, Form, Difficulty, Choice, Question, Task, QuizScore
 
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
@@ -26,13 +26,17 @@ class FormAdmin(admin.ModelAdmin):
     list_per_page = 100000
     list_filter  = ['form_name', 'form_unit_id']
     search_fields = [  'form_name', 'form_description' ]
-
 admin.site.register(Form, FormAdmin)
 
 
 class TaskInline(admin.TabularInline):
     model = Task
 admin.site.register(Task)
+
+
+class QuizScoreInline(admin.TabularInline):
+    model = QuizScore
+admin.site.register(QuizScore)
 
 
 class DifficultyInline(admin.TabularInline):

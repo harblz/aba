@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 from django.contrib.admin import SimpleListFilter
 
-from .models import Unit, Deck, Difficulty, Choice, Flashcard, Task
+from .models import Unit, Deck, Difficulty, Choice, Flashcard, Task, FluencyUntimedScore, FluencyTimedScore
 
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
@@ -21,6 +21,16 @@ class UnitInline(admin.TabularInline):
 admin.site.register(Unit)
 
 
+class FluencyUntimedScoreInline(admin.StackedInline):
+    model = FluencyUntimedScore
+admin.site.register(FluencyUntimedScore)
+
+
+class FluencyTimedScoreInline(admin.StackedInline):
+    model = FluencyTimedScore
+admin.site.register(FluencyTimedScore)
+
+
 class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('id', 'escaped_choice_text', 'votes', 'is_correct', 'flashcard_id')
     list_per_page = 100000
@@ -34,7 +44,6 @@ class ChoiceAdmin(admin.ModelAdmin):
     search_fields = [  'choice_text' ]
 
 admin.site.register(Choice, ChoiceAdmin)
-
 
 
 class DeckAdmin(admin.ModelAdmin):
