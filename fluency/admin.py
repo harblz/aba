@@ -39,7 +39,8 @@ class FluencyTimedScoreAdmin(admin.ModelAdmin):
     list_per_page = 100
 
     def percent_score(self, obj):
-        return round(obj.score*100,1)
+        score = round(obj.score*100,1)
+        return score
 
 admin.site.register(FluencyTimedScore, FluencyTimedScoreAdmin)
 
