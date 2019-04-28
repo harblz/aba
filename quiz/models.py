@@ -88,6 +88,7 @@ class QuizScore(models.Model):
     unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
     form_id         = models.ForeignKey(Form, on_delete=models.CASCADE)
     date            = models.DateTimeField()
+
  
 class Question(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)

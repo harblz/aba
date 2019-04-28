@@ -33,10 +33,15 @@ class TaskInline(admin.TabularInline):
     model = Task
 admin.site.register(Task)
 
+class QuizScoreAdmin(admin.ModelAdmin):
+    list_display    = ['percent_score', 'unit_id', 'form_id', 'date']
+    list_filter     = ['unit_id', 'form_id', 'date']
+    search_fields   = ['unit_id__unit_name', 'form_id__form_name', 'date', 'score']
+    list_per_page = 100
 
-class QuizScoreInline(admin.TabularInline):
-    model = QuizScore
-admin.site.register(QuizScore)
+    def percent_score(self, obj):
+        return round(obj.score*100,1)
+admin.site.register(QuizScore, QuizScoreAdmin)
 
 
 class DifficultyInline(admin.TabularInline):

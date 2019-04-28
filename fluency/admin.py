@@ -21,14 +21,36 @@ class UnitInline(admin.TabularInline):
 admin.site.register(Unit)
 
 
-class FluencyUntimedScoreInline(admin.StackedInline):
-    model = FluencyUntimedScore
-admin.site.register(FluencyUntimedScore)
+class FluencyUntimedScoreAdmin(admin.ModelAdmin):
+    list_display    = ['percent_score', 'unit_id', 'deck_id', 'date']
+    list_filter     = ['unit_id', 'deck_id', 'date']
+    search_fields   = ['unit_id__unit_name', 'deck_id__form_name', 'date', 'score']
+    list_per_page = 100
+
+    def percent_score(self, obj):
+        return round(obj.score*100,1)
+
+admin.site.register(FluencyUntimedScore, FluencyUntimedScoreAdmin)
+
+class FluencyTimedScoreAdmin(admin.ModelAdmin):
+    list_display    = ['percent_score', 'time_elapsed', 'unit_id', 'deck_id', 'date']
+    list_filter     = ['unit_id', 'deck_id', 'date']
+    search_fields   = ['unit_id__unit_name', 'deck_id__form_name', 'date', 'score']
+    list_per_page = 100
+
+    def percent_score(self, obj):
+        return round(obj.score*100,1)
+
+admin.site.register(FluencyTimedScore, FluencyTimedScoreAdmin)
+
+#class FluencyUntimedScoreInline(admin.StackedInline):
+#    model = FluencyUntimedScore
+#admin.site.register(FluencyUntimedScore)
 
 
-class FluencyTimedScoreInline(admin.StackedInline):
-    model = FluencyTimedScore
-admin.site.register(FluencyTimedScore)
+#class FluencyTimedScoreInline(admin.StackedInline):
+#    model = FluencyTimedScore
+#admin.site.register(FluencyTimedScore)
 
 
 class ChoiceAdmin(admin.ModelAdmin):
