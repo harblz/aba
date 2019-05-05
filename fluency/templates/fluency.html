@@ -409,7 +409,9 @@
     var flashcard_title = flashcards[current_flashcard]["fields"]["flashcard_text"];
     flashcard_title = flashcard_title.substr(3, flashcard_title.length-7);
 
-    clone.querySelector(".card-title").innerHTML = '<p>' + flashcard_title + ' <small style="font-size: 0.5em;" class="text-info">' + task[3].substr(1, task[3].length-2) + ' ' + task[1].substr(1, task[1].length-2) + '</small></p>'
+    clone.querySelector(".card-title").innerHTML = '<p>' + flashcard_title + ' <small style="font-size: 0.5em;" class="text-info">' + ' ' + task[1].substr(1, task[1].length-2) + '</small></p>'
+
+    /* task[3].substr(0, task[3].length-1) */
 
 
     if ( current_flashcard != 0 ) {
