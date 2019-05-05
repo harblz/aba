@@ -89,6 +89,13 @@ class QuizScore(models.Model):
     form_id         = models.ForeignKey(Form, on_delete=models.CASCADE)
     date            = models.DateTimeField()
 
+
+class QuizScoreSummary(QuizScore):
+    class Meta:
+        proxy = True
+        verbose_name = 'Quiz Score Summary'
+        verbose_name_plural = 'Quiz Scores Summary'
+
  
 class Question(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)
@@ -127,8 +134,6 @@ class Question(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
     error_reports.short_description = '# of Error Reports'
-
-
 
  
 class Choice(models.Model):

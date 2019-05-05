@@ -106,6 +106,7 @@ class Flashcard(models.Model):
     unit                = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck                = models.ForeignKey(Deck, on_delete=models.CASCADE)
     task_list_item      = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    task_list_data      = models.CharField(default=None, max_length=50, null=True)
     difficulty          = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     flashcard_hint      = RichTextField()
     pub_date            = models.DateTimeField('date published')

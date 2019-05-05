@@ -370,8 +370,13 @@
 
     var clone = document.importNode(flashcard_template.content, true)
 
+    var task = flashcards[current_flashcard]["fields"]["task_list_data"];
+    task = task.substr(2, task.length);
+    task = task.substr(0, task.length-2);
+    task = task.split(", ");
+
     choices = flashcards[current_flashcard]["fields"]["flashcard_choices"];
-    console.log('qq',choices);
+
     choices = choices.substr(2,choices.length);
     choices = choices.substr(0,choices.length-2);
 
@@ -401,7 +406,11 @@
       options.push(option);
     }
 
-    clone.querySelector(".card-title").innerHTML = flashcards[current_flashcard]["fields"]["flashcard_text"]
+    var flashcard_title = flashcards[current_flashcard]["fields"]["flashcard_text"];
+    flashcard_title = flashcard_title.substr(3, flashcard_title.length-7);
+
+    clone.querySelector(".card-title").innerHTML = '<p>' + flashcard_title + ' <small style="font-size: 0.5em;" class="text-info">' + task[3].substr(1, task[3].length-2) + ' ' + task[1].substr(1, task[1].length-2) + '</small></p>'
+
 
     if ( current_flashcard != 0 ) {
       var correction = flashcards[current_flashcard-1]["fields"]["flashcard_hint"];
@@ -411,7 +420,7 @@
     var hint = flashcards[current_flashcard]["fields"]["flashcard_hint"];
 
     clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
-    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length) + "</p><p><button onClick='hideFeedback()' class='btn btn-danger'>OK, I got it</button></p>";
+    clone.querySelector("#flashcard_negative_feedback").innerHTML = "</p><p><button onClick='hideFeedback()' class='btn btn-danger'>OK, I got it</button></p>" + "</div><p>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length);
 
     flashcard.appendChild(clone)
 

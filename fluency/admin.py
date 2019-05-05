@@ -94,6 +94,10 @@ change_difficulty_RBT.short_description = "Change selected flashcards difficulty
 
 
 class FlashcardAdmin(admin.ModelAdmin):
+    save_as=True
+    save_on_top=True
+    view_on_site=True
+
     readonly_fields = ('id',)
     list_display = ('id', 'escaped_flashcard_text', 'flashcard_unit_name', 'flashcard_deck_name', 'has_answer', 'error_reports', 'flashcard_difficulty', 'task_list_item', 'pub_date', 'was_published_recently')
     list_per_page = 100000

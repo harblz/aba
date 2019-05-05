@@ -21,7 +21,9 @@ from django.utils import timezone
 from datetime import datetime    
 
 from pages.models import Pages
-from .models import Unit, Deck, Choice, Flashcard, FluencyTimedScore, FluencyUntimedScore
+from .models import Unit, Deck, Task, Choice, Flashcard, FluencyTimedScore, FluencyUntimedScore
+
+from itertools import chain
 
 def fluency_index(request):
     pages = Pages.objects.order_by('order')
@@ -88,9 +90,10 @@ def fluency_timed_view(request, quiz_id, deck_id ):
         flashcard_set		= list(Flashcard.objects.filter(unit_id=quiz_id, deck_id=deck_id).all())
 
         for flashcard in flashcard_set:
-        	choices = list(Choice.objects.filter(flashcard_id=flashcard.id).values_list('id', 'choice_text', 'is_correct'))
-
-        	flashcard.flashcard_choices = choices
+            choices = list(Choice.objects.filter(flashcard_id=flashcard.id).values_list('id', 'choice_text', 'is_correct'))
+            flashcard.flashcard_choices = choices
+            task=list(Task.objects.filter(pk=flashcard.task_list_item_id).values_list('id', 'task_name', 'task_list_description', 'certification'))
+            flashcard.task_list_data = task
 
         flashcard_set		= serializers.serialize('json', flashcard_set )
 
@@ -123,9 +126,10 @@ def fluency_view(request, quiz_id, deck_id ):
         flashcard_set		= list(Flashcard.objects.filter(unit_id=quiz_id, deck_id=deck_id).all())
 
         for flashcard in flashcard_set:
-        	choices = list(Choice.objects.filter(flashcard_id=flashcard.id).values_list('id', 'choice_text', 'is_correct'))
-
-        	flashcard.flashcard_choices = choices
+            choices = list(Choice.objects.filter(flashcard_id=flashcard.id).values_list('id', 'choice_text', 'is_correct'))
+            flashcard.flashcard_choices = choices
+            task=list(Task.objects.filter(pk=flashcard.task_list_item_id).values_list('id', 'task_name', 'task_list_description', 'certification'))
+            flashcard.task_list_data = task
 
         flashcard_set		= serializers.serialize('json', flashcard_set )
 

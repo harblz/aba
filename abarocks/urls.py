@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^quiz/', include('quiz.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^fluency/', include('fluency.urls')),
+    url(r'^learn/', include('learn.urls')),
 
     #wagtail CMS
     re_path(r'^cms/', include(wagtailadmin_urls)),
