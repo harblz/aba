@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
 from django.db.models import F
+
 import random
+from random import shuffle
 
 from django.utils import timezone
 from datetime import datetime    
@@ -133,13 +135,13 @@ def quiz_view(request, quiz_id, form_id ):
             prev_question = None
 
         if ( prev_question == None):
-            choices             = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
-            prev_question       = None
-            prev_correct_choice = None
-            prev_question_hint   = None
+            choices                 = list(Choice.objects.filter(question_id=next_question_id).order_by('?').values_list('id', 'choice_text', 'is_correct'))
+            prev_question           = None
+            prev_correct_choice     = None
+            prev_question_hint      = None
 
         else:
-            choices             = list(Choice.objects.filter(question_id=next_question_id).values_list('id', 'choice_text', 'is_correct'))
+            choices             = list(Choice.objects.filter(question_id=next_question_id).order_by('?').values_list('id', 'choice_text', 'is_correct'))
             prev_question       = list(Question.objects.filter(pk=prev_question_id).values_list('id', 'question_text', 'question_hint', 'task_list_item_id'))
             prev_correct_choice = list(Choice.objects.filter(question_id=prev_question_id, is_correct=True).values_list('choice_text'))
             prev_question_hint   = prev_question[0][2]
