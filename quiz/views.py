@@ -147,7 +147,7 @@ def quiz_view(request, quiz_id, form_id ):
             'form_short_name'       : form_short_name,   
 
             #'task_item'             : serializers.serialize('json', list(task_item), ensure_ascii=False),
-            'task_list'             : serializers.serialize('json', task_list),
+            #'task_list'             : serializers.serialize('json', task_list),
 
             'unit_name'             : quiz_name.unit_name,
             'choices'               : choices,
