@@ -387,13 +387,12 @@
 
 
   function submitScore(score) {
-      console.log('submitting score')
     $.ajax({
       url : "/quiz/score/",
       type : "POST",
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', unit_id: unit_id, module: 'quiz', form_id: form_id, quiz_score: score },
       success : function(response) {
-        console.log(response);
+        // console.log(response);
       },
       error : function(xhr,errmsg,err) {
         console.log('Error - ', xhr, errmsg, err)
@@ -405,9 +404,6 @@
     var error_type = document.getElementById("error_type");
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
     var error_description = document.getElementById("error_description").value;
-
-    console.log(current_question_id, selected, error_description);
-
     $.ajax({
       url : "/error/report",
       type : "POST",
@@ -446,10 +442,8 @@
     var status = document.querySelector('input[name="choice"]:checked').is_correct;
     selected_choice = document.querySelector('input[name="choice"]:checked').closest('.quiz-choice-labels').innerText;
 
-
     selected_choice = selected_choice.replace(/(\r\n|\n|\r)/gm, "");
     selected_choice = selected_choice.trim();
-    console.log(selected_choice);
 
     if ( status === true ) {
       current_score.push("correct");              
@@ -472,7 +466,6 @@
 
   function get_next_question() {
     var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
-    console.log(id);
     current_question_id = id; /* This is for the error report modal */
     JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
     var id_list = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).remove(id);
@@ -484,8 +477,7 @@
       data : { 'csrfmiddlewaretoken': csrf, next_question_id : id, prev_question_id: prev_question_id, unit_id: unit_id, form_id: form_id },
       success : function(response) {
 
-        console.log(response);
-
+        console.log('get_next_question: ', response);
 
         /* Question Text Template */
         document.querySelector("#question_text_wrapper").innerHTML = '';
@@ -495,8 +487,6 @@
         var question_text_wrapper = document.querySelector("#question_text_wrapper")
 
         var clone = document.importNode(question_template.content, true)
-
-        console.log(id_list.length, max_questions)
         
 
         clone.querySelector("#template_question_form").innerHTML  = 'Form ' + response.form_short_name + ' &nbsp&nbsp ' + response.task_item;

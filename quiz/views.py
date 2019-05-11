@@ -75,22 +75,14 @@ def quiz_view(request, quiz_id, form_id ):
     # get
     if request.method == 'GET':
         quiz_name           = Unit.objects.get(pk=quiz_id)
-        form_name           = Form.objects.get(pk=form_id).form_short_name
         queryset_ids        = Question.objects.filter(unit_id=quiz_id, form_id=form_id).values_list('id', flat=True)
-        first_question_id   = random.choice(queryset_ids)
-        question            = get_object_or_404(Question, pk=first_question_id)
         unit_name           = quiz_name
         unit_id             = quiz_id
-        task_item           = Task.objects.get(pk=question.task_list_item_id).task_name
         max_questions       = len(queryset_ids)
 
         return render(request, 'quiz/quiz.html', {
-            'form'              : form_name,
             'form_id'           : form_id,
-            'task_item'         : task_item,
             'question_ids'      : json.dumps(list(queryset_ids), cls=DjangoJSONEncoder),
-            'question'          : question,
-            'first_question_id' : first_question_id,
             'unit_name'         : unit_name,
             'unit_id'           : unit_id,
             'total_questions'   : max_questions,
@@ -107,7 +99,8 @@ def quiz_view(request, quiz_id, form_id ):
 
         quiz_name               = Unit.objects.get(id=quiz_id)
 
-        #Choice.objects.filter(pk=attempt_id).update(votes=F('votes')+1)
+        task_list_ids           = Question.objects.filter(unit_id=quiz_id, form_id=form_id).values_list('task_list_item_id', flat=True).distinct()
+        task_list               = Task.objects.filter(pk__in=task_list_ids).values_list()
 
         #1 at the end of the test, don't worry if there is no next question
         try:
@@ -151,7 +144,11 @@ def quiz_view(request, quiz_id, form_id ):
         return JsonResponse({
             'form'                  : form_name,
             'form_id'               : form_id,
-            'form_short_name'       : form_short_name,
+            'form_short_name'       : form_short_name,   
+
+            #'task_item'             : serializers.serialize('json', list(task_item), ensure_ascii=False),
+            'task_list'             : serializers.serialize('json', task_list),
+
             'unit_name'             : quiz_name.unit_name,
             'choices'               : choices,
             'next_question'         : next_question,

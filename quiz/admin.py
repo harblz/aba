@@ -8,6 +8,9 @@ from .models import Unit, Form, Difficulty, Choice, Question, Task, QuizScore, Q
 
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
+from django.db.models import Count, Avg, Sum, Min, Max, DateTimeField
+from django.db.models.functions import Trunc
+
 # Extending SimpleListFilter
 
 # Register your models here.
@@ -52,15 +55,19 @@ class QuizScoreSummaryAdmin(admin.ModelAdmin):
         except (AttributeError, KeyError):
             return response
         
+        metrics = {
+            'total': Count('id'),
+            'average_score': Avg('score')*100,
+        }
 
         response.context_data['summary'] = list(
             qs
             .values('unit_id__unit_name')
-            .order_by('-date')
+            .annotate(**metrics)
+            .order_by('-average_score')
         )
         
         return response
-
 
 class QuizScoreAdmin(admin.ModelAdmin):
     list_display    = ['percent_score', 'unit_id', 'form_id', 'date']
