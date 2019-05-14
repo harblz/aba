@@ -82,14 +82,21 @@ class Task(models.Model):
     def get_task_id(self):
         return self.task_id
 
- 
+
 class FluencyUntimedScore(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)
     score           = models.DecimalField(blank=True, null=True, decimal_places=3,max_digits=5)
     unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck_id         = models.ForeignKey(Deck, on_delete=models.CASCADE)
     date            = models.DateTimeField()
- 
+
+
+class FluencyUntimedScoreSummary(FluencyUntimedScore):
+    class Meta:
+        proxy = True
+        verbose_name = 'Fluency Untimed Score Summary'
+        verbose_name_plural = 'Fluency Untimed Scores Summary'
+
 
 class FluencyTimedScore(models.Model):
     id              = models.AutoField(primary_key=True, editable=False)
@@ -98,6 +105,14 @@ class FluencyTimedScore(models.Model):
     unit_id         = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck_id         = models.ForeignKey(Deck, on_delete=models.CASCADE)
     date            = models.DateTimeField()
+
+
+
+class FluencyTimedScoreSummary(FluencyTimedScore):
+    class Meta:
+        proxy = True
+        verbose_name = 'Fluency Timed Score Summary'
+        verbose_name_plural = 'Fluency Timed Scores Summary'
 
 
 class Flashcard(models.Model):

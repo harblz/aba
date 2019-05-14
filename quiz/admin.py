@@ -54,7 +54,7 @@ def get_next_in_date_hierarchy(request, date_hierarchy):
 
 @admin.register(QuizScoreSummary)
 class QuizScoreSummaryAdmin(admin.ModelAdmin):
-    change_list_template = 'admin/quiz_score_summary_change_list.html'
+    change_list_template = 'admin/quiz_scores_summary.html'
     date_hierarchy = 'date'
 
     list_filter = (

@@ -4,10 +4,12 @@ from django.utils.html import format_html
 
 from django.contrib.admin import SimpleListFilter
 
-from .models import Unit, Deck, Difficulty, Choice, Flashcard, Task, FluencyUntimedScore, FluencyTimedScore
+from .models import Unit, Deck, Difficulty, Choice, Flashcard, Task, FluencyUntimedScore, FluencyUntimedScoreSummary, FluencyTimedScore, FluencyTimedScoreSummary
 
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
+from django.db.models import Count, Avg, Sum, Min, Max, DateTimeField
+from django.db.models.functions import Trunc
 # Extending SimpleListFilter
 
 # Register your models here.
@@ -21,6 +23,81 @@ class UnitInline(admin.TabularInline):
 admin.site.register(Unit)
 
 
+def get_next_in_date_hierarchy(request, date_hierarchy):
+    if date_hierarchy + '__day' in request.GET:
+        return 'hour'
+
+    if date_hierarchy + '__month' in request.GET:
+        return 'day'
+
+    if date_hierarchy + '__year' in request.GET:
+        return 'week'
+
+    return 'month'
+
+
+@admin.register(FluencyUntimedScoreSummary)
+class FluencyUntimedScoreSummaryAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/fluency_untimed_scores.html'
+    date_hierarchy = 'date'
+
+    list_filter = (
+        'date',
+        'unit_id__unit_name'
+    )
+
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(
+            request,
+            extra_context=extra_context,
+        )
+
+        try:
+            qs = response.context_data['cl'].queryset
+        except (AttributeError, KeyError):
+            return response
+        
+        metrics = {
+            'total': Count('id'),
+            'average_score': Avg('score')*100,
+        }
+
+        response.context_data['summary'] = list(
+            qs
+            .values('unit_id__unit_name')
+            .annotate(**metrics)
+            .order_by('-average_score')
+        )
+
+
+        period = get_next_in_date_hierarchy(request, self.date_hierarchy)
+        response.context_data['period'] = period
+
+
+        summary_over_time = qs.annotate(
+            period=Trunc('date', period, output_field=DateTimeField()),
+        ).values('period').annotate(total=Avg('score')*100).order_by('period')
+
+        summary_range = summary_over_time.aggregate(
+            low=Min('total'),
+            high=Max('total'),
+        )
+        high = 100
+        low = 0
+
+        response.context_data['summary_over_time'] = [{
+            'period': x['period'],
+            'total': x['total'] or 0,
+            'pct': \
+               ((x['total'] or 0) - low) / (high - low) * 100
+               if high > low else 0,
+        } for x in summary_over_time]
+        
+        return response
+
+
+
 class FluencyUntimedScoreAdmin(admin.ModelAdmin):
     list_display    = ['percent_score', 'unit_id', 'deck_id', 'date']
     list_filter     = ['unit_id', 'deck_id', 'date']
@@ -31,6 +108,68 @@ class FluencyUntimedScoreAdmin(admin.ModelAdmin):
         return round(obj.score*100,1)
 
 admin.site.register(FluencyUntimedScore, FluencyUntimedScoreAdmin)
+
+
+@admin.register(FluencyTimedScoreSummary)
+class FluencyTimedScoreSummaryAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/fluency_timed_scores.html'
+    date_hierarchy = 'date'
+
+    list_filter = (
+        'date',
+        'unit_id__unit_name'
+    )
+
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(
+            request,
+            extra_context=extra_context,
+        )
+
+        try:
+            qs = response.context_data['cl'].queryset
+        except (AttributeError, KeyError):
+            return response
+        
+        metrics = {
+            'total': Count('id'),
+            'average_score': Avg('score')*100,
+        }
+
+        response.context_data['summary'] = list(
+            qs
+            .values('unit_id__unit_name')
+            .annotate(**metrics)
+            .order_by('-average_score')
+        )
+
+
+        period = get_next_in_date_hierarchy(request, self.date_hierarchy)
+        response.context_data['period'] = period
+
+
+        summary_over_time = qs.annotate(
+            period=Trunc('date', period, output_field=DateTimeField()),
+        ).values('period').annotate(total=Avg('score')*100).order_by('period')
+
+        summary_range = summary_over_time.aggregate(
+            low=Min('total'),
+            high=Max('total'),
+        )
+        high = 100
+        low = 0
+
+        response.context_data['summary_over_time'] = [{
+            'period': x['period'],
+            'total': x['total'] or 0,
+            'pct': \
+               ((x['total'] or 0) - low) / (high - low) * 100
+               if high > low else 0,
+        } for x in summary_over_time]
+        
+        return response
+
 
 class FluencyTimedScoreAdmin(admin.ModelAdmin):
     list_display    = ['percent_score', 'time_elapsed', 'unit_id', 'deck_id', 'date']
@@ -43,15 +182,6 @@ class FluencyTimedScoreAdmin(admin.ModelAdmin):
         return score
 
 admin.site.register(FluencyTimedScore, FluencyTimedScoreAdmin)
-
-#class FluencyUntimedScoreInline(admin.StackedInline):
-#    model = FluencyUntimedScore
-#admin.site.register(FluencyUntimedScore)
-
-
-#class FluencyTimedScoreInline(admin.StackedInline):
-#    model = FluencyTimedScore
-#admin.site.register(FluencyTimedScore)
 
 
 class ChoiceAdmin(admin.ModelAdmin):
