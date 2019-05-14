@@ -1,3 +1,5 @@
+import math
+
 from django.contrib import admin
 
 from django.utils.html import format_html
@@ -38,11 +40,28 @@ class TaskInline(admin.TabularInline):
     model = Task
 admin.site.register(Task)
 
+def get_next_in_date_hierarchy(request, date_hierarchy):
+    if date_hierarchy + '__day' in request.GET:
+        return 'hour'
+
+    if date_hierarchy + '__month' in request.GET:
+        return 'day'
+
+    if date_hierarchy + '__year' in request.GET:
+        return 'week'
+
+    return 'month'
 
 @admin.register(QuizScoreSummary)
 class QuizScoreSummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/quiz_score_summary_change_list.html'
     date_hierarchy = 'date'
+
+    list_filter = (
+        'date',
+        'unit_id__unit_name'
+    )
+
 
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(
@@ -66,6 +85,30 @@ class QuizScoreSummaryAdmin(admin.ModelAdmin):
             .annotate(**metrics)
             .order_by('-average_score')
         )
+
+
+        period = get_next_in_date_hierarchy(request, self.date_hierarchy)
+        response.context_data['period'] = period
+
+
+        summary_over_time = qs.annotate(
+            period=Trunc('date', period, output_field=DateTimeField()),
+        ).values('period').annotate(total=Avg('score')*100).order_by('period')
+
+        summary_range = summary_over_time.aggregate(
+            low=Min('total'),
+            high=Max('total'),
+        )
+        high = 100
+        low = 0
+
+        response.context_data['summary_over_time'] = [{
+            'period': x['period'],
+            'total': x['total'] or 0,
+            'pct': \
+               ((x['total'] or 0) - low) / (high - low) * 100
+               if high > low else 0,
+        } for x in summary_over_time]
         
         return response
 
