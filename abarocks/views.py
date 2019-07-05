@@ -22,6 +22,10 @@ def redirect_root(request):
     return render(request, 'blog/post_list.html', { 'posts': posts, 'pinned_posts' : pinned_posts, 'pages': pages, 'id' : last_post_id })
 
 
+def redirect_account(request):
+    pages           = Pages.objects.order_by('order')
+    return render(request, 'learn/account.html', { 'pages': pages })
+
 def redirect_study(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'quiz/study.html', { 'pages': pages })

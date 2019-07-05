@@ -1,0 +1,155 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block head %}
+	<style>
+		.user_card {
+			height: 450px;
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: #ff914d;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		.brand_logo_container {
+			position: relative;
+			height: 170px;
+			width: 170px;
+			top: 45%;
+			border-radius: 50%;
+			background: white;
+			padding: 10px;
+			text-align: center;
+		}
+		.brand_logo {
+			height: 150px;
+			width: 150px;
+			border-radius: 50%;
+			border: 2px solid white;
+		}
+		.form_container {
+			margin-top: 35%;
+		}
+		.login_btn {
+			width: 100%;
+			background: #c0392b !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #c0392b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+			background-color: #c0392b !important;
+		}
+		div.user_card div.mt-4 {
+			color: #c0392b;
+			font-weight: bold;
+		}
+		div.user_card div.mt-4 a:link {
+			color: white;
+		}
+		div.user_card div.mt-4 a:visited {
+			color: purple;
+		}
+
+	</style>
+{% endblock %}
+
+{% block content %}
+		<div class="container h-100">
+			<div class="d-flex justify-content-center h-100">
+				<div class="user_card">
+
+					<div class="d-flex justify-content-center mt-3 login_container">
+						<div class="d-flex justify-content-center">
+							<div class="brand_logo_container">
+								<img src="/static/img/5_2019_hq_sticker_logo_white.png" class="brand_logo" alt="Logo">
+							</div>
+						</div>
+					</div>
+
+					<div class="d-flex justify-content-center form_container">
+					  	<form class="form" method="post">
+					    	{% csrf_token %}
+
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="text" name="username" maxlength="150" autofocus="" required id="id_username">
+							</div>
+
+
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" name="password" required id="id_password">
+							</div>
+
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customControlInline">
+									<label class="custom-control-label" for="customControlInline">Remember me</label>
+								</div>
+							</div>
+
+					  	
+					    	<button class="btn btn-primary" type="submit">Sign up</button>
+					  	</form>
+					</div>
+
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Don't have an account? <a href="/accounts/signup" class="ml-2">Sign Up</a>
+						</div>
+						<div class="d-flex justify-content-center links">
+							<a href="/accounts/forgot">Forgot your password?</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+<!--
+  <p>
+  	<form class="form" method="post">
+  		<h2>Sign up</h2>
+    	<input type="hidden" name="csrfmiddlewaretoken" value="to4tP11wgVhnShYrWVN5QXV8UrpiOSHUBTgecZADcOmcCyX9Jo8ajYq29C7gvtgJ">
+    	<label for="id_username">Username:</label><input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username"><br><span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+		<label for="id_password1">Password:</label><input type="password" name="password1" required="" id="id_password1"><br><span class="helptext"><ul><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul></span>
+		<label for="id_password2">Password confirmation:</label>
+			<input type="password" name="password2" required="" id="id_password2"><br><span class="helptext">Enter the same password as before, for verification.</span>
+  	
+    	<button class="btn btn-primary" type="submit">Sign up</button>
+  	</form>
+  </p>
+!-->
+{% endblock %}

@@ -187,6 +187,25 @@
     <br />
   </template>
 
+  <template id="missed_question_template">
+    <div id="missed_question_template_text">
+      <p class="mt-2" style="line-height: 2rem;">
+        Question #<span id="missed_questionNumber">1 </span> of <span id="template_missed_question_max"></span> — <small>
+          <span class="p-1 border-info rounded text-white bg-info font-weight-bold">
+            <span id="template_missed_question_form">Form</span>
+          </span><br>
+          <span class="p-1 border-info rounded text-white bg-primary font-weight-bold"><span id="template_unit_name"></span> Practice Quiz</span>
+          &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report missed_Question </a>
+          <br>
+        </small>
+      </p>
+
+      <h6 style="font-size: 1.2rem;font-weight: normal;margin-top: 5px;">
+        <span id="template_missed_question_text"></span>
+      </h6>
+    </div>
+  </template>
+
   <script>
 
   /**
@@ -303,7 +322,7 @@
     $('#progress_bar_correct').css('width', (score.correct/score.max_questions*100)+'%').attr('aria-valuenow', (score.correct/score.max_questions*100));
     $('#progress_bar_incorrect').css('width', (score.incorrect/score.max_questions*100)+'%').attr('aria-valuenow', (score.incorrect/score.max_questions*100));
 
-    /* Check for End of Quiz */
+    /* Grade Quiz when no more questions remain */
     var remaining_questions = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).length;
     if (remaining_questions == 0 ) {
       displayScore();
@@ -367,12 +386,16 @@
 
   var question_ids        = JSON.parse("{{question_ids}}");
 
-  var prev_question_id = 0;
-  var current_question_id = 0;
-  var selected_choice = 0;
+  // variables that temporarily hold question data
+  var prev_question_id      = 0;
+  var current_question_id   = 0;
+  var selected_choice       = null;
+  var missed_questions_ids  = [];
 
+  // quiz meta data
   var unit_id = "{{unit_id}}";
   var form_id = "{{form_id}}";
+
   var csrf    = "{{csrf_token}}";
 
   localStorage.setItem(unit_id + "_question_ids",JSON.stringify(question_ids));
@@ -445,16 +468,18 @@
     selected_choice = selected_choice.replace(/(\r\n|\n|\r)/gm, "");
     selected_choice = selected_choice.trim();
 
+    // correct response
     if ( status === true ) {
       current_score.push("correct");              
       localStorage.setItem(unit_id,JSON.stringify(current_score));
       calculateScore();
-    } else {
-      current_score.push("incorrect");              
+    } else { // incorrect response
+      current_score.push("incorrect");
+      missed_questions_ids.push([current_question_id, document.querySelector("#questionNumber").innerHTML]);
+      console.log(missed_questions_ids);
       localStorage.setItem(unit_id,JSON.stringify(current_score));
       calculateScore();
       $('#error_modal').modal('toggle')
-      //document.getElementById("error_modal_button").click();
     }
     
   }
@@ -463,6 +488,31 @@
     // Handler when the DOM is fully loaded
     get_next_question();
   });
+
+  function generate_missed_questions_report() {
+    console('generating missed questions report');
+    console.log('missed_questions_ids', missed_questions_ids);
+    for (i = 0; i < missed_questions_ids.length; i++ ) {
+      $.ajax({
+        url : "/quiz/report/{{unit_id}}/form_"+form_id+"/", // /quiz/report/unit_id/form_id/
+        type : "POST",
+        data : { 
+          // TODO: send an array of questions to the server, not the array with the human-friendly question number + question_id
+          // get all the questions in 1 request, not many.
+          'csrfmiddlewaretoken': csrf, 
+          questions: missed_questions_ids[i][0],
+          unit_id: unit_id, 
+          form_id: form_id 
+        },
+        success : function(response) {
+
+        },
+        error : function(xhr,errmsg,err) {
+
+        }
+      });
+    }
+  }
 
   function get_next_question() {
     var id = JSON.parse(localStorage.getItem(unit_id + "_question_ids")).randomElement();
@@ -474,7 +524,13 @@
     $.ajax({
       url : "/quiz/{{unit_id}}/form_"+form_id+"/",
       type : "POST",
-      data : { 'csrfmiddlewaretoken': csrf, next_question_id : id, prev_question_id: prev_question_id, unit_id: unit_id, form_id: form_id },
+      data : { 
+        'csrfmiddlewaretoken': csrf, 
+        next_question_id : id, 
+        prev_question_id: prev_question_id, 
+        unit_id: unit_id, 
+        form_id: form_id 
+      },
       success : function(response) {
 
         console.log('get_next_question: ', response);
@@ -559,6 +615,7 @@
     window.scrollTo(0,0);
   }
 
+  // create pie graph at end of the quiz
   function create(i) {
     var width = Math.random() * 8;
     var height = width * 0.4;

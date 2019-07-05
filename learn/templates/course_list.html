@@ -3,41 +3,169 @@
 
 {% block content %}
 
-<div class="container">
-  Content here.
+<div id="content_container" class="container" style="padding: 2.5%; border: 1px solid red;">
+
+
+  <div class="row">
+
+    <div class="col-12 lms-title">
+      <h2>Your Task-List Takedown!</h2>
+    </div>
+
+    <div class="w-100" style="height: 2rem;"></div>
+
+
+    <div class="col lms-resume">
+
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Item Title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Pick up where you left off</h6>
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+          <div class="w-100" style="height: 1rem;"></div>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8 lms-progress-chart">
+      <div class="container" style="height: 400px;width:400px;">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <div class="w-100" style="height: 5rem;"></div>
+
+    <div class="col-12 lms-all-units">
+
+      <h2>RBT Study Materials</h2>
+      <p>
+        Let's cover the task list, item-by-item - then, take practice quizzes to get yourself ready for the RBT exam
+      </p>
+      <p class="text-info">
+        <u>NOTE</u>: this course <b><u>DOES NOT</u></b> count towards your 40 hour training requirement for the RBT exam -- this is intended as a free, supplementary resource to build your skills and confidence in behavior analysis, and help get you ready for the BACB's RBT exam. There's also no substitute for real-world practice - real-world practice with a competent BCBA is strongly suggested.
+      </p>
+
+      <div class="w-100" style="height: 1rem;"></div>
+
+      <p>
+        <img src="https://aba.rocks/static/img/BACB-Emblem-new.png" alt="BACB Emblem" class="img-thumbnail float-left" height="50px" width="50px" style="margin-right: 10px;">
+        <p class="text-muted">
+          The RBT Task list and BACB emblem are Copyright © 1998-2019 the Behavior Analyst Certification Board, Inc., (BACB), ALL RIGHTS RESERVED. 
+        </p>
+      </p>
+
+      <div class="w-100" style="height: 2rem;"></div>
+
+      <div class="accordion" id="lms-unit-accordion">
+        
+        {% for unit in units %}
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{ unit.unit_name }}
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              {{ unit.unit_description | safe }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+
+
+    </div>
+
+  </div>
+
 </div>
 
 
 <script>
+
+  var options = {
+    /* Half-Doughnuts, Please. */
+    circumference: Math.PI,
+    rotation: 1.0 * Math.PI,
+    title: {
+        display: true,
+        text: 'Overall Progress'
+    }
+  }
+
+  var data = {
+
+      datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+      }],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: [
+          'A. Measurement',
+          'B. Assessment',
+          'C. Skill Acquisition',
+          'D. Behavior Reduction',
+          'E. Documentation and Reporting',
+          'F. Professional Conduct and Scope of Practice'
+      ],
+  };
+
+  var ctx = document.getElementById('myChart');
+  var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options,
+  });
+
   function resize() {
     // Resize post container for desktop
     if (window.screen.width <= 576) {
-      document.querySelector("#post_container").style.visibility = "visible";
+      document.querySelector("#content_container").style.visibility = "visible";
     } else if ( window.screen.width > 576 && window.screen.width <= 900) {
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.22 + "px";
-      document.querySelector("#post_container").style.visibility = "visible";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.22 + "px";
+      document.querySelector("#content_container").style.marginLeft = window.screen.width * 0.22 + "px";
+      document.querySelector("#content_container").style.visibility = "visible";
     } else if ( window.screen.width > 900 && window.screen.width <= 1200) {
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.165 + "px";
-      document.querySelector("#post_container").style.visibility = "visible";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.165 + "px";
+      document.querySelector("#content_container").style.marginLeft = window.screen.width * 0.165 + "px";
+      document.querySelector("#content_container").style.visibility = "visible";
     } else if ( window.screen.width >= 900 && window.screen.width <= 1200) {
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.185 + "px";
-      document.querySelector("#post_container").style.visibility = "visible";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.185 + "px";
+      document.querySelector("#content_container").style.marginLeft = window.screen.width * 0.185 + "px";
+      document.querySelector("#content_container").style.visibility = "visible";
     } else {
-      document.querySelector("#post_container").style.marginLeft = window.screen.width * 0.225 + "px";
-      document.querySelector("#post_container").style.visibility = "visible";
-      document.querySelector("#carousel").style.marginLeft = window.screen.width * 0.125 + "px";
+      document.querySelector("#content_container").style.marginLeft = window.screen.width * 0.225 + "px";
+      document.querySelector("#content_container").style.visibility = "visible";
     }
   }
 
   window.onload = function () { 
-    resize();
+    //resize();
   }
 
   window.onresize = function(event) {
-      resize();
+    //resize();
   };
 </script>
 

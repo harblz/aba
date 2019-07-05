@@ -238,14 +238,14 @@ time.icon:hover, time.icon:focus
   text-decoration: none;
 }
 .page-header {
-    background-color: #ff9400;
+    background-color: #ff914d;
     margin: 0 0 30px 0;
     padding: 20px 10px 10px 40px;
     font-family: Helvetica;
 }
 
 .page-header-mobile {
-    background-color: #ff9400;
+    background-color: #ff914d;
     margin: 0 0 30px 0;
     padding: 10px 5px 5px 20px;
     font-family: Helvetica;

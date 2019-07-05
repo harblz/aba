@@ -21,9 +21,16 @@ from django.utils import timezone
 from datetime import datetime    
 
 from pages.models import Pages
-from .models import Course
+
+from .models import Course, Unit
 
 # Create your views here.
 def course_index(request):
     pages           = Pages.objects.order_by('order')
-    return render(request, 'course_list.html', { 'pages': pages })
+    units 			= Unit.objects.order_by('unit_order')
+    return render(request, 'course_list.html', { 'pages': pages, 'units': units })
+
+# Create your views here.
+def course_account(request):
+    pages           = Pages.objects.order_by('order')
+    return render(request, 'account.html', { 'pages': pages })

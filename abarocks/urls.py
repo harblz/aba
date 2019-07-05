@@ -29,9 +29,11 @@ from wagtail.core import urls as wagtail_urls
 
 from .views import redirect_error_report, redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm, redirect_thanks
 
-urlpatterns = [
-    url(r'^error/report', redirect_error_report),
+urlpatterns = [    
     url(r'^admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^error/report', redirect_error_report),
     url(r'^research/', redirect_research),
     url(r'^coffee/', redirect_coffee),
     url(r'^thanks/', redirect_thanks),
@@ -45,7 +47,11 @@ urlpatterns = [
     url(r'^fluency/', include('fluency.urls')),
     url(r'^learn/', include('learn.urls')),
 
-    #wagtail CMS
+    # django newsletter
+    url(r'^newsletter/', include('newsletter.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+
+    # wagtail CMS
     re_path(r'^cms/', include(wagtailadmin_urls)),
     re_path(r'^documents/', include(wagtaildocs_urls)),
     re_path(r'^wag_pages/', include(wagtail_urls)),

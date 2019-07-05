@@ -70,6 +70,22 @@ def submit_score_report(request):
         })
 
 
+def quiz_missed_questions_report(request):
+    request.POST.get("questions")
+    report = []
+
+    for question in questions:
+        missed_question = Question.objects.filter(pk=question[0]).values_list()
+        task_list_item  = Task.objects.filter(pk=missed_question.task_list_item_id).values_list()
+        report.append([
+                missed_question,
+                task_list_item,
+            ])
+
+    return JsonResponse({
+            'report' : report,
+        })
+
 def quiz_view(request, quiz_id, form_id ):
     pages = Pages.objects.order_by('order')
     # get

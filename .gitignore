@@ -1,5 +1,6 @@
 .gitignore
 /abarocks/settings.py
+node_modules
 *.pyc
 *~
 *.sqlite3
