@@ -48,8 +48,8 @@ urlpatterns = [
     url(r'^learn/', include('learn.urls')),
 
     # django newsletter
-    url(r'^newsletter/', include('newsletter.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
+    #url(r'^newsletter/', include('newsletter.urls')),
+    #url(r'^tinymce/', include('tinymce.urls')),
 
     # wagtail CMS
     re_path(r'^cms/', include(wagtailadmin_urls)),
