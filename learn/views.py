@@ -22,15 +22,27 @@ from datetime import datetime
 
 from pages.models import Pages
 
-from .models import Course, Unit
+from .models import Course, Unit, LessonPage
 
-# Create your views here.
 def course_index(request):
     pages           = Pages.objects.order_by('order')
     units 			= Unit.objects.order_by('unit_order')
+    lesson_page		= LessonPage.objects.order_by('unit_order')
     return render(request, 'course_list.html', { 'pages': pages, 'units': units })
 
-# Create your views here.
+def unit_landing_page(request, pk):
+	pages 			= Pages.objects.order_by('order')
+	return render(request, 'unit_landing_page.html', { 'pages':pages })
+
 def course_account(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'account.html', { 'pages': pages })
+
+# Pages written via the learn dashboard
+def topic_page(request, slug):
+	pages = Pages.objects.order_by('order')
+	page = LessonPage.objects.filter(slug=slug)
+	page = get_object_or_404(LessonPage, pk=page[0].id)
+	page.page_views += 1;
+	page.save()
+	return render(request, 'learn_topic.html', {'learn_topic': learn_topic, 'pages': pages})

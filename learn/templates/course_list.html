@@ -61,17 +61,19 @@
         
         {% for unit in units %}
         <div class="card">
-          <div class="card-header" id="headingOne">
+          <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapse-unit-{{unit.id}}" aria-expanded="true" aria-controls="collapseOne">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <button class="btn btn-link">
                 {{ unit.unit_name }}
               </button>
             </h5>
           </div>
 
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div id="collapse-unit-{{unit.id}}" class="collapse" aria-labelledby="headingOne" data-parent="#lms-unit-accordion">
             <div class="card-body">
               {{ unit.unit_description | safe }}
+              <br />
+              <a href="unit/{{unit.id}}" class="btn btn-info">Study</a>
             </div>
           </div>
         </div>

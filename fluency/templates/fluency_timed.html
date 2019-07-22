@@ -171,16 +171,8 @@
   </template>
 
 
+  {% include "disqus.html" %}
   <script>
-
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  var disqus_config = function () {
-      this.page.url = '{{ request.build_absolute_uri }}{{ object.get_absolute_url }}';
-      this.page.identifier = 'fluency_timed_{{ unit_id }}';
-      this.page.title = 'Timed Fluency {{ unit_name }} Practice Flashcards';
-  };
 
   function highlightAnswers() {
     $('#table-choices tr').on('click', function() {
@@ -192,19 +184,6 @@
   }
 
   highlightAnswers();
-
-  (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-aba-rocks.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-
-<script>
 
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.onbeforeunload = function ()

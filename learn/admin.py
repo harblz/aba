@@ -20,6 +20,10 @@ admin.site.register(Unit)
 
 # Register your models here.
 class LessonPageInline(admin.TabularInline):
+    save_as=True
+    save_on_top=True
+    view_on_site=True
+    
     model = LessonPage
 admin.site.register(LessonPage)
 

@@ -8,6 +8,8 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from quiz.models import Unit, Form, Choice, Question, Task, QuizScore
 
+from django.core.validators import validate_slug
+
 
 # Create your models here.
 class Course(models.Model):
@@ -48,12 +50,33 @@ class Objective(models.Model):
         return self.objective_id
 
 
+class Certification(models.Model):
+    certification_name           = models.CharField(max_length=50)
+    certification_description    = RichTextField()
+
+    def __str__(self):
+        return self.certification_name
+
+    def get_certification_description(self):
+        return self.certification_description
+        
+    def get_certification_id(self):
+        return self.certification_id
+
+
 class LessonPage(models.Model):
-    author              = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
-    title               = models.CharField(max_length=200)
-    body                = RichTextField()
-    order               = models.IntegerField()
-    lesson_objectives   = models.ManyToManyField(Objective)
+    author                  = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
+    title                   = models.CharField(max_length=200)
+    slug                    = models.CharField(max_length=200, validators=[validate_slug])
+    body                    = RichTextField()
+    order                   = models.IntegerField()
+    lesson_certification    = models.ForeignKey(Certification, on_delete=models.CASCADE)
+    lesson_course           = models.ForeignKey(Course, on_delete=models.CASCADE)
+    lesson_unit             = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    lesson_objectives       = models.ManyToManyField(Objective)
+
+    # help text
+    slug.help_text          = "must be a single string, e.g. 'this-is-an-example'"
 
     STATUS_CHOICES = (
         ('d', 'Draft'),
@@ -122,17 +145,3 @@ class TaskListItem(models.Model):
         
     def get_task_list_item_id(self):
         return self.task_list_item_id
-
-
-class Certification(models.Model):
-    certification_name           = models.CharField(max_length=50)
-    certification_description    = RichTextField()
-
-    def __str__(self):
-        return self.certification_name
-
-    def get_certification_description(self):
-        return self.certification_description
-        
-    def get_certification_id(self):
-        return self.certification_id
