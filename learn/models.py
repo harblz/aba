@@ -74,6 +74,7 @@ class LessonPage(models.Model):
     lesson_course           = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson_unit             = models.ForeignKey(Unit, on_delete=models.CASCADE)
     lesson_objectives       = models.ManyToManyField(Objective)
+    next_lesson             = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 
     # help text
     slug.help_text          = "must be a single string, e.g. 'this-is-an-example'"

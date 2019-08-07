@@ -32,7 +32,11 @@ def course_index(request):
 
 def unit_landing_page(request, pk):
 	pages 			= Pages.objects.order_by('order')
-	return render(request, 'unit_landing_page.html', { 'pages':pages })
+	page = LessonPage.objects.filter(pk=pk)
+	page = get_object_or_404(LessonPage, pk=page[0].id)
+	page.page_views += 1;
+	page.save()
+	return render(request, 'unit_landing_page.html', { 'learn_topic': page, 'pages':pages,  })
 
 def course_account(request):
     pages           = Pages.objects.order_by('order')
@@ -45,4 +49,4 @@ def topic_page(request, slug):
 	page = get_object_or_404(LessonPage, pk=page[0].id)
 	page.page_views += 1;
 	page.save()
-	return render(request, 'learn_topic.html', {'learn_topic': learn_topic, 'pages': pages})
+	return render(request, 'learn_topic.html', {'learn_topic': page, 'pages': pages})

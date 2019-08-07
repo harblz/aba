@@ -19,12 +19,13 @@ class UnitInline(admin.TabularInline):
 admin.site.register(Unit)
 
 # Register your models here.
-class LessonPageInline(admin.TabularInline):
+class LessonPageAdmin(admin.ModelAdmin):
     save_as=True
     save_on_top=True
     view_on_site=True
     
-    model = LessonPage
+    list_display = ['author', 'title', 'status', 'created_date', 'published_date']
+    ordering = ['-published_date']
 admin.site.register(LessonPage)
 
 # Register your models here.
