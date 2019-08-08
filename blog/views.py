@@ -20,7 +20,7 @@ from django.core import serializers
 
 def blog_coffee_checkout(request):
     pages = Pages.objects.order_by('order')
-    stripe.api_key = "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7"
+    stripe.api_key = "sk_live_ERSCcIQW6Na7l8VfnXUpD2RH00E1Q70EFF"
 
     if request.method == "POST":
         token    = request.POST.get("stripeToken")

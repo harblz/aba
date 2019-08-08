@@ -19,11 +19,14 @@
 
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Item Title</h5>
+          <h5 class="card-title"> {{ user.profile.last_lesson_page }} </h5>
           <h6 class="card-subtitle mb-2 text-muted">Pick up where you left off</h6>
-          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+          <img class="img-fluid" src="https://www.aba.rocks/{{ user.profile.last_lesson_page.pic }}">
           <div class="w-100" style="height: 1rem;"></div>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">
+            {{ user.profile.last_lesson_page.body|safe|truncatewords_html:user.profile.last_lesson_page.snippet_size }}
+          </p>
+          <a href="/learn/unit/{{user.profile.last_lesson_page.id}}" class="btn btn-info text-white">Study</a>
         </div>
       </div>
     </div>
@@ -126,14 +129,7 @@
       }],
 
       // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: [
-          'A. Measurement',
-          'B. Assessment',
-          'C. Skill Acquisition',
-          'D. Behavior Reduction',
-          'E. Documentation and Reporting',
-          'F. Professional Conduct and Scope of Practice'
-      ],
+      labels: {{ chart_labels_array|safe }},
   };
 
   var ctx = document.getElementById('myChart');

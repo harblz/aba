@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 from django.contrib.admin import SimpleListFilter
 
-from .models import Course, Unit, LessonPage, Objective, TaskListItem, TaskListItemCategory, Certification
+from .models import Course, Unit, LessonPage, Objective, TaskListItem, TaskListItemCategory, Certification, Profile
 
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
@@ -12,6 +12,12 @@ from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDrop
 class CourseInline(admin.TabularInline):
     model = Course
 admin.site.register(Course)
+
+# Register your models here.
+class ProfileInline(admin.TabularInline):
+    model = Profile
+admin.site.register(Profile)
+
 
 # Register your models here.
 class UnitInline(admin.TabularInline):

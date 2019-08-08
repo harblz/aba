@@ -13,6 +13,7 @@ from django.core import serializers
 
 from django.core.mail import send_mail
 
+from django.contrib.auth.decorators import login_required
 
 def redirect_root(request):
     posts           = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1]
@@ -25,6 +26,7 @@ def redirect_root(request):
 def redirect_account(request):
     pages           = Pages.objects.order_by('order')
     return render(request, 'learn/account.html', { 'pages': pages })
+
 
 def redirect_study(request):
     pages           = Pages.objects.order_by('order')
@@ -101,7 +103,7 @@ def redirect_coffee(request):
 
 
 def redirect_coffee_confirm(request):
-    stripe.api_key = "sk_live_0fHEU5T1nHoILQpYZ7lyPwP7"
+    stripe.api_key = "sk_live_ERSCcIQW6Na7l8VfnXUpD2RH00E1Q70EFF "
 
     if request.method == "POST":
         token    = request.POST.get("stripeToken")
