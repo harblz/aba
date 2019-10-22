@@ -4,20 +4,51 @@ from django.utils import timezone
 
 from ckeditor.fields import RichTextField
 from django.utils.encoding import python_2_unicode_compatible
-from quiz.models import Unit, Form, Choice, Question, Task, QuizScore
+
+
 from django.core.validators import validate_slug
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from quiz.models import Unit, Form, Choice, Question, Task, QuizScore, Form
+
+from fluency.models import Deck
+
+
+# each module (fluency, quiz, courses, etc.) that will show up on the study page
+class Module(models.Model):
+    module_name             = models.CharField(max_length=50)
+    slug                    = models.CharField(max_length=200, validators=[validate_slug], default='module')
+    module_title            = models.CharField(max_length=250, null=True, blank=True)
+    module_button           = models.CharField(max_length=50, null=True, blank=True)
+    module_order            = models.IntegerField(null=True, blank=True)
+    module_description      = RichTextField()
+    pic                     = models.CharField(max_length=200, null=True, blank=True)
+    
+    module_order.help_text  = "Order left-to-right for published modules on the study page"
+    pic.help_text           = "This is the 'splash' picture that will be shown for the module. You can leave it blank. FOR PICS SERVED UP ON THE SITE, THEY SHOULD START WITH /static/img/"
+
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+    page_views = models.IntegerField(default=0)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.module_name
 
 # Create your models here.
 class Course(models.Model):
-    course_name           = models.CharField(max_length=50)
-    course_description    = RichTextField()
-    course_target         = models.CharField(max_length=50, default='RBT')
-    course_units          = models.ManyToManyField(Unit)
+    course_name             = models.CharField(max_length=50)
+    course_description      = RichTextField()
+    course_target           = models.CharField(max_length=50, default='RBT')
+    course_units            = models.ManyToManyField(Unit)
 
     def __str__(self):
         return self.course_name
@@ -76,11 +107,15 @@ class LessonPage(models.Model):
     lesson_course           = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson_unit             = models.ForeignKey(Unit, on_delete=models.CASCADE)
     lesson_objectives       = models.ManyToManyField(Objective)
-    next_lesson             = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+
+    lesson_quizzes          = models.ManyToManyField(Form, blank=True)
+
+    last_lesson             = models.ForeignKey('self', related_name='last_lesson_page', blank=True, null=True, on_delete=models.CASCADE)
+    next_lesson             = models.ForeignKey('self', related_name='next_lesson_page', blank=True, null=True, on_delete=models.CASCADE)
 
     # help text
     slug.help_text          = "must be a single string, e.g. 'this-is-an-example'"
-    pic.help_text           = "This is the 'splash' picture that will be shown for the unit. You can leave it blank. FOR POSTS SERVED UP ON THE SITE, THEY SHOULD START WITH /static/img/"
+    pic.help_text           = "This is the 'splash' picture that will be shown for the unit. You can leave it blank. FOR PICS SERVED UP ON THE SITE, THEY SHOULD START WITH /static/img/"
     snippet_size.help_text  = "The snippet_size determines how much of a text to 'preview' before the card shows the 'study' button"
 
     STATUS_CHOICES = (
@@ -105,7 +140,6 @@ class LessonPage(models.Model):
 
     def __str__(self):
         return self.title
-
 
 
 class Unit(models.Model):
@@ -144,6 +178,7 @@ class TaskListItemCategory(models.Model):
     class Meta:
         verbose_name_plural = "Task List Item Categories"
 
+
 class TaskListItem(models.Model):
     task_list_item_name           = models.CharField(max_length=50)
     task_list_item_description    = RichTextField()
@@ -158,14 +193,18 @@ class TaskListItem(models.Model):
         return self.task_list_item_id
 
 
-
 # One-to-One link with django's user model
 class Profile(models.Model):
-    user 						= models.OneToOneField(User, on_delete=models.CASCADE)
-    last_lesson_course   		= models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
-    last_lesson_page   			= models.ForeignKey(LessonPage, on_delete=models.CASCADE, blank=True, null=True)
-    course_units_completed  	= models.ManyToManyField(Unit, blank=True)
-    course_lessons_completed  	= models.ManyToManyField(LessonPage,related_name='course_lessons_completed', blank=True)
+    user 						    = models.OneToOneField(User, on_delete=models.CASCADE)
+    last_lesson_course   		    = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    last_lesson_page   			    = models.ForeignKey(LessonPage, on_delete=models.CASCADE, blank=True, null=True)
+    course_units_completed  	    = models.ManyToManyField(Unit, blank=True)
+    course_lessons_completed  	    = models.ManyToManyField(LessonPage, related_name='course_lessons_completed', blank=True)
+    user_quiz_forms_completed       = models.ManyToManyField(Form, blank=True)
+    user_fluency_decks_completed    = models.ManyToManyField(Deck, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=User)

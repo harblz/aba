@@ -17,6 +17,9 @@ from django.utils import timezone
 from datetime import datetime    
 
 from .models import Unit, Form, Choice, Question, Task, QuizScore
+
+from learn.models import Profile    
+
 from pages.models import Pages
 
 def quiz_index(request):
@@ -59,6 +62,11 @@ def submit_score_report(request):
 
     form_id         = request.POST.get("form_id")
     form            = Form.objects.get(pk=form_id)
+
+    if score >= '0.8':
+        profile = Profile.course_lessons_completed.all
+        profile.add(request.POST.get("form_id"))
+        profile.save()
 
     results         = QuizScore(score=score, unit_id=unit, form_id=form, date=datetime.now())
     results.save()

@@ -325,8 +325,7 @@
     } else {
       get_next_question();
     }
-
-
+    console.log('score: ', score);
     return score;
   }
 
@@ -468,7 +467,7 @@
     } else { // incorrect response
       current_score.push("incorrect");
       missed_questions_ids.push([current_question_id, document.querySelector("#questionNumber").innerHTML]);
-      console.log(missed_questions_ids);
+      //console.log(missed_questions_ids);
       localStorage.setItem(unit_id,JSON.stringify(current_score));
       calculateScore();
       $('#error_modal').modal('toggle')
@@ -482,8 +481,8 @@
   });
 
   function generate_missed_questions_report() {
-    console('generating missed questions report');
-    console.log('missed_questions_ids', missed_questions_ids);
+    //console('generating missed questions report');
+    //console.log('missed_questions_ids', missed_questions_ids);
     for (i = 0; i < missed_questions_ids.length; i++ ) {
       $.ajax({
         url : "/quiz/report/{{unit_id}}/form_"+form_id+"/", // /quiz/report/unit_id/form_id/
@@ -525,7 +524,7 @@
       },
       success : function(response) {
 
-        console.log('get_next_question: ', response);
+        //console.log('get_next_question: ', response);
 
         /* Question Text Template */
         document.querySelector("#question_text_wrapper").innerHTML = '';

@@ -15,6 +15,8 @@ from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
 
+from learn.models import Module
+
 def redirect_root(request):
     posts           = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:1]
     pinned_posts    = Post.objects.filter(published_date__lte=timezone.now(),is_pinned=True).order_by('-published_date')
@@ -24,13 +26,14 @@ def redirect_root(request):
 
 
 def redirect_account(request):
-    pages           = Pages.objects.order_by('order')
+    pages             = Pages.objects.order_by('order')
     return render(request, 'learn/account.html', { 'pages': pages })
 
 
 def redirect_study(request):
     pages           = Pages.objects.order_by('order')
-    return render(request, 'quiz/study.html', { 'pages': pages })
+    modules         = Module.objects.filter(published_date__isnull=False).order_by('module_order')
+    return render(request, 'quiz/study.html', { 'pages': pages, 'modules': modules })
 
 
 def redirect_thanks(request):
