@@ -3,8 +3,6 @@ from django.db import models
 from django.utils import timezone
 
 from ckeditor.fields import RichTextField
-from django.utils.encoding import python_2_unicode_compatible
-
 
 from django.core.validators import validate_slug
 

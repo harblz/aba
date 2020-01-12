@@ -23,9 +23,9 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 # wagtail CMS
-from wagtail.admin import urls as wagtailadmin_urls
-from wagtail.documents import urls as wagtaildocs_urls
-from wagtail.core import urls as wagtail_urls
+#from wagtail.admin import urls as wagtailadmin_urls
+#from wagtail.documents import urls as wagtaildocs_urls
+#from wagtail.core import urls as wagtail_urls
 
 from .views import redirect_error_report, redirect_root, redirect_study, redirect_research, redirect_coffee, redirect_coffee_confirm, redirect_thanks
 
@@ -52,9 +52,9 @@ urlpatterns = [
     #url(r'^tinymce/', include('tinymce.urls')),
 
     # wagtail CMS
-    re_path(r'^cms/', include(wagtailadmin_urls)),
-    re_path(r'^documents/', include(wagtaildocs_urls)),
-    re_path(r'^wag_pages/', include(wagtail_urls)),
+    #re_path(r'^cms/', include(wagtailadmin_urls)),
+    #re_path(r'^documents/', include(wagtaildocs_urls)),
+    #re_path(r'^wag_pages/', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_title  = 'ABA.rocks Administration'
