@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}{% block mobile-content %}
-    <div id="post_container" class="post container" style="padding: 0 2.5% 5% 2.5%; visibility: hidden;margin-top: 25px;">
+    <div id="post_container" class="post container" style="padding: 0 2.5% 5% 2.5%;margin-top: 25px;">
       <div class="row">
 
         <div class="calendar-icon col-1">
@@ -10,11 +10,15 @@
         <div class="col-2"> </div>
 
         <div class="col-10">
-
-          <h2><strong>
-           {{ learn_topic.title }}
-          </strong></h2>
+          
+          <h2>
+            <strong>
+              {{ learn_topic.title }}
+            </strong>
+          </h2>
+          
           <h4 class="text-muted">Test {{ learn_topic.lesson_unit }}</h4>
+
           <br />
 
           {{ learn_topic.body | safe }}
@@ -98,7 +102,7 @@
 
     </div>
 
-
+      
       <script>
         function checkProgress() {
           //var progress = "{{ user.profile.user_quiz_forms_completed.all }}";
@@ -116,21 +120,17 @@
             {% endfor %}
           {% endif %}
 
-          console.log('completed_quiz_ids', completed_quiz_ids, 'lesson_quizzes', lesson_quizzes);
           count_completed_lesson_quizzes = 0;
-          for (i = 0; i < completed_quiz_ids.length; i++) {
-            var found = lesson_quizzes.indexOf(completed_quiz_ids[i]);
-            if (found != null) {
-              console.log(found);
+          
+          for ( i = 0; i < lesson_quizzes.length; i++ ) {
+            if ( completed_quiz_ids.includes(lesson_quizzes[i]) ) {
               count_completed_lesson_quizzes++;
-              text = document.getElementById('quiz_'+completed_quiz_ids[i]).innerHTML;
-              document.getElementById('quiz_'+completed_quiz_ids[i]).innerHTML = '<i class="fas fa-check-circle"></i> &nbsp&nbsp' + text;
-              document.getElementById('quiz_'+completed_quiz_ids[i]).classList += 'text-muted'
             }
           }
+
           var progress = (100*count_completed_lesson_quizzes/lesson_quizzes.length)+'%';
-          console.log('progress: ', progress);
           recordProgress(progress);
+          
         }
         checkProgress();
 
@@ -169,6 +169,8 @@
             resize();
         };
       </script>
+      
+
       {% include "disqus.html" %}
                             
 
