@@ -1,1 +1,0 @@
-C:/home/django/abarocks/abarocks/__init__.py
