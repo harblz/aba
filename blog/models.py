@@ -36,7 +36,7 @@ class Post(models.Model):
     category         = models.ForeignKey('blog.Category', on_delete=models.CASCADE,default=0)
     meta             = models.CharField(max_length=1000, null=True)
     snippet_size     = models.IntegerField(default=150)
-    is_pinned        = models.NullBooleanField(default=False)
+    is_pinned        = models.BooleanField(null=True, blank=True)
 
     pic.help_text           = "This is the 'splash' picture that will be shown to the user as a header for each post. You can leave it blank. FOR POSTS SERVED UP ON THE SITE, THEY SHOULD START WITH /static/img/"
 

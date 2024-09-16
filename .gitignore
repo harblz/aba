@@ -8,3 +8,4 @@ __pycache__
 myvenv
 .DS_Store
 debug.log
+node_modules
