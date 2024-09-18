@@ -21,61 +21,74 @@ from django.db.models import F
 import random
 
 from django.utils import timezone
-from datetime import datetime    
-
+from datetime import datetime
 from pages.models import Pages
+
 
 from .models import Course, Unit, LessonPage, Profile
 
+
 @login_required
 def course_index(request):
-    pages           = Pages.objects.order_by('order')
-    units 			= Unit.objects.order_by('unit_order')
-    lesson_page		= LessonPage.objects.order_by('unit_order')
+    pages = Pages.objects.order_by("order")
+    units = Unit.objects.order_by("unit_order")
+    lesson_page = LessonPage.objects.order_by("unit_order")
 
     # chart progress and labels list for chart.js
-    #chart_progress_array 	= Profile.objects.values_list('course_units_completed', flat=True)
-    chart_progress_array 	= Profile.objects.values("id", "course_units_completed").all()
+    # chart_progress_array 	= Profile.objects.values_list('course_units_completed', flat=True)
+    chart_progress_array = Profile.objects.values("id", "course_units_completed").all()
 
-
-	#all_units = Unit.objects.order_by('unit_order').values_list('unit_weight', flat=True)
+    # all_units = Unit.objects.order_by('unit_order').values_list('unit_weight', flat=True)
     for unit in chart_progress_array:
-    	unit['course_weight'] = 10
+        unit["course_weight"] = 10
 
+    chart_progress_array = list(chart_progress_array)
 
-    chart_progress_array	= list(chart_progress_array)
+    chart_labels_array = Unit.objects.values_list("unit_name", flat=True)
+    chart_labels_array = list(chart_labels_array)
 
-    chart_labels_array 		= Unit.objects.values_list('unit_name', flat=True)
-    chart_labels_array 		= list(chart_labels_array)
+    return render(
+        request,
+        "course_list.html",
+        {
+            # 'pages'					: pages,
+            "units": units,
+            "lesson_page": lesson_page,
+            "chart_labels_array": chart_labels_array,
+            "chart_progress_array": chart_progress_array,
+        },
+    )
 
-    return render(request, 'course_list.html', { 
-    	'pages'					: pages, 
-    	'units'					: units, 
-    	'lesson_page'			: lesson_page, 
-    	'chart_labels_array'    : chart_labels_array,
-    	'chart_progress_array'  : chart_progress_array,
-    	})
 
 @login_required
 def unit_landing_page(request, pk):
-	pages 			= Pages.objects.order_by('order')
-	page = LessonPage.objects.filter(pk=pk)
-	page = get_object_or_404(LessonPage, pk=page[0].id)
-	page.page_views += 1;
-	page.save()
-	return render(request, 'unit_landing_page.html', { 'learn_topic': page, 'pages':pages,  })
+    pages = Pages.objects.order_by("order")
+    page = LessonPage.objects.filter(pk=pk)
+    page = get_object_or_404(LessonPage, pk=page[0].id)
+    page.page_views += 1
+    page.save()
+    return render(
+        request,
+        "unit_landing_page.html",
+        {
+            "learn_topic": page,
+            "pages": pages,
+        },
+    )
+
 
 @login_required
 def course_account(request):
-    pages           = Pages.objects.order_by('order')
-    return render(request, 'account.html', { 'pages': pages })
+    pages = Pages.objects.order_by("order")
+    return render(request, "account.html", {"pages": pages})
+
 
 # Pages written via the learn dashboard
 @login_required
 def topic_page(request, slug):
-    pages              = Pages.objects.order_by('order')
-    page               = LessonPage.objects.filter(slug=slug)
-    page               = get_object_or_404(LessonPage, pk=page[0].id)
-    page.page_views += 1;
+    pages = Pages.objects.order_by("order")
+    page = LessonPage.objects.filter(slug=slug)
+    page = get_object_or_404(LessonPage, pk=page[0].id)
+    page.page_views += 1
     page.save()
-    return render(request, 'learn_topic.html', {'learn_topic': page, 'pages': pages})
+    return render(request, "learn_topic.html", {"learn_topic": page, "pages": pages})

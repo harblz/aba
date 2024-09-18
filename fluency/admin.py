@@ -6,7 +6,7 @@ from django.contrib.admin import SimpleListFilter
 
 from .models import Unit, Deck, Difficulty, Choice, Flashcard, Task, FluencyUntimedScore, FluencyUntimedScoreSummary, FluencyTimedScore, FluencyTimedScoreSummary
 
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
+# from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
 from django.db.models import Count, Avg, Sum, Min, Max, DateTimeField
 from django.db.models.functions import Trunc

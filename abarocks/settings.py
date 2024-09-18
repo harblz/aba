@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
+    "pages.apps.PagesConfig",
     # "django_htmx" , Uncomment when ready for htmx
 ]
 
@@ -77,7 +78,7 @@ MIDDLEWARE = [
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not testing
-ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
+"""ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 if ENABLE_DEBUG_TOOLBAR:
     INSTALLED_APPS += [
         "django_extensions",
@@ -86,7 +87,7 @@ if ENABLE_DEBUG_TOOLBAR:
     MIDDLEWARE[:0] = [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
-    DEBUG_TOOLBAR_CONFIG = {"ROOT_TAG_EXTRA_ATTRS": "hx-preserve"}
+    DEBUG_TOOLBAR_CONFIG = {"ROOT_TAG_EXTRA_ATTRS": "hx-preserve"}"""
 
 ROOT_URLCONF = "abarocks.urls"
 
@@ -114,7 +115,7 @@ WSGI_APPLICATION = "abarocks.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data/db.sqlite3",
+        "NAME": str(BASE_DIR / "data/db.sqlite3"),
     }
 }
 

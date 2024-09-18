@@ -8,7 +8,7 @@ from django.contrib.admin import SimpleListFilter
 
 from .models import Unit, Form, Difficulty, Choice, Question, Task, QuizScore, QuizScoreSummary
 
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
+# from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
 from django.db.models import Count, Avg, Sum, Min, Max, DateTimeField
 from django.db.models.functions import Trunc
