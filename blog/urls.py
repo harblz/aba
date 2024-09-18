@@ -13,7 +13,11 @@ urlpatterns = [
     ),
     path("<slug:slug>", views.post_details_by_slug, name="post_details_by_slug"),
     re_path(r"^research$", views.blog_research, name="research"),
-    # re_path(r'^coffee$', views.blog_coffee, name='coffee'),
-    # re_path(r"^blog_coffee_checkout$", views.blog_coffee_checkout, name="blog_coffee_checkout"),
+    re_path(r"^coffee$", views.blog_coffee, name="coffee"),
+    re_path(
+        r"^blog_coffee_checkout$",
+        views.blog_coffee_checkout,
+        name="blog_coffee_checkout",
+    ),
     re_path(r"^thanks$", views.thanks, name="thanks"),
 ]

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 from pathlib import Path
 import os
 import tempfile
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,18 +52,20 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "whitenoise.runserver_nostatic",  # Use Whitenoise w/ `runserver`
+    "whitenoise.runserver_nostatic",  # Use Whitenoise w/ `manage.py runserver`
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "taggit",
     "ckeditor",
+    "django_htmx",
+    "django_bootstrap5",
+    "fontawesomefree",
     "polls.apps.PollsConfig",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
     "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
     "pages.apps.PagesConfig",
-    # "django_htmx" , Uncomment when ready for htmx
 ]
 
 MIDDLEWARE = [
@@ -74,11 +77,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "django_htmx.middleware.HtmxMiddleware" , Uncomment when ready for htmx
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
-# Debug Toolbar and Extensions only when `DEBUG = False` and not testing
-"""ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
+# Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
+ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 if ENABLE_DEBUG_TOOLBAR:
     INSTALLED_APPS += [
         "django_extensions",
@@ -87,7 +90,7 @@ if ENABLE_DEBUG_TOOLBAR:
     MIDDLEWARE[:0] = [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
-    DEBUG_TOOLBAR_CONFIG = {"ROOT_TAG_EXTRA_ATTRS": "hx-preserve"}"""
+    DEBUG_TOOLBAR_CONFIG = {"ROOT_TAG_EXTRA_ATTRS": "hx-preserve"}
 
 ROOT_URLCONF = "abarocks.urls"
 
@@ -115,7 +118,7 @@ WSGI_APPLICATION = "abarocks.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": str(BASE_DIR / "data/db.sqlite3"),
+        "NAME": BASE_DIR / "data/db.sqlite3",
     }
 }
 
@@ -174,6 +177,7 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 # CKEditor
 # https://django-ckeditor.readthedocs.io/en/latest/
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_CONFIGS = {
     "default": {
         "width": "100%",

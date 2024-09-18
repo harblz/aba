@@ -44,9 +44,9 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     re_path(r"^error/report", redirect_error_report),
     re_path(r"^research/", redirect_research),
-    # re_path(r'^coffee/', redirect_coffee),
-    # re_path(r'^thanks/', redirect_thanks),
-    # re_path(r'^blog_coffee_checkout/', redirect_coffee_confirm),
+    re_path(r"^coffee/", redirect_coffee),
+    re_path(r"^thanks/", redirect_thanks),
+    re_path(r"^blog_coffee_checkout/", redirect_coffee_confirm),
     re_path(r"^study/", redirect_study),
     re_path(r"^$", redirect_root),
     re_path(r"^blog/", include("blog.urls")),
@@ -57,11 +57,6 @@ urlpatterns = [
     re_path(r"^learn/", include("learn.urls")),
     # django newsletter
     # re_path(r'^newsletter/', include('newsletter.urls')),
-    # re_path(r'^tinymce/', include('tinymce.urls')),
-    # wagtail CMS
-    # re_path(r'^cms/', include(wagtailadmin_urls)),
-    # re_path(r'^documents/', include(wagtaildocs_urls)),
-    # re_path(r'^wag_pages/', include(wagtail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_title = "ABA.rocks Administration"

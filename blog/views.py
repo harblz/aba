@@ -1,5 +1,3 @@
-# import stripe
-
 from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
@@ -18,20 +16,23 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
 
-"""def blog_coffee_checkout(request):
-    # pages = Pages.objects.order_by('order')
+import stripe
+
+
+def blog_coffee_checkout(request):
+    pages = Pages.objects.order_by("order")
     stripe.api_key = "sk_live_ERSCcIQW6Na7l8VfnXUpD2RH00E1Q70EFF"
 
     if request.method == "POST":
-        token    = request.POST.get("stripeToken")
+        token = request.POST.get("stripeToken")
         donation = request.POST.get("donation")
 
     try:
-        charge  = stripe.Charge.create(
-            amount      = donation,
-            currency    = "usd",
-            source      = token,
-            description = "A generous donation from a fan!"
+        charge = stripe.Charge.create(
+            amount=donation,
+            currency="usd",
+            source=token,
+            description="A generous donation from a fan!",
         )
 
         # new_car.charge_id   = charge.id
@@ -40,10 +41,12 @@ from django.core import serializers
         return False, ce
 
     else:
-        #new_car.save()
+        # new_car.save()
         donation = int(donation) / 100.00
-        return render(request, 'blog/thanks.html', { 'pages': pages, 'donation' : donation })
-        # The payment was successfully processed & the user's card was charged - confirm with them how much"""
+        return render(
+            request, "blog/thanks.html", {"pages": pages, "donation": donation}
+        )
+        # The payment was successfully processed & the user's card was charged - confirm with them how much
 
 
 def thanks(request):
