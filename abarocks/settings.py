@@ -27,14 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = [
-    "www.aba.rocks",
-    "aba.rocks",
-    "localhost",
-    "127.0.0.1",
-    "192.168.0.110",
-    "10.0.0.243",
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(":")
 
 MANAGERS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
 ADMINS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
