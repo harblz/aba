@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", False) == "True"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(":")
-INTERNAL_IPS = ALLOWED_HOSTS
+INTERNAL_IPS = os.environ.get("INTERNAL_IPS").split(":")
 
 MANAGERS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
 ADMINS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
