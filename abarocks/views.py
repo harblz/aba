@@ -30,6 +30,7 @@ def redirect_root(request):
         .order_by("-published_date")[:1][0]
         .id
     )
+
     pages = Pages.objects.order_by("order")
     return render(
         request,

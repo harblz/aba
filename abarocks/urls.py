@@ -23,11 +23,9 @@ from django.contrib import admin
 
 from django.views.generic import RedirectView
 
-# wagtail CMS
-# from wagtail.admin import urls as wagtailadmin_urls
-# from wagtail.documents import urls as wagtaildocs_urls
-# from wagtail.core import urls as wagtail_urls
+from debug_toolbar.toolbar import debug_toolbar_urls
 
+import abarocks.settings
 from .views import (
     redirect_error_report,
     redirect_root,
@@ -58,6 +56,11 @@ urlpatterns = [
     # django newsletter
     # re_path(r'^newsletter/', include('newsletter.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.ENABLE_DEBUG_TOOLBAR:
+    urlpatterns = [
+        *urlpatterns,
+    ] + debug_toolbar_urls()
 
 admin.site.site_title = "ABA.rocks Administration"
 admin.site.site_header = "ABA.rocks administration"
