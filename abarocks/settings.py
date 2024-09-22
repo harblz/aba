@@ -50,11 +50,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "taggit",
-    "ckeditor",
+    "django_ckeditor_5",
     "django_htmx",
     "django_bootstrap5",
     "fontawesomefree",
-    "polls.apps.PollsConfig",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
     "fluency.apps.FluencyConfig",
@@ -148,9 +147,6 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(tempfile.gettempdir(), "ck_media")
-
 # Whitenoise compression & caching
 # https://whitenoise.readthedocs.io/en/latest/django.html
 """STORAGES = {
@@ -164,15 +160,9 @@ MEDIA_ROOT = os.path.join(tempfile.gettempdir(), "ck_media")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Stripe
-# https://docs.stripe.com/api?lang=python
-STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
-
 # CKEditor
 # https://django-ckeditor.readthedocs.io/en/latest/
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     "default": {
         "width": "100%",
         "toolbar": "Custom",

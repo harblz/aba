@@ -37,9 +37,10 @@ from .views import (
 )
 
 urlpatterns = [
-    re_path(r"^admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
     re_path(r"^error/report", redirect_error_report),
     re_path(r"^research/", redirect_research),
     re_path(r"^coffee/", redirect_coffee),
@@ -50,7 +51,6 @@ urlpatterns = [
     re_path(r"^blog/", include("blog.urls")),
     re_path(r"^pages/", include("pages.urls")),
     re_path(r"^quiz/", include("quiz.urls")),
-    re_path(r"^polls/", include("polls.urls")),
     re_path(r"^fluency/", include("fluency.urls")),
     re_path(r"^learn/", include("learn.urls")),
     # django newsletter
