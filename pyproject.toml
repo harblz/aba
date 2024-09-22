@@ -30,6 +30,7 @@ ipython = "^8.27"
 setuptools = "*"
 django-extensions = "^3.2"
 django-debug-toolbar = "^4.4"
+werkzeug = "^3.0.4"
 
 [build-system]
 requires = ["poetry-core"]
