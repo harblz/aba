@@ -8,27 +8,39 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0004_choice_is_correct'),
+        ("quiz", "0004_choice_is_correct"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Unit',
+            name="Unit",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('unit_name', models.CharField(max_length=50)),
-                ('unit_description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("unit_name", models.CharField(max_length=50)),
+                ("unit_description", models.TextField()),
             ],
         ),
         migrations.AlterField(
-            model_name='question',
-            name='question_text',
-            field=ckeditor.fields.RichTextField(),
+            model_name="question",
+            name="question_text",
+            field=ckeditor.fields.CKEditor5Field(),
         ),
         migrations.AddField(
-            model_name='question',
-            name='unit_id',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='quiz.Unit'),
+            model_name="question",
+            name="unit_id",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="quiz.Unit",
+            ),
             preserve_default=False,
         ),
     ]

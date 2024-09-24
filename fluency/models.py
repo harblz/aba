@@ -2,12 +2,12 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Unit(models.Model):
     unit_name = models.CharField(max_length=50)
-    unit_description = RichTextField()
+    unit_description = CKEditor5Field()
     unit_target = models.CharField(max_length=50, default="BCBA")
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Unit(models.Model):
 class Deck(models.Model):
     deck_name = models.CharField(max_length=75, default="1")
     deck_short_name = models.CharField(max_length=75, blank=True, null=True)
-    deck_description = RichTextField(null=True)
+    deck_description = CKEditor5Field(null=True)
     deck_unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck_timed_duration = models.IntegerField(default=60)
 
@@ -42,7 +42,7 @@ class Deck(models.Model):
 
 class Difficulty(models.Model):
     difficulty_name = models.CharField(max_length=25)
-    difficulty_description = RichTextField()
+    difficulty_description = CKEditor5Field()
 
     class Meta:
         verbose_name_plural = "Difficulties"
@@ -59,7 +59,7 @@ class Difficulty(models.Model):
 
 class Task(models.Model):
     task_name = models.CharField(max_length=50)
-    task_list_description = RichTextField()
+    task_list_description = CKEditor5Field()
     certification = models.CharField(max_length=25, default="RBT")
     task_version = models.CharField(max_length=50, default="2019")
 
@@ -117,13 +117,13 @@ class FluencyTimedScoreSummary(FluencyTimedScore):
 
 class Flashcard(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
-    flashcard_text = RichTextField()
+    flashcard_text = CKEditor5Field()
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
     task_list_item = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     task_list_data = models.CharField(default=None, max_length=50, null=True)
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
-    flashcard_hint = RichTextField()
+    flashcard_hint = CKEditor5Field()
     pub_date = models.DateTimeField("date published")
     flashcard_choices = models.CharField(default=None, max_length=50, null=True)
     error_reports = models.IntegerField(default=0)
@@ -159,7 +159,7 @@ class Flashcard(models.Model):
 
 class Choice(models.Model):
     flashcard = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
-    choice_text = RichTextField()
+    choice_text = CKEditor5Field()
     votes = models.IntegerField(default=0)
     is_correct = models.BooleanField(default=False)
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from datetime import datetime
 
 
@@ -12,7 +12,7 @@ class Pages(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
-    text = RichTextField()
+    text = CKEditor5Field()
     order = models.IntegerField()
     icon = models.CharField(max_length=50)
     STATUS_CHOICES = (

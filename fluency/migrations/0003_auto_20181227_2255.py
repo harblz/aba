@@ -8,36 +8,56 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fluency', '0002_auto_20181223_1614'),
+        ("fluency", "0002_auto_20181223_1614"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Deck',
+            name="Deck",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('deck_name', models.CharField(default='A', max_length=75)),
-                ('deck_short_name', models.CharField(blank=True, max_length=75, null=True)),
-                ('deck_description', ckeditor.fields.RichTextField(null=True)),
-                ('deck_timed_duration', models.IntegerField(default=60)),
-                ('deck_unit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='fluency.Unit')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("deck_name", models.CharField(default="A", max_length=75)),
+                (
+                    "deck_short_name",
+                    models.CharField(blank=True, max_length=75, null=True),
+                ),
+                ("deck_description", ckeditor.fields.CKEditor5Field(null=True)),
+                ("deck_timed_duration", models.IntegerField(default=60)),
+                (
+                    "deck_unit",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="fluency.Unit"
+                    ),
+                ),
             ],
         ),
         migrations.RemoveField(
-            model_name='form',
-            name='form_unit',
+            model_name="form",
+            name="form_unit",
         ),
         migrations.RemoveField(
-            model_name='flashcard',
-            name='form',
+            model_name="flashcard",
+            name="form",
         ),
         migrations.DeleteModel(
-            name='Form',
+            name="Form",
         ),
         migrations.AddField(
-            model_name='flashcard',
-            name='deck',
-            field=models.ForeignKey(default=60, on_delete=django.db.models.deletion.CASCADE, to='fluency.Deck'),
+            model_name="flashcard",
+            name="deck",
+            field=models.ForeignKey(
+                default=60,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="fluency.Deck",
+            ),
             preserve_default=False,
         ),
     ]

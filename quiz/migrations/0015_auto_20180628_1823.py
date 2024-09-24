@@ -7,28 +7,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0014_task_task_list_description'),
+        ("quiz", "0014_task_task_list_description"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='choice',
-            name='choice_text',
-            field=ckeditor.fields.RichTextField(),
+            model_name="choice",
+            name="choice_text",
+            field=ckeditor.fields.CKEditor5Field(),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='certification',
-            field=models.CharField(default='RBT', max_length=25),
+            model_name="task",
+            name="certification",
+            field=models.CharField(default="RBT", max_length=25),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='task_list_description',
-            field=ckeditor.fields.RichTextField(),
+            model_name="task",
+            name="task_list_description",
+            field=ckeditor.fields.CKEditor5Field(),
         ),
         migrations.AlterField(
-            model_name='task',
-            name='task_version',
-            field=models.CharField(default='2017', max_length=50),
+            model_name="task",
+            name="task_version",
+            field=models.CharField(default="2017", max_length=50),
         ),
     ]

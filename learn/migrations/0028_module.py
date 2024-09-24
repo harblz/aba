@@ -8,20 +8,41 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('learn', '0027_auto_20190821_1230'),
+        ("learn", "0027_auto_20190821_1230"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Module',
+            name="Module",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('module_name', models.CharField(max_length=50)),
-                ('module_description', ckeditor.fields.RichTextField()),
-                ('status', models.CharField(choices=[('d', 'Draft'), ('p', 'Published'), ('w', 'Withdrawn')], max_length=1)),
-                ('created_date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('published_date', models.DateTimeField(blank=True, null=True)),
-                ('page_views', models.IntegerField(default=0)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("module_name", models.CharField(max_length=50)),
+                ("module_description", ckeditor.fields.CKEditor5Field()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("d", "Draft"),
+                            ("p", "Published"),
+                            ("w", "Withdrawn"),
+                        ],
+                        max_length=1,
+                    ),
+                ),
+                (
+                    "created_date",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                ("published_date", models.DateTimeField(blank=True, null=True)),
+                ("page_views", models.IntegerField(default=0)),
             ],
         ),
     ]

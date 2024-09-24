@@ -22,15 +22,13 @@ import random
 
 from django.utils import timezone
 from datetime import datetime
-from pages.models import Pages
 
 
-from .models import Course, Unit, LessonPage, Profile
+from .models import Course, Profile
 
 
 @login_required
 def course_index(request):
-    pages = Pages.objects.order_by("order")
     units = Unit.objects.order_by("unit_order")
     lesson_page = LessonPage.objects.order_by("unit_order")
 
@@ -62,7 +60,6 @@ def course_index(request):
 
 @login_required
 def unit_landing_page(request, pk):
-    pages = Pages.objects.order_by("order")
     page = LessonPage.objects.filter(pk=pk)
     page = get_object_or_404(LessonPage, pk=page[0].id)
     page.page_views += 1
@@ -79,14 +76,12 @@ def unit_landing_page(request, pk):
 
 @login_required
 def course_account(request):
-    pages = Pages.objects.order_by("order")
     return render(request, "account.html", {"pages": pages})
 
 
 # Pages written via the learn dashboard
 @login_required
 def topic_page(request, slug):
-    pages = Pages.objects.order_by("order")
     page = LessonPage.objects.filter(slug=slug)
     page = get_object_or_404(LessonPage, pk=page[0].id)
     page.page_views += 1

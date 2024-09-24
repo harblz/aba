@@ -2,12 +2,12 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Unit(models.Model):
     unit_name = models.CharField(max_length=50)
-    unit_description = RichTextField()
+    unit_description = CKEditor5Field()
     unit_target = models.CharField(max_length=50, default="RBT")
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Unit(models.Model):
 class Form(models.Model):
     form_name = models.CharField(max_length=75, default="A")
     form_short_name = models.CharField(max_length=75, blank=True, null=True)
-    form_description = RichTextField(null=True)
+    form_description = CKEditor5Field(null=True)
     form_unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -41,7 +41,7 @@ class Form(models.Model):
 
 class Difficulty(models.Model):
     difficulty_name = models.CharField(max_length=25)
-    difficulty_description = RichTextField()
+    difficulty_description = CKEditor5Field()
 
     class Meta:
         verbose_name_plural = "Difficulties"
@@ -58,7 +58,7 @@ class Difficulty(models.Model):
 
 class Task(models.Model):
     task_name = models.CharField(max_length=50)
-    task_list_description = RichTextField()
+    task_list_description = CKEditor5Field()
     certification = models.CharField(max_length=25, default="RBT")
     task_version = models.CharField(max_length=50, default="2017")
 
@@ -98,12 +98,12 @@ class QuizScoreSummary(QuizScore):
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
-    question_text = RichTextField()
+    question_text = CKEditor5Field()
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
     task_list_item = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
-    question_hint = RichTextField()
+    question_hint = CKEditor5Field()
     error_reports = models.IntegerField(default=0)
     pub_date = models.DateTimeField("date published")
 
@@ -137,7 +137,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = RichTextField()
+    choice_text = CKEditor5Field()
     votes = models.IntegerField(default=0)
     is_correct = models.BooleanField(default=False)
 
