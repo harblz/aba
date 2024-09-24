@@ -1,5 +1,4 @@
 from django.db import models
-from django_ckeditor_5.fields import CKEditor5Field
 from django.contrib.auth.models import User
 
 
@@ -21,23 +20,27 @@ class Profile(models.Model):
 
 
 class Course(models.Model):
-    # Competencies and topics (e.g., BCBA, RBT)
+    """Competencies, subjects, and topics (e.g., BCBA, RBT, Feeding Therapy, etc.)"""
+
+    # TODO: Add relation in pages
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)  # Content to be displayed on page
-    content = models.OneToOneField("Pages", on_delete=models.RESTRICT)
     course_data = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name
 
-    def get_course_description(self):
+    def get_course_description(self) -> str:
+        """Returns the full description of the course"""
         return self.description
 
-    def get_course_id(self):
+    def natural_key(self) -> str:
+        """Returns the acronym/code for the competency"""
         return self.code
 
     def get_task_list(self) -> dict:
+        """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
             tasks = self.task_list.all().order_by("area", "task")
             task_list = {}
@@ -53,23 +56,30 @@ class Course(models.Model):
 
 
 class TaskManager(models.Manager):
+    """Manager to return natural key of Task"""
+
     def get_by_natural_key(self, license, area, task):
         return self.get(license=license, area=area, task=task)
 
 
 class Task(models.Model):
+    """BACB Task List items"""
+
     license = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="task_list"
     )
     area = models.CharField(max_length=1)
     area_name = models.CharField(max_length=50)
-    task = models.IntegerField(max_length=2)
+    task = models.IntegerField()
     task_desc = models.CharField(max_length=100)
 
     objects = TaskManager()
 
     def __str__(self):
         return f"{self.license} Task List: Item {self.area}-{self.task}"
+
+    def natural_key(self):
+        return (self.license, self.area, self.task)
 
     class Meta:
         constraints = [
