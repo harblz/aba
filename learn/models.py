@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django_ckeditor_5.fields import CKEditor5Field
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -26,7 +28,8 @@ class Course(models.Model):
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)  # Content to be displayed on page
-    course_data = models.JSONField(default=dict)
+    category_weights = models.IntegerField()
+    course_data = models.JSONField()
 
     def __str__(self):
         return self.name
@@ -42,7 +45,7 @@ class Course(models.Model):
     def get_task_list(self) -> dict:
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
-            tasks = self.task_list.all().order_by("area", "task")
+            tasks = self.tasks.all().order_by("area", "task")
             task_list = {}
             for task in tasks:
                 task_name = f"{task.area}-{task.task}"
@@ -65,9 +68,7 @@ class TaskManager(models.Manager):
 class Task(models.Model):
     """BACB Task List items"""
 
-    license = models.ForeignKey(
-        Course, on_delete=models.CASCADE, related_name="task_list"
-    )
+    license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
     area = models.CharField(max_length=1)
     area_name = models.CharField(max_length=50)
     task = models.IntegerField()
@@ -88,3 +89,17 @@ class Task(models.Model):
             )
         ]
         db_table_comment = "Tasks for RBT, BCaBA, and BCBA according to the BACB"
+
+
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
+    page = models.IntegerField()
+    title = models.CharField(max_length=100)
+    content = CKEditor5Field()
+
+    def __str__(self):
+        return f"{self.course} Lesson {self.page}"
+
+    class Meta:
+        models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")
+        db_table_comment = "Lesson pages for each course"

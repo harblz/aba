@@ -18,7 +18,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, re_path, include
 from django.contrib import admin
-from django.views.generic import RedirectView
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 
@@ -30,8 +29,6 @@ urlpatterns = [
     path("quiz/", include("quiz.urls")),
     path("fluency/", include("fluency.urls")),
     path("learn/", include("learn.urls")),
-    # django newsletter
-    # re_path(r'^newsletter/', include('newsletter.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.ENABLE_DEBUG_TOOLBAR:

@@ -1,145 +1,34 @@
-import datetime
 from django.db import models
-from django.utils import timezone
 
-from django_ckeditor_5.fields import CKEditor5Field
-
-
-class Unit(models.Model):
-    unit_name = models.CharField(max_length=50)
-    unit_description = CKEditor5Field()
-    unit_target = models.CharField(max_length=50, default="RBT")
-
-    def __str__(self):
-        return self.unit_name
-
-    def get_unit_description(self):
-        return self.unit_description
-
-    def get_unit_id(self):
-        return self.unit_id
+from learn import models as learn
 
 
-class Form(models.Model):
-    form_name = models.CharField(max_length=75, default="A")
-    form_short_name = models.CharField(max_length=75, blank=True, null=True)
-    form_description = CKEditor5Field(null=True)
-    form_unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+class Quiz(models.Model):
+    course = models.ForeignKey(learn.Course, on_delete=models.CASCADE)
+    number = models.IntegerField(default=0)
+    questions = models.IntegerField("Number of Questions", default=0)
+    desc = models.CharField("Description", max_length=100)
+    timed = models.BooleanField("Timed?", default=False)
+    time = models.IntegerField("Time in minutes", default=0, null=True, blank=True)
+    has_list = models.BooleanField("Has a task list?", default=False)
 
     def __str__(self):
-        return self.form_name
+        return f"{self.course} Quiz #{self.number}"
 
-    def get_form_unit(self):
-        return self.form_unit
-
-    def get_form_name(self):
-        return self.form_name
-
-    def get_form_id(self):
-        return self.form_id
-
-
-class Difficulty(models.Model):
-    difficulty_name = models.CharField(max_length=25)
-    difficulty_description = CKEditor5Field()
+    def natural_keY(self):
+        return (self.course, self.number)
 
     class Meta:
-        verbose_name_plural = "Difficulties"
-
-    def __str__(self):
-        return self.difficulty_name
-
-    def get_difficulty_description(self):
-        return self.difficulty_description
-
-    def get_difficulty_id(self):
-        return self.difficulty_id
-
-
-class Task(models.Model):
-    task_name = models.CharField(max_length=50)
-    task_list_description = CKEditor5Field()
-    certification = models.CharField(max_length=25, default="RBT")
-    task_version = models.CharField(max_length=50, default="2017")
-
-    def __str__(self):
-        return self.task_name
-
-    def get_task_name(self):
-        return self.task_name
-
-    def get_task_description(self):
-        return self.task_description
-
-    def get_task_certification(self):
-        return self.task_certification
-
-    def get_task_version(self):
-        return self.task_version
-
-    def get_task_id(self):
-        return self.task_id
-
-
-class QuizScore(models.Model):
-    id = models.AutoField(primary_key=True, editable=False)
-    score = models.DecimalField(blank=True, null=True, decimal_places=3, max_digits=4)
-    unit_id = models.ForeignKey(Unit, on_delete=models.CASCADE)
-    form_id = models.ForeignKey(Form, on_delete=models.CASCADE)
-    date = models.DateTimeField()
-
-
-class QuizScoreSummary(QuizScore):
-    class Meta:
-        proxy = True
-        verbose_name = "Quiz Score Summary"
-        verbose_name_plural = "Quiz Scores Summary"
+        models.UniqueConstraint(fields=["topic", "number"], name="unique_quiz")
+        db_table_comment = "Table of available quizzes"
 
 
 class Question(models.Model):
-    id = models.AutoField(primary_key=True, editable=False)
-    question_text = CKEditor5Field()
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
-    form = models.ForeignKey(Form, on_delete=models.CASCADE)
-    task_list_item = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
-    difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
-    question_hint = CKEditor5Field()
-    error_reports = models.IntegerField(default=0)
-    pub_date = models.DateTimeField("date published")
-
-    def __str__(self):
-        return self.question_text
-
-    def get_unit_id(self):
-        return self.unit_id
-
-    def get_difficulty_id(self):
-        return self.difficulty_id
-
-    get_unit_id.admin_order_field = "Quiz ID"
-    get_unit_id.short_description = "A unique number for each quiz. Each question that belongs to the same quiz will have the same Quiz ID."
-
-    def get_hint(self):
-        return self.question_hint
-
-    get_hint.short_description = "Question Hint"
-
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
-
-    was_published_recently.admin_order_field = "pub_date"
-    was_published_recently.boolean = True
-    was_published_recently.short_description = "Published recently?"
-
-    error_reports.short_description = "# of Error Reports"
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = CKEditor5Field()
-    votes = models.IntegerField(default=0)
-    is_correct = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.choice_text
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    q_no = models.IntegerField("Question Number")
+    text = models.TextField("Question Text")
+    one = models.TextField("Question One")
+    two = models.TextField("Question Two")
+    three = models.TextField("Question Three")
+    four = models.TextField("Question Four")
+    answer = models.ForeignKey("self", on_delete=models.SET_NULL)

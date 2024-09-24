@@ -1,12 +1,15 @@
-from django.urls import path, include, re_path
+from django.urls import path
 
 from . import views
 
-app_name = 'learn'
+app_name = "learn"
 urlpatterns = [
-    re_path(r'^$', views.course_index, name='course_index'),
-    re_path(r'account/$', views.course_account, name='course_account'),
-    re_path(r'unit/(?P<pk>\d+)', views.unit_landing_page, name='unit_landing_page'),
-    path('topic/<slug:slug>/', views.topic_page),
-    #re_path(r'^(?P<quiz_id>\w+)/deck_(?P<deck_id>\w+)/$', views.fluency_view, name='fluency_view'),
+    path("courses/", views.course_index, name="course_index"),
+    path("<str: code>/", views.course_landing_page, name="course_landing_page"),
+    path(
+        "<str: code>/tasklist/",
+        views.return_task_list,
+        name="tasklist_landing_page",
+    ),
+    path("<str: code>/<int: page>/", views.lesson_page, name="lesson_page"),
 ]
