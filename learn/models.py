@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import HStoreField
 
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -28,7 +29,7 @@ class Course(models.Model):
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)  # Content to be displayed on page
-    category_weights = models.IntegerField()
+    weights = HStoreField("# of questions per category")
     course_data = models.JSONField()
 
     def __str__(self):
@@ -45,7 +46,7 @@ class Course(models.Model):
     def get_task_list(self) -> dict:
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
-            tasks = self.tasks.all().order_by("area", "task")
+            tasks = self.tasks.filter(code=self.code).order_by("area", "task")
             task_list = {}
             for task in tasks:
                 task_name = f"{task.area}-{task.task}"

@@ -1,69 +1,74 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views import generic
-from django.views.generic import TemplateView
-import json
-from django.core.serializers.json import DjangoJSONEncoder
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.core import serializers
-from django.db.models import F
-from pages.models import Pages
-
-import random
-from random import shuffle
-
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from datetime import datetime
+from django.db.models import F
+from django.http import HttpResponse, JsonResponse, HttpResponseServerError
+import random
 
-from .models import Unit, Form, Choice, Question, Task, QuizScore
+from learn.models import Profile, Course
+from pages.models import Pages
+from .models import *
 
-from learn.models import Profile
+
+def quiz_index(request) -> HttpResponse:
+    page = Pages.objects.get(title="Practice Quizzes")
+    quizzes = Quiz.objects.all().order_by("code", "number")
+    return render(request, "Replace with template", {"quizzes": quizzes})
 
 
-def quiz_index(request):
-    pages = Pages.objects.order_by("order")
-    template_name = "quiz/index.html"
-    units = Unit.objects.values(
-        "unit_name", "unit_target", "unit_description", "id"
-    ).all()  # Question.objects.values("unit_name").distinct()
-
-    for unit in units:
-        unit["count"] = len(
-            Question.objects.values("unit_id").filter(unit_id=unit["id"])
-        )
-        unit["forms"] = Form.objects.filter(form_unit_id=unit["id"])
-        for form in unit["forms"]:
-            form.count = len(Question.objects.filter(form_id=form.id))
-
+def index_by_course(request, code) -> HttpResponse:
+    # pages = Pages.objects.filter(title=f"{code} Quizzes)
+    course_quizzes = Quiz.objects.get(code=code)
     return render(
         request,
         "quiz/index.html",
-        {"units": units, "pages": pages},
+        {"quizzes": course_quizzes},
     )
 
 
-def quiz_question_inspector(request, question_id):
+def get_quiz(request, code, quiz) -> HttpResponse:
+    return render(request, "Replace with quiz template", {"code": code, "quiz": quiz})
 
-    pages = Pages.objects.order_by("order")
-    question = get_object_or_404(Question, pk=question_id)
 
-    correct_choice = list(
-        Choice.objects.filter(question_id=question.id, is_correct=True).values_list(
-            "id", "choice_text", "is_correct"
-        )
-    )
+def _get_questions(code, quiz) -> list:
+    weights = Course.objects.get(code=code).weights
+    questions = []
+    for key, value in weights:
+        options = Question.objects.filter(
+            code=code, quiz=quiz, category=key
+        ).values_list("id")
+        questions += random.sample(options, value)
+    return questions
 
-    return render(
-        request,
-        "quiz/quiz_question_inspector.html",
-        {
-            "question": question,
-            "correct_choice": correct_choice,
-            "pages": pages,
-        },
-    )
+
+def _reset_quiz(request) -> Question:
+    pass
+
+
+def _start_quiz(request, code, quiz) -> JsonResponse:
+    try:
+        questions = _get_questions(code, quiz)
+        random.shuffle(questions)
+        quiz = Quiz.objects.filter(code=code, quiz=quiz)
+        if quiz.values("timed"):
+            time = quiz.values_list("time")
+        data = []
+        for question in questions:
+            obj = Question.objects.get(id=question)
+            data.append(
+                {
+                    "question": obj.text,
+                    "choice_one": obj.one,
+                    "choice_two": obj.two,
+                    "choice_three": obj.three,
+                    "choice_four": obj.four,
+                    "answer": obj.answer,
+                }
+            )
+            payload = {"status": True, "data": data}
+            return JsonResponse(payload)
+    except Exception as e:
+        HttpResponse("There was a problem with your request:" + str(e))
 
 
 def submit_score_report(request):
