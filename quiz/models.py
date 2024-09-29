@@ -31,7 +31,7 @@ class Question(models.Model):
     two = models.TextField("Question Two")
     three = models.TextField("Question Three", null=True, blank=True)
     four = models.TextField("Question Four", null=True, blank=True)
-    answer = models.ForeignKey("self", on_delete=models.SET_NULL)
+    answer = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.text

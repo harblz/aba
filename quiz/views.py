@@ -1,33 +1,38 @@
 from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.db.models import F
-from django.http import HttpResponse, JsonResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
+from django.views.generic import ListView
 import random
+from django_htmx.http import retarget, trigger_client_event
 
 from learn.models import Profile, Course
 from pages.models import Pages
 from .models import *
+from .forms import QuizForm
 
 
-def quiz_index(request) -> HttpResponse:
-    page = Pages.objects.get(title="Practice Quizzes")
-    quizzes = Quiz.objects.all().order_by("code", "number")
-    return render(request, "Replace with template", {"quizzes": quizzes})
+class QuizIndex(ListView):
+    model = Quiz
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = Pages.objects.get(title="Practice Quizzes")
+        return context
 
 
-def index_by_course(request, code) -> HttpResponse:
-    # pages = Pages.objects.filter(title=f"{code} Quizzes)
-    course_quizzes = Quiz.objects.get(code=code)
+class IndexByCourse(ListView):
+    model = Quiz
+
+    def get_queryset(self):
+        queryset = Quiz.objects.filter(self.kwargs["course"])
+        return queryset
+
+
+def get_quiz(request, course, quiz) -> HttpResponse:
     return render(
         request,
-        "quiz/index.html",
-        {"quizzes": course_quizzes},
+        "",  # TODO: Replace with template name
+        {"course": course, "quiz": quiz},
     )
-
-
-def get_quiz(request, code, quiz) -> HttpResponse:
-    return render(request, "Replace with quiz template", {"code": code, "quiz": quiz})
 
 
 def _get_questions(code, quiz) -> list:
@@ -41,37 +46,57 @@ def _get_questions(code, quiz) -> list:
     return questions
 
 
-def _reset_quiz(request) -> Question:
+def _save_progress(request) -> None:
     pass
+    # response =
+    # return trigger_client_event(response)
 
 
-def _start_quiz(request, code, quiz) -> JsonResponse:
-    try:
-        questions = _get_questions(code, quiz)
-        random.shuffle(questions)
-        quiz = Quiz.objects.filter(code=code, quiz=quiz)
-        if quiz.values("timed"):
-            time = quiz.values_list("time")
-        data = []
-        for question in questions:
-            obj = Question.objects.get(id=question)
-            data.append(
-                {
-                    "question": obj.text,
-                    "choice_one": obj.one,
-                    "choice_two": obj.two,
-                    "choice_three": obj.three,
-                    "choice_four": obj.four,
-                    "answer": obj.answer,
-                }
+def _next_question(request, question) -> HttpResponse:
+    if request.htmx:
+        try:
+            _save_progress(request)
+        except Exception as e:
+            return HttpResponseServerError(e)
+
+        try:
+            question = Question.objects.get(id=question)
+            form = QuizForm(question=question)
+            return retarget(
+                request,
+                "",  # TODO: Replace with template name
             )
-            payload = {"status": True, "data": data}
-            return JsonResponse(payload)
-    except Exception as e:
-        HttpResponse("There was a problem with your request:" + str(e))
+        except Exception as e:
+            return HttpResponseServerError(e)
+    else:
+        return HttpResponseForbidden()
 
 
-def submit_score_report(request):
+def _start_quiz(request, code, quiz) -> HttpResponse:
+    if request.htmx:
+        try:
+            questions = _get_questions(code, quiz)
+            random.shuffle(questions)
+            if quiz.values("timed"):
+                time = quiz.values_list("time")
+                # Save start time to session
+            form = QuizForm(question=Question.objects.get(pk=questions[0]))
+            response = render(
+                request,
+                "",  # TODO: Replace with template name
+                {"form": form, "question_list": questions},
+            )
+            return retarget(
+                response,
+                "",  # TODO: Replace with CSS selector
+            )
+        except Exception as e:
+            return HttpResponse("There was a problem with your request:" + str(e))
+    else:
+        return HttpResponseForbidden()
+
+
+"""def submit_score_report(request):
     # send_mail('Subject here','Here is the message.','alex@behaviorist.tech',['alex@behaviorist.tech'],fail_silently=False,)
     score = request.POST.get("quiz_score")
 
@@ -239,4 +264,4 @@ def quiz_view(request, quiz_id, form_id):
                 "prev_correct_choice": prev_correct_choice,
                 "task_item": task_item,
             }
-        )
+        )"""

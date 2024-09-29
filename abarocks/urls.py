@@ -25,9 +25,9 @@ import abarocks.settings
 
 urlpatterns = [
     path("/", include("pages.urls")),
-    path("blog/", include("blog.urls")),
-    path("quiz/", include("quiz.urls")),
-    path("fluency/", include("fluency.urls")),
+    # path("blog/", include("blog.urls")),
+    path("quizzes/", include("quiz.urls")),
+    # path("fluency/", include("fluency.urls")),
     path("learn/", include("learn.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -31,6 +31,15 @@ setuptools = "*"
 django-extensions = "^3.2"
 django-debug-toolbar = "^4.4"
 werkzeug = "^3.0.4"
+psycopg = {extras = ["binary"], version = "^3.2.2"}
+
+
+[tool.poetry.group.prod]
+optional = true
+
+
+[tool.poetry.group.prod.dependencies]
+psycopg = {extras = ["c"], version = "^3.2.2"}
 
 [build-system]
 requires = ["poetry-core"]

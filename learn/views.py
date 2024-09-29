@@ -1,23 +1,19 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic import ListView
 
 from .models import Course, Lesson
 from pages.models import Pages
 
 
-@login_required
-def course_index(request) -> HttpResponse:
-    # page = Pages.objects.get("Courses")
-    courses = Course.objects.all().order_by("name")
-    return render(
-        request,
-        "course_list.html",
-        {
-            # "page": page,
-            "courses": courses,
-        },
-    )
+class CourseIndex(ListView):
+    model = Course
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context["page"] = Pages.objects.get("Courses")
+        return context
 
 
 @login_required
@@ -26,7 +22,7 @@ def course_landing_page(request, code) -> HttpResponse:
     course = get_object_or_404(Course, pk=code)
     return render(
         request,
-        "unit_landing_page.html",
+        "unit_landing_page.html",  # TODO: Check tempalte name
         {
             "learn_topic": course,
             "page": page,
@@ -34,19 +30,26 @@ def course_landing_page(request, code) -> HttpResponse:
     )
 
 
-def return_task_list(request, code) -> HttpResponse:
-    # page = Pages.objects.get(f"{code} Task List")
-    course = get_object_or_404(Course, pk=code)
-    task_list = course.get_task_list()
+class TaskListView(ListView):
+    model = Course
+
+    def get_queryset(self):
+        queryset = get_object_or_404(Course, code=self.kwargs["code"])
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["task_list"] = Course.objects.get(
+            code=self.kwargs["code"]
+        ).get_task_list()
+        return context
+
+
+def lesson_page(request, course) -> HttpResponse:
+    page = int(request.GET.get("page", "1"))
+    lesson = Lesson.objects.get(course=course, page=page)
     return render(
-        "Replace with template",
-        {
-            "task_list": task_list,
-            # "page": page
-        },
+        request,
+        "",  # TODO: Replace with template name
+        {"lesson": lesson, "page": page},
     )
-
-
-def lesson_page(request, code, page) -> HttpResponse:
-    lesson = Lesson.objects.filter(code=code, page=page).order_by("page")
-    return render("Replace with template", {"lesson": lesson})
