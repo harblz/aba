@@ -49,14 +49,15 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",  # Use Whitenoise w/ `manage.py runserver`
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.postgres",
     "taggit",
     "django_ckeditor_5",
     "django_htmx",
     "django_bootstrap5",
     "fontawesomefree",
     "quiz.apps.QuizConfig",
-    "blog.apps.BlogConfig",
-    "fluency.apps.FluencyConfig",
+    # "blog.apps.BlogConfig",
+    # "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
     "pages.apps.PagesConfig",
 ]
@@ -110,8 +111,11 @@ WSGI_APPLICATION = "abarocks.wsgi.application"
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data/db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {
+            "service": "aba.rocks",
+            "passfile": ".pgpass",
+        },
     }
 }
 

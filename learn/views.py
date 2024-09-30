@@ -18,14 +18,14 @@ class CourseIndex(ListView):
 
 @login_required
 def course_landing_page(request, code) -> HttpResponse:
-    page = Pages.objects.get(f"{code} Lesson Intro")
+    # page = Pages.objects.get(f"{code} Lesson Intro")
     course = get_object_or_404(Course, pk=code)
     return render(
         request,
         "unit_landing_page.html",  # TODO: Check tempalte name
         {
             "learn_topic": course,
-            "page": page,
+            # "page": page,
         },
     )
 

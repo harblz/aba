@@ -22,9 +22,10 @@ from django.contrib import admin
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 import abarocks.settings
+from . import views
 
 urlpatterns = [
-    path("/", include("pages.urls")),
+    path("", views.home, name="home"),
     # path("blog/", include("blog.urls")),
     path("quizzes/", include("quiz.urls")),
     # path("fluency/", include("fluency.urls")),

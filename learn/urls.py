@@ -11,5 +11,5 @@ urlpatterns = [
         views.TaskListView.as_view(),
         name="tasklist_landing_page",
     ),
-    path("<str:code>/lesson/", views.lesson_page, name="lesson_page"),
+    path("<str:code>/course/", views.lesson_page, name="lesson_page"),
 ]
