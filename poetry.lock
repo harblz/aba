@@ -848,6 +848,16 @@ files = [
 windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
+name = "pygraphviz"
+version = "1.14"
+description = "Python interface to Graphviz"
+optional = false
+python-versions = ">=3.10"
+files = [
+    {file = "pygraphviz-1.14.tar.gz", hash = "sha256:c10df02377f4e39b00ae17c862f4ee7e5767317f1c6b2dfd04cea6acc7fc2bea"},
+]
+
+[[package]]
 name = "requests"
 version = "2.32.3"
 description = "Python HTTP for Humans."
@@ -1047,4 +1057,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "775219890eab99e49c33e3691293fe6b5fa2440a31c00f4d1bdbe4e281dffc86"
+content-hash = "0a30863d915f83af66c81ebf4074b398cebac5aef7651d9bb7cdba318cef46f2"

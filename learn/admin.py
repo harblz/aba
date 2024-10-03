@@ -15,7 +15,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    pass
+    exclude = ["slug"]
 
 
 @admin.register(Lesson)

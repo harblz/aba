@@ -4,6 +4,7 @@ from learn import models as learn
 
 
 class Quiz(models.Model):
+    slug = models.SlugField(unique=True, primary_key=True)
     course = models.ForeignKey(learn.Course, on_delete=models.CASCADE)
     number = models.IntegerField(default=0)
     questions = models.IntegerField("Number of Questions", default=0)
@@ -16,7 +17,7 @@ class Quiz(models.Model):
         return f"{self.course} Quiz #{self.number}"
 
     def natural_keY(self):
-        return (self.course, self.number)
+        return (self.course.code, self.number)
 
     class Meta:
         models.UniqueConstraint(fields=["course", "number"], name="unique_quiz")

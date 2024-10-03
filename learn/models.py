@@ -63,12 +63,13 @@ class TaskManager(models.Manager):
     """Manager to return natural key of Task"""
 
     def get_by_natural_key(self, license, area, task):
-        return self.get(license=license, area=area, task=task)
+        return self.get(license=license.code, area=area, task=task)
 
 
 class Task(models.Model):
     """BACB Task List items"""
 
+    slug = models.SlugField(unique=True, primary_key=True)
     license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
     area = models.CharField(max_length=1)
     area_name = models.CharField(max_length=50)
@@ -78,10 +79,10 @@ class Task(models.Model):
     objects = TaskManager()
 
     def __str__(self):
-        return f"{self.license} Task List: Item {self.area}-{self.task}"
+        return f"{self.license.code} Task List: Item {self.area}-{self.task}"
 
     def natural_key(self):
-        return (self.license, self.area, self.task)
+        return (self.license.code, self.area, self.task)
 
     class Meta:
         constraints = [
@@ -99,7 +100,7 @@ class Lesson(models.Model):
     content = CKEditor5Field()
 
     def __str__(self):
-        return f"{self.course} Lesson {self.page}"
+        return f"{self.course.code} Lesson {self.page}"
 
     class Meta:
         models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")

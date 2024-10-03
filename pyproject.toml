@@ -32,6 +32,7 @@ django-extensions = "^3.2"
 django-debug-toolbar = "^4.4"
 werkzeug = "^3.0.4"
 psycopg = {extras = ["binary"], version = "^3.2.3"}
+pygraphviz = "^1.14"
 
 
 [tool.poetry.group.prod]

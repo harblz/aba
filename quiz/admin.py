@@ -5,7 +5,7 @@ from .models import *
 # Register your models here.
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
-    pass
+    exclude = ["slug"]
 
 
 @admin.register(Question)
