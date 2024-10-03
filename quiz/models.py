@@ -16,8 +16,12 @@ class Quiz(models.Model):
     def __str__(self):
         return f"{self.course} Quiz #{self.number}"
 
-    def natural_keY(self):
+    def natural_key(self):
         return (self.course.code, self.number)
+
+    def save(self, *args, **kwargs):
+        self.slug = f"{self.course.code}-{self.number}"
+        super(Quiz, self).save(*args, **kwargs)
 
     class Meta:
         models.UniqueConstraint(fields=["course", "number"], name="unique_quiz")

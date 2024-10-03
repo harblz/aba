@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 from django.contrib.postgres.fields import HStoreField
 
 from django_ckeditor_5.fields import CKEditor5Field
@@ -30,7 +31,7 @@ class Course(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)  # Content to be displayed on page
     weights = HStoreField("# of questions per category")
-    course_data = models.JSONField()
+    course_data = models.JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -82,7 +83,11 @@ class Task(models.Model):
         return f"{self.license.code} Task List: Item {self.area}-{self.task}"
 
     def natural_key(self):
-        return (self.license.code, self.area, self.task)
+        return (self.license, self.area, self.task)
+
+    def save(self, *args, **kwargs):
+        self.slug = f"{self.license.code}-{self.area}-{self.task}"
+        return super(Task, self).save(*args, **kwargs)
 
     class Meta:
         constraints = [
@@ -100,7 +105,7 @@ class Lesson(models.Model):
     content = CKEditor5Field()
 
     def __str__(self):
-        return f"{self.course.code} Lesson {self.page}"
+        return f"{self.course} Lesson {self.page}"
 
     class Meta:
         models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")
