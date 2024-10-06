@@ -76,7 +76,7 @@ MIDDLEWARE = [
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
 ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
-"""if ENABLE_DEBUG_TOOLBAR:
+if ENABLE_DEBUG_TOOLBAR:
     hide_toolbar_patterns = ["/media/", "/static/"]
     INSTALLED_APPS += [
         "django_extensions",
@@ -90,7 +90,7 @@ ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
             request.path.startswith(p) for p in hide_toolbar_patterns
         ),
         "ROOT_TAG_EXTRA_ATTRS": "hx-preserve",
-    }"""
+    }
 
 RESULTS_CACHE_SIZE = 1000
 

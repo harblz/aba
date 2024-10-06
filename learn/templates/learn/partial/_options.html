@@ -1,0 +1,6 @@
+<select id="area" name="area">
+  <option value="">Choose License Area</option>
+  {% for area in areas %}
+    <option value="{{ area.area }}">{{ area.area_name }}</option>
+  {% endfor %}
+</select>  

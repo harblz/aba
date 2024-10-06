@@ -46,8 +46,8 @@
 {% endif %}
 
 <div>
-    <label for="license">License</label>
-    <select name="license" id="license" hx-get="task/change/options" hx-target="#area" hx-indicator=".htmx-indicator">
+    <label for="license">License:</label>
+    <select name="license_code" id="license_code" hx-get="{% url "learn:task_changeform_options" %}" hx-vals="{'license':" hx-target="#area" hx-indicator=".htmx-indicator">
       <option value="">Select a license</option>
       {% for key, value in licenses.items %}
         <option value="{{ key }}">{{ value }}</option>
@@ -55,19 +55,31 @@
     </select>
 </div>
 <div>
-    <label for="area">Area</label>
-    <select id="area" name="area" hx-swap="innerHTML" hx-get="task/change/options" hx-target="#area_name" hx-indicator=".htmx-indicator">
-      {% block options %}
-      <option value=""></option>
-      {% for key, value in options.items %}
-      <option value="{{ key }}">{{ value }}</option>
-      {% endfor %}
-      {% endblock %}
-    </select>
-    <label for="area_name">Area Name</label>
-    <input type="text" value="" readonly="readonly" id="area_name" name="area_name"/>
+    <label for="area">Area:</label>
+    <div name="area" id="area">{% include "learn/partial/_options.html" %}</div>
+    <input type="hidden" name="area_name" id="hidden" value="" _="
+    on change from #area-select get textContent from <option:checked/> and set my @value to it"/>
     <img class="htmx-indicator" width="20" src="{% static "/img/bars.svg" %}" alt="loader bars">
 </div>
+
+{% block field_sets %}
+{% for fieldset in adminform %}
+  {% include "admin/includes/fieldset.html" with heading_level=2 prefix="fieldset" id_prefix=0 id_suffix=forloop.counter0 %}
+{% endfor %}
+{% endblock %}
+
+{% block after_field_sets %}{% endblock %}
+
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
+{% endblock %}
+
+{% block after_related_objects %}{% endblock %}
+
+{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+
 {% block admin_change_form_document_ready %}
     <script id="django-admin-form-add-constants"
             src="{% static 'admin/js/change_form.js' %}"

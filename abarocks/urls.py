@@ -31,6 +31,7 @@ urlpatterns = [
     path("quizzes/", include("quiz.urls")),
     # path("fluency/", include("fluency.urls")),
     path("learn/", include("learn.urls")),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.ENABLE_DEBUG_TOOLBAR:

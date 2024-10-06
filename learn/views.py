@@ -57,15 +57,15 @@ def lesson_page(request, course) -> HttpResponse:
     )
 
 
-@for_htmx(use_block="options")
 def task_changeform_options(request):
-    course_filter = Task.objects.filter(license=request.GET.get("license"))
+    course_filter = Task.objects.filter(license=request.GET.get("license_code"))
     if course_filter.exists():
-        categories = course_filter.values("area", "area_name").distinct()
-        options = {}
-        for entry in categories:
-            options[entry["area"]] = entry["area_name"]
-        return TemplateResponse(request, "learn/change_form.html", {"options": options})
+        areas = course_filter.values("area", "area_name").distinct()
+        return TemplateResponse(
+            request,
+            "learn/partial/_options.html",
+            {"areas": areas},
+        )
     else:
         pass
 
