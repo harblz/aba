@@ -30,7 +30,7 @@ class Course(models.Model):
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)  # Content to be displayed on page
-    weights = HStoreField("# of questions per category")
+    weights = models.ForeignKey("ContentArea", on_delete=models.SET_NULL, null=True)
     course_data = models.JSONField(null=True, blank=True)
 
     def __str__(self):
@@ -60,6 +60,30 @@ class Course(models.Model):
         db_table_comment = "The competency, license, or topic of interest"
 
 
+class ContentArea(models.Model):
+    slug = models.SlugField(unique=True, primary_key=True)
+    license = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="content_areas"
+    )
+    letter = models.CharField(max_length=1)
+    section = models.IntegerField(null=True, blank=True)
+    area = models.CharField(max_length=50)
+    weight = models.IntegerField()
+
+    def __str__(self):
+        if self.section:
+            return f"{self.license.code} Task List Section {self.section}, Content Area {self.area}"
+        else:
+            return f"{self.license.code} Task List, Content Area {self.area}"
+
+    def save(self, *args, **kwargs):
+        if self.section:
+            self.slug = f"{self.license.code}-{self.section}-{self.area}"
+        else:
+            self.slug = f"{self.license.code}-{self.area}"
+        return super(ContentArea, self).save(*args, **kwargs)
+
+
 class TaskManager(models.Manager):
     """Manager to return natural key of Task"""
 
@@ -72,8 +96,9 @@ class Task(models.Model):
 
     slug = models.SlugField(unique=True, primary_key=True)
     license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
-    area = models.CharField(max_length=1)
-    area_name = models.CharField(max_length=50)
+    area = models.ForeignKey(
+        ContentArea, on_delete=models.CASCADE, related_name="tasks"
+    )
     task = models.IntegerField()
     task_desc = models.TextField()
 
