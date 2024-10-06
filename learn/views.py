@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.template.response import TemplateResponse
 from django.views.generic import ListView
 
-from abarocks.utils import for_htmx
 from .models import Course, Lesson, Task
 from pages.models import Pages
 
