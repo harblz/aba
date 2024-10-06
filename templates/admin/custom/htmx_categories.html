@@ -1,0 +1,7 @@
+{% load static %}
+<div>
+    <label >{{ widget.name }}</label>
+    <select name="{{ widget.name }}" hx-get="/task/categories/" hx-target="#models" hx-indicator=".htmx-indicator">
+      
+    </select>
+  </div>

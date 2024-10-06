@@ -76,7 +76,8 @@ MIDDLEWARE = [
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
 ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
-if ENABLE_DEBUG_TOOLBAR:
+"""if ENABLE_DEBUG_TOOLBAR:
+    hide_toolbar_patterns = ["/media/", "/static/"]
     INSTALLED_APPS += [
         "django_extensions",
         "debug_toolbar",
@@ -84,7 +85,14 @@ if ENABLE_DEBUG_TOOLBAR:
     MIDDLEWARE[:0] = [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
-    DEBUG_TOOLBAR_CONFIG = {"ROOT_TAG_EXTRA_ATTRS": "hx-preserve"}
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": lambda request: not any(
+            request.path.startswith(p) for p in hide_toolbar_patterns
+        ),
+        "ROOT_TAG_EXTRA_ATTRS": "hx-preserve",
+    }"""
+
+RESULTS_CACHE_SIZE = 1000
 
 ROOT_URLCONF = "abarocks.urls"
 

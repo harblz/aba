@@ -322,6 +322,23 @@ asgiref = ">=3.6"
 django = ">=3.2"
 
 [[package]]
+name = "django-render-block"
+version = "0.10"
+description = "Render a particular block from a template to a string."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_render_block-0.10-py3-none-any.whl", hash = "sha256:4deeec70a360aa90385443aeae1213ffb2acbfe2b5fb09d4afe47e75a29240c3"},
+    {file = "django_render_block-0.10.tar.gz", hash = "sha256:23fbc9cfed17aac47e936e65f0c29ae186765a41234cdc8dbf88d4a9377fdd76"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[package.extras]
+dev = ["Jinja2 (>=2.8)"]
+
+[[package]]
 name = "django-taggit"
 version = "6.1.0"
 description = "django-taggit is a reusable Django application for simple tagging."
@@ -1057,4 +1074,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0a30863d915f83af66c81ebf4074b398cebac5aef7651d9bb7cdba318cef46f2"
+content-hash = "d66b1775ae209295c714ec660d93a48bb8b4d489801b0cc4961747bb4d6027e0"

@@ -75,7 +75,7 @@ class Task(models.Model):
     area = models.CharField(max_length=1)
     area_name = models.CharField(max_length=50)
     task = models.IntegerField()
-    task_desc = models.CharField(max_length=100)
+    task_desc = models.TextField()
 
     objects = TaskManager()
 

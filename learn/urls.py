@@ -12,4 +12,10 @@ urlpatterns = [
         name="tasklist_landing_page",
     ),
     path("<str:code>/course/", views.lesson_page, name="lesson_page"),
+    path(
+        "task/change/options",
+        views.task_changeform_options,
+        name="task_changeform_options",
+    ),
+    path("task/change/area_name", views.get_area_name, name="get_area_name"),
 ]
