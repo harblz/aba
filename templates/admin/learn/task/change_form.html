@@ -47,7 +47,7 @@
 
 <div>
     <label for="license">License:</label>
-    <select name="license_code" id="license_code" hx-get="{% url "learn:task_changeform_options" %}" hx-vals="{'license':" hx-target="#area" hx-indicator=".htmx-indicator">
+    <select name="license_code" id="license_code" hx-get="{% url "learn:task_changeform_options" %}" hx-target="#area" hx-indicator=".htmx-indicator">
       <option value="">Select a license</option>
       {% for key, value in licenses.items %}
         <option value="{{ key }}">{{ value }}</option>

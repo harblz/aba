@@ -13,7 +13,7 @@ class Pages(models.Model):
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
     text = CKEditor5Field()
-    order = models.IntegerField()
+    order = models.IntegerField()  # TODO: Remove
     icon = models.CharField(max_length=50)
     STATUS_CHOICES = (
         ("d", "Draft"),

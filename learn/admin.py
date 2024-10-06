@@ -13,9 +13,17 @@ class CourseAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(ContentArea)
+class ContentAreaAdmin(admin.ModelAdmin):
+    ordering = ["slug"]
+    fields = ["license", "section", ("letter", "area"), "weight"]
+    search_fields = ["slug"]
+
+
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    fields = [("area", "area_name"), "task", "task_desc"]
+    fields = ["license", "area", "task", "task_desc"]
+    autocomplete_fields = ["area"]
 
 
 @admin.register(Lesson)

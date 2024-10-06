@@ -29,16 +29,10 @@ class Course(models.Model):
     # TODO: Add relation in pages
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100)  # Content to be displayed on page
-    weights = models.ForeignKey("ContentArea", on_delete=models.SET_NULL, null=True)
     course_data = models.JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.name
-
-    def get_course_description(self) -> str:
-        """Returns the full description of the course"""
-        return self.description
 
     def natural_key(self) -> str:
         """Returns the acronym/code for the competency"""
@@ -78,9 +72,9 @@ class ContentArea(models.Model):
 
     def save(self, *args, **kwargs):
         if self.section:
-            self.slug = f"{self.license.code}-{self.section}-{self.area}"
+            self.slug = f"{self.license.code}-{self.section}-{self.letter}"
         else:
-            self.slug = f"{self.license.code}-{self.area}"
+            self.slug = f"{self.license.code}-{self.letter}"
         return super(ContentArea, self).save(*args, **kwargs)
 
 
