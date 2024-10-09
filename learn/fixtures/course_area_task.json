@@ -1,1 +1,2361 @@
-[{"model": "learn.course", "pk": "BCaBA", "fields": {"name": "Board Certified Assistant Behavior Analyst", "course_data": null}}, {"model": "learn.course", "pk": "BCBA", "fields": {"name": "Board Certified Behavior Analyst", "course_data": null}}, {"model": "learn.course", "pk": "RBT", "fields": {"name": "Registered Behavior Technician", "course_data": null}}, {"model": "learn.contentarea", "pk": "BCBA-1-A", "fields": {"license": "BCBA", "letter": "A", "section": 1, "area": "Philosophical Underpinnings", "weight": 6}}, {"model": "learn.contentarea", "pk": "BCBA-1-B", "fields": {"license": "BCBA", "letter": "B", "section": 1, "area": "Concepts and Principles", "weight": 32}}, {"model": "learn.contentarea", "pk": "BCBA-1-C", "fields": {"license": "BCBA", "letter": "C", "section": 1, "area": "Measurement, Data Display, and Interpretation", "weight": 21}}, {"model": "learn.contentarea", "pk": "BCBA-1-D", "fields": {"license": "BCBA", "letter": "D", "section": 1, "area": "Experimental Design", "weight": 12}}, {"model": "learn.contentarea", "pk": "BCBA-2-E", "fields": {"license": "BCBA", "letter": "E", "section": 2, "area": "Ethics", "weight": 18}}, {"model": "learn.contentarea", "pk": "BCBA-2-F", "fields": {"license": "BCBA", "letter": "F", "section": 2, "area": "Behavior Assessment", "weight": 18}}, {"model": "learn.contentarea", "pk": "BCBA-2-G", "fields": {"license": "BCBA", "letter": "G", "section": 2, "area": "Behavior-Change Procedures", "weight": 35}}, {"model": "learn.contentarea", "pk": "BCBA-2-H", "fields": {"license": "BCBA", "letter": "H", "section": 2, "area": "Selecting and Implementing Interventions", "weight": 16}}, {"model": "learn.contentarea", "pk": "BCBA-2-I", "fields": {"license": "BCBA", "letter": "I", "section": 2, "area": "Personnel Supervision and Management", "weight": 17}}, {"model": "learn.contentarea", "pk": "RBT-A", "fields": {"license": "RBT", "letter": "A", "section": null, "area": "Measurement", "weight": 12}}, {"model": "learn.contentarea", "pk": "RBT-B", "fields": {"license": "RBT", "letter": "B", "section": null, "area": "Assessment", "weight": 6}}, {"model": "learn.contentarea", "pk": "RBT-C", "fields": {"license": "RBT", "letter": "C", "section": null, "area": "Skill Acquisition", "weight": 24}}, {"model": "learn.contentarea", "pk": "RBT-D", "fields": {"license": "RBT", "letter": "D", "section": null, "area": "Behavior Reduction", "weight": 12}}, {"model": "learn.contentarea", "pk": "RBT-E", "fields": {"license": "RBT", "letter": "E", "section": null, "area": "Documentation and Reporting", "weight": 10}}, {"model": "learn.contentarea", "pk": "RBT-F", "fields": {"license": "RBT", "letter": "F", "section": null, "area": "Professional Conduct and Scope of Practice", "weight": 11}}, {"model": "learn.task", "pk": "BCBA-A-1", "fields": {"license": "BCBA", "area": "BCBA-1-A", "task": 1, "task_desc": "Identify the goals of behavior analysis as a science (i.e., description, prediction, control)"}}, {"model": "learn.task", "pk": "BCBA-A-2", "fields": {"license": "BCBA", "area": "BCBA-1-A", "task": 2, "task_desc": "Explain the philosophical assumptions underlying the science of behavior analysis (e.g., selectionism, determinism, empiricism, parsimony, pragmatism)"}}, {"model": "learn.task", "pk": "BCBA-A-3", "fields": {"license": "BCBA", "area": "BCBA-1-A", "task": 3, "task_desc": "Describe and explain behavior from the perspective of radical behaviorism"}}, {"model": "learn.task", "pk": "BCBA-A-4", "fields": {"license": "BCBA", "area": "BCBA-1-A", "task": 4, "task_desc": "Distinguish among behaviorism, the experimental analysis of behavior, applied behavior analysis, and professional practice guided by the science of behavior analysis"}}, {"model": "learn.task", "pk": "BCBA-A-5", "fields": {"license": "BCBA", "area": "BCBA-1-A", "task": 5, "task_desc": "Describe and define the dimensions of applied behavior analysis (Baer, Wolf, & Risley, 1968)"}}, {"model": "learn.task", "pk": "BCBA-B-1", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 1, "task_desc": "Define and provide examples of behavior, response, and response class"}}, {"model": "learn.task", "pk": "BCBA-B-10", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 10, "task_desc": "Define and provide examples of stimulus control"}}, {"model": "learn.task", "pk": "BCBA-B-11", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 11, "task_desc": "Define and provide examples of discrimination, generalization, and maintenance"}}, {"model": "learn.task", "pk": "BCBA-B-12", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 12, "task_desc": "Define and provide examples of motivating operations"}}, {"model": "learn.task", "pk": "BCBA-B-13", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 13, "task_desc": "Define and provide examples of rule-governed and contingency-shaped behavior"}}, {"model": "learn.task", "pk": "BCBA-B-14", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 14, "task_desc": "Define and provide examples of the verbal operants"}}, {"model": "learn.task", "pk": "BCBA-B-15", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 15, "task_desc": "Define and provide examples of derived stimulus relations"}}, {"model": "learn.task", "pk": "BCBA-B-2", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 2, "task_desc": "Define and provide examples of stimulus and stimulus class"}}, {"model": "learn.task", "pk": "BCBA-B-3", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 3, "task_desc": "Define and provide examples of respondent and operant conditioning"}}, {"model": "learn.task", "pk": "BCBA-B-4", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 4, "task_desc": "Define and provide examples of positive and negative reinforcement contingencies"}}, {"model": "learn.task", "pk": "BCBA-B-5", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 5, "task_desc": "Define and provide examples of schedules of reinforcement"}}, {"model": "learn.task", "pk": "BCBA-B-6", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 6, "task_desc": "Define and provide examples of positive and negative punishment contingencies"}}, {"model": "learn.task", "pk": "BCBA-B-7", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 7, "task_desc": "Define and provide examples of automatic and socially mediated contingencies"}}, {"model": "learn.task", "pk": "BCBA-B-8", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 8, "task_desc": "Define and provide examples of unconditioned, conditioned, and generalized reinforcers and punishers"}}, {"model": "learn.task", "pk": "BCBA-B-9", "fields": {"license": "BCBA", "area": "BCBA-1-B", "task": 9, "task_desc": "Define and provide examples of operant extinction"}}, {"model": "learn.task", "pk": "BCBA-C-1", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 1, "task_desc": "Establish operational definitions of behavior"}}, {"model": "learn.task", "pk": "BCBA-C-10", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 10, "task_desc": "Graph data to communicate relevant quantitative relations (e.g., equal-interval graphs, bar graphs, cumulative records)"}}, {"model": "learn.task", "pk": "BCBA-C-11", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 11, "task_desc": "Interpret graphed data"}}, {"model": "learn.task", "pk": "BCBA-C-2", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 2, "task_desc": "Distinguish among direct, indirect, and product measures of behavior"}}, {"model": "learn.task", "pk": "BCBA-C-3", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 3, "task_desc": "Measure occurrence (e.g., count, frequency, rate, percentage)"}}, {"model": "learn.task", "pk": "BCBA-C-4", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 4, "task_desc": "Measure temporal dimensions of behavior (e.g., duration, latency, interresponse time)"}}, {"model": "learn.task", "pk": "BCBA-C-5", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 5, "task_desc": "Measure form and strength of behavior (e.g., topography, magnitude)"}}, {"model": "learn.task", "pk": "BCBA-C-6", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 6, "task_desc": "Measure trials to criterion"}}, {"model": "learn.task", "pk": "BCBA-C-7", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 7, "task_desc": "Design and implement sampling procedures (i.e., interval recording, time sampling)"}}, {"model": "learn.task", "pk": "BCBA-C-8", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 8, "task_desc": "Evaluate the validity and reliability of measurement procedures"}}, {"model": "learn.task", "pk": "BCBA-C-9", "fields": {"license": "BCBA", "area": "BCBA-1-C", "task": 9, "task_desc": "Select a measurement system to obtain representative data given the dimensions of behavior and the logistics of observing and recording"}}, {"model": "learn.task", "pk": "BCBA-D-1", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 1, "task_desc": "Distinguish between dependent and independent variables"}}, {"model": "learn.task", "pk": "BCBA-D-2", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 2, "task_desc": "Distinguish between internal and external validity"}}, {"model": "learn.task", "pk": "BCBA-D-3", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 3, "task_desc": "Identify the defining features of single-subject experimental designs (e.g., individuals serve as their own controls, repeated measures, prediction, verification, replication)"}}, {"model": "learn.task", "pk": "BCBA-D-4", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 4, "task_desc": "Describe the advantages of single-subject experimental designs compared to group designs"}}, {"model": "learn.task", "pk": "BCBA-D-5", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 5, "task_desc": "Use single-subject experimental designs (e.g., reversal, multiple baseline, multielement, changing criterion)"}}, {"model": "learn.task", "pk": "BCBA-D-6", "fields": {"license": "BCBA", "area": "BCBA-1-D", "task": 6, "task_desc": "Describe rationales for conducting comparative, component, and parametric analyses"}}, {"model": "learn.task", "pk": "BCBA-E-1", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 1, "task_desc": "Introduction"}}, {"model": "learn.task", "pk": "BCBA-E-2", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 2, "task_desc": "Responsibility as a Professional"}}, {"model": "learn.task", "pk": "BCBA-E-3", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 3, "task_desc": "Responsibility in Practice"}}, {"model": "learn.task", "pk": "BCBA-E-4", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 4, "task_desc": "Responsibility to Clients and Stakeholders"}}, {"model": "learn.task", "pk": "BCBA-E-5", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 5, "task_desc": "Responsibility to Supervisees and Trainees"}}, {"model": "learn.task", "pk": "BCBA-E-6", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 6, "task_desc": "Responsibility in Public Statements"}}, {"model": "learn.task", "pk": "BCBA-E-7", "fields": {"license": "BCBA", "area": "BCBA-2-E", "task": 7, "task_desc": "Responsibility in Research"}}, {"model": "learn.task", "pk": "BCBA-F-1", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 1, "task_desc": "Review records and available data (e.g., educational, medical, historical) at the outset of the case"}}, {"model": "learn.task", "pk": "BCBA-F-2", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 2, "task_desc": "Determine the need for behavior-analytic services"}}, {"model": "learn.task", "pk": "BCBA-F-3", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 3, "task_desc": "Identify and prioritize socially significant behavior-change goals"}}, {"model": "learn.task", "pk": "BCBA-F-4", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 4, "task_desc": "Conduct assessments of relevant skill strengths and deficits"}}, {"model": "learn.task", "pk": "BCBA-F-5", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 5, "task_desc": "Conduct preference assessments"}}, {"model": "learn.task", "pk": "BCBA-F-6", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 6, "task_desc": "Describe the common functions of problem behavior"}}, {"model": "learn.task", "pk": "BCBA-F-7", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 7, "task_desc": "Conduct a descriptive assessment of problem behavior"}}, {"model": "learn.task", "pk": "BCBA-F-8", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 8, "task_desc": "Conduct a functional analysis of problem behavior"}}, {"model": "learn.task", "pk": "BCBA-F-9", "fields": {"license": "BCBA", "area": "BCBA-2-F", "task": 9, "task_desc": "Interpret functional assessment data"}}, {"model": "learn.task", "pk": "BCBA-G-1", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 1, "task_desc": "Use positive and negative reinforcement procedures to strengthen behavior"}}, {"model": "learn.task", "pk": "BCBA-G-10", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 10, "task_desc": "Teach simple and conditional discriminations"}}, {"model": "learn.task", "pk": "BCBA-G-11", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 11, "task_desc": "Use Skinner’s analysis to teach verbal behavior"}}, {"model": "learn.task", "pk": "BCBA-G-12", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 12, "task_desc": "Use equivalence-based instruction"}}, {"model": "learn.task", "pk": "BCBA-G-13", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 13, "task_desc": "Use the high-probability instructional sequence"}}, {"model": "learn.task", "pk": "BCBA-G-14", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 14, "task_desc": "Use reinforcement procedures to weaken behavior (e.g., DRA, FCT, DRO, DRL, NCR)"}}, {"model": "learn.task", "pk": "BCBA-G-15", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 15, "task_desc": "Use extinction"}}, {"model": "learn.task", "pk": "BCBA-G-16", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 16, "task_desc": "Use positive and negative punishment (e.g., time-out, response cost, overcorrection)"}}, {"model": "learn.task", "pk": "BCBA-G-17", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 17, "task_desc": "Use token economies"}}, {"model": "learn.task", "pk": "BCBA-G-18", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 18, "task_desc": "Use group contingencies"}}, {"model": "learn.task", "pk": "BCBA-G-19", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 19, "task_desc": "Use contingency contracting"}}, {"model": "learn.task", "pk": "BCBA-G-2", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 2, "task_desc": "Use interventions based on motivating operations and discriminative stimuli"}}, {"model": "learn.task", "pk": "BCBA-G-20", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 20, "task_desc": "Use self-management strategies"}}, {"model": "learn.task", "pk": "BCBA-G-21", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 21, "task_desc": "Use procedures to promote stimulus and response generalization"}}, {"model": "learn.task", "pk": "BCBA-G-22", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 22, "task_desc": "Use procedures to promote maintenance"}}, {"model": "learn.task", "pk": "BCBA-G-3", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 3, "task_desc": "Establish and use conditioned reinforcers"}}, {"model": "learn.task", "pk": "BCBA-G-4", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 4, "task_desc": "Use stimulus and response prompts and fading (e.g., errorless, most-to-least, least-to-most, prompt delay, stimulus fading)"}}, {"model": "learn.task", "pk": "BCBA-G-5", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 5, "task_desc": "Use modeling and imitation training"}}, {"model": "learn.task", "pk": "BCBA-G-6", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 6, "task_desc": "Use instructions and rules"}}, {"model": "learn.task", "pk": "BCBA-G-7", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 7, "task_desc": "Use shaping"}}, {"model": "learn.task", "pk": "BCBA-G-8", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 8, "task_desc": "Use chaining"}}, {"model": "learn.task", "pk": "BCBA-G-9", "fields": {"license": "BCBA", "area": "BCBA-2-G", "task": 9, "task_desc": "Use discrete-trial, free-operant, and naturalistic teaching arrangements"}}, {"model": "learn.task", "pk": "BCBA-H-1", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 1, "task_desc": "State intervention goals in observable and measurable terms"}}, {"model": "learn.task", "pk": "BCBA-H-2", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 2, "task_desc": "Identify potential interventions based on assessment results and the best available scientific evidence"}}, {"model": "learn.task", "pk": "BCBA-H-3", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 3, "task_desc": "Recommend intervention goals and strategies based on such factors as client preferences, supporting environments, risks, constraints, and social validity"}}, {"model": "learn.task", "pk": "BCBA-H-4", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 4, "task_desc": "When a target behavior is to be decreased, select an acceptable alternative behavior to be established or increased"}}, {"model": "learn.task", "pk": "BCBA-H-5", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 5, "task_desc": "Plan for possible unwanted effects when using reinforcement, extinction, and punishment procedures"}}, {"model": "learn.task", "pk": "BCBA-H-6", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 6, "task_desc": "Monitor client progress and treatment integrity"}}, {"model": "learn.task", "pk": "BCBA-H-7", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 7, "task_desc": "Make data-based decisions about the effectiveness of the intervention and the need for treatment revision"}}, {"model": "learn.task", "pk": "BCBA-H-8", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 8, "task_desc": "Make data-based decisions about the need for ongoing services"}}, {"model": "learn.task", "pk": "BCBA-H-9", "fields": {"license": "BCBA", "area": "BCBA-2-H", "task": 9, "task_desc": "Collaborate with others who support and/or provide services to clients"}}, {"model": "learn.task", "pk": "BCBA-I-1", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 1, "task_desc": "State the reasons for using behavior-analytic supervision and the potential risks of ineffective supervision (e.g., poor client outcomes, poor supervisee performance)"}}, {"model": "learn.task", "pk": "BCBA-I-2", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 2, "task_desc": "Establish clear performance expectations for the supervisor and supervisee"}}, {"model": "learn.task", "pk": "BCBA-I-3", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 3, "task_desc": "Select supervision goals based on an assessment of the supervisee’s skills"}}, {"model": "learn.task", "pk": "BCBA-I-4", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 4, "task_desc": "Train personnel to competently perform assessment and intervention procedures"}}, {"model": "learn.task", "pk": "BCBA-I-5", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 5, "task_desc": "Use performance monitoring, feedback, and reinforcement systems"}}, {"model": "learn.task", "pk": "BCBA-I-6", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 6, "task_desc": "Use a functional assessment approach (e.g., performance diagnostics) to identify variables affecting personnel performance"}}, {"model": "learn.task", "pk": "BCBA-I-7", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 7, "task_desc": "Use function-based strategies to improve personnel performance"}}, {"model": "learn.task", "pk": "BCBA-I-8", "fields": {"license": "BCBA", "area": "BCBA-2-I", "task": 8, "task_desc": "Evaluate the effects of supervision (e.g., on client outcomes, on supervisee repertoires)"}}, {"model": "learn.task", "pk": "RBT-A-1", "fields": {"license": "RBT", "area": "RBT-A", "task": 1, "task_desc": "Prepare for data collection"}}, {"model": "learn.task", "pk": "RBT-A-2", "fields": {"license": "RBT", "area": "RBT-A", "task": 2, "task_desc": "Implement continuous measurement procedures (e.g., frequency, duration)"}}, {"model": "learn.task", "pk": "RBT-A-3", "fields": {"license": "RBT", "area": "RBT-A", "task": 3, "task_desc": "Implement discontinuous measurement procedures (e.g., partial & whole interval, momentary time sampling)"}}, {"model": "learn.task", "pk": "RBT-A-4", "fields": {"license": "RBT", "area": "RBT-A", "task": 4, "task_desc": "Implement permanent-product recording procedures"}}, {"model": "learn.task", "pk": "RBT-A-5", "fields": {"license": "RBT", "area": "RBT-A", "task": 5, "task_desc": "Enter data and update graphs"}}, {"model": "learn.task", "pk": "RBT-A-6", "fields": {"license": "RBT", "area": "RBT-A", "task": 6, "task_desc": "Describe behavior and environment in observable and measurable terms"}}, {"model": "learn.task", "pk": "RBT-B-1", "fields": {"license": "RBT", "area": "RBT-B", "task": 1, "task_desc": "Conduct preference assessments"}}, {"model": "learn.task", "pk": "RBT-B-2", "fields": {"license": "RBT", "area": "RBT-B", "task": 2, "task_desc": "Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills)"}}, {"model": "learn.task", "pk": "RBT-B-3", "fields": {"license": "RBT", "area": "RBT-B", "task": 3, "task_desc": "Assist with functional assessment procedures"}}, {"model": "learn.task", "pk": "RBT-C-1", "fields": {"license": "RBT", "area": "RBT-C", "task": 1, "task_desc": "Identify the essential components of a written skill acquisition plan"}}, {"model": "learn.task", "pk": "RBT-C-10", "fields": {"license": "RBT", "area": "RBT-C", "task": 10, "task_desc": "Implement generalization and maintenance procedures"}}, {"model": "learn.task", "pk": "RBT-C-11", "fields": {"license": "RBT", "area": "RBT-C", "task": 11, "task_desc": "Implement shaping procedures"}}, {"model": "learn.task", "pk": "RBT-C-12", "fields": {"license": "RBT", "area": "RBT-C", "task": 12, "task_desc": "Implement token economy procedures"}}, {"model": "learn.task", "pk": "RBT-C-2", "fields": {"license": "RBT", "area": "RBT-C", "task": 2, "task_desc": "Prepare for the session as required by the skill acquisition plan"}}, {"model": "learn.task", "pk": "RBT-C-3", "fields": {"license": "RBT", "area": "RBT-C", "task": 3, "task_desc": "Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules)"}}, {"model": "learn.task", "pk": "RBT-C-4", "fields": {"license": "RBT", "area": "RBT-C", "task": 4, "task_desc": "Implement discrete-trial teaching procedures"}}, {"model": "learn.task", "pk": "RBT-C-5", "fields": {"license": "RBT", "area": "RBT-C", "task": 5, "task_desc": "Implement naturalistic teaching procedures (e.g., incidental teaching)"}}, {"model": "learn.task", "pk": "RBT-C-6", "fields": {"license": "RBT", "area": "RBT-C", "task": 6, "task_desc": "Implement task analyzed chaining procedures"}}, {"model": "learn.task", "pk": "RBT-C-7", "fields": {"license": "RBT", "area": "RBT-C", "task": 7, "task_desc": "Implement discrimination training"}}, {"model": "learn.task", "pk": "RBT-C-8", "fields": {"license": "RBT", "area": "RBT-C", "task": 8, "task_desc": "Implement stimulus control transfer procedures"}}, {"model": "learn.task", "pk": "RBT-C-9", "fields": {"license": "RBT", "area": "RBT-C", "task": 9, "task_desc": "Implement prompt and prompt fading procedures"}}, {"model": "learn.task", "pk": "RBT-D-1", "fields": {"license": "RBT", "area": "RBT-D", "task": 1, "task_desc": "Identify essential components of a written behavior reduction plan"}}, {"model": "learn.task", "pk": "RBT-D-2", "fields": {"license": "RBT", "area": "RBT-D", "task": 2, "task_desc": "Describe common functions of behavior"}}, {"model": "learn.task", "pk": "RBT-D-3", "fields": {"license": "RBT", "area": "RBT-D", "task": 3, "task_desc": "Implement interventions based on modification of antecedents such as motivating operations and discriminative stimuli"}}, {"model": "learn.task", "pk": "RBT-D-4", "fields": {"license": "RBT", "area": "RBT-D", "task": 4, "task_desc": "Implement differential reinforcement procedures (e.g., DRA, DRO)"}}, {"model": "learn.task", "pk": "RBT-D-5", "fields": {"license": "RBT", "area": "RBT-D", "task": 5, "task_desc": "Implement extinction procedures"}}, {"model": "learn.task", "pk": "RBT-D-6", "fields": {"license": "RBT", "area": "RBT-D", "task": 6, "task_desc": "Implement crisis/emergency procedures according to protocol"}}, {"model": "learn.task", "pk": "RBT-E-1", "fields": {"license": "RBT", "area": "RBT-E", "task": 1, "task_desc": "Effectively communicate with a supervisor in an ongoing manner"}}, {"model": "learn.task", "pk": "RBT-E-2", "fields": {"license": "RBT", "area": "RBT-E", "task": 2, "task_desc": "Actively seek clinical direction from supervisor in a timely manner"}}, {"model": "learn.task", "pk": "RBT-E-3", "fields": {"license": "RBT", "area": "RBT-E", "task": 3, "task_desc": "Report other variables that might affect the client in a timely manner"}}, {"model": "learn.task", "pk": "RBT-E-4", "fields": {"license": "RBT", "area": "RBT-E", "task": 4, "task_desc": "Generate objective session notes for service verification by describing what occurred during the sessions, in accordance with applicable legal, regulatory, and workplace requirements"}}, {"model": "learn.task", "pk": "RBT-E-5", "fields": {"license": "RBT", "area": "RBT-E", "task": 5, "task_desc": "Comply with applicable legal, regulatory, and workplace data collection, storage, transportation, and documentation requirements"}}, {"model": "learn.task", "pk": "RBT-F-1", "fields": {"license": "RBT", "area": "RBT-F", "task": 1, "task_desc": "Describe the BACB’s RBT supervision requirements and the role of RBTs in the service-delivery system"}}, {"model": "learn.task", "pk": "RBT-F-2", "fields": {"license": "RBT", "area": "RBT-F", "task": 2, "task_desc": "Respond appropriately to feedback and maintain or improve performance accordingly"}}, {"model": "learn.task", "pk": "RBT-F-3", "fields": {"license": "RBT", "area": "RBT-F", "task": 3, "task_desc": "Communicate with stakeholders (e.g., family, caregivers, other professionals) as authorized"}}, {"model": "learn.task", "pk": "RBT-F-4", "fields": {"license": "RBT", "area": "RBT-F", "task": 4, "task_desc": "Maintain professional boundaries (e.g., avoid dual relationships, conflicts of interest, social media contacts)"}}, {"model": "learn.task", "pk": "RBT-F-5", "fields": {"license": "RBT", "area": "RBT-F", "task": 5, "task_desc": "Maintain client dignity"}}]
+[
+{
+   "model": "learn.course",
+   "pk": "BCaBA",
+   "fields": {
+      "name": "Board Certified Assistant Behavior Analyst",
+      "course_data": null
+   }
+},
+{
+   "model": "learn.course",
+   "pk": "BCBA",
+   "fields": {
+      "name": "Board Certified Behavior Analyst",
+      "course_data": null
+   }
+},
+{
+   "model": "learn.course",
+   "pk": "RBT",
+   "fields": {
+      "name": "Registered Behavior Technician",
+      "course_data": null
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-1-A",
+   "fields": {
+      "license": "BCBA",
+      "letter": "A",
+      "section": 1,
+      "area": "Philosophical Underpinnings",
+      "weight": 6
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-1-B",
+   "fields": {
+      "license": "BCBA",
+      "letter": "B",
+      "section": 1,
+      "area": "Concepts and Principles",
+      "weight": 32
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-1-C",
+   "fields": {
+      "license": "BCBA",
+      "letter": "C",
+      "section": 1,
+      "area": "Measurement, Data Display, and Interpretation",
+      "weight": 21
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-1-D",
+   "fields": {
+      "license": "BCBA",
+      "letter": "D",
+      "section": 1,
+      "area": "Experimental Design",
+      "weight": 12
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-2-E",
+   "fields": {
+      "license": "BCBA",
+      "letter": "E",
+      "section": 2,
+      "area": "Ethics",
+      "weight": 18
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-2-F",
+   "fields": {
+      "license": "BCBA",
+      "letter": "F",
+      "section": 2,
+      "area": "Behavior Assessment",
+      "weight": 18
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-2-G",
+   "fields": {
+      "license": "BCBA",
+      "letter": "G",
+      "section": 2,
+      "area": "Behavior-Change Procedures",
+      "weight": 35
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-2-H",
+   "fields": {
+      "license": "BCBA",
+      "letter": "H",
+      "section": 2,
+      "area": "Selecting and Implementing Interventions",
+      "weight": 16
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "BCBA-2-I",
+   "fields": {
+      "license": "BCBA",
+      "letter": "I",
+      "section": 2,
+      "area": "Personnel Supervision and Management",
+      "weight": 17
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-A",
+   "fields": {
+      "license": "RBT",
+      "letter": "A",
+      "section": null,
+      "area": "Measurement",
+      "weight": 12
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-B",
+   "fields": {
+      "license": "RBT",
+      "letter": "B",
+      "section": null,
+      "area": "Assessment",
+      "weight": 6
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-C",
+   "fields": {
+      "license": "RBT",
+      "letter": "C",
+      "section": null,
+      "area": "Skill Acquisition",
+      "weight": 24
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-D",
+   "fields": {
+      "license": "RBT",
+      "letter": "D",
+      "section": null,
+      "area": "Behavior Reduction",
+      "weight": 12
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-E",
+   "fields": {
+      "license": "RBT",
+      "letter": "E",
+      "section": null,
+      "area": "Documentation and Reporting",
+      "weight": 10
+   }
+},
+{
+   "model": "learn.contentarea",
+   "pk": "RBT-F",
+   "fields": {
+      "license": "RBT",
+      "letter": "F",
+      "section": null,
+      "area": "Professional Conduct and Scope of Practice",
+      "weight": 11
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-A-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-A",
+      "task": 1,
+      "task_desc": "Identify the goals of behavior analysis as a science (i.e., description, prediction, control)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-A-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-A",
+      "task": 2,
+      "task_desc": "Explain the philosophical assumptions underlying the science of behavior analysis (e.g., selectionism, determinism, empiricism, parsimony, pragmatism)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-A-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-A",
+      "task": 3,
+      "task_desc": "Describe and explain behavior from the perspective of radical behaviorism"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-A-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-A",
+      "task": 4,
+      "task_desc": "Distinguish among behaviorism, the experimental analysis of behavior, applied behavior analysis, and professional practice guided by the science of behavior analysis"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-A-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-A",
+      "task": 5,
+      "task_desc": "Describe and define the dimensions of applied behavior analysis (Baer, Wolf, & Risley, 1968)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 1,
+      "task_desc": "Define and provide examples of behavior, response, and response class"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-10",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 10,
+      "task_desc": "Define and provide examples of stimulus control"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-11",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 11,
+      "task_desc": "Define and provide examples of discrimination, generalization, and maintenance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-12",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 12,
+      "task_desc": "Define and provide examples of motivating operations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-13",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 13,
+      "task_desc": "Define and provide examples of rule-governed and contingency-shaped behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-14",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 14,
+      "task_desc": "Define and provide examples of the verbal operants"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-15",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 15,
+      "task_desc": "Define and provide examples of derived stimulus relations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 2,
+      "task_desc": "Define and provide examples of stimulus and stimulus class"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 3,
+      "task_desc": "Define and provide examples of respondent and operant conditioning"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 4,
+      "task_desc": "Define and provide examples of positive and negative reinforcement contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 5,
+      "task_desc": "Define and provide examples of schedules of reinforcement"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 6,
+      "task_desc": "Define and provide examples of positive and negative punishment contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 7,
+      "task_desc": "Define and provide examples of automatic and socially mediated contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 8,
+      "task_desc": "Define and provide examples of unconditioned, conditioned, and generalized reinforcers and punishers"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-B-9",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-B",
+      "task": 9,
+      "task_desc": "Define and provide examples of operant extinction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 1,
+      "task_desc": "Establish operational definitions of behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-10",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 10,
+      "task_desc": "Graph data to communicate relevant quantitative relations (e.g., equal-interval graphs, bar graphs, cumulative records)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-11",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 11,
+      "task_desc": "Interpret graphed data"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 2,
+      "task_desc": "Distinguish among direct, indirect, and product measures of behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 3,
+      "task_desc": "Measure occurrence (e.g., count, frequency, rate, percentage)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 4,
+      "task_desc": "Measure temporal dimensions of behavior (e.g., duration, latency, interresponse time)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 5,
+      "task_desc": "Measure form and strength of behavior (e.g., topography, magnitude)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 6,
+      "task_desc": "Measure trials to criterion"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 7,
+      "task_desc": "Design and implement sampling procedures (i.e., interval recording, time sampling)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 8,
+      "task_desc": "Evaluate the validity and reliability of measurement procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-C-9",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-C",
+      "task": 9,
+      "task_desc": "Select a measurement system to obtain representative data given the dimensions of behavior and the logistics of observing and recording"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 1,
+      "task_desc": "Distinguish between dependent and independent variables"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 2,
+      "task_desc": "Distinguish between internal and external validity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 3,
+      "task_desc": "Identify the defining features of single-subject experimental designs (e.g., individuals serve as their own controls, repeated measures, prediction, verification, replication)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 4,
+      "task_desc": "Describe the advantages of single-subject experimental designs compared to group designs"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 5,
+      "task_desc": "Use single-subject experimental designs (e.g., reversal, multiple baseline, multielement, changing criterion)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-D-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-1-D",
+      "task": 6,
+      "task_desc": "Describe rationales for conducting comparative, component, and parametric analyses"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 1,
+      "task_desc": "Introduction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 2,
+      "task_desc": "Responsibility as a Professional"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 3,
+      "task_desc": "Responsibility in Practice"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 4,
+      "task_desc": "Responsibility to Clients and Stakeholders"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 5,
+      "task_desc": "Responsibility to Supervisees and Trainees"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 6,
+      "task_desc": "Responsibility in Public Statements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-E-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-E",
+      "task": 7,
+      "task_desc": "Responsibility in Research"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 1,
+      "task_desc": "Review records and available data (e.g., educational, medical, historical) at the outset of the case"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 2,
+      "task_desc": "Determine the need for behavior-analytic services"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 3,
+      "task_desc": "Identify and prioritize socially significant behavior-change goals"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 4,
+      "task_desc": "Conduct assessments of relevant skill strengths and deficits"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 5,
+      "task_desc": "Conduct preference assessments"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 6,
+      "task_desc": "Describe the common functions of problem behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 7,
+      "task_desc": "Conduct a descriptive assessment of problem behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 8,
+      "task_desc": "Conduct a functional analysis of problem behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-F-9",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-F",
+      "task": 9,
+      "task_desc": "Interpret functional assessment data"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 1,
+      "task_desc": "Use positive and negative reinforcement procedures to strengthen behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-10",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 10,
+      "task_desc": "Teach simple and conditional discriminations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-11",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 11,
+      "task_desc": "Use Skinner’s analysis to teach verbal behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-12",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 12,
+      "task_desc": "Use equivalence-based instruction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-13",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 13,
+      "task_desc": "Use the high-probability instructional sequence"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-14",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 14,
+      "task_desc": "Use reinforcement procedures to weaken behavior (e.g., DRA, FCT, DRO, DRL, NCR)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-15",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 15,
+      "task_desc": "Use extinction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-16",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 16,
+      "task_desc": "Use positive and negative punishment (e.g., time-out, response cost, overcorrection)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-17",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 17,
+      "task_desc": "Use token economies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-18",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 18,
+      "task_desc": "Use group contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-19",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 19,
+      "task_desc": "Use contingency contracting"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 2,
+      "task_desc": "Use interventions based on motivating operations and discriminative stimuli"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-20",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 20,
+      "task_desc": "Use self-management strategies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-21",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 21,
+      "task_desc": "Use procedures to promote stimulus and response generalization"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-22",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 22,
+      "task_desc": "Use procedures to promote maintenance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 3,
+      "task_desc": "Establish and use conditioned reinforcers"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 4,
+      "task_desc": "Use stimulus and response prompts and fading (e.g., errorless, most-to-least, least-to-most, prompt delay, stimulus fading)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 5,
+      "task_desc": "Use modeling and imitation training"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 6,
+      "task_desc": "Use instructions and rules"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 7,
+      "task_desc": "Use shaping"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 8,
+      "task_desc": "Use chaining"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-G-9",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-G",
+      "task": 9,
+      "task_desc": "Use discrete-trial, free-operant, and naturalistic teaching arrangements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 1,
+      "task_desc": "State intervention goals in observable and measurable terms"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 2,
+      "task_desc": "Identify potential interventions based on assessment results and the best available scientific evidence"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 3,
+      "task_desc": "Recommend intervention goals and strategies based on such factors as client preferences, supporting environments, risks, constraints, and social validity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 4,
+      "task_desc": "When a target behavior is to be decreased, select an acceptable alternative behavior to be established or increased"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 5,
+      "task_desc": "Plan for possible unwanted effects when using reinforcement, extinction, and punishment procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 6,
+      "task_desc": "Monitor client progress and treatment integrity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 7,
+      "task_desc": "Make data-based decisions about the effectiveness of the intervention and the need for treatment revision"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 8,
+      "task_desc": "Make data-based decisions about the need for ongoing services"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-H-9",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-H",
+      "task": 9,
+      "task_desc": "Collaborate with others who support and/or provide services to clients"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-1",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 1,
+      "task_desc": "State the reasons for using behavior-analytic supervision and the potential risks of ineffective supervision (e.g., poor client outcomes, poor supervisee performance)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-2",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 2,
+      "task_desc": "Establish clear performance expectations for the supervisor and supervisee"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-3",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 3,
+      "task_desc": "Select supervision goals based on an assessment of the supervisee’s skills"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-4",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 4,
+      "task_desc": "Train personnel to competently perform assessment and intervention procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-5",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 5,
+      "task_desc": "Use performance monitoring, feedback, and reinforcement systems"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-6",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 6,
+      "task_desc": "Use a functional assessment approach (e.g., performance diagnostics) to identify variables affecting personnel performance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-7",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 7,
+      "task_desc": "Use function-based strategies to improve personnel performance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCBA-I-8",
+   "fields": {
+      "license": "BCBA",
+      "area": "BCBA-2-I",
+      "task": 8,
+      "task_desc": "Evaluate the effects of supervision (e.g., on client outcomes, on supervisee repertoires)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 1,
+      "task_desc": "Prepare for data collection"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 2,
+      "task_desc": "Implement continuous measurement procedures (e.g., frequency, duration)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 3,
+      "task_desc": "Implement discontinuous measurement procedures (e.g., partial & whole interval, momentary time sampling)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-4",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 4,
+      "task_desc": "Implement permanent-product recording procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-5",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 5,
+      "task_desc": "Enter data and update graphs"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-A-6",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-A",
+      "task": 6,
+      "task_desc": "Describe behavior and environment in observable and measurable terms"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-B-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-B",
+      "task": 1,
+      "task_desc": "Conduct preference assessments"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-B-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-B",
+      "task": 2,
+      "task_desc": "Assist with individualized assessment procedures (e.g., curriculum-based, developmental, social skills)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-B-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-B",
+      "task": 3,
+      "task_desc": "Assist with functional assessment procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 1,
+      "task_desc": "Identify the essential components of a written skill acquisition plan"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-10",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 10,
+      "task_desc": "Implement generalization and maintenance procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-11",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 11,
+      "task_desc": "Implement shaping procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-12",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 12,
+      "task_desc": "Implement token economy procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 2,
+      "task_desc": "Prepare for the session as required by the skill acquisition plan"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 3,
+      "task_desc": "Use contingencies of reinforcement (e.g., conditioned/unconditioned reinforcement, continuous/intermittent schedules)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-4",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 4,
+      "task_desc": "Implement discrete-trial teaching procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-5",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 5,
+      "task_desc": "Implement naturalistic teaching procedures (e.g., incidental teaching)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-6",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 6,
+      "task_desc": "Implement task analyzed chaining procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-7",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 7,
+      "task_desc": "Implement discrimination training"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-8",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 8,
+      "task_desc": "Implement stimulus control transfer procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-C-9",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-C",
+      "task": 9,
+      "task_desc": "Implement prompt and prompt fading procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 1,
+      "task_desc": "Identify essential components of a written behavior reduction plan"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 2,
+      "task_desc": "Describe common functions of behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 3,
+      "task_desc": "Implement interventions based on modification of antecedents such as motivating operations and discriminative stimuli"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-4",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 4,
+      "task_desc": "Implement differential reinforcement procedures (e.g., DRA, DRO)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-5",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 5,
+      "task_desc": "Implement extinction procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-D-6",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-D",
+      "task": 6,
+      "task_desc": "Implement crisis/emergency procedures according to protocol"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-E-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-E",
+      "task": 1,
+      "task_desc": "Effectively communicate with a supervisor in an ongoing manner"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-E-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-E",
+      "task": 2,
+      "task_desc": "Actively seek clinical direction from supervisor in a timely manner"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-E-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-E",
+      "task": 3,
+      "task_desc": "Report other variables that might affect the client in a timely manner"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-E-4",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-E",
+      "task": 4,
+      "task_desc": "Generate objective session notes for service verification by describing what occurred during the sessions, in accordance with applicable legal, regulatory, and workplace requirements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-E-5",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-E",
+      "task": 5,
+      "task_desc": "Comply with applicable legal, regulatory, and workplace data collection, storage, transportation, and documentation requirements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-F-1",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-F",
+      "task": 1,
+      "task_desc": "Describe the BACB’s RBT supervision requirements and the role of RBTs in the service-delivery system"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-F-2",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-F",
+      "task": 2,
+      "task_desc": "Respond appropriately to feedback and maintain or improve performance accordingly"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-F-3",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-F",
+      "task": 3,
+      "task_desc": "Communicate with stakeholders (e.g., family, caregivers, other professionals) as authorized"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-F-4",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-F",
+      "task": 4,
+      "task_desc": "Maintain professional boundaries (e.g., avoid dual relationships, conflicts of interest, social media contacts)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "RBT-F-5",
+   "fields": {
+      "license": "RBT",
+      "area": "RBT-F",
+      "task": 5,
+      "task_desc": "Maintain client dignity"
+   }
+},
+   {
+   "model": "learn.task",
+   "pk": "BCaBA-A-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-A",
+      "task": 1,
+      "task_desc": "Identify the goals of behavior analysis as a science (i.e., description, prediction, control)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-A-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-A",
+      "task": 2,
+      "task_desc": "Explain the philosophical assumptions underlying the science of behavior analysis (e.g., selectionism, determinism, empiricism, parsimony, pragmatism)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-A-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-A",
+      "task": 3,
+      "task_desc": "Describe and explain behavior from the perspective of radical behaviorism"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-A-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-A",
+      "task": 4,
+      "task_desc": "Distinguish among behaviorism, the experimental analysis of behavior, applied behavior analysis, and professional practice guided by the science of behavior analysis"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-A-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-A",
+      "task": 5,
+      "task_desc": "Describe and define the dimensions of applied behavior analysis (Baer, Wolf, & Risley, 1968)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 1,
+      "task_desc": "Define and provide examples of behavior, response, and response class"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-10",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 10,
+      "task_desc": "Define and provide examples of stimulus control"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-11",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 11,
+      "task_desc": "Define and provide examples of discrimination, generalization, and maintenance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-12",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 12,
+      "task_desc": "Define and provide examples of motivating operations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-13",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 13,
+      "task_desc": "Define and provide examples of rule-governed and contingency-shaped behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-14",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 14,
+      "task_desc": "Define and provide examples of the verbal operants"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-15",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 15,
+      "task_desc": "Define and provide examples of derived stimulus relations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 2,
+      "task_desc": "Define and provide examples of stimulus and stimulus class"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 3,
+      "task_desc": "Define and provide examples of respondent and operant conditioning"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 4,
+      "task_desc": "Define and provide examples of positive and negative reinforcement contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 5,
+      "task_desc": "Define and provide examples of schedules of reinforcement"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 6,
+      "task_desc": "Define and provide examples of positive and negative punishment contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 7,
+      "task_desc": "Define and provide examples of automatic and socially mediated contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-8",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 8,
+      "task_desc": "Define and provide examples of unconditioned, conditioned, and generalized reinforcers and punishers"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-B-9",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-B",
+      "task": 9,
+      "task_desc": "Define and provide examples of operant extinction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 1,
+      "task_desc": "Establish operational definitions of behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-10",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 10,
+      "task_desc": "Graph data to communicate relevant quantitative relations (e.g., equal-interval graphs, bar graphs, cumulative records)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-11",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 11,
+      "task_desc": "Interpret graphed data"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 2,
+      "task_desc": "Distinguish among direct, indirect, and product measures of behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 3,
+      "task_desc": "Measure occurrence (e.g., count, frequency, rate, percentage)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 4,
+      "task_desc": "Measure temporal dimensions of behavior (e.g., duration, latency, interresponse time)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 5,
+      "task_desc": "Measure form and strength of behavior (e.g., topography, magnitude)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 6,
+      "task_desc": "Measure trials to criterion"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 7,
+      "task_desc": "Design and implement sampling procedures (i.e., interval recording, time sampling)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-8",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 8,
+      "task_desc": "Evaluate the validity and reliability of measurement procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-C-9",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-C",
+      "task": 9,
+      "task_desc": "Select a measurement system to obtain representative data given the dimensions of behavior and the logistics of observing and recording"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 1,
+      "task_desc": "Distinguish between dependent and independent variables"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 2,
+      "task_desc": "Distinguish between internal and external validity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 3,
+      "task_desc": "Identify the defining features of single-subject experimental designs (e.g., individuals serve as their own controls, repeated measures, prediction, verification, replication)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 4,
+      "task_desc": "Describe the advantages of single-subject experimental designs compared to group designs"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 5,
+      "task_desc": "Use single-subject experimental designs (e.g., reversal, multiple baseline, multielement, changing criterion)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-D-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-1-D",
+      "task": 6,
+      "task_desc": "Describe rationales for conducting comparative, component, and parametric analyses"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 1,
+      "task_desc": "Introduction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 2,
+      "task_desc": "Responsibility as a Professional"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 3,
+      "task_desc": "Responsibility in Practice"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 4,
+      "task_desc": "Responsibility to Clients and Stakeholders"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 5,
+      "task_desc": "Responsibility to Supervisees and Trainees"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 6,
+      "task_desc": "Responsibility in Public Statements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-E-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-E",
+      "task": 7,
+      "task_desc": "Responsibility in Research"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 1,
+      "task_desc": "Review records and available data (e.g., educational, medical, historical) at the outset of the case"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 2,
+      "task_desc": "Determine the need for behavior-analytic services"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 3,
+      "task_desc": "Identify and prioritize socially significant behavior-change goals"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 4,
+      "task_desc": "Conduct assessments of relevant skill strengths and deficits"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 5,
+      "task_desc": "Conduct preference assessments"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 6,
+      "task_desc": "Describe the common functions of problem behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-F-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-F",
+      "task": 7,
+      "task_desc": "Conduct a descriptive assessment of problem behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 1,
+      "task_desc": "Use positive and negative reinforcement procedures to strengthen behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-10",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 10,
+      "task_desc": "Teach simple and conditional discriminations"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-11",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 11,
+      "task_desc": "Use Skinner’s analysis to teach verbal behavior"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-12",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 12,
+      "task_desc": "Use equivalence-based instruction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-13",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 13,
+      "task_desc": "Use the high-probability instructional sequence"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-14",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 14,
+      "task_desc": "Use reinforcement procedures to weaken behavior (e.g., DRA, FCT, DRO, DRL, NCR)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-15",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 15,
+      "task_desc": "Use extinction"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-16",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 16,
+      "task_desc": "Use positive and negative punishment (e.g., time-out, response cost, overcorrection)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-17",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 17,
+      "task_desc": "Use token economies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-18",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 18,
+      "task_desc": "Use group contingencies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-19",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 19,
+      "task_desc": "Use contingency contracting"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 2,
+      "task_desc": "Use interventions based on motivating operations and discriminative stimuli"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-20",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 20,
+      "task_desc": "Use self-management strategies"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-21",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 21,
+      "task_desc": "Use procedures to promote stimulus and response generalization"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-22",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 22,
+      "task_desc": "Use procedures to promote maintenance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 3,
+      "task_desc": "Establish and use conditioned reinforcers"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 4,
+      "task_desc": "Use stimulus and response prompts and fading (e.g., errorless, most-to-least, least-to-most, prompt delay, stimulus fading)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 5,
+      "task_desc": "Use modeling and imitation training"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 6,
+      "task_desc": "Use instructions and rules"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 7,
+      "task_desc": "Use shaping"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-8",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 8,
+      "task_desc": "Use chaining"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-G-9",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-G",
+      "task": 9,
+      "task_desc": "Use discrete-trial, free-operant, and naturalistic teaching arrangements"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 1,
+      "task_desc": "State intervention goals in observable and measurable terms"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 2,
+      "task_desc": "Identify potential interventions based on assessment results and the best available scientific evidence"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 3,
+      "task_desc": "Recommend intervention goals and strategies based on such factors as client preferences, supporting environments, risks, constraints, and social validity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 4,
+      "task_desc": "When a target behavior is to be decreased, select an acceptable alternative behavior to be established or increased"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 5,
+      "task_desc": "Plan for possible unwanted effects when using reinforcement, extinction, and punishment procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 6,
+      "task_desc": "Monitor client progress and treatment integrity"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 7,
+      "task_desc": "Make data-based decisions about the effectiveness of the intervention and the need for treatment revision"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-H-8",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-H",
+      "task": 8,
+      "task_desc": "Collaborate with others who support and/or provide services to clients"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-1",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 1,
+      "task_desc": "State the reasons for using behavior-analytic supervision and the potential risks of ineffective supervision (e.g., poor client outcomes, poor supervisee performance)"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-2",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 2,
+      "task_desc": "Establish clear performance expectations for the supervisor and supervisee"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-3",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 3,
+      "task_desc": "Select supervision goals based on an assessment of the supervisee’s skills"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-4",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 4,
+      "task_desc": "Train personnel to competently perform assessment and intervention procedures"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-5",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 5,
+      "task_desc": "Use performance monitoring, feedback, and reinforcement systems"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-6",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 6,
+      "task_desc": "Use function-based strategies to improve personnel performance"
+   }
+},
+{
+   "model": "learn.task",
+   "pk": "BCaBA-I-7",
+   "fields": {
+      "license": "BCaBA",
+      "area": "BCBA-2-I",
+      "task": 7,
+      "task_desc": "Evaluate the effects of supervision (e.g., on client outcomes, on supervisee repertoires)"
+   }
+},
+]
