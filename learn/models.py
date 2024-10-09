@@ -34,10 +34,6 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-    def natural_key(self) -> str:
-        """Returns the acronym/code for the competency"""
-        return self.code
-
     def get_task_list(self) -> dict:
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
@@ -66,9 +62,9 @@ class ContentArea(models.Model):
 
     def __str__(self):
         if self.section:
-            return f"{self.license.code} Task List Section {self.section}, Content Area {self.area}"
+            return f"{self.license.code}, Section {self.section}, Area {self.letter}: {self.area}"
         else:
-            return f"{self.license.code} Task List, Content Area {self.area}"
+            return f"{self.license.code}, Area {self.letter}: {self.area}"
 
     def save(self, *args, **kwargs):
         if self.section:
@@ -91,7 +87,9 @@ class Task(models.Model):
     slug = models.SlugField(unique=True, primary_key=True)
     license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
     area = models.ForeignKey(
-        ContentArea, on_delete=models.CASCADE, related_name="tasks"
+        ContentArea,
+        on_delete=models.CASCADE,
+        related_name="tasks",
     )
     task = models.IntegerField()
     task_desc = models.TextField()
@@ -99,13 +97,13 @@ class Task(models.Model):
     objects = TaskManager()
 
     def __str__(self):
-        return f"{self.license.code} Task List: Item {self.area}-{self.task}"
+        return f"{self.license.code} Task List: Item {self.area.letter}-{self.task}"
 
     def natural_key(self):
         return (self.license, self.area, self.task)
 
     def save(self, *args, **kwargs):
-        self.slug = f"{self.license.code}-{self.area}-{self.task}"
+        self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
         return super(Task, self).save(*args, **kwargs)
 
     class Meta:
