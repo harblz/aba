@@ -24,6 +24,7 @@ class ContentAreaAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     fields = ["license", "area", "task", "task_desc"]
     autocomplete_fields = ["area"]
+    formfield_overrides = {}
 
 
 @admin.register(Lesson)
