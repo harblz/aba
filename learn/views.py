@@ -57,7 +57,10 @@ def lesson_page(request, course) -> HttpResponse:
 
 
 def task_changeform_options(request):
-    course_filter = ContentArea.objects.filter(license=request.GET.get("license"))
+    if request.GET.get("license") == "BCaBA":
+        course_filter = ContentArea.objects.filter(license="BCBA")
+    else:
+        course_filter = ContentArea.objects.filter(license=request.GET.get("license"))
     if course_filter.exists():
         areas = {}
         for index, slug in enumerate(course_filter.values_list("slug", flat=True)):
