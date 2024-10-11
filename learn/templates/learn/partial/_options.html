@@ -1,6 +1,7 @@
-<select id="area" name="area">
+<select name="area" data-context="available-source" required id="id_area">
   <option value="">Choose License Area</option>
-  {% for area in areas %}
-    <option value="{{ area.area }}">{{ area.area_name }}</option>
-  {% endfor %}
-</select>  
+{% for key, value in areas.items %}
+  <option value="{{ key }}">{{ value }}</option>
+{% endfor %}
+</select>
+

@@ -6,6 +6,14 @@ from .models import Task
 class TaskForm(ModelForm):
     class Meta:
         model = Task
+        exclude = ["slug"]
         widgets = {
-            "area": Select(attrs={"hx-get": "", "hx-target": "", "hx-indicator": ""})
+            "license": Select(
+                attrs={
+                    "hx-get": "/learn/task/change/options",
+                    "hx-target": "#id_area",
+                    "hx-swap": "outerHTML",
+                    # "hx-indicator": "",
+                }
+            )
         }

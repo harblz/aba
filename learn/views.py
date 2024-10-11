@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.template.response import TemplateResponse
 from django.views.generic import ListView
 
-from .models import Course, Lesson, Task
+from .models import Course, Lesson, Task, ContentArea
 from pages.models import Pages
 
 
@@ -57,9 +57,11 @@ def lesson_page(request, course) -> HttpResponse:
 
 
 def task_changeform_options(request):
-    course_filter = Task.objects.filter(license=request.GET.get("license_code"))
+    course_filter = ContentArea.objects.filter(license=request.GET.get("license"))
     if course_filter.exists():
-        areas = course_filter.values("area", "area_name").distinct()
+        areas = {}
+        for index, slug in enumerate(course_filter.values_list("slug", flat=True)):
+            areas[slug] = str(course_filter[index])
         return TemplateResponse(
             request,
             "learn/partial/_options.html",

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from learn.models import *
+from .models import *
+from .forms import TaskForm
 
 
 # Register your models here.
@@ -22,9 +23,10 @@ class ContentAreaAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    fields = ["license", "area", "task", "task_desc"]
-    autocomplete_fields = ["area"]
-    formfield_overrides = {}
+    form = TaskForm
+
+    class Media:
+        js = ("js/htmx.min.js", "django-htmx.js")
 
 
 @admin.register(Lesson)
