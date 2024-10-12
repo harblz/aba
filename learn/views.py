@@ -10,6 +10,8 @@ from pages.models import Pages
 
 class CourseIndex(ListView):
     model = Course
+    context_object_name = "Courses"
+    template_name = "learn/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,6 +35,7 @@ def course_landing_page(request, code) -> HttpResponse:
 
 class TaskListView(ListView):
     model = Course
+    template_name = "learn/task_list.html"
 
     def get_queryset(self):
         queryset = get_object_or_404(Course, code=self.kwargs["code"])
@@ -43,6 +46,7 @@ class TaskListView(ListView):
         context["task_list"] = Course.objects.get(
             code=self.kwargs["code"]
         ).get_task_list()
+        context["license"] = self.kwargs["code"]
         return context
 
 

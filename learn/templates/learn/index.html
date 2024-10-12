@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Course Index{% endblock %}
+
+{% block content %}
+{% for course in Courses %}
+<h2>{{ course.name }}</h2>
+{% endfor %}
+{% endblock %}

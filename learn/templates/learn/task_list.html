@@ -1,0 +1,20 @@
+{% block content %}
+{{ license }} Task List
+{% for area, task in task_list.items %}
+<table>
+<caption>
+  {{ area }}
+</caption>
+  <tr>
+    <th scope="col">Task</th>
+    <th scope="col">Description</th>
+  </tr>
+  <tr>
+    {% for task, description in task.items %}
+    <td>{{ task }}</td>
+    <td>{{ description }}</td>
+    {% endfor %}
+  </tr>
+</table>
+{% endfor %}
+{% endblock %}

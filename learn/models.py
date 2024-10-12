@@ -37,11 +37,15 @@ class Course(models.Model):
     def get_task_list(self) -> dict:
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
-            tasks = self.tasks.filter(code=self.code).order_by("area", "task")
+            tasks = self.tasks.all().order_by("area", "task")
             task_list = {}
             for task in tasks:
-                task_name = f"{task.area}-{task.task}"
-                task_list[task_name] = task.task_desc
+                area = f"{task.area.letter}: {task.area.area}"
+                task_name = f"{task.area.letter}-{task.task}"
+                if area in task_list:
+                    task_list[area][task_name] = task.task_desc
+                else:
+                    task_list[area] = {task_name: task.task_desc}
             return task_list
         else:
             pass

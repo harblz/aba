@@ -1,157 +1,84 @@
 {% load static %}
 {% load django_bootstrap5 %}
-<!doctype html>
-<html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load django_htmx %}
+<!DOCTYPE html>
 
-      <!-- Pinterest Claim -->
-      <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0"/>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
 
-      <title>{% block title %}{% endblock %}ABA Rocks: A Behavior Analysis Blog</title>
-      
-      <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-      {% bootstrap_css %}
-      {% bootstrap_javascript %}
-      <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-      <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
-      <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-      <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-      <script src="{% static 'js/moment.js' %}"></script>
-      <script src="{% static 'js/chart.bundle.min.js' %}"></script>
-      <script src="{% static 'js/moment.js' %}"></script>
-      <script src="{% static 'js/chart.bundle.min.js' %}"></script>
+	<!-- Pinterest Claim -->
+	<meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
 
+	<title>{% block title %}{% endblock %}ABA Rocks: A Behavior Analysis Blog</title>
 
-      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-      <link rel="stylesheet" href="{% static 'css/fluency.css' %}">
-
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-98470698-1', 'auto');
-        ga('send', 'pageview');
-      </script>
-    
-      <meta name="theme-color" content="#ffffff">
-
-      {% block head %}{% endblock %}
-    </head>
-    <body>
-
-      <!-- Desktop Header !-->
-      <div class="page-header d-none d-md-block page-title">
-
-          <h2 style="text-align: center;">
-            <div class="d-inline">
-              <a class="page-banner-title" href="/">
-                ABA Rocks: <small>A Behavior Analysis Blog</small>
-              </a>
-            </div>
-          </h2>
-      </div>
-
-      <!-- Mobile Header !-->
-      <div class="page-header-mobile d-inline d-sm-block d-md-none d-lg-none page-title">
-
-          <h2 class="d-inline" style="text-align: center;">
-            <div class="d-inline">
-              <button class="float-left btn btn-dark" type="button" data-toggle="collapse" data-target="#mobileHeader" aria-expanded="false" aria-controls="mobileHeader">
-                <i class="fas fa-bars"></i>
-              </button>
-            </div>
-            <div class="d-inline" style="margin-left: 12%">
-              <a class="page-banner-title" href="/">
-                ABA Rocks: <br /> <small>A Behavior Analysis Blog</small>
-              </a>
-            </div>
-          </h2>
-      </div>
-
-      <!-- Mobile Sidebar !-->
-      <div class="collapse" id="mobileHeader" style="position: fixed; z-index: 1000; margin: 50px 2.5% 0 2.5%; border: 1px solid #ccc; height: 100%; width: 95%;">
-        <div class="d-lg-none d-md-none">
-          {% block mobile-sidebar %}
-            <div id="sidebar">
-
-              <ul class="list-group list-group-flush">
-
-                {% include "mobile_sidebar.html" %}
-
-              </ul>
-
-            </div>
-          {% endblock %}
-        </div>
-      </div>
-
-      <div class="content container-fluid">
-        <div class="row">
-              <!-- Desktop Sidebar !-->
-              {% block sidebar %}
-                <div id="sidebar" class="d-none d-lg-block d-md-block" style="position: fixed; width: 15%; z-index: 1000; border-top: 0px; border-left: 0px; border-right: 0px; top: 18%;">
-
-                  <ul class="list-group list-group-flush">
-
-                    {% include "desktop_sidebar.html" %}
-
-                  </ul>
-                </div>
-              {% endblock %}
-
-              <!-- Blog Quiz Content !-->
-
-              <div class="d-none d-md-block d-lg-block col-md-2">
-                <!-- Filler Column !-->
-              </div>
-
-              <div id="section-to-print" class="col-md-10" style="margin: 0 auto 0 auto;">
-                <div class="quiz-filler d-block d-sm-block d-md-none" style="min-height: 95px;">
-                </div>
-                {% block quiz-content %}
-                {% endblock %}
-              </div>
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+	<link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+	<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+	<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+	<script src="{% static 'js/moment.js' %}"></script>
+	<script src="{% static 'js/chart.bundle.min.js' %}"></script>
+	<script src="{% static 'js/moment.js' %}"></script>
+	<script src="{% static 'js/chart.bundle.min.js' %}"></script>
 
 
-              <!-- Blog Posts Desktop Content !-->                
-              <div class="d-none d-md-block d-lg-block col-md-2">
-                  <!-- Filler Column !-->
-              </div>
+	<!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+		<link rel="stylesheet" href="{% static 'css/fluency.css' %}">
+		!-->
 
-                <!-- Blog Posts Desktop Content !-->
-                {% block content %}
-                  <div id="section-to-print" class="d-none d-sm-none d-md-block d-lg-block col-md-10">
-                    <!-- Posts -->
-                  </div>
-                {% endblock %}
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
+		ga('create', 'UA-98470698-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 
-              {% block coffee-content %}
+	<meta name="theme-color" content="#ffffff">
 
-              {% endblock %}
-        </div>
+	{% block head %}{% endblock %}
+	</head>
 
-      </div>
-      <script>
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        })
-      </script>
+	<body>
+		
+		<header id="header">
+			{% include "header.html" %}
+		</header>
 
-      {% block extra-body-js %}
-      {% endblock %}
-      
-      <script id="dsq-count-scr" src="//https-aba-rocks.disqus.com/count.js" async></script>
+		<div id="content">
 
-    </body>
+			{% if user.is_authenticated %}
+				{% block login %}
+				{% endblock login %}
+			{% endif %}
 
-    {% block extra-js %}
-    {% endblock %}
+			<!-- Content -->
+			<div class="jumbotron jumbotron-fluid py-4">
+				<div class="container">
+				<h1 class="display-4">{{ post.title }}</h1>
+					{% block content %}
+					{% endblock content %}
+				</div>
+			</div>
 
-</html>
+		</div>
+
+		<footer id="footer">
+			{% include "footer.html" %}
+		</footer>
+
+	{% block extra-js %}
+	{% endblock extra-js %}
+
+	</body>
