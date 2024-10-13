@@ -1,0 +1,16 @@
+{% load static %}
+
+{% block login %}
+    <!-- Hero -->
+    <div class="px-4 py-4 my-0 text-center">
+        <img class="d-block mx-auto mb-2" src="{% static 'img/studying_quiz.png' %}" alt="" width="216" height="171">
+        <h1 class="display-5 fw-bold text-body-emphasis">ABA.Rocks</h1>
+        <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">The world's largest free platform for learning ABA - from parent to practitioner.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Learn</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Log In</button>
+        </div>
+        </div>
+    </div>
+{% endblock login %}

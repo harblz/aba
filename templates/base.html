@@ -1,84 +1,19 @@
 {% load static %}
-{% load django_bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% load django_htmx %}
 <!DOCTYPE html>
-
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
-
-	<!-- Pinterest Claim -->
-	<meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
-
-	<title>{% block title %}{% endblock %}ABA Rocks: A Behavior Analysis Blog</title>
-
-	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-	{% bootstrap_css %}
-	{% bootstrap_javascript %}
-	<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-	<link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
-	<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-	<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-	<script src="{% static 'js/moment.js' %}"></script>
-	<script src="{% static 'js/chart.bundle.min.js' %}"></script>
-	<script src="{% static 'js/moment.js' %}"></script>
-	<script src="{% static 'js/chart.bundle.min.js' %}"></script>
-
-
-	<!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-		<link rel="stylesheet" href="{% static 'css/fluency.css' %}">
-		!-->
-
-	<script>
-		(function (i, s, o, g, r, a, m) {
-		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-			(i[r].q = i[r].q || []).push(arguments)
-		}, i[r].l = 1 * new Date(); a = s.createElement(o),
-			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-		ga('create', 'UA-98470698-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-
-	<meta name="theme-color" content="#ffffff">
-
-	{% block head %}{% endblock %}
-	</head>
-
+<html>
+	{% include "head.html" %}
 	<body>
-		
 		<header id="header">
 			{% include "header.html" %}
 		</header>
-
 		<div id="content">
-
-			{% if user.is_authenticated %}
-				{% block login %}
-				{% endblock login %}
-			{% endif %}
-
-			<!-- Content -->
-			<div class="jumbotron jumbotron-fluid py-4">
-				<div class="container">
-				<h1 class="display-4">{{ post.title }}</h1>
-					{% block content %}
-					{% endblock content %}
-				</div>
-			</div>
-
+			{% block content %}
+			{% endblock content %}
 		</div>
-
 		<footer id="footer">
 			{% include "footer.html" %}
 		</footer>
-
 	{% block extra-js %}
 	{% endblock extra-js %}
-
 	</body>
+</html>

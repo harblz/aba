@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ post.title }} {% endblock title %}
+{% block content %}
+	{% for post in posts %}
+		<div class="jumbotron jumbotron-fluid py-4">
+			<div class="container">
+			<a href="{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
+			{% autoescape off %}
+				{{ post.text }}
+			{% endautoescape %}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock content %}

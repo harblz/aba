@@ -1,0 +1,39 @@
+<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #ff9400;">
+    <div class="container-fluid">
+    <a class="navbar-brand" style="color: #fff; font-weight: bold;" href="{% url 'home' %}">ABA.Rocks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-weight: bold;">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'course_index' %}">Learn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'blog-posts' %}">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'patreon' %}">Patreon</a>
+            </li>
+            <li class="nav-item dropdown" style="font-weight: bold;">
+                <a class="nav-link dropdown-toggle" href="{% url 'blog-posts' %}" style="color: #fff" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Study by Certification
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">RBT</a></li>
+                    <li><a class="dropdown-item" href="">BCaBA</a></li>
+                    <li><a class="dropdown-item" href="">BCBA</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="">Study something else here</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
