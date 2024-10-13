@@ -2,11 +2,11 @@
 {% load static %}
 {% block title %}Course Index{% endblock title %}
 {% block content %}
-    <div class="d-flex justify-content-center align-items-start">
+    <div class="d-flex justify-content-center align-items-start flex-container">
             {% for course in Courses %}
             <div class="p-2 bd-highlight">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{% static 'img/studying_quiz.png' %}" alt="Card image cap">
+                    <img class="card-img-top" src="{% static course.image %}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ course.name }}</h5>
                         <p class="card-text">{{ course.description }}</p>

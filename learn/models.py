@@ -29,6 +29,7 @@ class Course(models.Model):
     # TODO: Add relation in pages
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
+    image = models.CharField(null=True, max_length=250)
     description = models.TextField(null=True)
     course_data = models.JSONField(null=True, blank=True)
 
