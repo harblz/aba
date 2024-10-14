@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "django_htmx",
     "django_bootstrap5",
-    "fontawesome_5",
+    "fontawesomefree",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
     # "fluency.apps.FluencyConfig",
@@ -157,6 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 # Whitenoise compression & caching
