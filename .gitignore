@@ -820,3 +820,11 @@ cython_debug/
 #.idea/
 
 
+### VisualStudioCode template
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+
+# Built Visual Studio Code Extensions
+*.vsix
+
