@@ -6,12 +6,18 @@
             {% for course in Courses %}
             <div class="p-2 bd-highlight">
                 <div class="card" style="width: 18rem;">
+<<<<<<< HEAD
                     <img class="card-img-top img-thumbnail img-container" src="{% static course.image %}" alt="Card image cap">
                     <div class="card-body">
+=======
+                    <img class="card-img-top" src="{% static course.image %}" alt="Card image cap">
+                    <div class="card-body text-center">
+>>>>>>> refs/remotes/origin/develop
                         <h5 class="card-title">{{ course.name }}</h5>
                         <p class="card-text">{{ course.description|truncatechars:50 }}</p>
                         <a href="#" class="btn btn-primary">Resume</a>
                         <a href="#" class="btn btn-secondary">Course Overview</a>
+                        <a href="{% url 'learn:tasklist_landing_page' code=course.code %}" class="btn btn-secondary">Task List</a>
                     </div>
                 </div>
             </div>

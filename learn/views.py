@@ -51,13 +51,20 @@ class TaskListView(ListView):
 
 
 def lesson_page(request, course) -> HttpResponse:
-    page = int(request.GET.get("page", "1"))
+    page = request.GET.get("page")
     lesson = Lesson.objects.get(course=course, page=page)
+    # TODO: Determine logic for saving sessions and handling users
     return render(
         request,
         "",  # TODO: Replace with template name
         {"lesson": lesson, "page": page},
     )
+
+
+def _next_page(request, course) -> HttpResponse:
+    # Pull current page from session
+    # Increment page # and query for ID
+    pass
 
 
 def task_changeform_options(request):
