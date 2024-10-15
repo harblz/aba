@@ -7,12 +7,13 @@ from django_htmx.http import retarget, trigger_client_event
 from pages.models import Pages
 from blog.models import Post
 
+
 def home(request):
     try:
-        post = Post.objects.order_by("-published_date")[:1]
+        Posts = Post.objects.order_by("-published_date")[:2]
     except Post.DoesNotExist:
         raise Http404("No recent blog posts")
-    return render(request, "home.html", { 'post': post[0] })
+    return render(request, "home.html", { 'Posts': Posts })
 
 def about(request):
     return render(request, "about.html")

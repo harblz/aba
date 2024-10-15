@@ -3,6 +3,10 @@ a {
     text-decoration: inherit;
 }
 
+.img-container {
+    max-height: 180px;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
