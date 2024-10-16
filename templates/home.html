@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}ABA.Rocks Homepage{% endblock title %}
+{% block title %}ABA Rocks: A Behavior Analysis Blog{% endblock %}
 {% block content %}
-{% for Post in Posts %}
-	<div class="jumbotron jumbotron-fluid py-4">
-		<div class="container">
-		<h1 class="display-4">{{ Post.title }}</h1>
-		{% autoescape off %}
-			{{ Post.text }}
-		{% endautoescape %}
-		</div>
-	</div>
-{% endfor %}
-{% endblock content %}
+  {% include "blog/posts.html" %}
+{% endblock %}

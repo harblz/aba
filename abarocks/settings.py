@@ -124,6 +124,10 @@ DATABASES = {
             "service": "aba.rocks",
             "passfile": ".pgpass",
         },
+    },
+    "old": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "data/db.sqlite3.backup.09-16-24"
     }
 }
 

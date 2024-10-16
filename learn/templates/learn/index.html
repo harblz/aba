@@ -12,7 +12,7 @@
                         <p class="card-text">{{ course.description|truncatechars:50 }}</p>
                         <a href="#" class="btn btn-primary">Resume</a>
                         <a href="#" class="btn btn-secondary">Course Overview</a>
-                        <a href="{% url 'learn:tasklist_landing_page' code=course.code %}" class="btn btn-secondary">Task List</a>
+                        <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">Task List</a>
                     </div>
                 </div>
             </div>

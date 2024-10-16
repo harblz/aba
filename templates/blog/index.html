@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load django_htmx %}
-Index
+{% load static django_htmx %}
+{% block title %}Blog Posts{% endblock %}
 {% block content %}
-{% endblock content %}
+ {% include "blog/posts.html" %}
+{% endblock %}

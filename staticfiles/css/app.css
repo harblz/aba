@@ -22,3 +22,7 @@ a {
         flex-direction: column;
     }
 }
+
+#post-container {
+    border: medium solid black;
+}
