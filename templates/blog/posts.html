@@ -1,14 +1,23 @@
-{% extends "base.html" %}
+{% extends "blog/index.html" %}
 {% load static %}
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}
+Post List View
 	{% for post in posts %}
-		<div class="jumbotron jumbotron-fluid py-4">
+		{% if forloop.last %}
+			<div class="py-4 jumbotron jumbotron-fluid"
+				hx-trigger="revealed"
+				hx-get="{% url blog-posts %}?page={{ page_obj.number|add:1 }}"
+				hx-swap="afterend"
+			>
+		{% else %}
+			<div class="py-4 jumbotron jumbotron-fluid">
+		{% endif %}
 			<div class="container">
-			<a href="{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
-			{% autoescape off %}
-				{{ post.text }}
-			{% endautoescape %}
+				<a href="{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
+				{% autoescape off %}
+					{{ post.text }}
+				{% endautoescape %}
 			</div>
 		</div>
 	{% endfor %}

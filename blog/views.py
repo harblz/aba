@@ -1,6 +1,6 @@
-from django.conf import settings
+from django.views.generic import ListView
+
 from django.shortcuts import render, get_object_or_404, Http404
-from django.utils import timezone
 
 from pages.models import Pages
 from .models import Post
@@ -12,9 +12,14 @@ def post(request, post_id):
         raise Http404("Page does not exist")
     return render(request, "blog/post.html", {"post": post})
 
-def posts(request):
-    try:
-        posts = Post.objects.order_by("-published_date").values()
-    except Pages.DoesNotExist:
-        raise Http404("There are no published posts")
-    return render(request, "blog/posts.html", {"posts": posts})
+class posts(ListView):
+    model = Post
+    paginate_by = 2
+    context_object_name = "posts"
+    template = "blog/index.html"
+    ordering = "pk"
+    def get_template_names(self, *args, **kwargs):
+        if self.request.htmx:
+            return "blog/post_list.html"
+        else:
+            return self.template

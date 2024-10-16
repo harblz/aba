@@ -9,13 +9,6 @@ from blog.models import Post
 
 
 def home(request):
-<<<<<<< HEAD
-    try:
-        Posts = Post.objects.order_by("-published_date")[:2]
-    except Post.DoesNotExist:
-        raise Http404("No recent blog posts")
-    return render(request, "home.html", { 'Posts': Posts })
-=======
     # TODO: insert if clause for no posts
     post = Post.objects.order_by("-published_date")[:1]
     if post:
@@ -23,7 +16,6 @@ def home(request):
     else:
         return render(request, "home.html", {})
 
->>>>>>> refs/remotes/origin/develop
 
 def about(request):
     return render(request, "about.html")
