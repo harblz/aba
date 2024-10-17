@@ -16,13 +16,13 @@ def post(request, post_id):
 
 class Posts(ListView):
     model = Post
-    paginate_by = 10
+    paginate_by = 1
     context_object_name = "posts"
     template_name = "blog/index.html"
     ordering = "-published_date"
 
-    '''def get_template_names(self, *args, **kwargs):
+    def get_template_names(self, *args, **kwargs):
         if self.request.htmx:
-            return "blog/post_list.html"
+            return "blog/posts.html"
         else:
-            return self.template'''
+            return self.template_name
