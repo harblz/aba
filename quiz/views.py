@@ -58,48 +58,46 @@ def _save_progress(request) -> trigger_client_event:
 
 @htmx_required
 def _next_question(request, question) -> HttpResponse:
-    if request.htmx:
-        try:
-            _save_progress(request)
-        except Exception as e:
-            return HttpResponseServerError(e)
+    try:
+        _save_progress(request)
+    except Exception as e:
+        return HttpResponseServerError(
+            "There was a problem saving your progress" + str(e)
+        )
 
-        try:
-            question = Question.objects.get(id=question)
-            form = QuizForm(question=question)
-            return retarget(
-                request,
-                "",  # TODO: Replace with template name
-            )
-        except Exception as e:
-            return HttpResponseServerError(e)
-    else:
-        return HttpResponseForbidden()
+    try:
+        question = Question.objects.get(id=question)
+        form = QuizForm(question=question)
+        return retarget(
+            request,
+            "",  # TODO: Replace with template name
+        )
+    except Exception as e:
+        return HttpResponseServerError(
+            "There was a problem continuing the quiz" + str(e)
+        )
 
 
 @htmx_required
 def _start_quiz(request, code, quiz) -> HttpResponse:
-    if request.htmx:
-        try:
-            questions = _get_questions(code, quiz)
-            random.shuffle(questions)
-            if quiz.values("timed"):
-                time = quiz.values_list("time")
-                # Save start time to session
-            form = QuizForm(question=Question.objects.get(pk=questions[0]))
-            response = render(
-                request,
-                "",  # TODO: Replace with template name
-                {"form": form, "question_list": questions},
-            )
-            return retarget(
-                response,
-                "",  # TODO: Replace with CSS selector
-            )
-        except Exception as e:
-            return HttpResponse("There was a problem with your request:" + str(e))
-    else:
-        return HttpResponseForbidden()
+    try:
+        questions = _get_questions(code, quiz)
+        random.shuffle(questions)
+        if quiz.values("timed"):
+            time = quiz.values_list("time")
+            # Save start time to session
+        form = QuizForm(question=Question.objects.get(pk=questions[0]))
+        response = render(
+            request,
+            "",  # TODO: Replace with template name
+            {"form": form, "question_list": questions},
+        )
+        return retarget(
+            response,
+            "",  # TODO: Replace with CSS selector
+        )
+    except Exception as e:
+        return HttpResponse("There was a problem starting the quiz:" + str(e))
 
 
 """def submit_score_report(request):
