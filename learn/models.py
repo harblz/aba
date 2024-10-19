@@ -7,22 +7,6 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 
 # Create your models here.
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # JSONField for all three maybe?
-    # scores = Should relate to quiz field for score tracking
-    # progress = Should store progress in fluency
-    # current_lesson = Should store current/incomplete fluency lesson
-
-    def __str__(self):
-        return self.user
-
-    class Meta:
-        db_table_comment = (
-            "Profiles for learner tracking linked to django.contrib.auth.user"
-        )
-
-
 class Course(models.Model):
     """Competencies, subjects, and topics (e.g., BCBA, RBT, Feeding Therapy, etc.)"""
 
@@ -32,6 +16,9 @@ class Course(models.Model):
     image = models.CharField(null=True, max_length=250)
     description = models.TextField(null=True)
     course_data = models.JSONField(null=True, blank=True)
+
+    class Meta:
+        db_table_comment = "The competency, license, or topic of interest"
 
     def __str__(self):
         return self.name
@@ -51,9 +38,6 @@ class Course(models.Model):
             return task_list
         else:
             pass
-
-    class Meta:
-        db_table_comment = "The competency, license, or topic of interest"
 
 
 class ContentArea(models.Model):
@@ -102,6 +86,14 @@ class Task(models.Model):
 
     objects = TaskManager()
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["license", "area", "task"], name="unique_tasks"
+            )
+        ]
+        db_table_comment = "Tasks for RBT, BCaBA, and BCBA according to the BACB"
+
     def __str__(self):
         return f"{self.license.code} Task List: Item {self.area.letter}-{self.task}"
 
@@ -112,14 +104,6 @@ class Task(models.Model):
         self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
         return super(Task, self).save(*args, **kwargs)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["license", "area", "task"], name="unique_tasks"
-            )
-        ]
-        db_table_comment = "Tasks for RBT, BCaBA, and BCBA according to the BACB"
-
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
@@ -127,9 +111,9 @@ class Lesson(models.Model):
     title = models.CharField(max_length=100)
     content = CKEditor5Field()
 
-    def __str__(self):
-        return f"{self.course} Lesson {self.page}"
-
     class Meta:
         models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")
         db_table_comment = "Lesson pages for each course"
+
+    def __str__(self):
+        return f"{self.course} Lesson {self.page}"

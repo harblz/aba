@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, Http404
 
 from pages.models import Pages
 from .models import Post
+from core.decorators import htmx_required
 
 
 def post(request, post_id):
@@ -16,13 +17,7 @@ def post(request, post_id):
 
 class Posts(ListView):
     model = Post
-    paginate_by = 1
+    paginate_by = 10
     context_object_name = "posts"
     template_name = "blog/index.html"
     ordering = "-published_date"
-
-    def get_template_names(self, *args, **kwargs):
-        if self.request.htmx:
-            return "blog/posts.html"
-        else:
-            return self.template_name

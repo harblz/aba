@@ -13,19 +13,19 @@ class Quiz(models.Model):
     time = models.IntegerField("Time in minutes", default=0, null=True, blank=True)
     has_list = models.BooleanField("Has a task list?", default=False)
 
+    class Meta:
+        models.UniqueConstraint(fields=["course", "number"], name="unique_quiz")
+        db_table_comment = "Table of available quizzes"
+
     def __str__(self):
         return f"{self.course} Quiz #{self.number}"
-
-    def natural_key(self):
-        return (self.course.code, self.number)
 
     def save(self, *args, **kwargs):
         self.slug = f"{self.course.code}-{self.number}"
         super(Quiz, self).save(*args, **kwargs)
 
-    class Meta:
-        models.UniqueConstraint(fields=["course", "number"], name="unique_quiz")
-        db_table_comment = "Table of available quizzes"
+    def natural_key(self):
+        return (self.course.code, self.number)
 
 
 class Question(models.Model):
@@ -38,8 +38,8 @@ class Question(models.Model):
     four = models.TextField("Question Four", null=True, blank=True)
     answer = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
-    def __str__(self):
-        return self.text
-
     class Meta:
         db_table_comment = "Table of all questions from any quiz"
+
+    def __str__(self):
+        return self.text

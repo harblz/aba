@@ -4,10 +4,12 @@ from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event
 
-from learn.models import Profile, Course
+from learn.models import Course
 from pages.models import Pages
+from core.models import Profile
 from .models import *
 from .forms import QuizForm
+from core.decorators import htmx_required
 
 
 class QuizIndex(ListView):
@@ -46,13 +48,15 @@ def _get_questions(code, quiz) -> list:
     return questions
 
 
-def _save_progress(request) -> None:
+@htmx_required
+def _save_progress(request) -> trigger_client_event:
     # TODO: Add session saving
     pass
     # response =
     # return trigger_client_event(response)
 
 
+@htmx_required
 def _next_question(request, question) -> HttpResponse:
     if request.htmx:
         try:
@@ -73,6 +77,7 @@ def _next_question(request, question) -> HttpResponse:
         return HttpResponseForbidden()
 
 
+@htmx_required
 def _start_quiz(request, code, quiz) -> HttpResponse:
     if request.htmx:
         try:

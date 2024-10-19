@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "django_htmx",
     "django_bootstrap5",
     "fontawesomefree",
+    "core.apps.CoreConfig",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
     # "fluency.apps.FluencyConfig",
@@ -127,8 +128,8 @@ DATABASES = {
     },
     "old": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data/db.sqlite3.backup.09-16-24"
-    }
+        "NAME": BASE_DIR / "data/db.sqlite3.backup.09-16-24",
+    },
 }
 
 # Password validation

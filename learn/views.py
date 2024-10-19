@@ -6,6 +6,7 @@ from django.views.generic import ListView
 
 from .models import Course, Lesson, Task, ContentArea
 from pages.models import Pages
+from core.decorators import htmx_required
 
 
 class CourseIndex(ListView):
@@ -67,6 +68,7 @@ def _next_page(request, course) -> HttpResponse:
     pass
 
 
+@htmx_required
 def task_changeform_options(request):
     if request.GET.get("license") == "BCaBA":
         course_filter = ContentArea.objects.filter(license="BCBA")

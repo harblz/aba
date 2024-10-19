@@ -4,11 +4,6 @@ from .forms import TaskForm
 
 
 # Register your models here.
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     pass
