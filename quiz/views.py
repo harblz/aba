@@ -1,8 +1,12 @@
+import django.contrib.auth.decorators
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event
+from django.contrib.sessions.models import Session
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from learn.models import Course
 from pages.models import Pages
@@ -49,48 +53,79 @@ def _get_questions(code, quiz) -> list:
 
 
 @htmx_required
-def _save_progress(request) -> trigger_client_event:
-    # TODO: Add session saving
-    pass
-    # response =
-    # return trigger_client_event(response)
+def _save_progress(request):
+    try:
+        index = request.session["quiz"]["current_index"]
+        request.session["quiz"]["questions"][index]["user_answer"] = request.POST.get(
+            "answer"
+        )
+        index += 1
+
+        if request.POST.get("suspend"):
+            Profile.objects.get(user=request.user).data["quiz"] = request.session[
+                "quiz"
+            ]
+            response = HttpResponse()
+            return retarget(response, "")  # TODO: return html for popup and redirect
+        else:
+            # TODO: need logic for anon users
+            pass
+    except Exception as e:
+        return e
 
 
 @htmx_required
-def _next_question(request, question) -> HttpResponse:
+def _next_question(request) -> HttpResponse:
     try:
         _save_progress(request)
     except Exception as e:
         return HttpResponseServerError(
-            "There was a problem saving your progress" + str(e)
+            "There was a problem saving your progress:" + str(e)
         )
 
     try:
-        question = Question.objects.get(id=question)
-        form = QuizForm(question=question)
+        next_question = request.session["quiz"]["current_index"]
+        form = QuizForm(
+            question=Question.objects.get(
+                pk=request.session["quiz"]["questions"][next_question]["question"]
+            )
+        )
+        response = render(request, "", {"form": form})  # Replace with template name
         return retarget(
-            request,
-            "",  # TODO: Replace with template name
+            response,
+            "",  # TODO: Replace with CSS selector
         )
     except Exception as e:
         return HttpResponseServerError(
-            "There was a problem continuing the quiz" + str(e)
+            "There was a problem loading the next question:" + str(e)
         )
 
 
 @htmx_required
 def _start_quiz(request, code, quiz) -> HttpResponse:
+    slug = quiz.slug
+    request.session["quiz"]["slug"] = {}
     try:
         questions = _get_questions(code, quiz)
         random.shuffle(questions)
+        for question, index in enumerate(questions):
+            obj = Question.objects.get(id=question)
+            request.session["quiz"]["questions"][str(index)]["question"] = obj.pk
+            request.session["quiz"]["questions"][str(index)]["answer"] = obj.answer
         if quiz.values("timed"):
             time = quiz.values_list("time")
-            # Save start time to session
+            request.session["quiz"]["starttime"] = timezone.now()
+            request.session["quiz"]["timelimit"] = time
+        request.session["quiz"]["current_index"] = 0
+    except Exception as e:
+        return HttpResponse("There was a problem loading the quiz:" + str(e))
+
+    try:
         form = QuizForm(question=Question.objects.get(pk=questions[0]))
         response = render(
             request,
             "",  # TODO: Replace with template name
-            {"form": form, "question_list": questions},
+            {"form": form},
         )
         return retarget(
             response,
