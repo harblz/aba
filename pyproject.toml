@@ -20,12 +20,12 @@ django-bootstrap5 = "^24.3"
 django-htmx = "^1.19"
 fontawesomefree = "^6.6.0"
 django-ckeditor-5 = "^0.2.13"
+black = {extras = ["d"], version = "^24.10.0"}
 
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.8"
 ipython = "^8.27"
 setuptools = "*"
 django-extensions = "^3.2"

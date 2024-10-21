@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from django.contrib.postgres.fields import HStoreField
-
 from django_ckeditor_5.fields import CKEditor5Field
 
 
@@ -50,6 +48,10 @@ class ContentArea(models.Model):
     area = models.CharField(max_length=50)
     weight = models.IntegerField()
 
+    class Meta:
+        db_table_comment = "The content areas for each Course"
+        default_related_name = "content_areas"
+
     def __str__(self):
         if self.section:
             return f"{self.license.code}, Section {self.section}, Area {self.letter}: {self.area}"
@@ -75,11 +77,10 @@ class Task(models.Model):
     """BACB Task List items"""
 
     slug = models.SlugField(unique=True, primary_key=True)
-    license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
+    license = models.ForeignKey(Course, on_delete=models.CASCADE)
     area = models.ForeignKey(
         ContentArea,
         on_delete=models.CASCADE,
-        related_name="tasks",
     )
     task = models.IntegerField()
     task_desc = models.TextField()
@@ -93,6 +94,7 @@ class Task(models.Model):
             )
         ]
         db_table_comment = "Tasks for RBT, BCaBA, and BCBA according to the BACB"
+        default_related_name = "tasks"
 
     def __str__(self):
         return f"{self.license.code} Task List: Item {self.area.letter}-{self.task}"
@@ -106,7 +108,8 @@ class Task(models.Model):
 
 
 class Lesson(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    area = models.ForeignKey(ContentArea, on_delete=models.CASCADE)
     page = models.IntegerField()
     title = models.CharField(max_length=100)
     content = CKEditor5Field()
@@ -114,6 +117,7 @@ class Lesson(models.Model):
     class Meta:
         models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")
         db_table_comment = "Lesson pages for each course"
+        default_related_name = "lessons"
 
     def __str__(self):
         return f"{self.course} Lesson {self.page}"

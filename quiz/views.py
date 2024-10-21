@@ -42,9 +42,9 @@ def get_quiz(request, course, quiz) -> HttpResponse:
 
 
 def _get_questions(code, quiz) -> list:
-    weights = Course.objects.get(code=code).weights
+    areas = Course.objects.get(code=code).content_areas.all()
     questions = []
-    for key, value in weights:
+    for area in areas:
         options = Question.objects.filter(
             code=code, quiz=quiz, category=key
         ).values_list("id")
