@@ -8,6 +8,6 @@ urlpatterns = [
     path("<str:course>/", views.IndexByCourse.as_view(), name="quizzes_by_course"),
     path("<str:course>/<int:quiz>/", views.get_quiz, name="get_quiz"),
     path("<str:course>/<int:quiz>/start/", views._start_quiz, name="start_quiz"),
-    path("quiz/next/<int:quiz_id>/", views._next_question, name="next_quiz"),
+    path("quiz/next/<int:quiz_id>/", views._next_question, name="next_question"),
     path("quiz/save/", views._save_progress, name="save_progress"),
 ]

@@ -1,4 +1,7 @@
+from typing import Type
+
 import django.contrib.auth.decorators
+import django.http
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
@@ -41,15 +44,23 @@ def get_quiz(request, course, quiz) -> HttpResponse:
     )
 
 
-def _get_questions(code, quiz) -> list:
-    areas = Course.objects.get(code=code).content_areas.all()
+def _get_questions(code, quiz) -> list | Type[Exception]:
+    quiz = Quiz.objects.get(course=code, number=quiz)
     questions = []
-    for area in areas:
-        options = Question.objects.filter(
-            code=code, quiz=quiz, category=key
-        ).values_list("id")
-        questions += random.sample(options, value)
-    return questions
+    areas = None
+    if quiz.areas.all.exists():
+        areas = quiz.areas.all()
+    elif not quiz.areas.all.exists():
+        course = quiz.course.all()
+        areas = course.areas.all()
+    try:
+        for area in areas:
+            weight = area.weight
+            options = area.questions.all()
+            questions += random.sample(options, weight)
+        return questions
+    except Exception as e:
+        return Exception
 
 
 @htmx_required
@@ -61,14 +72,16 @@ def _save_progress(request):
         )
         index += 1
 
-        if request.POST.get("suspend"):
+        if request.POST.get("suspend") & request.user.is_authenticated:
             Profile.objects.get(user=request.user).data["quiz"] = request.session[
                 "quiz"
             ]
             response = HttpResponse()
             return retarget(response, "")  # TODO: return html for popup and redirect
-        else:
+        elif request.POST.get("suspend"):
             # TODO: need logic for anon users
+            pass
+        else:
             pass
     except Exception as e:
         return e
@@ -90,11 +103,7 @@ def _next_question(request) -> HttpResponse:
                 pk=request.session["quiz"]["questions"][next_question]["question"]
             )
         )
-        response = render(request, "", {"form": form})  # Replace with template name
-        return retarget(
-            response,
-            "",  # TODO: Replace with CSS selector
-        )
+        return render(request, "quiz/question_form.html", {"form": form})
     except Exception as e:
         return HttpResponseServerError(
             "There was a problem loading the next question:" + str(e)
@@ -118,13 +127,13 @@ def _start_quiz(request, code, quiz) -> HttpResponse:
             request.session["quiz"]["timelimit"] = time
         request.session["quiz"]["current_index"] = 0
     except Exception as e:
-        return HttpResponse("There was a problem loading the quiz:" + str(e))
+        return HttpResponseServerError("There was a problem loading the quiz:" + str(e))
 
     try:
         form = QuizForm(question=Question.objects.get(pk=questions[0]))
         response = render(
             request,
-            "",  # TODO: Replace with template name
+            "quiz/question_form.html",
             {"form": form},
         )
         return retarget(
@@ -132,7 +141,9 @@ def _start_quiz(request, code, quiz) -> HttpResponse:
             "",  # TODO: Replace with CSS selector
         )
     except Exception as e:
-        return HttpResponse("There was a problem starting the quiz:" + str(e))
+        return HttpResponseServerError(
+            "There was a problem starting the quiz:" + str(e)
+        )
 
 
 """def submit_score_report(request):

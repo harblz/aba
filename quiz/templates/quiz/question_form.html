@@ -1,0 +1,11 @@
+{% extends "quiz/quiz.html" %}
+<form action="{% url 'quiz:next_question' %}" id="question" method="post" hx-boost="true" hx-select="#form-wrapper">
+  {% csrf_token %}
+  <div id="form-wrapper">
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field }}
+    {% endfor %}
+  </div>
+  <button type="submit">Next Question</button>
+</form>
