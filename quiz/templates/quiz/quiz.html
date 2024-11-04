@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
+{% load duration_extras humanize static %}
 
 {% block content %}
-
+  <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
+    {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
+    {% else %}untimed. Take your time.
+    {% endif %}</p>
+  <button type="button"
+          hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
+          hx-swap="innerHTML"
+          hx-target="#content"
+          hx-indicator="#spinner"
+  >Click here to begin!</button>
+  <img  id="spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
 {% endblock %}

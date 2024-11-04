@@ -42,14 +42,22 @@ class EditQuizForm(forms.ModelForm):
         if self.instance.slug:
             if self.instance.timed:
                 self.initial["time"] = int(self.instance.time.seconds / 60)
+                self.fields["timed"].widget = forms.HiddenInput()
             else:
+                self.fields["timed"].widget = forms.HiddenInput()
                 self.fields["time"].widget = forms.HiddenInput()
         else:
-            pass
+            self.fields["time"].widget.attrs["hidden"] = ""
+            self.fields["timed"].widget.attrs[
+                "_"
+            ] = "on input toggle @hidden on #id_time"
 
     def save(self, commit=True):
         instance = super(EditQuizForm, self).save(commit=False)
-        instance.time = datetime.timedelta(minutes=self.cleaned_data["time"].seconds)
+        if instance.timed:
+            instance.time = datetime.timedelta(
+                minutes=self.cleaned_data["time"].seconds
+            )
         if commit:
             instance.save()
         return instance

@@ -59,11 +59,12 @@ class ContentArea(models.Model):
             return f"{self.license.code}, Area {self.letter}: {self.area}"
 
     def save(self, *args, **kwargs):
-        if self.section:
-            self.slug = f"{self.license.code}-{self.section}-{self.letter}"
-        else:
-            self.slug = f"{self.license.code}-{self.letter}"
-        return super(ContentArea, self).save(*args, **kwargs)
+        if not self.slug:
+            if self.section:
+                self.slug = f"{self.license.code}-{self.section}-{self.letter}"
+            else:
+                self.slug = f"{self.license.code}-{self.letter}"
+        super(ContentArea, self).save(*args, **kwargs)
 
 
 class TaskManager(models.Manager):
@@ -103,8 +104,9 @@ class Task(models.Model):
         return (self.license, self.area, self.task)
 
     def save(self, *args, **kwargs):
-        self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
-        return super(Task, self).save(*args, **kwargs)
+        if not self.slug:
+            self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
+        super(Task, self).save(*args, **kwargs)
 
 
 class Lesson(models.Model):

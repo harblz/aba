@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
 import random
-from django_htmx.http import retarget, trigger_client_event
+from django_htmx.http import retarget, trigger_client_event, reswap
 from django.utils import timezone
 from django.template.response import TemplateResponse
 
@@ -13,14 +13,17 @@ from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
+from abarocks.views import handler500
 
 
 class QuizIndex(ListView):
     model = Quiz
+    context_object_name = "quizzes"
+    template_name = "quiz/index.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page"] = Pages.objects.get(title="Practice Quizzes")
+        # context["page"] = Pages.objects.get(title="Practice Quizzes")
         return context
 
 
@@ -32,30 +35,19 @@ class IndexByCourse(ListView):
         return queryset
 
 
-def HideShowAdminTime(request):
-    if request.GET.get("timed") == "true":
-
-        return TemplateResponse(
-            request,
-        )
-
-
-def get_quiz(request, course, quiz) -> HttpResponse:
-    msg = "This quiz is"
-    if quiz.timed:
-        time = f"{quiz.timed} long"
-    else:
-        page = Pages.objects.get(title="Untimed Quiz")
+def get_quiz(request, code, number) -> HttpResponse:
+    quiz = Quiz.objects.get(course=code, number=number)
+    course = quiz.course
 
     return render(
         request,
         "quiz/quiz.html",
-        {"course": course, "quiz": quiz, "page": page},
+        {"course": course, "quiz": quiz},
     )
 
 
-def _get_questions(code, quiz) -> list | Type[Exception]:
-    quiz = Quiz.objects.get(course=code, number=quiz)
+def _get_questions(slug) -> list | Type[Exception]:
+    quiz = Quiz.objects.get(slug=slug)
     questions = []
     areas = None
     if quiz.areas.all.exists():
@@ -94,7 +86,8 @@ def _save_progress(request):
         else:
             pass
     except Exception as e:
-        return e
+        exception = str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
 
 @htmx_required
@@ -102,9 +95,8 @@ def _next_question(request) -> HttpResponse:
     try:
         _save_progress(request)
     except Exception as e:
-        return HttpResponseServerError(
-            "There was a problem saving your progress:" + str(e)
-        )
+        exception = "There was a problem saving your progress:" + str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
     try:
         next_question = request.session["quiz"]["current_index"]
@@ -115,18 +107,20 @@ def _next_question(request) -> HttpResponse:
         )
         return render(request, "quiz/question_form.html", {"form": form})
     except Exception as e:
-        return HttpResponseServerError(
-            "There was a problem loading the next question:" + str(e)
-        )
+        exception = "There was a problem loading the next question: " + str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
 
 @htmx_required
-def _start_quiz(request, code, quiz) -> HttpResponse:
-    slug = quiz.slug
-    request.session["quiz"]["slug"] = {}
+def _start_quiz(request, code, number) -> HttpResponse:
+    quiz = Quiz.objects.get(course=code, number=number)
+    request.session["quiz"] = {}
+    request.session["quiz"][quiz.slug] = {}
+    questions = []
     try:
-        questions = _get_questions(code, quiz)
+        questions = _get_questions(quiz.slug)
         random.shuffle(questions)
+        tuple(questions)
         for question, index in enumerate(questions):
             obj = Question.objects.get(id=question)
             request.session["quiz"]["questions"][str(index)]["question"] = obj.pk
@@ -137,23 +131,19 @@ def _start_quiz(request, code, quiz) -> HttpResponse:
             request.session["quiz"]["timelimit"] = time
         request.session["quiz"]["current_index"] = 0
     except Exception as e:
-        return HttpResponseServerError("There was a problem loading the quiz:" + str(e))
+        exception = "There was a problem loading the quiz: " + str(e)
+        reswap(handler500(request, exception), "beforeend")
 
     try:
         form = TakeQuizForm(question=Question.objects.get(pk=questions[0]))
-        response = render(
+        response = TemplateResponse(
             request,
             "quiz/question_form.html",
             {"form": form},
         )
-        return retarget(
-            response,
-            "",  # TODO: Replace with CSS selector
-        )
     except Exception as e:
-        return HttpResponseServerError(
-            "There was a problem starting the quiz:" + str(e)
-        )
+        exception = "There was a problem starting the quiz:" + str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
 
 """def submit_score_report(request):

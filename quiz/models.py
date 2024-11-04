@@ -22,7 +22,17 @@ class Quiz(models.Model):
         return f"{self.course} Quiz #{self.number}"
 
     def save(self, *args, **kwargs):
-        self.slug = f"{self.course.code}-{self.number}"
+        if not self.slug and self._state.adding:
+            try:
+                previous = Quiz.objects.filter(course=self.course.code).latest("number")
+            except Quiz.DoesNotExist:
+                previous = None
+
+            if not previous:
+                self.number = 1
+            else:
+                self.number = previous.number + 1
+            self.slug = f"{self.course.code}-{self.number}"
         super(Quiz, self).save(*args, **kwargs)
 
     def natural_key(self):
