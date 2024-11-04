@@ -1,21 +1,17 @@
 from typing import Type
 
-import django.contrib.auth.decorators
-import django.http
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event
-from django.contrib.sessions.models import Session
 from django.utils import timezone
-from django.contrib.auth.decorators import login_required
+from django.template.response import TemplateResponse
 
-from learn.models import Course
 from pages.models import Pages
 from core.models import Profile
 from .models import *
-from .forms import QuizForm
+from .forms import TakeQuizForm
 from core.decorators import htmx_required
 
 
@@ -36,11 +32,25 @@ class IndexByCourse(ListView):
         return queryset
 
 
+def HideShowAdminTime(request):
+    if request.GET.get("timed") == "true":
+
+        return TemplateResponse(
+            request,
+        )
+
+
 def get_quiz(request, course, quiz) -> HttpResponse:
+    msg = "This quiz is"
+    if quiz.timed:
+        time = f"{quiz.timed} long"
+    else:
+        page = Pages.objects.get(title="Untimed Quiz")
+
     return render(
         request,
-        "",  # TODO: Replace with template name
-        {"course": course, "quiz": quiz},
+        "quiz/quiz.html",
+        {"course": course, "quiz": quiz, "page": page},
     )
 
 
@@ -98,7 +108,7 @@ def _next_question(request) -> HttpResponse:
 
     try:
         next_question = request.session["quiz"]["current_index"]
-        form = QuizForm(
+        form = TakeQuizForm(
             question=Question.objects.get(
                 pk=request.session["quiz"]["questions"][next_question]["question"]
             )
@@ -130,7 +140,7 @@ def _start_quiz(request, code, quiz) -> HttpResponse:
         return HttpResponseServerError("There was a problem loading the quiz:" + str(e))
 
     try:
-        form = QuizForm(question=Question.objects.get(pk=questions[0]))
+        form = TakeQuizForm(question=Question.objects.get(pk=questions[0]))
         response = render(
             request,
             "quiz/question_form.html",

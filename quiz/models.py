@@ -6,11 +6,11 @@ from learn import models as learn
 class Quiz(models.Model):
     slug = models.SlugField(unique=True, primary_key=True)
     course = models.ForeignKey(learn.Course, on_delete=models.CASCADE)
-    areas = models.ManyToManyField(learn.ContentArea, blank=True, null=True)
+    areas = models.ManyToManyField(learn.ContentArea, blank=True)
     number = models.IntegerField(default=1)
     desc = models.CharField("Description", max_length=100)
     timed = models.BooleanField("Timed?", default=False)
-    time = models.IntegerField("Time in minutes", default=0, null=True, blank=True)
+    time = models.DurationField("Time in minutes", null=True, blank=True)
 
     class Meta:
         models.UniqueConstraint(fields=["course", "number"], name="unique_quiz")
