@@ -9,7 +9,7 @@ class Quiz(models.Model):
     areas = models.ManyToManyField(learn.ContentArea, blank=True)
     number = models.IntegerField(default=1)
     desc = models.CharField("Description", max_length=100)
-    timed = models.BooleanField("Timed?", default=False)
+    timed = models.BooleanField("Timed?", default=False, null=True, blank=True)
     time = models.DurationField("Time in minutes", null=True, blank=True)
 
     class Meta:
@@ -39,18 +39,44 @@ class Quiz(models.Model):
         return (self.course.code, self.number)
 
 
-class Question(models.Model):
+class BaseQuestion(models.Model):
     category = models.ForeignKey(learn.ContentArea, on_delete=models.CASCADE)
     text = models.TextField("Question Text", unique=True)
-    one = models.TextField("Question One")
-    two = models.TextField("Question Two")
-    three = models.TextField("Question Three", null=True, blank=True)
-    four = models.TextField("Question Four", null=True, blank=True)
-    answer = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
-        db_table_comment = "Table of all questions from any quiz"
-        default_related_name = "questions"
+        abstract = True
+
+    def __str__(self):
+        return self.text
+
+
+class MultipleChoiceQuestion(BaseQuestion):
+    answer = models.OneToOneField(
+        "MultipleChoiceAnswer", on_delete=models.SET_NULL, null=True, blank=True
+    )
+
+    class Meta:
+        default_related_name = "multiple_choice_questions"
+        verbose_name = "Multiple Choice Question"
+        db_table_comment = "All multiple choice questions"
+
+
+class TrueFalseQuestion(BaseQuestion):
+    answer = models.BooleanField()
+
+    class Meta:
+        default_related_name = "true_false_questions"
+        verbose_name = "True/False Question"
+        db_table_comment = "All True/False Questionse"
+
+
+class MultipleChoiceAnswer(models.Model):
+    question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
+    text = models.TextField("Answer Text", unique=True)
+
+    class Meta:
+        default_related_name = "answers"
+        db_table_comment = "Table of multiple choice answers"
 
     def __str__(self):
         return self.text

@@ -1,6 +1,7 @@
 import datetime
-
 from django import forms
+
+from .models import Quiz, TrueFalseQuestion
 
 
 class TakeQuizForm(forms.Form):
@@ -24,6 +25,7 @@ class EditQuizForm(forms.ModelForm):
     timed = forms.BooleanField(required=False)
 
     class Meta:
+        model = Quiz
         exclude = ["slug"]
         widgets = {
             "time": forms.NumberInput(),
@@ -61,3 +63,13 @@ class EditQuizForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class EditTrueFalseForm(forms.ModelForm):
+    answer = forms.BooleanField(
+        required=False, widget=forms.Select(choices=[(True, "True"), (False, "False")])
+    )
+
+    class Meta:
+        model = TrueFalseQuestion
+        fields = "__all__"

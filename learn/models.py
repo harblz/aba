@@ -67,13 +67,6 @@ class ContentArea(models.Model):
         super(ContentArea, self).save(*args, **kwargs)
 
 
-class TaskManager(models.Manager):
-    """Manager to return natural key of Task"""
-
-    def get_by_natural_key(self, license, area, task):
-        return self.get(license=license.code, area=area, task=task)
-
-
 class Task(models.Model):
     """BACB Task List items"""
 
@@ -85,8 +78,6 @@ class Task(models.Model):
     )
     task = models.IntegerField()
     task_desc = models.TextField()
-
-    objects = TaskManager()
 
     class Meta:
         constraints = [
