@@ -1,6 +1,7 @@
 from django.db import models
 
 from learn import models as learn
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Quiz(models.Model):
@@ -41,7 +42,8 @@ class Quiz(models.Model):
 
 class BaseQuestion(models.Model):
     category = models.ForeignKey(learn.ContentArea, on_delete=models.CASCADE)
-    text = models.TextField("Question Text", unique=True)
+    text = CKEditor5Field("Question Text")
+    hint = CKEditor5Field("Question Hint", blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -72,7 +74,7 @@ class TrueFalseQuestion(BaseQuestion):
 
 class MultipleChoiceAnswer(models.Model):
     question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
-    text = models.TextField("Answer Text", unique=True)
+    text = models.TextField("Answer Text")
 
     class Meta:
         default_related_name = "answers"
