@@ -7,6 +7,7 @@ import random
 from django_htmx.http import retarget, trigger_client_event, reswap
 from django.utils import timezone
 from django.template.response import TemplateResponse
+from django.apps import apps
 
 from pages.models import Pages
 from core.models import Profile
@@ -51,14 +52,21 @@ def _get_questions(slug) -> list | Type[Exception]:
     questions = []
     areas = None
     if quiz.areas.all.exists():
-        areas = quiz.areas.all()
+        areas = quiz.areas.all().values()
     elif not quiz.areas.all.exists():
-        course = quiz.course.all()
-        areas = course.areas.all()
+        areas = quiz.course.content_areas.all().values()
     try:
         for area in areas:
-            weight = area.weight
-            options = area.questions.all()
+            tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
+            mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values(
+                "id"
+            )
+            weight = area["weight"]
+            options = []
+            for question in tf:
+                options.append(f"TrueFalseQuestion:{question["id"]}")
+            for question in mc:
+                options.append(f"MultipleChoiceQuestion:{question["id"]}")
             questions += random.sample(options, weight)
         return questions
     except Exception as e:
@@ -116,15 +124,17 @@ def _start_quiz(request, code, number) -> HttpResponse:
     quiz = Quiz.objects.get(course=code, number=number)
     request.session["quiz"] = {}
     request.session["quiz"][quiz.slug] = {}
-    questions = []
     try:
         questions = _get_questions(quiz.slug)
         random.shuffle(questions)
         tuple(questions)
-        for question, index in enumerate(questions):
-            obj = Question.objects.get(id=question)
-            request.session["quiz"]["questions"][str(index)]["question"] = obj.pk
+        for index, question in enumerate(questions):
+            info = question.split(":")
+            model = apps.get_model("quiz", info[0])
+            obj = model.objects.get(id=info[1])
+            request.session["quiz"]["questions"][str(index)]["question"] = info[1]
             request.session["quiz"]["questions"][str(index)]["answer"] = obj.answer
+            request.session["quiz"]["questions"][str(index)]["table"] = info[0]
         if quiz.values("timed"):
             time = quiz.values_list("time")
             request.session["quiz"]["starttime"] = timezone.now()
