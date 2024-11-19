@@ -11,14 +11,19 @@ class TakeQuizForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
         super(TakeQuizForm, self).__init__(*args, **kwargs)
         self.question = question.text
-        choices = (question.one, question.two, question.three, question.four)
-        letters = ("A", "B", "C", "D")
-        self.answer.choices = {}
-        for index, choice in enumerate(choices):
-            if choice:
-                self.answer.choices[letters[index]] = choice
-            else:
-                break
+        choices = []
+        if type(question.answer) == str:
+            for index, answer in enumerate(question.answers.values()):
+                choices.append((index, answer["id"], answer["text"]))
+            letters = ("A", "B", "C", "D")
+            for index, choice in enumerate(choices):
+                if choice:
+                    self.answer.choices[letters[index]] = choice
+                else:
+                    break
+        elif type(question.answer) == bool:
+            choices = [(True, "True"), (False, "False")]
+        self.answer.choices = choices
 
 
 class EditQuizForm(forms.ModelForm):

@@ -82,6 +82,7 @@ def _save_progress(request):
         )
         index += 1
 
+        # noinspection PyTypeChecker
         if request.POST.get("suspend") & request.user.is_authenticated:
             Profile.objects.get(user=request.user).data["quiz"] = request.session[
                 "quiz"
@@ -108,8 +109,9 @@ def _next_question(request) -> HttpResponse:
 
     try:
         next_question = request.session["quiz"]["current_index"]
+        model = apps.get_model("quiz", next_question["table"])
         form = TakeQuizForm(
-            question=Question.objects.get(
+            question=model.objects.get(
                 pk=request.session["quiz"]["questions"][next_question]["question"]
             )
         )
@@ -145,7 +147,9 @@ def _start_quiz(request, code, number) -> HttpResponse:
         reswap(handler500(request, exception), "beforeend")
 
     try:
-        form = TakeQuizForm(question=Question.objects.get(pk=questions[0]))
+        first_question = request.session["quiz"]["current_index"]
+        model = apps.get_model("quiz", first_question["table"])
+        form = TakeQuizForm(question=model.objects.get(pk=first_question["question"]))
         response = TemplateResponse(
             request,
             "quiz/question_form.html",

@@ -37,7 +37,7 @@ class Quiz(models.Model):
         super(Quiz, self).save(*args, **kwargs)
 
     def natural_key(self):
-        return (self.course.code, self.number)
+        return self.course.code, self.number
 
 
 class BaseQuestion(models.Model):
