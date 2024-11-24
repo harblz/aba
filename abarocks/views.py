@@ -9,22 +9,19 @@ from blog.models import Post
 
 
 def home(request):
-    posts = Post.objects.order_by("-published_date")
+    posts = Post.objects.order_by("-published_date").exclude(is_pinned=True)
+    pinned = Post.objects.filter(is_pinned=True).order_by("published_date")
     if posts:
         paginator = Paginator(posts, 10)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
-        return render(request, "home.html", {"page_obj": page_obj})
+        return render(request, "home.html", {"page_obj": page_obj, "pinned": pinned})
     else:
         return render(request, "home.html", {})
 
 
 def about(request):
     return render(request, "about.html")
-
-
-def patreon(request):
-    return render(request, "patreon.html")
 
 
 def login(request):

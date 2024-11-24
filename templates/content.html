@@ -4,10 +4,12 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid py-4">
 	<div class="container">
-	<h1 class="display-4">{{ post.title }}</h1>
-	{% autoescape off %}
-		{{ Post.text }}
-	{% endautoescape %}
+		<div class="d-flex justify-content-center">
+					<h1 class="display-4">{{ post.title }}</h1>
+			{% autoescape off %}
+				{{ Post.text }}
+			{% endautoescape %}
+		</div>
 	</div>
 </div>
 {% endblock content %}

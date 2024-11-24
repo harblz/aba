@@ -21,3 +21,6 @@ class Posts(ListView):
     context_object_name = "posts"
     template_name = "blog/index.html"
     ordering = "-published_date"
+
+    def get_queryset(self):
+        return Post.objects.filter(is_pinned=False).order_by(self.ordering)

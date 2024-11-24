@@ -9,6 +9,10 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+# Alex's general bullshit
+.pgpass
+.vscode/
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -133,6 +137,7 @@ fabric.properties
 __pycache__/
 local_settings.py
 data/db.sqlite3
+db.sqlite3
 db.sqlite3-journal
 media
 data/
