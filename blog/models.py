@@ -34,6 +34,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=250, null=True)
     text = CKEditor5Field()
     pic = models.CharField(max_length=200, null=True, blank=True)
     slug = models.CharField(max_length=200)

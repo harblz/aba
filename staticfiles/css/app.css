@@ -46,6 +46,36 @@ a {
     }
 }
 
-#post-container {
-    border: medium solid black;
+.post-container {
+    border-bottom: 3px solid rgba(160, 160, 160, 0.728);
+    margin-top: 50px;
+}
+
+.post-date {
+    color: rgba(160, 160, 160, 1.0);
+}
+
+.carousel-highlight {
+    background-color: hsla(0, 0%, 8%, 0.908);
+    color: #fff;
+}
+
+.bd-highlight {
+    background-color: #563d7c26;
+    border: 1px solid rgba(86, 61, 124, 0.15);
+}
+
+.bd-highlight-1 {
+    background-color: #dcff688e;
+    border: 1px solid rgba(86, 61, 124, 0.15);
+}
+
+.bd-highlight-2 {
+    background-color: #fbb1ff26;
+    border: 1px solid rgba(86, 61, 124, 0.15);
+}
+
+.bd-highlight-3 {
+    background-color: rgba(255, 197, 109, 0.15);
+    border: 1px solid rgba(86, 61, 124, 0.15);
 }

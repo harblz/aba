@@ -1,10 +1,26 @@
 <div id="posts">
   {% for post in page_obj %}
-    <div class="py-4 jumbotron jumbotron-fluid">
-      <a href="{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
-      {% autoescape off %}
-        {{ post.text }}
-      {% endautoescape %}
+    <div class="container-fluid ">
+      <div class="col-md-8 mx-auto">
+        <div class="post-container p-4">
+          <div class="d-flex flex-row">
+            <div class="post-image w-25 d-none d-sm-block d-flex justify-content-center align-middle">
+              {% if post.pic %}
+                <img src="{{ post.pic }}" height="auto" width="auto" class="img-fluid rounded" alt="Responsive image">
+              {% endif %}
+            </div>  
+            <div class="post-title p-4 justify-content-center">
+              <a href="{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
+              <div class="post-subtitle p-2">
+                <p class="post-date">{{ post.published_date }} <br/><br/></p>
+                {% autoescape off %}
+                  {{ post.subtitle }}
+                {% endautoescape %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     {% if page_obj.has_next %}
       <span hx-get="{% url 'blog:blog-posts' %}?page={{ page_obj.next_page_number }}"
