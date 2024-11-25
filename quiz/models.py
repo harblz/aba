@@ -69,7 +69,7 @@ class TrueFalseQuestion(BaseQuestion):
     class Meta:
         default_related_name = "true_false_questions"
         verbose_name = "True/False Question"
-        db_table_comment = "All True/False Questionse"
+        db_table_comment = "All True/False Questions"
 
 
 class MultipleChoiceAnswer(models.Model):

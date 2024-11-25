@@ -108,13 +108,18 @@ def _next_question(request) -> HttpResponse:
         return reswap(handler500(request, exception), "beforeend")
 
     try:
-        next_question = request.session["quiz"]["current_index"]
-        model = apps.get_model("quiz", next_question["table"])
-        form = TakeQuizForm(
-            question=model.objects.get(
-                pk=request.session["quiz"]["questions"][next_question]["question"]
-            )
+        next_index = request.session["quiz"]["current_index"]
+        model = apps.get_model("quiz", next_index["table"])
+        question = model.objects.get(
+            pk=request.session["quiz"]["questions"][next_index]["question"]
         )
+        form = TakeQuizForm(question=question)
+        if next_index["table"] == "MultipleChoiceQuestion":
+            form.fields["answer"].choices = [
+                (answer.id, answer.text) for answer in question.answers.all()
+            ]
+        elif next_index["table"] == "TrueFalseQuestion":
+            form.fields["answer"].choices = [(True, "True"), (False, "False")]
         return render(request, "quiz/question_form.html", {"form": form})
     except Exception as e:
         exception = "There was a problem loading the next question: " + str(e)
@@ -149,7 +154,15 @@ def _start_quiz(request, code, number) -> HttpResponse:
     try:
         first_question = request.session["quiz"]["current_index"]
         model = apps.get_model("quiz", first_question["table"])
-        form = TakeQuizForm(question=model.objects.get(pk=first_question["question"]))
+        question = model.objects.get(pk=first_question["question"])
+        form = TakeQuizForm(question=question)
+        if first_question["table"] == "MultipleChoiceQuestion":
+            form.fields["answer"].choices = [
+                (answer.id, answer.text) for answer in question.answers.all()
+            ]
+        elif first_question["table"] == "TrueFalseQuestion":
+            form.fields["answer"].choices = [(True, "True"), (False, "False")]
+
         response = TemplateResponse(
             request,
             "quiz/question_form.html",
