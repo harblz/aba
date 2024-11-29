@@ -21,7 +21,7 @@ class TaskAdmin(admin.ModelAdmin):
     form = TaskForm
 
     class Media:
-        js = ("js/htmx.min.js", "django-htmx.js")
+        js = ["js/htmx.min.js", "django-htmx.js"]
 
 
 @admin.register(Lesson)

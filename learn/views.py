@@ -63,7 +63,7 @@ def lesson_page(request, course) -> HttpResponse:
 
 
 def _next_page(request, course) -> HttpResponse:
-    # Pull current page from session
+    # Pull current page from session/profile
     # Increment page # and query for ID
     pass
 

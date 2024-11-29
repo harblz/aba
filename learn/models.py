@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from django.contrib.postgres.fields import HStoreField
-
 from django_ckeditor_5.fields import CKEditor5Field
 
 
@@ -50,6 +48,10 @@ class ContentArea(models.Model):
     area = models.CharField(max_length=50)
     weight = models.IntegerField()
 
+    class Meta:
+        db_table_comment = "The content areas for each Course"
+        default_related_name = "content_areas"
+
     def __str__(self):
         if self.section:
             return f"{self.license.code}, Section {self.section}, Area {self.letter}: {self.area}"
@@ -57,34 +59,25 @@ class ContentArea(models.Model):
             return f"{self.license.code}, Area {self.letter}: {self.area}"
 
     def save(self, *args, **kwargs):
-        if self.section:
-            self.slug = f"{self.license.code}-{self.section}-{self.letter}"
-        else:
-            self.slug = f"{self.license.code}-{self.letter}"
-        return super(ContentArea, self).save(*args, **kwargs)
-
-
-class TaskManager(models.Manager):
-    """Manager to return natural key of Task"""
-
-    def get_by_natural_key(self, license, area, task):
-        return self.get(license=license.code, area=area, task=task)
+        if not self.slug:
+            if self.section:
+                self.slug = f"{self.license.code}-{self.section}-{self.letter}"
+            else:
+                self.slug = f"{self.license.code}-{self.letter}"
+        super(ContentArea, self).save(*args, **kwargs)
 
 
 class Task(models.Model):
     """BACB Task List items"""
 
     slug = models.SlugField(unique=True, primary_key=True)
-    license = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="tasks")
+    license = models.ForeignKey(Course, on_delete=models.CASCADE)
     area = models.ForeignKey(
         ContentArea,
         on_delete=models.CASCADE,
-        related_name="tasks",
     )
     task = models.IntegerField()
     task_desc = models.TextField()
-
-    objects = TaskManager()
 
     class Meta:
         constraints = [
@@ -93,6 +86,7 @@ class Task(models.Model):
             )
         ]
         db_table_comment = "Tasks for RBT, BCaBA, and BCBA according to the BACB"
+        default_related_name = "tasks"
 
     def __str__(self):
         return f"{self.license.code} Task List: Item {self.area.letter}-{self.task}"
@@ -101,8 +95,9 @@ class Task(models.Model):
         return (self.license, self.area, self.task)
 
     def save(self, *args, **kwargs):
-        self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
-        return super(Task, self).save(*args, **kwargs)
+        if not self.slug:
+            self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
+        super(Task, self).save(*args, **kwargs)
 
 class Lesson(models.Model):
     slug = models.SlugField(unique=True,primary_key=True)

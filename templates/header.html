@@ -5,7 +5,8 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" hx-boost="true" hx-select="#content"
+           hx-target="#content" hx-push-url="true">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-weight: bold;">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'learn:course-index' %}">Learn</a>

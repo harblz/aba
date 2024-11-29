@@ -1,24 +1,31 @@
+from typing import Type
+from traceback import format_exc
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
 import random
-from django_htmx.http import retarget, trigger_client_event
+from django_htmx.http import retarget, trigger_client_event, reswap
+from django.utils import timezone
+from django.template.response import TemplateResponse
+from django.apps import apps
 
-from learn.models import Course
 from pages.models import Pages
 from core.models import Profile
 from .models import *
-from .forms import QuizForm
+from .forms import TakeQuizForm
 from core.decorators import htmx_required
+from abarocks.views import handler500
 
 
 class QuizIndex(ListView):
-    template_name="quiz_list.html"
     model = Quiz
-    
+    context_object_name = "quizzes"
+    template_name = "quiz/index.html"
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page"] = Pages.objects.get(title="Practice Quizzes")
+        # context["page"] = Pages.objects.get(title="Practice Quizzes")
         return context
 
 
@@ -30,75 +37,153 @@ class IndexByCourse(ListView):
         return queryset
 
 
-def get_quiz(request, course, quiz) -> HttpResponse:
+def get_quiz(request, code, number) -> HttpResponse:
+    quiz = Quiz.objects.get(course=code, number=number)
+    course = quiz.course
+
     return render(
         request,
-        "",  # TODO: Replace with template name
+        "quiz/quiz.html",
         {"course": course, "quiz": quiz},
     )
 
 
-def _get_questions(code, quiz) -> list:
-    weights = Course.objects.get(code=code).weights
+def _get_questions(slug) -> list | Type[Exception]:
+    quiz = Quiz.objects.get(slug=slug)
     questions = []
-    for key, value in weights:
-        options = Question.objects.filter(
-            code=code, quiz=quiz, category=key
-        ).values_list("id")
-        questions += random.sample(options, value)
-    return questions
+    areas = []
+    if quiz.areas.all().exists():
+        areas = quiz.areas.all().values()
+    elif not quiz.areas.all():
+        areas = quiz.course.content_areas.all().values()
+    try:
+        for area in areas:
+            tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
+            mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values(
+                "id"
+            )
+            weight = area["weight"]
+            options = []
+            for question in tf:
+                options.append(f"TrueFalseQuestion:{question["id"]}")
+            for question in mc:
+                options.append(f"MultipleChoiceQuestion:{question["id"]}")
+            questions += random.sample(options, weight)
+        return questions
+    except Exception as e:
+        return Exception
 
 
 @htmx_required
-def _save_progress(request) -> trigger_client_event:
-    # TODO: Add session saving
-    pass
-    # response =
-    # return trigger_client_event(response)
+def _save_progress(request):
+    try:
+        slug = request.POST.get("slug")
+        index = request.session["quiz"][slug]["current_index"]
+        request.session["quiz"]["questions"][index]["user_answer"] = request.POST.get(
+            "answer"
+        )
+        index += 1
+
+        # noinspection PyTypeChecker
+        if request.POST.get("suspend") & request.user.is_authenticated:
+            Profile.objects.get(user=request.user).data["quiz"] = request.session[
+                "quiz"
+            ]
+            response = HttpResponse()
+            return retarget(response, "")  # TODO: return html for popup and redirect
+        elif request.POST.get("suspend"):
+            # TODO: need logic for anon users
+            pass
+        else:
+            pass
+    except Exception as e:
+        exception = str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
 
 @htmx_required
-def _next_question(request, question) -> HttpResponse:
+def _next_question(request) -> HttpResponse:
     try:
         _save_progress(request)
     except Exception as e:
-        return HttpResponseServerError(
-            "There was a problem saving your progress" + str(e)
-        )
+        exception = "There was a problem saving your progress:" + str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
     try:
-        question = Question.objects.get(id=question)
-        form = QuizForm(question=question)
-        return retarget(
-            request,
-            "",  # TODO: Replace with template name
-        )
+        slug = request.POST.get("slug")
+        next_index = request.session["quiz"][slug]["current_index"]
+        model = apps.get_model("quiz", next_index["table"])
+        question = model.objects.get(pk=next_index["question"])
+        form = TakeQuizForm(question=question)
+        if next_index["table"] == "MultipleChoiceQuestion":
+            form.fields["answer"].choices = [
+                (answer.id, answer.text) for answer in question.answers.all()
+            ]
+        elif next_index["table"] == "TrueFalseQuestion":
+            form.fields["answer"].choices = [(True, "True"), (False, "False")]
+        return render(request, "quiz/question_form.html", {"form": form})
     except Exception as e:
-        return HttpResponseServerError(
-            "There was a problem continuing the quiz" + str(e)
-        )
+        exception = "There was a problem loading the next question: " + str(e)
+        return reswap(handler500(request, exception), "beforeend")
 
 
 @htmx_required
-def _start_quiz(request, code, quiz) -> HttpResponse:
+def _start_quiz(request, code, number) -> HttpResponse:
+    quiz = Quiz.objects.get(course=code, number=number)
+    request.session["quiz"] = {}
+    request.session["quiz"][quiz.slug] = {}
+    request.session["quiz"][quiz.slug]["current_index"] = 0
+    request.session["quiz"][quiz.slug]["questions"] = {}
+    questions = _get_questions(quiz.slug)
+    random.shuffle(questions)
+    tuple(questions)
+    for index, question in enumerate(questions):
+        info = question.split(":")
+        model = apps.get_model("quiz", info[0])
+        obj = model.objects.get(id=info[1])
+        request.session["quiz"][quiz.slug]["questions"][str(index)] = {}
+        request.session["quiz"][quiz.slug]["questions"][str(index)]["question"] = info[
+            1
+        ]
+        if info[0] == "MultipleChoiceQuestion":
+            request.session["quiz"][quiz.slug]["questions"][str(index)][
+                "answer"
+            ] = obj.answer.id
+        elif info[0] == "TrueFalseQuestion":
+            request.session["quiz"][quiz.slug]["questions"][str(index)][
+                "answer"
+            ] = obj.answer
+        request.session["quiz"][quiz.slug]["questions"][str(index)]["table"] = info[0]
+    if quiz.timed:
+        time = quiz.time
+        request.session["quiz"][quiz.slug]["starttime"] = timezone.now()
+        request.session["quiz"][quiz.slug]["timelimit"] = time
+
     try:
-        questions = _get_questions(code, quiz)
-        random.shuffle(questions)
-        if quiz.values("timed"):
-            time = quiz.values_list("time")
-            # Save start time to session
-        form = QuizForm(question=Question.objects.get(pk=questions[0]))
-        response = render(
+        first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
+        model = apps.get_model("quiz", first_question["table"])
+        question = model.objects.get(pk=first_question["question"])
+        choices = []
+        if first_question["table"] == "MultipleChoiceQuestion":
+            choices = [(answer.id, answer.text) for answer in question.answers.all()]
+        elif first_question["table"] == "TrueFalseQuestion":
+            choices = [(True, "True"), (False, "False")]
+        """data = {
+            "question": question.text,
+        }"""
+        form = TakeQuizForm()
+        form.fields["answer"].choices = choices
+
+        response = TemplateResponse(
             request,
-            "",  # TODO: Replace with template name
-            {"form": form, "question_list": questions},
+            "quiz/question_form.html",
+            {"form": form, "question": question},
         )
-        return retarget(
-            response,
-            "",  # TODO: Replace with CSS selector
-        )
+        return response
     except Exception as e:
-        return HttpResponse("There was a problem starting the quiz:" + str(e))
+        traceback = format_exc()
+        exception = "There was a problem starting the quiz:\n" + traceback
+        return reswap(handler500(request, exception), "beforeend")
 
 
 """def submit_score_report(request):
