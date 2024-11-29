@@ -26,7 +26,7 @@ def course_landing_page(request, code) -> HttpResponse:
     course = get_object_or_404(Course, pk=code)
     return render(
         request,
-        "learn/unit_landing_page.html",  # TODO: Check tempalte name
+        "learn/unit_landing_page.html",  # TODO: Check template name
         {
             "learn_topic": course,
             # "page": page,
@@ -57,7 +57,7 @@ def lesson_page(request, course) -> HttpResponse:
     # TODO: Determine logic for saving sessions and handling users
     return render(
         request,
-        "",  # TODO: Replace with template name
+        "unit_landing_page.html",  # TODO: rename template? Unit renamed to "lesson"
         {"lesson": lesson, "page": page},
     )
 
