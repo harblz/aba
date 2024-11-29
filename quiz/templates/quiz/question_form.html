@@ -9,7 +9,7 @@
     </div>
 {% endfor %}
   <button type="button"
-          hx-post="{% url 'quiz:next_question' %}?slug={{ quiz.slug }}"
+          hx-post="{% url 'quiz:next_question' %}?slug={{ slug }}"
           hx-swap="innerHTML"
           hx-target="#content"
           hx-indicator="#spinner"

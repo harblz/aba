@@ -56,75 +56,58 @@ def _get_questions(slug) -> list | Type[Exception]:
         areas = quiz.areas.all().values()
     elif not quiz.areas.all():
         areas = quiz.course.content_areas.all().values()
-    try:
-        for area in areas:
-            tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
-            mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values(
-                "id"
-            )
-            weight = area["weight"]
-            options = []
-            for question in tf:
-                options.append(f"TrueFalseQuestion:{question["id"]}")
-            for question in mc:
-                options.append(f"MultipleChoiceQuestion:{question["id"]}")
-            questions += random.sample(options, weight)
-        return questions
-    except Exception as e:
-        return Exception
+    for area in areas:
+        tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
+        mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values("id")
+        weight = area["weight"]
+        options = []
+        for question in tf:
+            options.append(f"TrueFalseQuestion:{question["id"]}")
+        for question in mc:
+            options.append(f"MultipleChoiceQuestion:{question["id"]}")
+        questions += random.sample(options, weight)
+    return questions
 
 
 @htmx_required
 def _save_progress(request):
-    try:
-        slug = request.POST.get("slug")
-        index = request.session["quiz"][slug]["current_index"]
-        request.session["quiz"]["questions"][index]["user_answer"] = request.POST.get(
-            "answer"
-        )
-        index += 1
+    slug = request.GET.get("slug")
+    index = request.session["quiz"][slug]["current_index"]
+    request.session["quiz"][slug]["questions"][str(index)]["user_answer"] = (
+        request.POST.get("answer")
+    )
+    index += 1
 
-        # noinspection PyTypeChecker
-        if request.POST.get("suspend") & request.user.is_authenticated:
-            Profile.objects.get(user=request.user).data["quiz"] = request.session[
-                "quiz"
-            ]
-            response = HttpResponse()
-            return retarget(response, "")  # TODO: return html for popup and redirect
-        elif request.POST.get("suspend"):
-            # TODO: need logic for anon users
-            pass
-        else:
-            pass
-    except Exception as e:
+    # noinspection PyTypeChecker
+    if request.GET.get("suspend") and request.user.is_authenticated:
+        Profile.objects.get(user=request.user).data["quiz"] = request.session["quiz"]
+        response = HttpResponse()
+        return retarget(response, "")  # TODO: return html for popup and redirect
+    elif request.GET.get("suspend"):
+        # TODO: need logic for anon users
+        pass
+    else:
+        pass
+    """except Exception as e:
         exception = str(e)
-        return reswap(handler500(request, exception), "beforeend")
+        return reswap(handler500(request, exception), "beforeend")"""
 
 
 @htmx_required
 def _next_question(request) -> HttpResponse:
-    try:
-        _save_progress(request)
-    except Exception as e:
-        exception = "There was a problem saving your progress:" + str(e)
-        return reswap(handler500(request, exception), "beforeend")
-
-    try:
-        slug = request.POST.get("slug")
-        next_index = request.session["quiz"][slug]["current_index"]
-        model = apps.get_model("quiz", next_index["table"])
-        question = model.objects.get(pk=next_index["question"])
-        form = TakeQuizForm(question=question)
-        if next_index["table"] == "MultipleChoiceQuestion":
-            form.fields["answer"].choices = [
-                (answer.id, answer.text) for answer in question.answers.all()
-            ]
-        elif next_index["table"] == "TrueFalseQuestion":
-            form.fields["answer"].choices = [(True, "True"), (False, "False")]
-        return render(request, "quiz/question_form.html", {"form": form})
-    except Exception as e:
-        exception = "There was a problem loading the next question: " + str(e)
-        return reswap(handler500(request, exception), "beforeend")
+    _save_progress(request)
+    slug = request.POST.get("slug")
+    next_index = request.session["quiz"][slug]["current_index"]
+    model = apps.get_model("quiz", next_index["table"])
+    question = model.objects.get(pk=next_index["question"])
+    form = TakeQuizForm(question=question)
+    if next_index["table"] == "MultipleChoiceQuestion":
+        form.fields["answer"].choices = [
+            (answer.id, answer.text) for answer in question.answers.all()
+        ]
+    elif next_index["table"] == "TrueFalseQuestion":
+        form.fields["answer"].choices = [(True, "True"), (False, "False")]
+    return render(request, "quiz/question_form.html", {"form": form})
 
 
 @htmx_required
@@ -159,31 +142,23 @@ def _start_quiz(request, code, number) -> HttpResponse:
         request.session["quiz"][quiz.slug]["starttime"] = timezone.now()
         request.session["quiz"][quiz.slug]["timelimit"] = time
 
-    try:
-        first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
-        model = apps.get_model("quiz", first_question["table"])
-        question = model.objects.get(pk=first_question["question"])
-        choices = []
-        if first_question["table"] == "MultipleChoiceQuestion":
-            choices = [(answer.id, answer.text) for answer in question.answers.all()]
-        elif first_question["table"] == "TrueFalseQuestion":
-            choices = [(True, "True"), (False, "False")]
-        """data = {
-            "question": question.text,
-        }"""
-        form = TakeQuizForm()
-        form.fields["answer"].choices = choices
+    first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
+    model = apps.get_model("quiz", first_question["table"])
+    question = model.objects.get(pk=first_question["question"])
+    choices = []
+    if first_question["table"] == "MultipleChoiceQuestion":
+        choices = [(answer.id, answer.text) for answer in question.answers.all()]
+    elif first_question["table"] == "TrueFalseQuestion":
+        choices = [(True, "True"), (False, "False")]
+    form = TakeQuizForm()
+    form.fields["answer"].choices = choices
 
-        response = TemplateResponse(
-            request,
-            "quiz/question_form.html",
-            {"form": form, "question": question},
-        )
-        return response
-    except Exception as e:
-        traceback = format_exc()
-        exception = "There was a problem starting the quiz:\n" + traceback
-        return reswap(handler500(request, exception), "beforeend")
+    response = TemplateResponse(
+        request,
+        "quiz/question_form.html",
+        {"form": form, "slug": quiz.slug, "question": question},
+    )
+    return response
 
 
 """def submit_score_report(request):

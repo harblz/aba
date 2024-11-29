@@ -93,6 +93,13 @@ if ENABLE_DEBUG_TOOLBAR:
         "ROOT_TAG_EXTRA_ATTRS": "hx-preserve",
     }
 
+    # django-extensions
+    GRAPH_MODELS = {
+        "all_applications": True,
+        "group_models": True,
+    }
+    RUNSERVERPLUS_POLLER_RELOADER_INTERVAL = 1
+
 RESULTS_CACHE_SIZE = 1000
 
 ROOT_URLCONF = "abarocks.urls"
@@ -331,6 +338,10 @@ LOGGING = {
             "class": "logging.FileHandler",
             "filename": os.path.join(BASE_DIR, "debug.log"),
         },
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
     },
     "loggers": {
         "django": {
@@ -338,11 +349,10 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": True,
         },
+        "werkzeug": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
     },
-}
-
-# django-extensions
-GRAPH_MODELS = {
-    "all_applications": True,
-    "group_models": True,
 }
