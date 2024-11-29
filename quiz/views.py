@@ -13,8 +13,9 @@ from core.decorators import htmx_required
 
 
 class QuizIndex(ListView):
+    template_name="quiz_list.html"
     model = Quiz
-
+    
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = Pages.objects.get(title="Practice Quizzes")

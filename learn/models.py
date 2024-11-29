@@ -104,9 +104,10 @@ class Task(models.Model):
         self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
         return super(Task, self).save(*args, **kwargs)
 
-
 class Lesson(models.Model):
+    slug = models.SlugField(unique=True,primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
+    area = models.ForeignKey(ContentArea, on_delete=models.CASCADE)
     page = models.IntegerField()
     title = models.CharField(max_length=100)
     content = CKEditor5Field()
@@ -114,6 +115,12 @@ class Lesson(models.Model):
     class Meta:
         models.UniqueConstraint(fields=["course", "page"], name="unique_lessons")
         db_table_comment = "Lesson pages for each course"
+        default_related_name = "lessons"
 
     def __str__(self):
         return f"{self.course} Lesson {self.page}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{self.course.code}-{self.area.letter}-{self.page}"
+        return super(Lesson, self).save(*args, **kwargs)

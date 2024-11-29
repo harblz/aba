@@ -26,4 +26,5 @@ class TaskAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    pass
+    exclude = ('slug',) #TODO this does nothing.
+    fields = ["course", "area", "page", "title", "content"]

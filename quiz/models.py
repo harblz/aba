@@ -27,6 +27,12 @@ class Quiz(models.Model):
     def natural_key(self):
         return (self.course.code, self.number)
 
+ANSWERS = [
+    ("A", 'one'),
+    ("B", 'two'),
+    ("C", 'three'),
+    ("D", 'four'),
+]
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -36,7 +42,8 @@ class Question(models.Model):
     two = models.TextField("Question Two")
     three = models.TextField("Question Three", null=True, blank=True)
     four = models.TextField("Question Four", null=True, blank=True)
-    answer = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
+    answer = models.CharField(max_length=4, choices=ANSWERS,null=True, blank=True)
+    # answer = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table_comment = "Table of all questions from any quiz"
