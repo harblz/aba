@@ -2568,5 +2568,50 @@
       "hint": "<p>An observable behavior definition is a behavior that is defined by outwardly visible characteristics.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><em>Examples of observable behavior:</em></strong></p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;smiling</p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;tapping your foot</p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;covering your eyes</p>\r\n\r\n<p style=\"margin-left:40px\">&nbsp;</p>\r\n\r\n<p><strong><em>Examples of non-observable behavior:</em></strong></p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;feeling frustrating</p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;solving a math problem in his head</p>\r\n\r\n<p style=\"margin-left:40px\">&bull; &nbsp;a tickle in the back of your throat</p>",
       "answer": 1039
     }
+  },
+  {  "model": "quiz.truefalsequestion",
+      "pk": 4,
+      "fields": {
+      "text": "<p>True or False: 2 + 2 = Fish</p>",
+      "category": "RBT-E",
+      "hint": "<h2>Count = Frequency</h2>\r\n\r\n<p><strong>False - Count and and Rate <u>DO NOT</u> are not the same!</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>A quick terminology refresher:</p>\r\n\r\n<ul>\r\n\t<li><strong>Count</strong> - total number of instances of a behavior, also called <strong>frequency</strong>.</li>\r\n\t<li><strong>Rate</strong> - the amount of behavior per unit time</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u>Citations</u>:</p>\r\n\r\n<div style=\"margin-left:40px\">Carr, J. E., Nosik, M. R. and Luke, M. M. (2018), On the use of the term &lsquo;frequency&rsquo; in applied behavior analysis. Jnl of Applied Behav Analysis, 51: 436-439. doi:<a href=\"https://doi.org/10.1002/jaba.449\">10.1002/jaba.449</a></div>\r\n\r\n<p>&nbsp;</p>",
+      "answer": false
+    }
+  },
+    {  "model": "quiz.truefalsequestion",
+      "pk": 5,
+      "fields": {
+      "text": "<p>True or False: Bears are fren</p>",
+      "category": "RBT-E",
+      "hint": "<h2>Count = Frequency</h2>\r\n\r\n<p><strong>False - Count and and Rate <u>DO NOT</u> are not the same!</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>A quick terminology refresher:</p>\r\n\r\n<ul>\r\n\t<li><strong>Count</strong> - total number of instances of a behavior, also called <strong>frequency</strong>.</li>\r\n\t<li><strong>Rate</strong> - the amount of behavior per unit time</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u>Citations</u>:</p>\r\n\r\n<div style=\"margin-left:40px\">Carr, J. E., Nosik, M. R. and Luke, M. M. (2018), On the use of the term &lsquo;frequency&rsquo; in applied behavior analysis. Jnl of Applied Behav Analysis, 51: 436-439. doi:<a href=\"https://doi.org/10.1002/jaba.449\">10.1002/jaba.449</a></div>\r\n\r\n<p>&nbsp;</p>",
+      "answer": false
+    }
+  },
+  {  "model": "quiz.truefalsequestion",
+      "pk": 6,
+      "fields": {
+      "text": "<p>True or False: Bears are fren <strong>SHAPED</strong></p>",
+      "category": "RBT-E",
+      "hint": "<h2>Count = Frequency</h2>\r\n\r\n<p><strong>False - Count and and Rate <u>DO NOT</u> are not the same!</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>A quick terminology refresher:</p>\r\n\r\n<ul>\r\n\t<li><strong>Count</strong> - total number of instances of a behavior, also called <strong>frequency</strong>.</li>\r\n\t<li><strong>Rate</strong> - the amount of behavior per unit time</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u>Citations</u>:</p>\r\n\r\n<div style=\"margin-left:40px\">Carr, J. E., Nosik, M. R. and Luke, M. M. (2018), On the use of the term &lsquo;frequency&rsquo; in applied behavior analysis. Jnl of Applied Behav Analysis, 51: 436-439. doi:<a href=\"https://doi.org/10.1002/jaba.449\">10.1002/jaba.449</a></div>\r\n\r\n<p>&nbsp;</p>",
+      "answer": true
+    }
+  },
+  {  "model": "quiz.truefalsequestion",
+      "pk": 7,
+      "fields": {
+      "text": "<p>True or False: Alex likes bandanas</p>",
+      "category": "RBT-E",
+      "hint": "<h2>Count = Frequency</h2>\r\n\r\n<p><strong>False - Count and and Rate <u>DO NOT</u> are not the same!</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>A quick terminology refresher:</p>\r\n\r\n<ul>\r\n\t<li><strong>Count</strong> - total number of instances of a behavior, also called <strong>frequency</strong>.</li>\r\n\t<li><strong>Rate</strong> - the amount of behavior per unit time</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u>Citations</u>:</p>\r\n\r\n<div style=\"margin-left:40px\">Carr, J. E., Nosik, M. R. and Luke, M. M. (2018), On the use of the term &lsquo;frequency&rsquo; in applied behavior analysis. Jnl of Applied Behav Analysis, 51: 436-439. doi:<a href=\"https://doi.org/10.1002/jaba.449\">10.1002/jaba.449</a></div>\r\n\r\n<p>&nbsp;</p>",
+      "answer": true
+    }
+  },
+  {  "model": "quiz.truefalsequestion",
+      "pk": 8,
+      "fields": {
+      "text": "<p>True or False: Girls rule, boys drool</p>",
+      "category": "RBT-E",
+      "hint": "<h2>Count = Frequency</h2>\r\n\r\n<p><strong>False - Count and and Rate <u>DO NOT</u> are not the same!</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>A quick terminology refresher:</p>\r\n\r\n<ul>\r\n\t<li><strong>Count</strong> - total number of instances of a behavior, also called <strong>frequency</strong>.</li>\r\n\t<li><strong>Rate</strong> - the amount of behavior per unit time</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u>Citations</u>:</p>\r\n\r\n<div style=\"margin-left:40px\">Carr, J. E., Nosik, M. R. and Luke, M. M. (2018), On the use of the term &lsquo;frequency&rsquo; in applied behavior analysis. Jnl of Applied Behav Analysis, 51: 436-439. doi:<a href=\"https://doi.org/10.1002/jaba.449\">10.1002/jaba.449</a></div>\r\n\r\n<p>&nbsp;</p>",
+      "answer": true
+    }
   }
 ]
