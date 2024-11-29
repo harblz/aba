@@ -1,4 +1,5 @@
 from typing import Type
+from traceback import format_exc
 
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
@@ -50,10 +51,10 @@ def get_quiz(request, code, number) -> HttpResponse:
 def _get_questions(slug) -> list | Type[Exception]:
     quiz = Quiz.objects.get(slug=slug)
     questions = []
-    areas = None
-    if quiz.areas.all.exists():
+    areas = []
+    if quiz.areas.all().exists():
         areas = quiz.areas.all().values()
-    elif not quiz.areas.all.exists():
+    elif not quiz.areas.all():
         areas = quiz.course.content_areas.all().values()
     try:
         for area in areas:
@@ -76,7 +77,8 @@ def _get_questions(slug) -> list | Type[Exception]:
 @htmx_required
 def _save_progress(request):
     try:
-        index = request.session["quiz"]["current_index"]
+        slug = request.POST.get("slug")
+        index = request.session["quiz"][slug]["current_index"]
         request.session["quiz"]["questions"][index]["user_answer"] = request.POST.get(
             "answer"
         )
@@ -108,11 +110,10 @@ def _next_question(request) -> HttpResponse:
         return reswap(handler500(request, exception), "beforeend")
 
     try:
-        next_index = request.session["quiz"]["current_index"]
+        slug = request.POST.get("slug")
+        next_index = request.session["quiz"][slug]["current_index"]
         model = apps.get_model("quiz", next_index["table"])
-        question = model.objects.get(
-            pk=request.session["quiz"]["questions"][next_index]["question"]
-        )
+        question = model.objects.get(pk=next_index["question"])
         form = TakeQuizForm(question=question)
         if next_index["table"] == "MultipleChoiceQuestion":
             form.fields["answer"].choices = [
@@ -131,45 +132,57 @@ def _start_quiz(request, code, number) -> HttpResponse:
     quiz = Quiz.objects.get(course=code, number=number)
     request.session["quiz"] = {}
     request.session["quiz"][quiz.slug] = {}
-    try:
-        questions = _get_questions(quiz.slug)
-        random.shuffle(questions)
-        tuple(questions)
-        for index, question in enumerate(questions):
-            info = question.split(":")
-            model = apps.get_model("quiz", info[0])
-            obj = model.objects.get(id=info[1])
-            request.session["quiz"]["questions"][str(index)]["question"] = info[1]
-            request.session["quiz"]["questions"][str(index)]["answer"] = obj.answer
-            request.session["quiz"]["questions"][str(index)]["table"] = info[0]
-        if quiz.values("timed"):
-            time = quiz.values_list("time")
-            request.session["quiz"]["starttime"] = timezone.now()
-            request.session["quiz"]["timelimit"] = time
-        request.session["quiz"]["current_index"] = 0
-    except Exception as e:
-        exception = "There was a problem loading the quiz: " + str(e)
-        reswap(handler500(request, exception), "beforeend")
+    request.session["quiz"][quiz.slug]["current_index"] = 0
+    request.session["quiz"][quiz.slug]["questions"] = {}
+    questions = _get_questions(quiz.slug)
+    random.shuffle(questions)
+    tuple(questions)
+    for index, question in enumerate(questions):
+        info = question.split(":")
+        model = apps.get_model("quiz", info[0])
+        obj = model.objects.get(id=info[1])
+        request.session["quiz"][quiz.slug]["questions"][str(index)] = {}
+        request.session["quiz"][quiz.slug]["questions"][str(index)]["question"] = info[
+            1
+        ]
+        if info[0] == "MultipleChoiceQuestion":
+            request.session["quiz"][quiz.slug]["questions"][str(index)][
+                "answer"
+            ] = obj.answer.id
+        elif info[0] == "TrueFalseQuestion":
+            request.session["quiz"][quiz.slug]["questions"][str(index)][
+                "answer"
+            ] = obj.answer
+        request.session["quiz"][quiz.slug]["questions"][str(index)]["table"] = info[0]
+    if quiz.timed:
+        time = quiz.time
+        request.session["quiz"][quiz.slug]["starttime"] = timezone.now()
+        request.session["quiz"][quiz.slug]["timelimit"] = time
 
     try:
-        first_question = request.session["quiz"]["current_index"]
+        first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
         model = apps.get_model("quiz", first_question["table"])
         question = model.objects.get(pk=first_question["question"])
-        form = TakeQuizForm(question=question)
+        choices = []
         if first_question["table"] == "MultipleChoiceQuestion":
-            form.fields["answer"].choices = [
-                (answer.id, answer.text) for answer in question.answers.all()
-            ]
+            choices = [(answer.id, answer.text) for answer in question.answers.all()]
         elif first_question["table"] == "TrueFalseQuestion":
-            form.fields["answer"].choices = [(True, "True"), (False, "False")]
+            choices = [(True, "True"), (False, "False")]
+        """data = {
+            "question": question.text,
+        }"""
+        form = TakeQuizForm()
+        form.fields["answer"].choices = choices
 
         response = TemplateResponse(
             request,
             "quiz/question_form.html",
-            {"form": form},
+            {"form": form, "question": question},
         )
+        return response
     except Exception as e:
-        exception = "There was a problem starting the quiz:" + str(e)
+        traceback = format_exc()
+        exception = "There was a problem starting the quiz:\n" + traceback
         return reswap(handler500(request, exception), "beforeend")
 
 

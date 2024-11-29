@@ -6,6 +6,7 @@
     {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
     {% else %}untimed. Take your time.
     {% endif %}</p>
+  <br>
   <button type="button"
           hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
           hx-swap="innerHTML"

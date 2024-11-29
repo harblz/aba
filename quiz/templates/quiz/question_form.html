@@ -1,11 +1,18 @@
-{% extends "quiz/quiz.html" %}
-<form action="{% url 'quiz:next_question' %}" id="question" method="post" hx-boost="true" hx-select="#form-wrapper">
+{% load static %}
+{{ question.text|safe }}
+<form>
   {% csrf_token %}
-  <div id="form-wrapper">
-    {% for field in form %}
-      {{ field.errors }}
-      {{ field }}
-    {% endfor %}
-  </div>
-  <button type="submit">Next Question</button>
+  {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %}
+  <button type="button"
+          hx-post="{% url 'quiz:next_question' %}?slug={{ quiz.slug }}"
+          hx-swap="innerHTML"
+          hx-target="#content"
+          hx-indicator="#spinner"
+  >Next Question</button>
+  <img  id="spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
 </form>
