@@ -5,7 +5,8 @@ from . import views
 app_name = "learn"
 urlpatterns = [
     path("courses/", views.CourseIndex.as_view(), name="course-index"),
-    path("<str:code>/", views.course_landing_page, name="course-landing_page"),
+    path("courses/<str:code>/", views.Courses, name="course-overview"),
+    path("<str:code>/", views.course_landing_page, name="course-landing_page"), #TODO is this redundant?
     path(
         "<str:code>/tasklist/",
         views.TaskListView.as_view(),
