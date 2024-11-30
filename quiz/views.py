@@ -1,7 +1,7 @@
 from typing import Type
 from traceback import format_exc
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, Http404
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.views.generic import ListView
 import random
@@ -11,6 +11,7 @@ from django.template.response import TemplateResponse
 from django.apps import apps
 
 from pages.models import Pages
+from learn.models import Course, Lesson, Task, ContentArea
 from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
@@ -27,7 +28,6 @@ class QuizIndex(ListView):
         context = super().get_context_data(**kwargs)
         # context["page"] = Pages.objects.get(title="Practice Quizzes")
         return context
-
 
 class IndexByCourse(ListView):
     model = Quiz

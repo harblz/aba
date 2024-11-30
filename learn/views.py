@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, Http404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template.response import TemplateResponse
@@ -6,8 +6,16 @@ from django.views.generic import ListView
 
 from .models import Course, Lesson, Task, ContentArea
 from pages.models import Pages
+from quiz.models import Quiz
 from core.decorators import htmx_required
 
+def Courses(request, code):
+    try:
+        course = get_object_or_404(Course, code=code)
+        quizzes = Quiz.objects.filter(course_id=code)
+    except Pages.DoesNotExist:
+        raise Http404("Page does not exist")
+    return render(request, "learn/unit_landing_page.html", {"code": code, "course": course, "quizzes": quizzes})
 
 class CourseIndex(ListView):
     model = Course
