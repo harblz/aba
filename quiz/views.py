@@ -153,12 +153,11 @@ def _start_quiz(request, code, number) -> HttpResponse:
     form = TakeQuizForm()
     form.fields["answer"].choices = choices
 
-    response = TemplateResponse(
+    return render(
         request,
         "quiz/question_form.html",
         {"form": form, "slug": quiz.slug, "question": question},
     )
-    return response
 
 
 """def submit_score_report(request):
