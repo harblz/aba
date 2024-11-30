@@ -36,3 +36,8 @@ def handler500(request, exception):
     response = TemplateResponse(request, template_name, {"exception": exception})
 
     return response
+
+
+def testdebug(request):
+    x = 2 / 0
+    return HttpResponse(str(x))
