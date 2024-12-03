@@ -1,18 +1,27 @@
 {% load static %}
-{{ question.text|safe }}
-<form>
+<b>JSON DUMP:</b><br />{{ json }}<br /><br />
+<b>TEST QUIZ:</b><br />{{ quiz.slug }}<br /><br />
+<b>SLUG:</b> {{ slug }}<br /><br />
+<b>CURRENT INDEX: {{ index }}</b><br /><br />
+<br /><br />
+
+{{ question|safe }}
+<form hx-post="{% url 'quiz:next_question' %}?slug={{ slug }}&index={{ index }}"
+      hx-swap="innerHTML"
+      hx-target="#content"
+      hx-indicator="#spinner">
   {% csrf_token %}
+  <input type="hidden" name="slug" value="{{ slug }}">
+  <input type="hidden" name="index" value="{{ index }}">
   {% for field in form %}
     <div class="fieldWrapper">
         {{ field.errors }}
         {{ field.label_tag }} {{ field }}
     </div>
 {% endfor %}
-  <button type="button"
-          hx-post="{% url 'quiz:next_question' %}?slug={{ slug }}"
-          hx-swap="innerHTML"
-          hx-target="#content"
-          hx-indicator="#spinner"
-  >Next Question</button>
-  <img  id="spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
+  <button type="submit">Next Question</button>
+  <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
 </form>
+<script>
+  htmx.logAll();
+</script>

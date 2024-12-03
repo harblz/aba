@@ -3,7 +3,7 @@ import datetime
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
 
-from .models import Quiz, TrueFalseQuestion
+from .models import Quiz, MultipleChoiceQuestion, TrueFalseQuestion
 
 
 class TakeQuizForm(forms.Form):
@@ -11,6 +11,7 @@ class TakeQuizForm(forms.Form):
     answer = forms.ChoiceField(widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
+        question = kwargs.pop('question', "The question didn't load")
         super(TakeQuizForm, self).__init__(*args, **kwargs)
 
 
