@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from learn import models as learn
 from django_ckeditor_5.fields import CKEditor5Field
@@ -44,6 +45,7 @@ class BaseQuestion(models.Model):
     category = models.ForeignKey(learn.ContentArea, on_delete=models.CASCADE)
     text = CKEditor5Field("Question Text")
     hint = CKEditor5Field("Question Hint", blank=True, null=True)
+    disabled = models.BooleanField(default=False, null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -82,3 +84,18 @@ class MultipleChoiceAnswer(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class QuizProgress(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True
+    )
+    session = models.CharField(max_length=100)
+    quiz = models.SlugField(unique=True, primary_key=True)
+    index = models.IntegerField(default=0)
+    timed = models.BooleanField("Timed?", default=False, null=True, blank=True)
+    time = models.DurationField("Time in minutes", null=True, blank=True)
+    key = models.JSONField(default=dict)
+
+    class Meta:
+        db_table_comment = "Quiz progress data"

@@ -1,5 +1,6 @@
 from typing import Type
 from traceback import format_exc
+import json
 
 from django.shortcuts import get_object_or_404, render, Http404
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden
@@ -28,6 +29,7 @@ class QuizIndex(ListView):
         context = super().get_context_data(**kwargs)
         # context["page"] = Pages.objects.get(title="Practice Quizzes")
         return context
+
 
 class IndexByCourse(ListView):
     model = Quiz
@@ -71,41 +73,37 @@ def _get_questions(slug) -> list | Type[Exception]:
 
 @htmx_required
 def _save_progress(request):
-    slug = request.GET.get("slug")
-    index = request.session["quiz"][slug]["current_index"]
-    request.session["quiz"][slug]["questions"][str(index)]["user_answer"] = (
-        request.POST.get("answer")
-    )
-    index += 1
+    try:
+        slug = request.GET.get("slug")
+        progress = get_object_or_404(
+            QuizProgress, session=request.session.session_key, quiz=slug
+        )
+        progress.key[progress.index]["user_chocie"] = request.POST.get("answer")
+        progress.index += 1
+        progress.save()
 
-    # noinspection PyTypeChecker
-    if request.GET.get("suspend") and request.user.is_authenticated:
-        Profile.objects.get(user=request.user).data["quiz"] = request.session["quiz"]
-        response = HttpResponse()
-        return retarget(response, "")  # TODO: return html for popup and redirect
-    elif request.GET.get("suspend"):
-        # TODO: need logic for anon users
-        pass
-    else:
-        pass
-    """except Exception as e:
+    except Exception as e:
         exception = str(e)
-        return reswap(handler500(request, exception), "beforeend")"""
+        return reswap(handler500(request, exception), "beforeend")
 
 
 @htmx_required
 def _next_question(request) -> HttpResponse:
     _save_progress(request)
     slug = request.POST.get("slug")
-    next_index = request.session["quiz"][slug]["current_index"]
-    model = apps.get_model("quiz", next_index["table"])
-    question = model.objects.get(pk=next_index["question"])
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, quiz=slug
+    )
+    index = progress.index
+    key = json.loads(progress.key[index])
+    model = apps.get_model("quiz", key["table"])
+    question = model.objects.get(pk=key["question"])
     form = TakeQuizForm(question=question)
-    if next_index["table"] == "MultipleChoiceQuestion":
+    if key["table"] == "MultipleChoiceQuestion":
         form.fields["answer"].choices = [
             (answer.id, answer.text) for answer in question.answers.all()
         ]
-    elif next_index["table"] == "TrueFalseQuestion":
+    elif key["table"] == "TrueFalseQuestion":
         form.fields["answer"].choices = [(True, "True"), (False, "False")]
     return render(request, "quiz/question_form.html", {"form": form})
 
@@ -113,36 +111,38 @@ def _next_question(request) -> HttpResponse:
 @htmx_required
 def _start_quiz(request, code, number) -> HttpResponse:
     quiz = Quiz.objects.get(course=code, number=number)
-    request.session["quiz"] = {}
-    request.session["quiz"][quiz.slug] = {}
-    request.session["quiz"][quiz.slug]["current_index"] = 0
-    request.session["quiz"][quiz.slug]["questions"] = {}
+    timed = False
+    time = None
     questions = _get_questions(quiz.slug)
     random.shuffle(questions)
     tuple(questions)
+    q_data = {}
     for index, question in enumerate(questions):
         info = question.split(":")
         model = apps.get_model("quiz", info[0])
         obj = model.objects.get(id=info[1])
-        request.session["quiz"][quiz.slug]["questions"][str(index)] = {}
-        request.session["quiz"][quiz.slug]["questions"][str(index)]["question"] = info[
-            1
-        ]
+        index = index
+        answer = None
         if info[0] == "MultipleChoiceQuestion":
-            request.session["quiz"][quiz.slug]["questions"][str(index)][
-                "answer"
-            ] = obj.answer.id
+            answer = obj.answer.id
         elif info[0] == "TrueFalseQuestion":
-            request.session["quiz"][quiz.slug]["questions"][str(index)][
-                "answer"
-            ] = obj.answer
-        request.session["quiz"][quiz.slug]["questions"][str(index)]["table"] = info[0]
+            answer = obj.answer
+        q_data[index] = {"table": info[0], "question": info[1], "correct": answer}
+    json_data = json.dumps(q_data)
     if quiz.timed:
         time = quiz.time
-        request.session["quiz"][quiz.slug]["starttime"] = timezone.now()
-        request.session["quiz"][quiz.slug]["timelimit"] = time
+        timed = True
+    QuizProgress.objects.create(
+        user=request.user,
+        session=request.session.session_key,
+        quiz=quiz.slug,
+        index=0,
+        timed=timed,
+        time=time,
+        key=json_data,
+    )
 
-    first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
+    first_question = q_data[0]
     model = apps.get_model("quiz", first_question["table"])
     question = model.objects.get(pk=first_question["question"])
     choices = []
