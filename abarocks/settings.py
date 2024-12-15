@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    #"werkzeug.debug.DebuggedApplication",
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
@@ -80,8 +81,8 @@ ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 if ENABLE_DEBUG_TOOLBAR:
     hide_toolbar_patterns = ["/media/", "/static/"]
     INSTALLED_APPS += [
-        "django_extensions",
         "debug_toolbar",
+        "django_extensions",
     ]
     MIDDLEWARE[:0] = [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -329,23 +330,58 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # Error Logging
+# TODO: added shitty filters for the django debug toolbar, which clogs up the debug log file. No need to keep these but they generate ~8 exceptions each time you make a call to the database on the quiz logic.
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "specific_error-1": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'items' in template 'django/forms/label.html'."),
+        },
+        "specific_error-2": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'toolbar' in template 'debug_toolbar/includes/panel_content.html'."),
+        },
+        "specific_error-3": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("KeyError: 'toolbar'"),
+        },
+        "specific_error-4": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'toolbar'"),
+        },
+        "specific_error-5": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'class'"),
+        },
+        "specific_error-6": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("KeyError: 'class'"),
+        },
+        "specific_error-7": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'class'"),
+        },
+        "specific_error-8": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'class' in template 'django/forms/widgets/radio.html'."),
+        },
+    },
     "handlers": {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": os.path.join(BASE_DIR, "debug.log"),
+            "filters": ["specific_error-1", "specific_error-2", "specific_error-3", "specific_error-4", "specific_error-5", "specific_error-6", "specific_error-7", "specific_error-8"],
         },
         "console": {
-            "level": "DEBUG",
             "class": "logging.StreamHandler",
         },
     },
     "loggers": {
         "django": {
-            "handlers": ["file"],
+            "handlers": ["console", "file"],
             "level": "DEBUG",
             "propagate": True,
         },

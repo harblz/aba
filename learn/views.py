@@ -11,11 +11,11 @@ from core.decorators import htmx_required
 
 def Courses(request, code):
     try:
-        course = get_object_or_404(Course, code=code)
+        courses = get_object_or_404(Course, code=code)
         quizzes = Quiz.objects.filter(course_id=code)
     except Pages.DoesNotExist:
         raise Http404("Page does not exist")
-    return render(request, "learn/unit_landing_page.html", {"code": code, "course": course, "quizzes": quizzes})
+    return render(request, "learn/unit_landing_page.html", {"courses": courses, "quizzes": quizzes})
 
 class CourseIndex(ListView):
     model = Course
