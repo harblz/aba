@@ -9,13 +9,34 @@ from pages.models import Pages
 from quiz.models import Quiz
 from core.decorators import htmx_required
 
+def Lessons(request, code):
+    try:
+        course = get_object_or_404(Course, code=code)
+        lessons = Lesson.objects.filter(course_id=code).order_by("course__name")
+    except Lesson.DoesNotExist:
+        raise Http404("This lesson does not exist.")
+    return render(request, "learn/lessons_landing_page.html", {"course": course, "lessons": lessons})
+
+def QuizLessons(request, quiz_slug):
+    try:
+        quizzes = Quiz.objects.filter(slug=quiz_slug).prefetch_related("areas")
+        for quiz in quizzes:
+            for area in quiz.areas.all():
+                lessons += Lesson.objects.filter(area=area).order_by("course__name")
+    except Quiz.DoesNotExist:
+        raise Http404("This quiz does not exist.")
+    return render(request, "learn/quiz_lesson_page.html", {"lessons": lessons })
+
 def Courses(request, code):
     try:
-        courses = get_object_or_404(Course, code=code)
-        quizzes = Quiz.objects.filter(course_id=code)
+        course = get_object_or_404(Course, code=code)
+        quizzes = Quiz.objects.filter(course_id=code).order_by("course__name").prefetch_related("areas")
+        #lessons
     except Pages.DoesNotExist:
         raise Http404("Page does not exist")
-    return render(request, "learn/unit_landing_page.html", {"courses": courses, "quizzes": quizzes})
+    return render(request, "learn/course_landing_page.html", {"course": course, "quizzes": quizzes})
+
+
 
 class CourseIndex(ListView):
     model = Course

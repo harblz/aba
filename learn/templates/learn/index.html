@@ -3,6 +3,54 @@
 {% block title %}Course Index{% endblock title %}
 {% block content %}
 <div class="container">
+<h2> RBT Courses </h2>
+<hr>
+<div class="flex-row overflow-auto d-flex flex-nowrap">
+    <!-- for courses in RBT !-->
+     {% for course in Courses %}
+     {% if course.code == 'RBT' %}
+    <div class="p-4 col-4">
+        <div class="card" style="min-width: 350px;">
+            <img class="card-img-top" height="auto" width="auto" src="{% static course.image %}" alt="Card image cap">
+            <div class="text-center card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <h6 class="mb-2 card-subtitle text-muted">{{ course.subtitle }}</h6>
+                <p class="card-text">{{ course.description|truncatechars:250 }}</p>
+                <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
+                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<br />
+<br />
+<h2> BCBA Courses </h2>
+<hr>
+<div class="flex-row overflow-auto d-flex flex-nowrap">
+    <!-- for courses in BCBA !-->
+     {% for course in Courses %}
+     {% if course.code == 'BCBA' %}
+    <div class="p-4 col-4">
+        <div class="card" style="min-width: 350px;">
+            <img class="card-img-top" height="auto" width="auto" src="{% static course.image %}" alt="Card image cap">
+            <div class="text-center card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <h6 class="mb-2 card-subtitle text-muted">{{ course.subtitle }}</h6>
+                <p class="card-text">{{ course.description|truncatechars:250 }}</p>
+                <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
+                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<br />
+<br />
 <h2> All Courses </h2>
 <hr>
 <div class="flex-row overflow-auto d-flex flex-nowrap">
@@ -14,98 +62,11 @@
                 <h5 class="card-title">{{ course.name }}</h5>
                 <p class="card-text">{{ course.description|truncatechars:50 }}</p>
                 <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
-                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">Task List</a>
+                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
             </div>
         </div>
     </div>    
 {% endfor %}
 </div>
-
-<br />
-<br />
-<h2> RBT Courses </h2>
-<hr>
-<div class="flex-row overflow-auto d-flex flex-nowrap">
-    <!-- for courses in RBT !-->
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-    </div>
-    
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-    </div>
-
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-        </div>
-    </div>
-
-<br />
-<br />
-<h2> BCBA Courses </h2>
-<hr>
-<div class="flex-row overflow-auto d-flex flex-nowrap">
-    <!-- for courses in RBT !-->
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-    </div>
-    
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-    </div>
-
-    <div class="p-4 col-12">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="mb-2 card-subtitle text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-        </div>
-    </div>
-
 </div>
 {% endblock content %}
