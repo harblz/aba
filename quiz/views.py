@@ -1,7 +1,6 @@
 from typing import Type
 from traceback import format_exc
-
-import json, logging
+import json
 
 from django.shortcuts import get_object_or_404, render, Http404
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest
@@ -12,15 +11,14 @@ from django.utils import timezone
 from django.template.response import TemplateResponse
 from django.apps import apps
 
-#from pages.models import Pages
-#from learn.models import Course, Lesson, Task, ContentArea
+# from pages.models import Pages
+# from learn.models import Course, Lesson, Task, ContentArea
 from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
 from abarocks.views import handler500
 
-logger = logging.getLogger(__name__)
 
 class QuizIndex(ListView):
     model = Quiz
@@ -31,6 +29,7 @@ class QuizIndex(ListView):
         context = super().get_context_data(**kwargs)
         # context["page"] = Pages.objects.get(title="Practice Quizzes")
         return context
+
 
 class IndexByCourse(ListView):
     model = Quiz
@@ -73,106 +72,77 @@ def _get_questions(slug) -> list | Type[Exception]:
 
 
 @htmx_required
-def _save_progress(request, slug, index):
-    index = str(index)
-    request.session["quiz"][slug]["questions"][index]["user_answer"] = (
-        request.POST.get("answer")
-    )
-    index = str(int(index)+1)
-    request.session["quiz"][slug]["current_index"] = index
+def _save_progress(request):
+    try:
+        slug = request.GET.get("slug")
+        progress = get_object_or_404(
+            QuizProgress, session=request.session.session_key, quiz=slug
+        )
+        progress.key[progress.index]["user_chocie"] = request.POST.get("answer")
+        progress.index += 1
+        progress.save()
 
-
-    # noinspection PyTypeChecker
-    if request.GET.get("suspend") and request.user.is_authenticated:
-        Profile.objects.get(user=request.user).data["quiz"] = request.session["quiz"]
-        response = HttpResponse()
-        return retarget(response, "")  # TODO: return html for popup and redirect
-    elif request.GET.get("suspend"):
-        # TODO: need logic for anon users
-        pass
-    else:
-        pass
-    """except Exception as e:
+    except Exception as e:
         exception = str(e)
-        return reswap(handler500(request, exception), "beforeend")"""
+        return reswap(handler500(request, exception), "beforeend")
 
-"""
-class QuizQuestion:
-    def __init__(self, question_id, table, user_answer, answer):
-        self.question = question_id
-        self.table = table
-        self.user_answer = user_answer
-        self.answer = answer
-
-
-class UserQuiz:
-    def __init__(self, slug, user, index, questions):
-        self.slug = slug
-        self.user = user
-        self.current_index = index
-        self.questions = questions
-""" 
 
 @htmx_required
 def _next_question(request) -> HttpResponse:
-    slug = request.POST.get('slug')
-    index = request.POST.get('index')
-    quiz = request.session["quiz"]
-    table = quiz[slug]["questions"]["0"]["table"]
-    #quiz_test = UserQuiz(slug, "test user", index, quiz[slug]["questions"])
-    if int(index) == quiz[slug]["questions"].__len__()-1:
-        return HttpResponse("Quiz Complete. You're awesome!")
-    
-    _save_progress(request, slug, index)
-    quiz[slug]["current_index"] = str(quiz[slug]["current_index"])
-    next_index = quiz[slug]["current_index"]
-    model = apps.get_model("quiz", table) 
-    question = model.objects.get(pk=int(quiz[slug]["questions"][next_index]["question"]))
+    _save_progress(request)
+    slug = request.POST.get("slug")
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, quiz=slug
+    )
+    index = progress.index
+    key = json.loads(progress.key[index])
+    model = apps.get_model("quiz", key["table"])
+    question = model.objects.get(pk=key["question"])
     form = TakeQuizForm(question=question)
-    if table == "MultipleChoiceQuestion":
+    if key["table"] == "MultipleChoiceQuestion":
         form.fields["answer"].choices = [
             (answer.id, answer.text) for answer in question.answers.all()
         ]
-    elif table == "TrueFalseQuestion":
+    elif key["table"] == "TrueFalseQuestion":
         form.fields["answer"].choices = [(True, "True"), (False, "False")]
-    json_dump = json.dumps(quiz) #TODO Delete me after figuring out why current_index only iterates once
-    return render(request, "quiz/question_form.html", {"form": form, "question": question, "slug": slug, "json": json_dump, "index": next_index})
+    return render(request, "quiz/question_form.html", {"form": form})
 
 
 @htmx_required
 def _start_quiz(request, code, number) -> HttpResponse:
     quiz = Quiz.objects.get(course=code, number=number)
-    request.session["quiz"] = {}
-    request.session["quiz"][quiz.slug] = {}
-    request.session["quiz"][quiz.slug]["current_index"] = "0"
-    request.session["quiz"][quiz.slug]["questions"] = {}
+    timed = False
+    time = None
     questions = _get_questions(quiz.slug)
     random.shuffle(questions)
     tuple(questions)
+    q_data = {}
     for index, question in enumerate(questions):
         info = question.split(":")
         model = apps.get_model("quiz", info[0])
         obj = model.objects.get(id=info[1])
-        request.session["quiz"][quiz.slug]["questions"][str(index)] = {}
-        request.session["quiz"][quiz.slug]["questions"][str(index)]["question"] = info[
-            1
-        ]
+        index = index
+        answer = None
         if info[0] == "MultipleChoiceQuestion":
-            request.session["quiz"][quiz.slug]["questions"][str(index)][
-                "answer"
-            ] = obj.answer.id
+            answer = obj.answer.id
         elif info[0] == "TrueFalseQuestion":
-            request.session["quiz"][quiz.slug]["questions"][str(index)][
-                "answer"
-            ] = obj.answer
-        request.session["quiz"][quiz.slug]["questions"][str(index)]["table"] = info[0]
+            answer = obj.answer
+        q_data[index] = {"table": info[0], "question": info[1], "correct": answer}
+    json_data = json.dumps(q_data)
     if quiz.timed:
         time = quiz.time
-        request.session["quiz"][quiz.slug]["starttime"] = timezone.now()
-        request.session["quiz"][quiz.slug]["timelimit"] = time
+        timed = True
+    QuizProgress.objects.create(
+        user=request.user,
+        session=request.session.session_key,
+        quiz=quiz.slug,
+        index=0,
+        timed=timed,
+        time=time,
+        key=json_data,
+    )
 
-    first_question = request.session["quiz"][quiz.slug]["questions"]["0"]
-    index = request.session["quiz"][quiz.slug]["current_index"] #TODO delete me after debugging index
+    first_question = q_data[0]
     model = apps.get_model("quiz", first_question["table"])
     question = model.objects.get(pk=first_question["question"])
     choices = []
@@ -182,10 +152,9 @@ def _start_quiz(request, code, number) -> HttpResponse:
         choices = [(True, "True"), (False, "False")]
     form = TakeQuizForm()
     form.fields["answer"].choices = choices
-    json_dump = json.dumps(request.session["quiz"])
 
     return render(
         request,
         "quiz/question_form.html",
-        {"form": form, "slug": quiz.slug, "question": question, "json": json_dump, "index": index},
+        {"form": form, "slug": quiz.slug, "question": question},
     )
