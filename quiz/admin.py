@@ -28,3 +28,8 @@ class MultipleChoiceAnswerAdmin(admin.ModelAdmin):
 @admin.register(TrueFalseQuestion)
 class TrueFalseAdmin(admin.ModelAdmin):
     form = EditTrueFalseForm
+
+
+@admin.register(QuizProgress)
+class QuizProgressAdmin(admin.ModelAdmin):
+    pass

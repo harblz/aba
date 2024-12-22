@@ -861,3 +861,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+!/debug.log
+staticfiles/js/aba.js

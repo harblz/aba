@@ -5,17 +5,21 @@ from django.contrib import admin
 from debug_toolbar.toolbar import debug_toolbar_urls
 from . import views
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", views.home, name="home"),
-    path("about", views.about, name="about"),
-    path("login/", views.login, name="login"),
-    path("blog/", include("blog.urls")),
-    path("quizzes/", include("quiz.urls")),
-    path("learn/", include("learn.urls")),
-    path("ckeditor5/", include("django_ckeditor_5.urls")),
-    path("testdebug/", views.testdebug, name="testdebug"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+        path("", views.home, name="home"),
+        path("about", views.about, name="about"),
+        path("login/", views.login, name="login"),
+        path("blog/", include("blog.urls")),
+        path("quizzes/", include("quiz.urls")),
+        path("learn/", include("learn.urls")),
+        path("ckeditor5/", include("django_ckeditor_5.urls")),
+        path("testdebug/", views.testdebug, name="testdebug"),
+    ]
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
 
 if settings.ENABLE_DEBUG_TOOLBAR:
     urlpatterns = [

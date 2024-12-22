@@ -3,70 +3,47 @@
 {% block title %}Course Index{% endblock title %}
 {% block content %}
 <div class="container">
-<h2> RBT Courses </h2>
-<hr>
-<div class="flex-row overflow-auto d-flex flex-nowrap">
-    <!-- for courses in RBT !-->
-     {% for course in Courses %}
-     {% if course.code == 'RBT' %}
+  {% for course in Courses %}
+  <h2>{{ course.code }} Courses</h2>
+  <hr>
+  <div class="flex-row overflow-auto d-flex flex-nowrap">
     <div class="p-4 col-4">
-        <div class="card" style="min-width: 350px;">
-            <img class="card-img-top" height="auto" width="auto" src="{% static course.image %}" alt="Card image cap">
-            <div class="text-center card-body">
-                <h5 class="card-title">{{ course.name }}</h5>
-                <h6 class="mb-2 card-subtitle text-muted">{{ course.subtitle }}</h6>
-                <p class="card-text">{{ course.description|truncatechars:250 }}</p>
-                <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
-                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
-            </div>
+      <div class="card" style="min-width: 350px;">
+        {% if course.image %}
+          <img class="card-img-top" height="auto" width="auto" src="{% get_media_prefix %}{{ course.image }}" alt="Card image cap">
+        {% endif %}
+        <div class="text-center card-body">
+          <h5 class="card-title">{{ course.name }}</h5>
+          <h6 class="mb-2 card-subtitle text-muted">{{ course.subtitle }}</h6>
+          <p class="card-text">{{ course.description|truncatechars:250 }}</p>
+          <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
+          <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
+          <a href="{% url 'quiz:quizzes_by_course' code=course.code %}" class="btn btn-secondary">Quizzes</a>
         </div>
+      </div>
     </div>
-    {% endif %}
-    {% endfor %}
-</div>
-
-<br />
-<br />
-<h2> BCBA Courses </h2>
-<hr>
-<div class="flex-row overflow-auto d-flex flex-nowrap">
-    <!-- for courses in BCBA !-->
-     {% for course in Courses %}
-     {% if course.code == 'BCBA' %}
-    <div class="p-4 col-4">
-        <div class="card" style="min-width: 350px;">
-            <img class="card-img-top" height="auto" width="auto" src="{% static course.image %}" alt="Card image cap">
-            <div class="text-center card-body">
-                <h5 class="card-title">{{ course.name }}</h5>
-                <h6 class="mb-2 card-subtitle text-muted">{{ course.subtitle }}</h6>
-                <p class="card-text">{{ course.description|truncatechars:250 }}</p>
-                <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
-                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-</div>
-
-<br />
-<br />
-<h2> All Courses </h2>
-<hr>
-<div class="flex-row overflow-auto d-flex flex-nowrap">
-{% for course in Courses %}
+      <br />
+      <br />   
+  </div>
+  {% endfor %}
+  <h2>All Courses</h2>
+  <hr>
+  <div class="flex-row overflow-auto d-flex flex-nowrap">
+  {% for course in Courses %}
     <div class="p-4 col" style="min-width: 350px;">
-        <div class="card">
-            <img class="card-img-top" height="auto" width="auto" src="{% static course.image %}" alt="Card image cap">
-            <div class="text-center card-body">
-                <h5 class="card-title">{{ course.name }}</h5>
-                <p class="card-text">{{ course.description|truncatechars:50 }}</p>
-                <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
-                <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
-            </div>
+      <div class="card">
+        {% if course.image %}
+          <img class="card-img-top" height="auto" width="auto" src="{% get_media_prefix %}{{ course.image }}" alt="Card image cap">
+        {% endif %}
+        <div class="text-center card-body">
+          <h5 class="card-title">{{ course.name }}</h5>
+          <p class="card-text">{{ course.description|truncatechars:50 }}</p>
+          <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
+          <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
         </div>
-    </div>    
-{% endfor %}
-</div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
 </div>
 {% endblock content %}

@@ -11,9 +11,9 @@ class Course(models.Model):
     # TODO: Add relation in pages
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
-    subtitle = models.CharField(null=True)
-    image = models.CharField(null=True, max_length=250)
-    description = models.TextField(null=True)
+    subtitle = models.CharField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     course_data = models.JSONField(null=True, blank=True)
 
     class Meta:
@@ -100,8 +100,9 @@ class Task(models.Model):
             self.slug = f"{self.license.code}-{self.area.letter}-{self.task}"
         super(Task, self).save(*args, **kwargs)
 
+
 class Lesson(models.Model):
-    slug = models.SlugField(unique=True,primary_key=True)
+    slug = models.SlugField(unique=True, primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lessons")
     area = models.ForeignKey(ContentArea, on_delete=models.CASCADE)
     page = models.IntegerField()

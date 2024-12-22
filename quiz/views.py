@@ -3,7 +3,12 @@ from traceback import format_exc
 import json
 
 from django.shortcuts import get_object_or_404, render, Http404
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest
+from django.http import (
+    HttpResponse,
+    HttpResponseServerError,
+    HttpResponseForbidden,
+    HttpResponseBadRequest,
+)
 from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event, reswap
@@ -33,10 +38,12 @@ class QuizIndex(ListView):
 
 class IndexByCourse(ListView):
     model = Quiz
+    context_object_name = "quizzes"
+    template_name = "quiz/index.html"
 
     def get_queryset(self):
-        queryset = Quiz.objects.filter(self.kwargs["course"])
-        return queryset
+        queryset = super().get_queryset()
+        return queryset.filter(course=self.kwargs["code"])
 
 
 def get_quiz(request, code, number) -> HttpResponse:
@@ -74,11 +81,8 @@ def _get_questions(slug) -> list | Type[Exception]:
 @htmx_required
 def _save_progress(request):
     try:
-        slug = request.GET.get("slug")
-        progress = get_object_or_404(
-            QuizProgress, session=request.session.session_key, quiz=slug
-        )
-        progress.key[progress.index]["user_chocie"] = request.POST.get("answer")
+        progress = get_object_or_404(QuizProgress, session=request.session.session_key)
+        progress.key[progress.index]["user_choice"] = request.POST.get("answer")
         progress.index += 1
         progress.save()
 
@@ -90,12 +94,9 @@ def _save_progress(request):
 @htmx_required
 def _next_question(request) -> HttpResponse:
     _save_progress(request)
-    slug = request.POST.get("slug")
-    progress = get_object_or_404(
-        QuizProgress, session=request.session.session_key, quiz=slug
-    )
+    progress = get_object_or_404(QuizProgress, session=request.session.session_key)
     index = progress.index
-    key = json.loads(progress.key[index])
+    key = progress.key[str(index)]
     model = apps.get_model("quiz", key["table"])
     question = model.objects.get(pk=key["question"])
     form = TakeQuizForm(question=question)
@@ -105,7 +106,9 @@ def _next_question(request) -> HttpResponse:
         ]
     elif key["table"] == "TrueFalseQuestion":
         form.fields["answer"].choices = [(True, "True"), (False, "False")]
-    return render(request, "quiz/question_form.html", {"form": form})
+    return render(
+        request, "quiz/question_form.html", {"form": form, "question": question}
+    )
 
 
 @htmx_required
@@ -116,7 +119,7 @@ def _start_quiz(request, code, number) -> HttpResponse:
     questions = _get_questions(quiz.slug)
     random.shuffle(questions)
     tuple(questions)
-    q_data = {}
+    data = {}
     for index, question in enumerate(questions):
         info = question.split(":")
         model = apps.get_model("quiz", info[0])
@@ -127,8 +130,7 @@ def _start_quiz(request, code, number) -> HttpResponse:
             answer = obj.answer.id
         elif info[0] == "TrueFalseQuestion":
             answer = obj.answer
-        q_data[index] = {"table": info[0], "question": info[1], "correct": answer}
-    json_data = json.dumps(q_data)
+        data[index] = {"table": info[0], "question": info[1], "correct": answer}
     if quiz.timed:
         time = quiz.time
         timed = True
@@ -139,10 +141,10 @@ def _start_quiz(request, code, number) -> HttpResponse:
         index=0,
         timed=timed,
         time=time,
-        key=json_data,
+        key=data,
     )
 
-    first_question = q_data[0]
+    first_question = data[0]
     model = apps.get_model("quiz", first_question["table"])
     question = model.objects.get(pk=first_question["question"])
     choices = []
@@ -158,3 +160,10 @@ def _start_quiz(request, code, number) -> HttpResponse:
         "quiz/question_form.html",
         {"form": form, "slug": quiz.slug, "question": question},
     )
+
+
+@htmx_required
+def _check_progress(request):
+    progress = QuizProgress.objects.get(session=request.session.session_key)
+    if progress.exists():
+        return

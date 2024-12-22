@@ -1,22 +1,14 @@
-{% load static %}
-<b>JSON DUMP:</b><br />{{ json }}<br /><br />
-<b>TEST QUIZ:</b><br />{{ quiz.slug }}<br /><br />
-<b>SLUG:</b> {{ slug }}<br /><br />
-<b>CURRENT INDEX: {{ index }}</b><br /><br />
-<br /><br />
-
+{% load static django_bootstrap5 %}
 {{ question|safe }}
-<form hx-post="{% url 'quiz:next_question' %}?slug={{ slug }}&index={{ index }}"
+<form hx-post="{% url 'quiz:next_question' %}"
       hx-swap="innerHTML"
       hx-target="#content"
       hx-indicator="#spinner">
   {% csrf_token %}
-  <input type="hidden" name="slug" value="{{ slug }}">
-  <input type="hidden" name="index" value="{{ index }}">
+  {% bootstrap_form_errors form %}
   {% for field in form %}
     <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+       {% bootstrap_field field %}
     </div>
 {% endfor %}
   <button type="submit">Next Question</button>

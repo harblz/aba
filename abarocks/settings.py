@@ -73,7 +73,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
-    #"werkzeug.debug.DebuggedApplication",
+    # "werkzeug.debug.DebuggedApplication",
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
@@ -116,6 +116,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
@@ -168,10 +169,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_URL = "/media/"
 
 # Whitenoise compression & caching
 # https://whitenoise.readthedocs.io/en/latest/django.html
@@ -337,35 +343,51 @@ LOGGING = {
     "filters": {
         "specific_error-1": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'items' in template 'django/forms/label.html'."),
+            "callback": lambda record: not record.getMessage().startswith(
+                "Exception while resolving variable 'items' in template 'django/forms/label.html'."
+            ),
         },
         "specific_error-2": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'toolbar' in template 'debug_toolbar/includes/panel_content.html'."),
+            "callback": lambda record: not record.getMessage().startswith(
+                "Exception while resolving variable 'toolbar' in template 'debug_toolbar/includes/panel_content.html'."
+            ),
         },
         "specific_error-3": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("KeyError: 'toolbar'"),
+            "callback": lambda record: not record.getMessage().startswith(
+                "KeyError: 'toolbar'"
+            ),
         },
         "specific_error-4": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'toolbar'"),
+            "callback": lambda record: not record.getMessage().startswith(
+                "ValueError: invalid literal for int() with base 10: 'toolbar'"
+            ),
         },
         "specific_error-5": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'class'"),
+            "callback": lambda record: not record.getMessage().startswith(
+                "ValueError: invalid literal for int() with base 10: 'class'"
+            ),
         },
         "specific_error-6": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("KeyError: 'class'"),
+            "callback": lambda record: not record.getMessage().startswith(
+                "KeyError: 'class'"
+            ),
         },
         "specific_error-7": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("ValueError: invalid literal for int() with base 10: 'class'"),
+            "callback": lambda record: not record.getMessage().startswith(
+                "ValueError: invalid literal for int() with base 10: 'class'"
+            ),
         },
         "specific_error-8": {
             "()": "django.utils.log.CallbackFilter",
-            "callback": lambda record: not record.getMessage().startswith("Exception while resolving variable 'class' in template 'django/forms/widgets/radio.html'."),
+            "callback": lambda record: not record.getMessage().startswith(
+                "Exception while resolving variable 'class' in template 'django/forms/widgets/radio.html'."
+            ),
         },
     },
     "handlers": {
@@ -373,7 +395,16 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": os.path.join(BASE_DIR, "debug.log"),
-            "filters": ["specific_error-1", "specific_error-2", "specific_error-3", "specific_error-4", "specific_error-5", "specific_error-6", "specific_error-7", "specific_error-8"],
+            "filters": [
+                "specific_error-1",
+                "specific_error-2",
+                "specific_error-3",
+                "specific_error-4",
+                "specific_error-5",
+                "specific_error-6",
+                "specific_error-7",
+                "specific_error-8",
+            ],
         },
         "console": {
             "class": "logging.StreamHandler",

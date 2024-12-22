@@ -91,7 +91,7 @@ class QuizProgress(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True
     )
     session = models.CharField(max_length=100)
-    quiz = models.SlugField(unique=True, primary_key=True)
+    quiz = models.SlugField()
     index = models.IntegerField(default=0)
     timed = models.BooleanField("Timed?", default=False, null=True, blank=True)
     time = models.DurationField("Time in minutes", null=True, blank=True)
