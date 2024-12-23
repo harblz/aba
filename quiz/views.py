@@ -1,3 +1,4 @@
+import logging
 from typing import Type
 from traceback import format_exc
 import json
@@ -22,7 +23,7 @@ from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
-from abarocks.views import handler500
+from core.views import handler500
 
 
 class QuizIndex(ListView):
@@ -80,15 +81,10 @@ def _get_questions(slug) -> list | Type[Exception]:
 
 @htmx_required
 def _save_progress(request):
-    try:
-        progress = get_object_or_404(QuizProgress, session=request.session.session_key)
-        progress.key[progress.index]["user_choice"] = request.POST.get("answer")
-        progress.index += 1
-        progress.save()
-
-    except Exception as e:
-        exception = str(e)
-        return reswap(handler500(request, exception), "beforeend")
+    progress = get_object_or_404(QuizProgress, session=request.session.session_key)
+    progress.key[str(progress.index)]["user_choice"] = request.POST.get("answer")
+    progress.index += 1
+    progress.save()
 
 
 @htmx_required
