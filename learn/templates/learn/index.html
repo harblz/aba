@@ -40,6 +40,7 @@
           <p class="card-text">{{ course.description|truncatechars:50 }}</p>
           <a href="{% url 'learn:course-overview' code=course.code %}" class="btn btn-primary">Course Overview</a>
           <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="btn btn-secondary">TCO</a>
+          <a href="{% url 'quiz:quizzes_by_course' code=course.code %}" class="btn btn-secondary">Quizzes</a>
         </div>
       </div>
     </div>

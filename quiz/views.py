@@ -23,7 +23,6 @@ from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
-from core.views import handler500
 
 
 class QuizIndex(ListView):
@@ -47,14 +46,14 @@ class IndexByCourse(ListView):
         return queryset.filter(course=self.kwargs["code"])
 
 
-def get_quiz(request, code, number) -> HttpResponse:
-    quiz = Quiz.objects.get(course=code, number=number)
-    course = quiz.course
+def show_quiz(request, code, number) -> HttpResponse:
+    quiz_obj = Quiz.objects.get(course=code, number=number)
+    course = quiz_obj.course
 
     return render(
         request,
         "quiz/quiz.html",
-        {"course": course, "quiz": quiz},
+        {"course": course, "quiz": quiz_obj},
     )
 
 
@@ -88,8 +87,9 @@ def _save_progress(request):
 
 
 @htmx_required
-def _next_question(request) -> HttpResponse:
-    _save_progress(request)
+def _continue(request) -> HttpResponse:
+    if "next" in request.GET and request.user.is_authenticated:
+        _save_progress(request)
     progress = get_object_or_404(QuizProgress, session=request.session.session_key)
     index = progress.index
     key = progress.key[str(index)]
@@ -108,58 +108,68 @@ def _next_question(request) -> HttpResponse:
 
 
 @htmx_required
-def _start_quiz(request, code, number) -> HttpResponse:
-    quiz = Quiz.objects.get(course=code, number=number)
-    timed = False
-    time = None
-    questions = _get_questions(quiz.slug)
-    random.shuffle(questions)
-    tuple(questions)
-    data = {}
-    for index, question in enumerate(questions):
-        info = question.split(":")
-        model = apps.get_model("quiz", info[0])
-        obj = model.objects.get(id=info[1])
-        index = index
-        answer = None
-        if info[0] == "MultipleChoiceQuestion":
-            answer = obj.answer.id
-        elif info[0] == "TrueFalseQuestion":
-            answer = obj.answer
-        data[index] = {"table": info[0], "question": info[1], "correct": answer}
-    if quiz.timed:
-        time = quiz.time
-        timed = True
-    QuizProgress.objects.create(
-        user=request.user,
-        session=request.session.session_key,
-        quiz=quiz.slug,
-        index=0,
-        timed=timed,
-        time=time,
-        key=data,
+def _start(request, code, number) -> HttpResponse:
+    if (
+        response := _check_progress(request, code, number) is None
+        or "confirm" in request.GET
+    ):
+        quiz = Quiz.objects.get(course=code, number=number)
+        timed = False
+        time = None
+        questions = _get_questions(quiz.slug)
+        random.shuffle(questions)
+        tuple(questions)
+        data = {}
+        for index, question in enumerate(questions):
+            info = question.split(":")
+            model = apps.get_model("quiz", info[0])
+            obj = model.objects.get(id=info[1])
+            index = index
+            answer = None
+            if info[0] == "MultipleChoiceQuestion":
+                answer = obj.answer.id
+            elif info[0] == "TrueFalseQuestion":
+                answer = obj.answer
+            data[index] = {"table": info[0], "question": info[1], "correct": answer}
+        if quiz.timed:
+            time = quiz.time
+            timed = True
+        QuizProgress.objects.update_or_create(
+            user=request.user if request.user.is_authenticated else None,
+            session=request.session.session_key,
+            quiz=quiz.slug,
+            index=0,
+            timed=timed,
+            time=time,
+            key=data,
+        )
+
+        first_question = data[0]
+        model = apps.get_model("quiz", first_question["table"])
+        question = model.objects.get(pk=first_question["question"])
+        choices = []
+        if first_question["table"] == "MultipleChoiceQuestion":
+            choices = [(answer.id, answer.text) for answer in question.answers.all()]
+        elif first_question["table"] == "TrueFalseQuestion":
+            choices = [(True, "True"), (False, "False")]
+        form = TakeQuizForm()
+        form.fields["answer"].choices = choices
+
+        return render(
+            request,
+            "quiz/question_form.html",
+            {"form": form, "slug": quiz.slug, "question": question},
+        )
+    elif type(response) is TemplateResponse:
+        return reswap(response, "beforeend")
+
+
+def _check_progress(request, code, number):
+    slug = code + "-" + str(number)
+    progress = QuizProgress.objects.filter(
+        session=request.session.session_key, quiz=slug
     )
-
-    first_question = data[0]
-    model = apps.get_model("quiz", first_question["table"])
-    question = model.objects.get(pk=first_question["question"])
-    choices = []
-    if first_question["table"] == "MultipleChoiceQuestion":
-        choices = [(answer.id, answer.text) for answer in question.answers.all()]
-    elif first_question["table"] == "TrueFalseQuestion":
-        choices = [(True, "True"), (False, "False")]
-    form = TakeQuizForm()
-    form.fields["answer"].choices = choices
-
-    return render(
-        request,
-        "quiz/question_form.html",
-        {"form": form, "slug": quiz.slug, "question": question},
-    )
-
-
-@htmx_required
-def _check_progress(request):
-    progress = QuizProgress.objects.get(session=request.session.session_key)
     if progress.exists():
-        return
+        return TemplateResponse(request, "quiz/confirmation.html")
+    elif not progress.exists():
+        return None

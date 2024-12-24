@@ -2,7 +2,7 @@
 
 {% block content %}
   {% for quiz in quizzes %}
-  <a href="{% url 'quiz:get_quiz' quiz.course_id quiz.number %}">{{ quiz }}</a>
+  <a href="{% url 'quiz:quiz' quiz.course_id quiz.number %}">{{ quiz }}</a>
   {% endfor %}
 {% endblock %}
 

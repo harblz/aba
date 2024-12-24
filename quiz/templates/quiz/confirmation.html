@@ -7,8 +7,8 @@
       <p>You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" hx-get="">Continue</button>
-      <button type="button" class="btn btn-primary" hx-get="">Start Over</button>
+      <button type="button" class="btn btn-secondary" hx-get="{% url 'quiz:continue' %}" hx-target="#content">Resume</button>
+      <button type="button" class="btn btn-primary" hx-get="{% url 'quiz:start'  %}?confirm" hx-target="#content">Start Over</button>
     </div>
   </div>
 </div>

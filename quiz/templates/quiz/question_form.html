@@ -1,6 +1,6 @@
 {% load static django_bootstrap5 %}
 {{ question|safe }}
-<form hx-post="{% url 'quiz:next_question' %}"
+<form hx-post="{% url 'quiz:continue' %}?next"
       hx-swap="innerHTML"
       hx-target="#content"
       hx-indicator="#spinner">
