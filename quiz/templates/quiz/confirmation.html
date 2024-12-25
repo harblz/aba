@@ -4,11 +4,28 @@
       <h5 class="modal-title">Wait!</h5>
     </div>
     <div class="modal-body">
-      <p>You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?</p>
+      <p>
+        You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?
+      </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" hx-get="{% url 'quiz:continue' %}" hx-target="#content">Resume</button>
-      <button type="button" class="btn btn-primary" hx-get="{% url 'quiz:start'  %}?confirm" hx-target="#content">Start Over</button>
+        <button type="button"
+                class="btn btn-secondary"
+                hx-get="{% url 'quiz:continue' %}"
+                hx-target="#content"
+                hx-swap="innerhtml"
+                data-bs-toggle="modal"
+                data-bs-target="#modals-here"
+
+        >Resume</button>
+        <button type="button"
+                class="btn btn-primary"
+                hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm"
+                hx-target="#content"
+                data-bs-toggle="modal"
+                data-bs-target="#modals-here"
+
+        >Start Over</button>
     </div>
   </div>
 </div>

@@ -1,7 +1,4 @@
-import logging
 from typing import Type
-from traceback import format_exc
-import json
 
 from django.shortcuts import get_object_or_404, render, Http404
 from django.http import (
@@ -16,6 +13,7 @@ from django_htmx.http import retarget, trigger_client_event, reswap
 from django.utils import timezone
 from django.template.response import TemplateResponse
 from django.apps import apps
+from django.template import Template
 
 # from pages.models import Pages
 # from learn.models import Course, Lesson, Task, ContentArea
@@ -49,6 +47,7 @@ class IndexByCourse(ListView):
 def show_quiz(request, code, number) -> HttpResponse:
     quiz_obj = Quiz.objects.get(course=code, number=number)
     course = quiz_obj.course
+    request.session.set_test_cookie()
 
     return render(
         request,
@@ -109,11 +108,10 @@ def _continue(request) -> HttpResponse:
 
 @htmx_required
 def _start(request, code, number) -> HttpResponse:
+    quiz = Quiz.objects.get(course=code, number=number)
     if (
-        response := _check_progress(request, code, number) is None
-        or "confirm" in request.GET
-    ):
-        quiz = Quiz.objects.get(course=code, number=number)
+        response := _check_progress(request, code, number)
+    ) is None or "confirm" in request.GET:
         timed = False
         time = None
         questions = _get_questions(quiz.slug)
@@ -155,13 +153,17 @@ def _start(request, code, number) -> HttpResponse:
         form = TakeQuizForm()
         form.fields["answer"].choices = choices
 
-        return render(
+        response = TemplateResponse(
             request,
             "quiz/question_form.html",
             {"form": form, "slug": quiz.slug, "question": question},
         )
+        reswap(response, "innerhtml")
+        return retarget(response, "#content")
     elif type(response) is TemplateResponse:
-        return reswap(response, "beforeend")
+        reswap(response, "outerhtml")
+        retarget(response, "#modals-here")
+        return trigger_client_event(response, "", after="swap")
 
 
 def _check_progress(request, code, number):
@@ -170,6 +172,8 @@ def _check_progress(request, code, number):
         session=request.session.session_key, quiz=slug
     )
     if progress.exists():
-        return TemplateResponse(request, "quiz/confirmation.html")
+        context = {"quiz": Quiz.objects.get(slug=slug)}
+        response = TemplateResponse(request, "quiz/confirmation.html", context)
+        return response
     elif not progress.exists():
         return None
