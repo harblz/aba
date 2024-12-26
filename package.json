@@ -1,0 +1,30 @@
+{
+  "name": "aba.rocks",
+  "version": "2.0.0",
+  "description": "ABA Rocks is an open-source web app for aspiring behavior analysts!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harblz/aba.git"
+  },
+  "author": "Alex Raymond",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harblz/aba/issues"
+  },
+  "homepage": "https://github.com/harblz/aba#readme",
+  "dependencies": {
+    "alpinejs": "^3.14.7",
+    "htmx.org": "^1.9.12"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "tailwindcss": "^3.4.17",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
+  }
+}

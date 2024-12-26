@@ -29,16 +29,6 @@ def login(request):
     return render(request, "login.html")
 
 
-def handler500(request, exception):
-    if request.htmx:
-        template_name = "error/htmx500.html"
-    else:
-        template_name = "error/500.html"
-    response = TemplateResponse(request, template_name, {"exception": exception})
-
-    return response
-
-
 def testdebug(request):
     x = 2 / 0
     return HttpResponse(str(x))
