@@ -9,23 +9,14 @@
   <button type="button"
           class="btn btn-primary"
           hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
-          hx-trigger="click"
           hx-indicator="#spinner"
           hx-target="#content"
           hx-swap="innerHTML"
   >Click here to begin!</button>
   <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
-  <div id="alpine-wrapper" x-data="{ open : false }"></div>
-  <div id="modals-here"
-    class="modal modal-blur fade"
-    style="display: none"
-    aria-hidden="false"
-    tabindex="-1"
-    @htmx:after-swap.window="open = ! open"
-    x-show="open"
-  >
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content"></div>
-    </div>
-  </div>
+  <div id="alpine-wrapper" x-data="{ modal : false }">
+      <div class="modal-dialog modal-lg" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
+        <div class="modal-content" id="modals-here" ></div>
+      </div>
+</div>
 {% endblock content %}

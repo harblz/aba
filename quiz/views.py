@@ -87,7 +87,7 @@ def _save_progress(request):
 
 @htmx_required
 def _continue(request) -> HttpResponse:
-    if "next" in request.GET and request.user.is_authenticated:
+    if "next" in request.GET:
         _save_progress(request)
     progress = get_object_or_404(QuizProgress, session=request.session.session_key)
     index = progress.index
@@ -136,10 +136,12 @@ def _start(request, code, number) -> HttpResponse:
             user=request.user if request.user.is_authenticated else None,
             session=request.session.session_key,
             quiz=quiz.slug,
-            index=0,
-            timed=timed,
-            time=time,
-            key=data,
+            defaults={
+                "index": 0,
+                "timed": timed,
+                "time": time,
+                "key": data,
+            },
         )
 
         first_question = data[0]
@@ -163,7 +165,7 @@ def _start(request, code, number) -> HttpResponse:
     elif type(response) is TemplateResponse:
         reswap(response, "outerhtml")
         retarget(response, "#modals-here")
-        return trigger_client_event(response, "", after="swap")
+        return trigger_client_event(response, "show-modal", after="swap")
 
 
 def _check_progress(request, code, number):
