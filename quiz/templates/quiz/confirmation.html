@@ -1,4 +1,3 @@
-  <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title">Wait!</h5>
     </div>
@@ -10,15 +9,14 @@
     <div class="modal-footer">
         <button type="button"
                 class="button is-secondary"
-                hx-get="{% url 'quiz:continue' %}"
+                hx-get="{% url 'quiz:continue' %}?resume=True"
                 hx-target="#quiz-wrapper"
                 hx-swap="innerhtml"
 
         >Resume</button>
         <button type="button"
                 class="button is-primary"
-                hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm"
+                hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm=True"
                 hx-target="#quiz-wrapper"
         >Start Over</button>
     </div>
-  </div>

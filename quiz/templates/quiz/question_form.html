@@ -1,6 +1,6 @@
 {% load static %}
 {{ question|safe }}
-<form hx-post="{% url 'quiz:continue' %}?next"
+<form hx-post="{% url 'quiz:check_answer' %}"
       hx-swap="innerHTML"
       hx-target="#content"
       hx-indicator="#spinner">

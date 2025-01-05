@@ -25,6 +25,7 @@ from core.decorators import htmx_required
 
 from django.utils.safestring import mark_safe
 
+
 class QuizIndex(ListView):
     model = Quiz
     context_object_name = "quizzes"
@@ -85,8 +86,7 @@ def _get_questions(slug) -> list | Type[Exception]:
 # Add ", code, number" when client-side storage figured out
 def _save_progress(request):
     progress = get_object_or_404(QuizProgress, session=request.session.session_key)
-    form = TakeQuizForm()
-    progress.key[str(progress.index)]["user_choice"] = form.cleaned_data["user_choice"]
+    progress.key[str(progress.index)]["user_choice"] = request.POST.get("answer")
     progress.index += 1
     progress.save()
 
@@ -106,7 +106,13 @@ def _continue(request, **kwargs) -> HttpResponse:
     choices = []
     if key["table"] == "MultipleChoiceQuestion":
         choices = [
-            (answer.id, mark_safe(answer.text[:2] + " class='is-inline-block'" + answer.text[2:])) for answer in question.answers.all()
+            (
+                answer.id,
+                mark_safe(
+                    answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
+                ),
+            )
+            for answer in question.answers.all()
         ]
     elif key["table"] == "TrueFalseQuestion":
         choices = [(True, "True"), (False, "False")]
@@ -161,8 +167,18 @@ def _start(request, code, number) -> HttpResponse:
         question = model.objects.get(pk=first_question["question"])
         choices = []
         if first_question["table"] == "MultipleChoiceQuestion":
-            choices = [(answer.id, mark_safe(answer.text)) for answer in question.answers.all()]
-            choices = [(answer.id, mark_safe(answer.text[:2] + " class='is-inline-block'" + answer.text[2:])) for answer in question.answers.all()]
+            choices = [
+                (answer.id, mark_safe(answer.text)) for answer in question.answers.all()
+            ]
+            choices = [
+                (
+                    answer.id,
+                    mark_safe(
+                        answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
+                    ),
+                )
+                for answer in question.answers.all()
+            ]
         elif first_question["table"] == "TrueFalseQuestion":
             choices = [(True, "True"), (False, "False")]
         form = TakeQuizForm(choices=choices)
@@ -175,7 +191,7 @@ def _start(request, code, number) -> HttpResponse:
         return trigger_client_event(response, "reset", after="swap")
 
     elif type(response) is TemplateResponse:
-        reswap(response, "outerHTML")
+        reswap(response, "innerHTML")
         retarget(response, "#modals-here")
         return trigger_client_event(response, "show-modal", after="swap")
 
@@ -200,16 +216,16 @@ def _check_answer(request):
     progress = get_object_or_404(QuizProgress, session=request.session.session_key)
     index = progress.index
     question = progress.key[str(index)]
-    if request.POST.get("answer") == question["correct"]:
+    if request.POST.get("answer") == str(question["correct"]):
         # Needs logic to highlight the selected answer in green client side
         response = _continue(request, next=True)
         return response
-    elif request.POST.get("answer") != question["correct"]:
+    elif request.POST.get("answer") != str(question["correct"]):
         model = apps.get_model("quiz", question["table"])
         q_obj = model.objects.get(id=question["question"])
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)
-        reswap(response, "outerHTML")
-        retarget(response, "#modal-content")
+        reswap(response, "innerHTML")
+        retarget(response, "#modals-here")
         return trigger_client_event(response, "show-modal", after="swap")

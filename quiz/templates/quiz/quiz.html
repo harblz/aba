@@ -18,7 +18,11 @@
 </div>
 <div id="alpine-wrapper" x-data="{ modal : false }">
     <div class="modal is-active" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
-      <div class="modal-content" id="modals-here" ></div>
+      <div class="modal-content"
+           id="modals-here"
+           x-ref='modal'
+           @reset.window='$refs.modal.replaceChildren();
+                          $nextTick(() => { modal = false })'></div>
     </div>
 </div>
 {% endblock content %}

@@ -1,17 +1,15 @@
-<div class='modal-content' x-ref='modal' @reset.window='$refs.modal.replaceChildren()'>
-    <div class='modal-header'>
-    </div>
-    <div class='modal-body'>
-      <p>
-        {{ hint|safe }}
-      </p>
-    </div>
-    <div class='modal-footer'>
-        <button type='button'
-                class='btn btn-primary'
-                hx-get='{% url "quiz:continue" %}?continue=True'
-                hx-target='#quiz-wrapper'
-                hx-swap='innerHTML'
-        >Next Question</button>
-    </div>
+  <div class='modal-header'>
+  </div>
+  <div class='modal-body'>
+    <p>
+      {{ hint|safe }}
+    </p>
+  </div>
+  <div class='modal-footer'>
+      <button type='button'
+              class='btn btn-primary'
+              hx-get='{% url "quiz:continue" %}?continue=next'
+              hx-target='#quiz-wrapper'
+              hx-swap='innerHTML'
+      >Next Question</button>
   </div>

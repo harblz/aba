@@ -10,9 +10,13 @@ class TakeQuizForm(forms.Form):
     answer = forms.ChoiceField(widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
-        choices = kwargs.pop("choices")
-        super(TakeQuizForm, self).__init__(*args, **kwargs)
-        self.fields["answer"].choices = choices
+        choices = None
+        if "choices" in kwargs:
+            choices = kwargs.pop("choices")
+            super(TakeQuizForm, self).__init__(*args, **kwargs)
+            self.fields["answer"].choices = choices
+        else:
+            super(TakeQuizForm, self).__init__(*args, **kwargs)
 
 
 class EditQuizForm(forms.ModelForm):
