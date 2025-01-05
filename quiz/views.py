@@ -98,7 +98,7 @@ def _continue(request) -> HttpResponse:
     form = TakeQuizForm(question=question)
     if key["table"] == "MultipleChoiceQuestion":
         form.fields["answer"].choices = [
-            (answer.id, mark_safe(answer.text)) for answer in question.answers.all()
+            (answer.id, mark_safe(answer.text[:2] + " class='is-inline-block'" + answer.text[2:])) for answer in question.answers.all()
         ]
     elif key["table"] == "TrueFalseQuestion":
         form.fields["answer"].choices = [(True, "True"), (False, "False")]
@@ -151,6 +151,7 @@ def _start(request, code, number) -> HttpResponse:
         choices = []
         if first_question["table"] == "MultipleChoiceQuestion":
             choices = [(answer.id, mark_safe(answer.text)) for answer in question.answers.all()]
+            choices = [(answer.id, mark_safe(answer.text[:2] + " class='is-inline-block'" + answer.text[2:])) for answer in question.answers.all()]
         elif first_question["table"] == "TrueFalseQuestion":
             choices = [(True, "True"), (False, "False")]
         form = TakeQuizForm()
