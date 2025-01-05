@@ -1,0 +1,102 @@
+<nav class="navbar is-fixed-top" role="navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
+        ABA.Rocks
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu" 
+      htmx-trigger="click" 
+      hx-target="#navMenu"
+      hx-swap="class:is-active"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item has-text-weight-bold" href="{% url 'learn:course-index' %}">
+        Learn
+      </a>
+
+      <a class="navbar-item has-text-weight-bold" href="{% url 'blog:blog-posts' %}">
+        Blog
+      </a>
+
+      <a class="navbar-item has-text-weight-bold" href="{% url 'about' %}">
+        About
+      </a>
+
+      <a class="navbar-item has-text-weight-bold" href="https://ko-fi.com/abarocks">
+        &nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp
+      </a>
+
+      <div class="navbar-item has-text-weight-bold has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item has-text-weight-bold">
+            About
+          </a>
+          <a class="navbar-item has-text-weight-bold">
+            Jobs
+          </a>
+          <a class="navbar-item has-text-weight-bold">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item has-text-weight-bold">
+            Report an issue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--
+<nav class="navbar navbar-dark navbar-expand-lg">
+    <div class="container-fluid">
+    <a class="navbar-brand" style="color: #fff; font-weight: bold;" href="{% url 'home' %}">ABA.Rocks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i>
+    </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" hx-boost="true" hx-select="#content"
+           hx-target="#content" hx-push-url="true">
+        <ul class="mb-2 navbar-nav me-auto mb-lg-0" style="font-weight: bold;">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'learn:course-index' %}">Learn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'blog:blog-posts' %}">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://ko-fi.com/abarocks">&nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp</a>
+            </li>
+            <li class="nav-item dropdown" style="font-weight: bold;">
+                <a class="nav-link dropdown-toggle" href="{% url 'blog:blog-posts' %}" style="color: #fff" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Study by Certification
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">RBT</a></li>
+                    <li><a class="dropdown-item" href="">BCaBA</a></li>
+                    <li><a class="dropdown-item" href="">BCBA</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="">Study something else here</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+!-->
