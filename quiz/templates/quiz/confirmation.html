@@ -9,14 +9,14 @@
     </div>
     <div class="modal-footer">
         <button type="button"
-                class="btn btn-secondary"
+                class="button is-secondary"
                 hx-get="{% url 'quiz:continue' %}"
                 hx-target="#content"
                 hx-swap="innerhtml"
 
         >Resume</button>
         <button type="button"
-                class="btn btn-primary"
+                class="button is-primary"
                 hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm"
                 hx-target="#content"
         >Start Over</button>

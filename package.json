@@ -25,7 +25,8 @@
     "htmx-ext-alpine-morph": "^2.0.0",
     "htmx-ext-head-support": "^2.0.3",
     "htmx-ext-response-targets": "^2.0.2",
-    "htmx.org": "^1.9.12"
+    "htmx.org": "^1.9.12",
+    "sass": "^1.83.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

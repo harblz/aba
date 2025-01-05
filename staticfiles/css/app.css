@@ -1,99 +1,30 @@
 :root {
     --system-font:
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            Roboto,
-            Oxygen-sans,
-            Ubuntu,
-            Cantarell,
-            "Helvetica Neue",
-            Helvetica,
-            Arial,
-            "Noto Sans",
-            "Apple Color Emoji",
-            "Segoe UI Emoji",
-            "Segoe UI Symbol",
-            "Noto Color Emoji";
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen-sans,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        "Noto Sans",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji";
 }
 
 html {
     font-family: var(--system-font), ui-sans-serif, sans-serif;
 }
 
+:root {
+    --bulma-navbar-item-color: #fff;
+}
+
 a {
-    color: inherit;
-    text-decoration: inherit;
-}
-
-.img-container {
-    max-height: 180px;
-}
-
-.carousel-image {
-    object-fit: cover;
-}
-
-
-.flex-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.btn {
-    margin: 2px;
-}
-
-/* Responsive layout - makes a one column layout instead of a two-column layout */
-@media (max-width: 960px) {
-    .flex-container {
-        flex-direction: column;
-    }
-}
-
-.navbar {
-    z-index: 1000;
-    position: fixed;
-    width: 100%;
-    background-color: #ee6c4d;
-}
-
-.content {
-    /* keeps the navbar out of the way :o */
-    padding-top: 80px;
-}
-
-.post-container {
-    border-bottom: 3px solid rgba(160, 160, 160, 0.728);
-    margin-top: 50px;
-}
-
-.post-date {
-    color: rgba(160, 160, 160, 1.0);
-}
-
-.carousel-highlight {
-    background-color: hsla(0, 0%, 8%, 0.908);
     color: #fff;
-}
-
-/* these are bullshit styles for demo'ing template */
-.bd-highlight {
-    background-color: #563d7c26;
-    border: 1px solid rgba(86, 61, 124, 0.15);
-}
-
-.bd-highlight-1 {
-    background-color: #dcff688e;
-    border: 1px solid rgba(86, 61, 124, 0.15);
-}
-
-.bd-highlight-2 {
-    background-color: #fbb1ff26;
-    border: 1px solid rgba(86, 61, 124, 0.15);
-}
-
-.bd-highlight-3 {
-    background-color: rgba(255, 197, 109, 0.15);
-    border: 1px solid rgba(86, 61, 124, 0.15);
 }

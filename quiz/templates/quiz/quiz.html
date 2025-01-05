@@ -7,7 +7,7 @@
     {% endif %}</p>
   <br>
   <button type="button"
-          class="btn btn-primary"
+          class="button is-primary"
           hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
           hx-indicator="#spinner"
           hx-target="#content"
@@ -15,7 +15,7 @@
   >Click here to begin!</button>
   <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
   <div id="alpine-wrapper" x-data="{ modal : false }">
-      <div class="modal-dialog modal-lg" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
+      <div class="modal is-active" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
         <div class="modal-content" id="modals-here" ></div>
       </div>
 </div>

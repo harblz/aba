@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
   {% for quiz in quizzes %}
-  <a href="{% url 'quiz:quiz' quiz.course_id quiz.number %}">{{ quiz }}</a>
+  <a class="button is-primary" href="{% url 'quiz:quiz' quiz.course_id quiz.number %}">{{ quiz }}</a>
   {% endfor %}
-{% endblock %}
+{% endblock content %}
 

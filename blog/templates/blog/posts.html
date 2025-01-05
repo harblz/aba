@@ -1,33 +1,36 @@
-<div id="posts">
+<div id="posts" class="container">
   {% for post in page_obj %}
-    <div class="container-fluid ">
-      <div class="mx-auto col-md-8">
-        <div class="p-4 post-container">
-          <div class="flex-row d-flex">
-            <div class="align-middle post-image w-25 d-none d-sm-block d-flex justify-content-center">
-              {% if post.pic %}
-                <img src="{{ post.pic }}" height="auto" width="auto" class="rounded img-fluid" alt="Responsive image">
-              {% endif %}
-            </div>  
-            <div class="p-4 post-title justify-content-center">
-              <a href="blog/{{ post.id }}"><h1 class="display-4">{{ post.title }}</h1></a>
-              <div class="p-2 post-subtitle">
-                <p class="post-date">{{ post.published_date }} <br/><br/></p>
-                {% autoescape off %}
-                  {{ post.subtitle }}
-                {% endautoescape %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="block card">
+    {% if post.pic %}
+    <div class="card-image">
+      <figure class="image is-4by3">        
+        <img height="auto" width="auto"
+          src="{{ post.pic }}"
+          alt="{{ post.subtitle }}"
+        />
+      </figure>
     </div>
-    {% if page_obj.has_next %}
-      <span hx-get="{% url 'blog:blog-posts' %}?page={{ page_obj.next_page_number }}"
-            hx-target="#posts"
-            hx-swap="beforeend"
-            hx-trigger="revealed"
-      ></span>
     {% endif %}
-{% endfor %}
+    <div class="card-content">
+        <a class="title is-4" href="{% url 'blog:blog-post' post.id %}">{{ post.title }}</a>
+        <br />
+        <time class="subtitle is-6" datetime="2016-1-1">{{ post.published_date }}</time>
+        <br />
+        {% if post.subtitle %}
+        <br />
+        <p class="subtitle is-5">{{ post.subtitle|safe }}</p>
+        {% endif %}
+        <p>{{ post.text|safe }}</p>
+    </div>
+  </div>
+
+  {% if page_obj.has_next %}
+    <span hx-get="{% url 'blog:blog-posts' %}?page={{ page_obj.next_page_number }}"
+          hx-target="#posts"
+          hx-swap="beforeend"
+          hx-trigger="revealed"
+    ></span>
+  {% endif %}
+
+  {% endfor %}
 </div>

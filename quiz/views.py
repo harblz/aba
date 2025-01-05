@@ -22,6 +22,7 @@ from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
 
+from django.utils.safestring import mark_safe
 
 class QuizIndex(ListView):
     model = Quiz
@@ -97,7 +98,7 @@ def _continue(request) -> HttpResponse:
     form = TakeQuizForm(question=question)
     if key["table"] == "MultipleChoiceQuestion":
         form.fields["answer"].choices = [
-            (answer.id, answer.text) for answer in question.answers.all()
+            (answer.id, mark_safe(answer.text)) for answer in question.answers.all()
         ]
     elif key["table"] == "TrueFalseQuestion":
         form.fields["answer"].choices = [(True, "True"), (False, "False")]
@@ -149,7 +150,7 @@ def _start(request, code, number) -> HttpResponse:
         question = model.objects.get(pk=first_question["question"])
         choices = []
         if first_question["table"] == "MultipleChoiceQuestion":
-            choices = [(answer.id, answer.text) for answer in question.answers.all()]
+            choices = [(answer.id, mark_safe(answer.text)) for answer in question.answers.all()]
         elif first_question["table"] == "TrueFalseQuestion":
             choices = [(True, "True"), (False, "False")]
         form = TakeQuizForm()

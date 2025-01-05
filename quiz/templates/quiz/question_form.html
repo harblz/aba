@@ -1,19 +1,19 @@
-{% load static django_bootstrap5 %}
+{% load static %}
 {{ question|safe }}
 <form hx-post="{% url 'quiz:continue' %}?next"
       hx-swap="innerHTML"
       hx-target="#content"
       hx-indicator="#spinner">
   {% csrf_token %}
-  {% bootstrap_form_errors form %}
+  
   {% for field in form %}
-    <div class="fieldWrapper">
-       {% bootstrap_field field %}
-    </div>
-{% endfor %}
-  <button type="submit">Next Question</button>
+      <div id="answers" class="fieldWrapper">
+          {{ field.errors }}
+          {{ field.label_tag.as_field_group }} 
+          {{ field.as_field_group }}
+      </div>
+  {% endfor %}
+
+  <button class="button is-primary" type="submit">Next Question</button>
   <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
 </form>
-<script>
-  htmx.logAll();
-</script>

@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     "taggit",
     "django_ckeditor_5",
     "django_htmx",
-    "django_bootstrap5",
     "fontawesomefree",
     "core.apps.CoreConfig",
     "quiz.apps.QuizConfig",

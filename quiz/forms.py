@@ -5,9 +5,7 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 
 from .models import Quiz, MultipleChoiceQuestion, TrueFalseQuestion
 
-
 class TakeQuizForm(forms.Form):
-    # question = forms.CharField(widget=CKEditor5Widget(attrs={"readonly": True}))
     answer = forms.ChoiceField(widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
