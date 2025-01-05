@@ -14,7 +14,6 @@ package-mode = false
 python = "^3.12"
 django = "^5.1"
 whitenoise = "^6.7"
-stripe = "^10.12"
 django-taggit = "^6.0"
 django-bootstrap5 = "^24.3"
 django-htmx = "^1.19"

@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}Course Landing Page {% endblock title %}
 {% block content %}
-<div class="container-fluid">
+<div class='container-fluid'>
     <div>
         <h2>{{ course.name }}</h2>
         <h4>{{ course.code }}</h4>
@@ -9,18 +9,18 @@
     </div>
 
     <h2>Lessons</h2>
-    <div class="flex-row overflow-auto d-flex flex-nowrap">
+    <div class='flex-row overflow-auto d-flex flex-nowrap'>
         {% if lessons|length == 0 %}
         <p>There are no lessons for this course yet. Check back soon!</p>
         {% endif %}
         {% for lesson in lessons %}
-        <div class="p-4 col-3" style="min-width: 350px;">
-            <div class="card" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ lesson.title }}</h5>
-                <h6 class="mb-2 card-subtitle text-muted">{{ lesson.slug }}</h6>
+        <div class='p-4 col-3' style='min-width: 350px;'>
+            <div class='card' style='width: 20rem;'>
+            <div class='card-body'>
+                <h5 class='card-title'>{{ lesson.title }}</h5>
+                <h6 class='mb-2 card-subtitle text-muted'>{{ lesson.slug }}</h6>
                 <h6>{{ lesson.content|safe }}</h6>
-                <a href="#" class="card-link btn btn-primary">Read Lesson</a>
+                <a href='#' class='card-link btn btn-primary'>Read Lesson</a>
             </div>
             </div>
         </div>

@@ -5,12 +5,14 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 
 from .models import Quiz, MultipleChoiceQuestion, TrueFalseQuestion
 
+
 class TakeQuizForm(forms.Form):
     answer = forms.ChoiceField(widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
-        question = kwargs.pop('question', "The question didn't load")
+        choices = kwargs.pop("choices")
         super(TakeQuizForm, self).__init__(*args, **kwargs)
+        self.fields["answer"].choices = choices
 
 
 class EditQuizForm(forms.ModelForm):

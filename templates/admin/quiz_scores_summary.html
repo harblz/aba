@@ -1,4 +1,4 @@
-{% extends "admin/change_list.html" %}
+{% extends 'admin/change_list.html' %}
 
 {% load quiz_extras %}
 
@@ -12,7 +12,7 @@
 {% endblock content_title %}
 
 {% block result_list %}
-<div class="results">
+<div class='results'>
 
     <h2> Average Scores Over Time </h2>
 
@@ -62,18 +62,18 @@
       }
     </style>
 
-    <div class="results">
-        <div class="bar-chart">
+    <div class='results'>
+        <div class='bar-chart'>
         {% for x in summary_over_time %}
-            <div class="bar" style="height:{{ x.pct }}%">
-                <div class="bar-tooltip">
-                  Avg. Score of {{ x.total | default:0 | floatformat:"1" }}%
+            <div class='bar' style='height:{{ x.pct }}%'>
+                <div class='bar-tooltip'>
+                  Avg. Score of {{ x.total | default:0 | floatformat:'1' }}%
                   <br>
-                  on {{ x.period | date:"m/d/Y" }}
+                  on {{ x.period | date:'m/d/Y' }}
                 </div>
-                <div class="bar-inside-label">
+                <div class='bar-inside-label'>
                   <strong>
-                    {{ x.total | default:0 | floatformat:"1" }}%
+                    {{ x.total | default:0 | floatformat:'1' }}%
                   </strong>
                 </div>
             </div>
@@ -87,18 +87,18 @@
       <thead>
         <tr>
           <th>
-            <div class="text">
-              <a href="#">Category</a>
+            <div class='text'>
+              <a href='#'>Category</a>
             </div>
           </th>
           <th>
-            <div class="text">
-              <a href="#">Total</a>
+            <div class='text'>
+              <a href='#'>Total</a>
             </div>
           </th>
           <th>
-            <div class="text">
-              <a href="#">Average Score</a>
+            <div class='text'>
+              <a href='#'>Average Score</a>
             </div>
           </th>
         </tr>
@@ -106,10 +106,10 @@
 
       <tbody>
         {% for row in summary %}
-        <tr class="{% cycle 'row1' 'row2' %}">
+        <tr class='{% cycle 'row1' 'row2' %}'>
           <td> {{ row.unit_id__unit_name }} </td>
           <td> {{ row.total | intcomma }} </td>
-          <td> {{ row.average_score | default:0 | floatformat:"1" }}% </td>
+          <td> {{ row.average_score | default:0 | floatformat:'1' }}% </td>
         </tr>
         {% endfor %}
       </tbody>   

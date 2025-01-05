@@ -9,4 +9,5 @@ urlpatterns = [
     path("<str:code>/<int:number>/start/", views._start, name="start_quiz"),
     path("quiz/next/", views._continue, name="continue"),
     path("quiz/save/", views._save_progress, name="save_progress"),
+    path("quiz/check/", views._check_answer, name="check_answer"),
 ]

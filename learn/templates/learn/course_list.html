@@ -1,79 +1,79 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-<div id="content_container" class="container" style="padding: 2.5%; border: 1px solid red;">
+<div id='content_container' class='container' style='padding: 2.5%; border: 1px solid red;'>
 
-  <div class="row">
-    <div class="col-12 lms-title">
+  <div class='row'>
+    <div class='col-12 lms-title'>
       <h2>The Task-List Takedown!</h2>
     </div>
 
-    <div class="w-100" style="height: 2rem;"></div>
+    <div class='w-100' style='height: 2rem;'></div>
 
-    <div class="col lms-resume">
+    <div class='col lms-resume'>
 
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"> {{ user.profile.last_lesson_page }} </h5>
-          <h6 class="card-subtitle mb-2 text-muted">Pick up where you left off</h6>
-          <img class="img-fluid" src="https://www.aba.rocks/{{ user.profile.last_lesson_page.pic }}" alt="User's Profile Picture">
-          <div class="w-100" style="height: 1rem;"></div>
-          <p class="card-text">
+      <div class='card' style='width: 18rem;'>
+        <div class='card-body'>
+          <h5 class='card-title'> {{ user.profile.last_lesson_page }} </h5>
+          <h6 class='card-subtitle mb-2 text-muted'>Pick up where you left off</h6>
+          <img class='img-fluid' src='https://www.aba.rocks/{{ user.profile.last_lesson_page.pic }}' alt='User's Profile Picture'>
+          <div class='w-100' style='height: 1rem;'></div>
+          <p class='card-text'>
             {{ user.profile.last_lesson_page.body|safe|truncatewords_html:user.profile.last_lesson_page.snippet_size }}
           </p>
-          <a href="{% url 'course_index' %}" class="btn btn-info text-white">Study</a>
+          <a href='{% url "course_index" %}' class='btn btn-info text-white'>Study</a>
           <!-- /learn/unit/{{user.profile.last_lesson_page.id}} -->
         </div>
       </div>
     </div>
 
-    <div class="col-8 lms-progress-chart">
-      <div class="container" style="height: 400px;width:400px;">
-        <canvas id="myChart"></canvas>
+    <div class='col-8 lms-progress-chart'>
+      <div class='container' style='height: 400px;width:400px;'>
+        <canvas id='myChart'></canvas>
       </div>
     </div>
 
-    <div class="w-100" style="height: 5rem;"></div>
+    <div class='w-100' style='height: 5rem;'></div>
 
-    <div class="col-12 lms-all-units">
+    <div class='col-12 lms-all-units'>
 
       <h2>RBT Study Materials</h2>
       <p>
         Let's cover the task list, item-by-item - then, take practice quizzes to get yourself ready for the RBT exam
       </p>
-      <p class="text-info">
+      <p class='text-info'>
         <u>NOTE</u>: this course <b><u>DOES NOT</u></b> count towards your 40 hour training requirement for the RBT exam -- this is intended as a free, supplementary resource to build your skills and confidence in behavior analysis, and help get you ready for the BACB's RBT exam. There's also no substitute for real-world practice - real-world practice with a competent BCBA is strongly suggested.
       </p>
 
-      <div class="w-100" style="height: 1rem;"></div>
+      <div class='w-100' style='height: 1rem;'></div>
 
       <p>
-        <img src="https://aba.rocks/static/img/BACB-Emblem-new.png" alt="BACB Emblem" class="img-thumbnail float-left" height="50px" width="50px" style="margin-right: 10px;">
-        <p class="text-muted">
+        <img src='https://aba.rocks/static/img/BACB-Emblem-new.png' alt='BACB Emblem' class='img-thumbnail float-left' height='50px' width='50px' style='margin-right: 10px;'>
+        <p class='text-muted'>
           The RBT Task list and BACB emblem are Copyright © 1998-2019 the Behavior Analyst Certification Board, Inc., (BACB), ALL RIGHTS RESERVED. 
         </p>
       </p>
 
-      <div class="w-100" style="height: 2rem;"></div>
+      <div class='w-100' style='height: 2rem;'></div>
 
-      <div class="accordion" id="lms-unit-accordion">
+      <div class='accordion' id='lms-unit-accordion'>
         
         {% for unit in units %}
-        <div class="card">
-          <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapse-unit-{{ unit.id }}" aria-expanded="true" aria-controls="collapseOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link">
+        <div class='card'>
+          <div class='card-header' id='headingOne' type='button' data-toggle='collapse' data-target='#collapse-unit-{{ unit.id }}' aria-expanded='true' aria-controls='collapseOne'>
+            <h5 class='mb-0'>
+              <button class='btn btn-link'>
                 {{ unit.unit_name }}
               </button>
             </h5>
           </div>
 
-          <div id="collapse-unit-{{ unit.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#lms-unit-accordion">
-            <div class="card-body">
+          <div id='collapse-unit-{{ unit.id }}' class='collapse' aria-labelledby='headingOne' data-parent='#lms-unit-accordion'>
+            <div class='card-body'>
               {{ unit.unit_description | safe }}
               <br />
-              <a href="unit/{{ unit.id }}" class="btn btn-info">Study</a>
+              <a href='unit/{{ unit.id }}' class='btn btn-info'>Study</a>
             </div>
           </div>
         </div>

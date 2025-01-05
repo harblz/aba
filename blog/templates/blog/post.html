@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}
-<div class="py-4 jumbotron jumbotron-fluid">
-	<div class="container">
-	<h1 class="display-4">{{ post.title }}</h1>
+<div class='py-4 jumbotron jumbotron-fluid'>
+	<div class='container'>
+	<h1 class='display-4'>{{ post.title }}</h1>
 	{% autoescape off %}
 		{{ post.text }}
 	{% endautoescape %}

@@ -3,26 +3,26 @@
 {% block quiz-content %}
 
 
-  <span class="confetti_wrapper">
+  <span class='confetti_wrapper'>
     <!-- Displays the Quiz Results at the end !-->
-    <div id="results"></div>
+    <div id='results'></div>
 
-    <div class="container">
+    <div class='container'>
 
     </div>
 
-  <div class="container-fluid" id="flashcard_container"> 
+  <div class='container-fluid' id='flashcard_container'>
 
-    <div class="row">
-      <div class="col-md-2" >
-        <div class="col-md-12 timer_container">
-          <div class="d-flex justify-content-center">
-            <div class="item html">
-                <h2 id="countdown_timer">0</h2>
-                <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+    <div class='row'>
+      <div class='col-md-2' >
+        <div class='col-md-12 timer_container'>
+          <div class='d-flex justify-content-center'>
+            <div class='item html'>
+                <h2 id='countdown_timer'>0</h2>
+                <svg width='160' height='160' xmlns='http://www.w3.org/2000/svg'>
                  <g>
                   <title>Layer 1</title>
-                  <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#6fdb6f" fill="none"/>
+                  <circle id='circle' class='circle_animation' r='69.85699' cy='81' cx='81' stroke-width='8' stroke='#6fdb6f' fill='none'/>
                  </g>
                 </svg>
             </div>
@@ -30,35 +30,35 @@
         </div>
       </div>
 
-      <div class="col-md-10">
+      <div class='col-md-10'>
 
-        <div class="col-12 progress_bar_container">
-          <div class="progress">
-            <div id="progress_bar_correct" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            <div id="progress_bar_incorrect" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class='col-12 progress_bar_container'>
+          <div class='progress'>
+            <div id='progress_bar_correct' class='progress-bar bg-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'></div>
+            <div id='progress_bar_incorrect' class='progress-bar bg-danger' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'></div>
           </div>
         </div>    
 
         
-        <div class="col-12 alert-oot">
+        <div class='col-12 alert-oot'>
           <br>
-          <div class="alert alert-warning flashcard-oot" style="display:none;">You ran out of time - do you want to <a href=".">try again?</a></div>
+          <div class='alert alert-warning flashcard-oot' style='display:none;'>You ran out of time - do you want to <a href='.'>try again?</a></div>
         </div>
 
-        <div class="col-12 score_graph_container">
-          <div id="score_graph" class="fade" style="display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;">
-            <canvas id="myChart" width="400" height="400"></canvas>
+        <div class='col-12 score_graph_container'>
+          <div id='score_graph' class='fade' style='display: none; height: 100%; width: 100%;max-height: 400px; max-width: 400px;margin: 0 auto 0 auto;'>
+            <canvas id='myChart' width='400' height='400'></canvas>
           </div>
-          <div class="container-fluid" id="score_graph_options" style="display:none;margin: 2.5rem auto 0 auto">
-            <a href="." class="btn btn-info font-weight-bold">Restart Fluency</a>
-            <a href="../" class="btn btn-warning font-weight-bold">Practice Untimed</a>
-            <a href="/fluency" class="btn btn-success font-weight-bold">Back to SAFMEDS Menu</a>
-            <a href="/study" class="btn btn-secondary font-weight-bold">Back to Study Portal</a>
+          <div class='container-fluid' id='score_graph_options' style='display:none;margin: 2.5rem auto 0 auto'>
+            <a href='.' class='btn btn-info font-weight-bold'>Restart Fluency</a>
+            <a href='../' class='btn btn-warning font-weight-bold'>Practice Untimed</a>
+            <a href='/fluency' class='btn btn-success font-weight-bold'>Back to SAFMEDS Menu</a>
+            <a href='/study' class='btn btn-secondary font-weight-bold'>Back to Study Portal</a>
           </div>
         </div>
 
-        <div class="col-12 flashcard_wrapper">
-          <div id="flashcard" class="flashcard">
+        <div class='col-12 flashcard_wrapper'>
+          <div id='flashcard' class='flashcard'>
           </div>
         </div>
       </div>
@@ -68,9 +68,9 @@
   </div>
 
   <br /><br />
-  <div class="container" style="text-align: center;">
-    <button type="button" data-toggle="collapse" href="#disqus_thread" class="btn btn-info">
-      <i class="far fa-comment"></i>
+  <div class='container' style='text-align: center;'>
+    <button type='button' data-toggle='collapse' href='#disqus_thread' class='btn btn-info'>
+      <i class='far fa-comment'></i>
       Toggle Comments
     </button>
   </div>
@@ -78,24 +78,24 @@
 
 
   <!-- Report Question as Erroneous Modal !-->
-  <div class="modal fade" id="error_report_modal" tabindex="-1" role="dialog" aria-labelledby="error_report_modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Spot something fishy? &nbsp <i class="fas fa-fish"></i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+  <div class='modal fade' id='error_report_modal' tabindex='-1' role='dialog' aria-labelledby='error_report_modal' aria-hidden='true'>
+    <div class='modal-dialog' role='document'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='exampleModalLabel'>Spot something fishy? &nbsp <i class='fas fa-fish'></i></h5>
+          <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class='modal-body'>
           <br />
           <h5>See something wrong with this question?</h5>
-          <p class="text-muted"><b>Thank you for your feedback!</b><br /> Report the type of error below, and I'll get an email prompting me to fix it from the server. Thank you in advance for your time and patience while I work to improve this site - and best of luck studying!</p>
+          <p class='text-muted'><b>Thank you for your feedback!</b><br /> Report the type of error below, and I'll get an email prompting me to fix it from the server. Thank you in advance for your time and patience while I work to improve this site - and best of luck studying!</p>
 
         <form>
-          <div class="form-group">
-            <label for="error_type">What's wrong?</label>
-            <select multiple class="form-control" id="error_type">
+          <div class='form-group'>
+            <label for='error_type'>What's wrong?</label>
+            <select multiple class='form-control' id='error_type'>
               <option>Glitch / Bug</option>
               <option>Typo / Spelling & Grammar</option>
               <option>Question / Choices are wrong (please describe below)</option>
@@ -103,45 +103,45 @@
               <option>Other (please describe below)</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Please take a moment to summarize the problem:</label>
-            <textarea class="form-control" id="error_description" rows="3"></textarea>
+          <div class='form-group'>
+            <label for='exampleFormControlTextarea1'>Please take a moment to summarize the problem:</label>
+            <textarea class='form-control' id='error_description' rows='3'></textarea>
           </div>
         </form>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
-          <button type="button" class="btn btn-primary" onClick="submitReport()">Submit the report</button>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-secondary' data-dismiss='modal'>Nevermind</button>
+          <button type='button' class='btn btn-primary' onClick='submitReport()'>Submit the report</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Disqus Code !-->
-  <div id="disqus_thread" class="collapse col-12"></div>
+  <div id='disqus_thread' class='collapse col-12'></div>
 
 
-  <template id="flashcard_template">
-    <div class="card" style="width: 100%;margin: 0 auto 0 auto; padding: 5%;">
-      <div class="card-body">
-        <h3 class="card-title">Flashcard title</h3>
-        <h6 class="card-subtitle mb-2 text-muted">Which choice describes this flashcard best - <a href="#" class="text-info font-weight-bold" onClick="showHint()">want a hint?</a> &nbsp&nbsp <a class="text-warning font-weight-bold" data-toggle="modal" data-target="#error_report_modal" href="#"><i class="fas fa-flag"></i> Report Question </a></h6>
+  <template id='flashcard_template'>
+    <div class='card' style='width: 100%;margin: 0 auto 0 auto; padding: 5%;'>
+      <div class='card-body'>
+        <h3 class='card-title'>Flashcard title</h3>
+        <h6 class='card-subtitle mb-2 text-muted'>Which choice describes this flashcard best - <a href='#' class='text-info font-weight-bold' onClick='showHint()'>want a hint?</a> &nbsp&nbsp <a class='text-warning font-weight-bold' data-toggle='modal' data-target='#error_report_modal' href='#'><i class='fas fa-flag'></i> Report Question </a></h6>
 
-        <div id="flashcard_positive_feedback" class="flashcard_feedback alert alert-success" style="display: none;">
+        <div id='flashcard_positive_feedback' class='flashcard_feedback alert alert-success' style='display: none;'>
           Nice job! You got it right.
         </div>
 
-        <div id="flashcard_negative_feedback" class="flashcard_feedback alert alert-warning" style="display: none;">
+        <div id='flashcard_negative_feedback' class='flashcard_feedback alert alert-warning' style='display: none;'>
         </div>
 
-        <div id="flashcard_prompt" class="flashcard_prompt alert alert-info" style="display: none;">
+        <div id='flashcard_prompt' class='flashcard_prompt alert alert-info' style='display: none;'>
         </div>
 
         <br />
 
 
-        <div class="flashcard_options_container">
+        <div class='flashcard_options_container'>
 
         </div>
 
@@ -149,18 +149,18 @@
     </div>
   </template>
 
-  <template id="flashcard_options_template">
+  <template id='flashcard_options_template'>
 
-    <div class="form-check flashcard_template_option" style="cursor: pointer;">
+    <div class='form-check flashcard_template_option' style='cursor: pointer;'>
 
-      <label style="cursor: pointer;">
-        <table style="table-layout: fixed;" class="table table-hover" >
-          <tr style="display:table-row;border-radius: 15px;cursor: pointer;">
-            <td style="vertical-align: top;width:15px;" onClick=gradeMe(event)>
-              <input style="margin-left: 5px; margin-right: 8px;" class="form-check-input flashcard_input" type="radio" name="choice">
+      <label style='cursor: pointer;'>
+        <table style='table-layout: fixed;' class='table table-hover' >
+          <tr style='display:table-row;border-radius: 15px;cursor: pointer;'>
+            <td style='vertical-align: top;width:15px;' onClick=gradeMe(event)>
+              <input style='margin-left: 5px; margin-right: 8px;' class='form-check-input flashcard_input' type='radio' name='choice'>
             </td>
             <td>
-              <span class="form-check-label flashcard_input_label" style="font-weight: normal"></span>
+              <span class='form-check-label flashcard_input_label' style='font-weight: normal'></span>
             </td>
           </tr>
         </table>
@@ -171,7 +171,7 @@
   </template>
 
 
-  {% include "disqus.html" %}
+  {% include 'disqus.html' %}
   <script>
 
   function highlightAnswers() {
@@ -188,7 +188,7 @@
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.onbeforeunload = function ()
   {
-     return "";
+     return '';
   };
   
   function shuffle(a) {
@@ -210,21 +210,21 @@
   var show_negative_feedback  = false;
 
   var current_flashcard       = 0;
-  var max_flashcards          = Number("{{total_flashcards}}");
+  var max_flashcards          = Number('{{total_flashcards}}');
 
   var flashcards              = `{{ flashcards|escapejs }}`;
   flashcards = JSON.parse(flashcards);
   flashcards                  = shuffle(flashcards);
 
 
-  var unit_id = "{{unit_id}}";
-  var deck_id = "{{deck_id}}";
+  var unit_id = '{{unit_id}}';
+  var deck_id = '{{deck_id}}';
   
   function tally_vote(choice_id) {
     console.log(choice_id);
     $.ajax({
-      url : "/fluency/"+choice_id+"/tally/",
-      type : "POST",
+      url : '/fluency/'+choice_id+'/tally/',
+      type : 'POST',
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', choice_id : choice_id },
       success : function(response) {
         console.log(response);
@@ -238,16 +238,16 @@
   }
   
   function submitReport() {
-    console.log(flashcards[current_flashcard]["fields"]);
+    console.log(flashcards[current_flashcard]['fields']);
     var flashcard_id = flashcards[current_flashcard].pk;
-    var error_type = document.getElementById("error_type");
+    var error_type = document.getElementById('error_type');
     var selected = Array.from(error_type.selectedOptions).map(v=>v.value);
-    var error_description = document.getElementById("error_description").value;
+    var error_description = document.getElementById('error_description').value;
     console.log(error_description, flashcard_id, JSON.stringify(selected))
 
     $.ajax({
-      url : "/error/report",
-      type : "POST",
+      url : '/error/report',
+      type : 'POST',
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', id: flashcard_id, module: 'fluency', categories: JSON.stringify(selected), description: error_description },
       success : function(response) {
         console.log(response);
@@ -263,9 +263,9 @@
   }
 
   function gradeMe(event) {
-    tally_vote(event.target.getAttribute("pk"));
+    tally_vote(event.target.getAttribute('pk'));
     
-    var correct = event.target.getAttribute("correct");
+    var correct = event.target.getAttribute('correct');
     if ( correct === 'true' ) {
       flashcards_correct += 1;
       show_negative_feedback = false;
@@ -291,8 +291,8 @@
   function submitScore(score, time) {
     console.log('submitting score')
     $.ajax({
-      url : "/fluency/score/",
-      type : "POST",
+      url : '/fluency/score/',
+      type : 'POST',
       data : { 'csrfmiddlewaretoken': '{{csrf_token}}', unit_id: unit_id, time: elapsed_time, module: 'fluency_timed', deck_id: deck_id, fluency_score: score },
       success : function(response) {
         console.log(response);
@@ -321,13 +321,13 @@
     var final_score = flashcards_correct/(flashcards_incorrect+flashcards_correct);
     if ( final_score >= 0.8 ) {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-success"><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
+      $('#results').html('<br><div class='alert alert-success'><b>Hey, good work there!<b> Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
       for (var i = 0; i < 250; i++) {
         create(i);
       }
     } else {
       window.scrollTo(0,0);
-      $('#results').html('<br><div class="alert alert-danger"><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
+      $('#results').html('<br><div class='alert alert-danger'><b>Better luck next time</b> - keep trying! You can do it! Your score is: <b>'+Math.floor(final_score*100)+'%</b> and you finished in <b>'+elapsed_time+' seconds.</div>');
     }
     myChart.data.datasets[0].data[1] = flashcards_correct;
     myChart.data.datasets[0].data[0] = flashcards_incorrect;
@@ -337,7 +337,7 @@
   /* Warn user before reloading the quiz (and losing all progress!) */
   window.onbeforeunload = function ()
   {
-     //return "";
+     //return '';
   };
 
   window.onload = function() {
@@ -370,23 +370,23 @@
   }
 
   function next_flashcard() {
-    document.querySelector("#flashcard").innerHTML = '';
-    var flashcard_template  = document.querySelector("#flashcard_template")
+    document.querySelector('#flashcard').innerHTML = '';
+    var flashcard_template  = document.querySelector('#flashcard_template')
 
-    var flashcard = document.querySelector("#flashcard")
+    var flashcard = document.querySelector('#flashcard')
 
     var clone = document.importNode(flashcard_template.content, true)
 
-    var task = flashcards[current_flashcard]["fields"]["task_list_data"];
+    var task = flashcards[current_flashcard]['fields']['task_list_data'];
     task = task.substr(2, task.length);
     task = task.substr(0, task.length-2);
-    task = task.split(", ");
+    task = task.split(', ');
 
-    choices = flashcards[current_flashcard]["fields"]["flashcard_choices"];
+    choices = flashcards[current_flashcard]['fields']['flashcard_choices'];
     choices = choices.substr(2,choices.length);
     choices = choices.substr(0,choices.length-2);
 
-    choices = choices.split("), (");
+    choices = choices.split('), (');
 
     choices = shuffle(choices);
 
@@ -394,16 +394,16 @@
     var options = [];
 
     for (i = 0; i < choices.length; i++) {
-      option.id               = parseInt(choices[i].substr(0, choices[i].indexOf("'")-2))
-      option.content          = choices[i].substr(choices[i].indexOf("'")+4, choices[i].length)
-      option.content          = option.content.substr(0, option.content.indexOf("'")-4)
-      option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(",")+2, choices[i].length).toLowerCase())
+      option.id               = parseInt(choices[i].substr(0, choices[i].indexOf(''')-2))
+      option.content          = choices[i].substr(choices[i].indexOf(''')+4, choices[i].length)
+      option.content          = option.content.substr(0, option.content.indexOf(''')-4)
+      option.is_correct       = JSON.parse(choices[i].substr(choices[i].lastIndexOf(',')+2, choices[i].length).toLowerCase())
 
       var options_template = document.importNode(flashcard_options_template.content, true)
 
-      options_template.querySelector(".flashcard_input_label").innerHTML = option.content
-      options_template.querySelector(".flashcard_input").setAttribute('correct', option.is_correct);
-      options_template.querySelector(".flashcard_input").setAttribute('pk', option.id);
+      options_template.querySelector('.flashcard_input_label').innerHTML = option.content
+      options_template.querySelector('.flashcard_input').setAttribute('correct', option.is_correct);
+      options_template.querySelector('.flashcard_input').setAttribute('pk', option.id);
 
 
       clone.querySelector('.flashcard_options_container').appendChild(options_template)
@@ -412,19 +412,19 @@
       options.push(option);
     }
 
-    var flashcard_title = flashcards[current_flashcard]["fields"]["flashcard_text"];
+    var flashcard_title = flashcards[current_flashcard]['fields']['flashcard_text'];
 
-    clone.querySelector(".card-title").innerHTML = '<p>' + flashcard_title + ' <small style="font-size: 0.5em;" class="text-info">' + ' ' + task[1].substr(1, task[1].length-2) + '</small></p>'
+    clone.querySelector('.card-title').innerHTML = '<p>' + flashcard_title + ' <small style='font-size: 0.5em;' class='text-info'>' + ' ' + task[1].substr(1, task[1].length-2) + '</small></p>'
     
     if ( current_flashcard != 0 ) {
-      var correction = flashcards[current_flashcard-1]["fields"]["flashcard_hint"];
+      var correction = flashcards[current_flashcard-1]['fields']['flashcard_hint'];
     } else {
-      var correction = flashcards[current_flashcard]["fields"]["flashcard_hint"];
+      var correction = flashcards[current_flashcard]['fields']['flashcard_hint'];
     }
-    var hint = flashcards[current_flashcard]["fields"]["flashcard_hint"];
+    var hint = flashcards[current_flashcard]['fields']['flashcard_hint'];
 
-    clone.querySelector(".flashcard_prompt").innerHTML = "<p><b>The answer is: </b> " + hint.substr(3,hint.length) + "</p>";
-    clone.querySelector("#flashcard_negative_feedback").innerHTML = "<p><br>Oops! Not quite right - <b>the answer was: </b> " + correction.substr(3,correction.length) + "</p><p><button onClick='hideFeedback()' class='btn btn-danger'>OK, I got it</button></p>";
+    clone.querySelector('.flashcard_prompt').innerHTML = '<p><b>The answer is: </b> ' + hint.substr(3,hint.length) + '</p>';
+    clone.querySelector('#flashcard_negative_feedback').innerHTML = '<p><br>Oops! Not quite right - <b>the answer was: </b> ' + correction.substr(3,correction.length) + '</p><p><button onClick='hideFeedback()' class='btn btn-danger'>OK, I got it</button></p>';
 
     flashcard.appendChild(clone)
 
@@ -436,7 +436,7 @@
   }
 
   function showHint() {
-    var feedback_display_state = document.querySelector(".flashcard_prompt").style.display;
+    var feedback_display_state = document.querySelector('.flashcard_prompt').style.display;
     if (feedback_display_state == 'block') {
        feedback_display_state = 'none;';
     } else {
@@ -446,11 +446,11 @@
 
   // Score Pie Chart (generates a visualization of their score for the user)
   var dataset = [];
-  var ctx = document.getElementById("myChart");
+  var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-          labels: ["Incorrect", "Correct"],
+          labels: ['Incorrect', 'Correct'],
           datasets: [{
               label: 'Score Report',
               data: dataset,
@@ -480,24 +480,24 @@
     var width = Math.random() * 8;
     var height = width * 0.4;
     var colourIdx = Math.ceil(Math.random() * 3);
-    var colour = "red";
+    var colour = 'red';
     switch(colourIdx) {
       case 1:
-        colour = "yellow";
+        colour = 'yellow';
         break;
       case 2:
-        colour = "blue";
+        colour = 'blue';
         break;
       default:
-        colour = "red";
+        colour = 'red';
     }
-    $('<div class="confetti-'+i+' '+colour+'"></div>').css({
-      "width" : width+"px",
-      "height" : height+"px",
-      "top" : -Math.random()*20+"%",
-      "left" : Math.random()*100+"%",
-      "opacity" : Math.random()+0.5,
-      "transform" : "rotate("+Math.random()*360+"deg)"
+    $('<div class='confetti-'+i+' '+colour+''></div>').css({
+      'width' : width+'px',
+      'height' : height+'px',
+      'top' : -Math.random()*20+'%',
+      'left' : Math.random()*100+'%',
+      'opacity' : Math.random()+0.5,
+      'transform' : 'rotate('+Math.random()*360+'deg)'
     }).appendTo('.confetti_wrapper');  
     
     drop(i);
@@ -505,8 +505,8 @@
 
   function drop(x) {
     $('.confetti-'+x).animate({
-      top: "100%",
-      left: "+="+Math.random()*15+"%"
+      top: '100%',
+      left: '+='+Math.random()*15+'%'
     }, Math.random()*3000 + 3000, function() {
       reset(x);
     });
@@ -514,8 +514,8 @@
 
   function reset(x) {
     $('.confetti-'+x).animate({
-      "top" : -Math.random()*20+"%",
-      "left" : "-="+Math.random()*15+"%"
+      'top' : -Math.random()*20+'%',
+      'left' : '-='+Math.random()*15+'%'
     }, 0, function() {
       drop(x);             
     });

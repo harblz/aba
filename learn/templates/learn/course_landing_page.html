@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}Course Landing Page {% endblock title %}
 {% block content %}
-<div class="container-fluid">
+<div class='container-fluid'>
 <div>
     <h2>{{ course.name }}</h2>
     <h4>{{ course.code }}</h4>
@@ -14,25 +14,25 @@ Lessons = attached to courses; multiple lessons per course
 Quizzes = attached to lessons; multiple quizzes per lesson
 !-->
 
-<div class="flex-row overflow-auto d-flex flex-nowrap">
+<div class='flex-row overflow-auto d-flex flex-nowrap'>
     {% if quizzes|length == 0 %}
     <p>There are no quizzes for this course yet. Check back soon!</p>
     {% endif %}
 {% for quiz in quizzes %}
-<div class="p-4 col" style="min-width: 350px;">
-    <div class="card" style="width: 20rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ quiz.desc }}</h5>
+<div class='p-4 col' style='min-width: 350px;'>
+    <div class='card' style='width: 20rem;'>
+    <div class='card-body'>
+        <h5 class='card-title'>{{ quiz.desc }}</h5>
         {% for area in quiz.areas.all %}
-        <h6 class="mb-2 card-subtitle text-muted">{{ area.area }}</h6>
+        <h6 class='mb-2 card-subtitle text-muted'>{{ area.area }}</h6>
         {% endfor %}
         {% if quiz.timed == TRUE %}
-        <p class="card-text">Multiple choice quiz. There is a {{ quiz.time }} time limit. Good luck!</p>
+        <p class='card-text'>Multiple choice quiz. There is a {{ quiz.time }} time limit. Good luck!</p>
         {% else %}
-        <p class="card-text">Multiple choice quiz. No time limit. Good luck!</p>
+        <p class='card-text'>Multiple choice quiz. No time limit. Good luck!</p>
         {% endif %}
-        <a href="{% url 'quiz:get_quiz' quiz.course_id quiz.number %}" class="card-link btn btn-primary">Start Quiz</a>
-        <a href="#" class="card-link btn btn-secondary">Lesson</a>
+        <a href='{% url "quiz:get_quiz" quiz.course_id quiz.number %}' class='card-link btn btn-primary'>Start Quiz</a>
+        <a href='#' class='card-link btn btn-secondary'>Lesson</a>
     </div>
     </div>
 </div>
