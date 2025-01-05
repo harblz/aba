@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load duration_extras humanize static %}
 {% block content %}
+<div id="quiz-wrapper">
   <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
     {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
     {% else %}untimed. Take your time.
@@ -14,9 +15,10 @@
           hx-swap="innerHTML"
   >Click here to begin!</button>
   <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
-  <div id="alpine-wrapper" x-data="{ modal : false }">
-      <div class="modal is-active" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
-        <div class="modal-content" id="modals-here" ></div>
-      </div>
+</div>
+<div id="alpine-wrapper" x-data="{ modal : false }">
+    <div class="modal is-active" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
+      <div class="modal-content" id="modals-here" ></div>
+    </div>
 </div>
 {% endblock content %}

@@ -11,14 +11,14 @@
         <button type="button"
                 class="button is-secondary"
                 hx-get="{% url 'quiz:continue' %}"
-                hx-target="#content"
+                hx-target="#quiz-wrapper"
                 hx-swap="innerhtml"
 
         >Resume</button>
         <button type="button"
                 class="button is-primary"
                 hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm"
-                hx-target="#content"
+                hx-target="#quiz-wrapper"
         >Start Over</button>
     </div>
   </div>
