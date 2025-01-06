@@ -2,7 +2,7 @@
 {{ question|safe }}
 <form hx-post="{% url 'quiz:check_answer' %}"
       hx-swap="innerHTML"
-      hx-target="#content"
+      hx-target="#quiz-wrapper"
       x-data="{ loading: false }"
       :class="{'is-loading': loading }"
       @click="loading = !loading">

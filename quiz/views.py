@@ -52,7 +52,6 @@ def show_quiz(request, code, number) -> HttpResponse:
     course = quiz_obj.course
     request.session.set_test_cookie()
     headers = {"code": "RBT", "number": 1}
-    headers = json.dumps(headers)
 
     return render(
         request,
@@ -85,7 +84,10 @@ def _get_questions(slug) -> list | Type[Exception]:
 @htmx_required
 # Add ", code, number" when client-side storage figured out
 def _save_progress(request):
-    progress = get_object_or_404(QuizProgress, session=request.session.session_key)
+    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, slug=slug
+    )
     progress.key[str(progress.index)]["user_choice"] = request.POST.get("answer")
     progress.index += 1
     progress.save()
@@ -98,7 +100,10 @@ def _continue(request, **kwargs) -> HttpResponse:
         _save_progress(request)
     elif request.GET.get("continue") == "resume":
         pass
-    progress = get_object_or_404(QuizProgress, session=request.session.session_key)
+    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, slug=slug
+    )
     index = progress.index
     key = progress.key[str(index)]
     model = apps.get_model("quiz", key["table"])
@@ -213,7 +218,10 @@ def _check_progress(request, code, number):
 @htmx_required
 # Add ", code, number" when client-side storage figured out
 def _check_answer(request):
-    progress = get_object_or_404(QuizProgress, session=request.session.session_key)
+    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, slug=slug
+    )
     index = progress.index
     question = progress.key[str(index)]
     if request.POST.get("answer") == str(question["correct"]):
@@ -229,3 +237,8 @@ def _check_answer(request):
         reswap(response, "innerHTML")
         retarget(response, "#modals-here")
         return trigger_client_event(response, "show-modal", after="swap")
+
+
+@htmx_required
+def _grade_quiz(request):
+    pass
