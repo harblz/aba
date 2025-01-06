@@ -1,22 +1,28 @@
-    <div class="modal-header">
-      <h5 class="modal-title">Wait!</h5>
-    </div>
-    <div class="modal-body">
-      <p>
-        You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?
-      </p>
-    </div>
-    <div class="modal-footer">
-        <button type="button"
-                class="button is-secondary"
-                hx-get="{% url 'quiz:continue' %}?resume=True"
-                hx-target="#quiz-wrapper"
-                hx-swap="innerhtml"
+<header class="modal-card-head">
+  <h5 class="modal-title">Wait!</h5>
+</header>
+<section class="modal-card-body">
+  <p>
+    You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?
+  </p>
+</section>
+<footer class="modal-card-foot">
+    <button type="button"
+            class="button is-secondary"
+            x-data="{ loading: false }"
+            :class="{ 'is-loading': loading }"
+            @click="loading = !loading"
+            hx-get="{% url 'quiz:continue' %}?resume=True"
+            hx-target="#quiz-wrapper"
+            hx-swap="innerhtml"
 
-        >Resume</button>
-        <button type="button"
-                class="button is-primary"
-                hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm=True"
-                hx-target="#quiz-wrapper"
-        >Start Over</button>
-    </div>
+    >Resume</button>
+    <button type="button"
+            class="button is-primary"
+            x-data="{ loading: false }"
+            :class="{ 'is-loading': loading }"
+            @click="loading = !loading"
+            hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm=True"
+            hx-target="#quiz-wrapper"
+    >Start Over</button>
+</footer>

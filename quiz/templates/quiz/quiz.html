@@ -10,15 +10,17 @@
   <button type="button"
           class="button is-primary"
           hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
-          hx-indicator="#spinner"
+          x-data="{ loading: false }"
+          :class="{'is-loading': loading }"
+          @click="loading = !loading"
           hx-target="#content"
           hx-swap="innerHTML"
   >Click here to begin!</button>
-  <img id="spinner" height="auto" width="auto" alt="loading spinner" class="htmx-indicator" src="{% static 'img/spinners/bars-min.svg' %}"/>
 </div>
 <div id="alpine-wrapper" x-data="{ modal : false }">
-    <div class="modal is-active" tabindex="-1" @show-modal.window="modal = !modal" x-show="modal" x-transition>
-      <div class="modal-content"
+    <div class="modal" id="modal-wrapper" @show-modal.window="modal = !modal" :class="{ 'is-active': modal }" x-transition>
+      <div class="modal-background"></div>
+      <div class="modal-card"
            id="modals-here"
            x-ref='modal'
            @reset.window='$refs.modal.replaceChildren();

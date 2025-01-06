@@ -1,15 +1,19 @@
-  <div class='modal-header'>
-  </div>
-  <div class='modal-body'>
-    <p>
-      {{ hint|safe }}
-    </p>
-  </div>
-  <div class='modal-footer'>
-      <button type='button'
-              class='btn btn-primary'
-              hx-get='{% url "quiz:continue" %}?continue=next'
-              hx-target='#quiz-wrapper'
-              hx-swap='innerHTML'
-      >Next Question</button>
-  </div>
+<header class='modal-card-head'>
+  <h5>Not Quite!</h5>
+</header>
+<section class='modal-card-body'>
+  <p>
+    {{ hint|safe }}
+  </p>
+</section>
+<footer class='modal-card-foot'>
+    <button type='button'
+            class='button  is-primary'
+            x-data="{ loading: false }"
+            :class="{'is-loading': loading }"
+            @click="loading = !loading"
+            hx-get='{% url "quiz:continue" %}?continue=next'
+            hx-target='#quiz-wrapper'
+            hx-swap='innerHTML'
+    >Next Question</button>
+</footer>
