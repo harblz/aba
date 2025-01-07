@@ -1,0 +1,17 @@
+{% block content %}
+<h1>{{ code }} Quiz No.{{ number }} Final Results</h1>
+<ul>
+  <li>
+    <p>Total Number of Questions:</p>
+    <p>{{ total }}</p>
+  </li>
+  <li>
+    <p>Number of Questions Answered Correctly:</p>
+    <p>{{ correct }}</p>
+  </li>
+  <li>
+    <p>Final Grade:</p>
+    <p>{{ percent }}</p>
+  </li>
+</ul>
+{% endblock content %}

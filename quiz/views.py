@@ -241,4 +241,26 @@ def _check_answer(request):
 
 @htmx_required
 def _grade_quiz(request):
-    pass
+    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, slug=slug
+    )
+    quiz = json.loads(progress.key)
+    total_q = 0
+    total_q = sum(1 for key in quiz.keys())
+    n_correct = 0
+    for key, value in quiz.items():
+        correct = value["correct"]
+        answer = value["user_choice"]
+        if correct == answer:
+            n_correct += 1
+    percent = (n_correct / total_q) * 100
+    context = {
+        "correct": n_correct,
+        "total": total_q,
+        "percent": percent,
+        "code": request.GET.get("code"),
+        "number": request.GET.get("number"),
+    }
+    # TODO: Logic to save results/quiz to user profile
+    return TemplateResponse(request, "", context)
