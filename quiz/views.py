@@ -262,5 +262,18 @@ def _grade_quiz(request):
         "code": request.GET.get("code"),
         "number": request.GET.get("number"),
     }
-    # TODO: Logic to save results/quiz to user profile
-    return TemplateResponse(request, "", context)
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        save_data = profile.data
+        data = {}
+        if "quizzes" not in data.keys:
+            save_data["quizzes"] = {}
+        save_data = save_data["quizzes"]
+        if request.GET.get("code") not in save_data.keys():
+            save_data[request.GET.get("code")] = {}
+        save_data = save_data[request.GET.get("code")]
+        if str(request.GET.get("number")) not in save_data.keys():
+            save_data[request.GET.get("number")] = {}
+        save_data = save_data[request.GET.get("number")]
+
+    return TemplateResponse(request, "quiz/completed.html", context)
