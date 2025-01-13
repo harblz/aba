@@ -1,29 +1,20 @@
 from typing import Type
 import json
 
-from django.shortcuts import get_object_or_404, render, Http404
-from django.http import (
-    HttpResponse,
-    HttpResponseServerError,
-    HttpResponseForbidden,
-    HttpResponseBadRequest,
-)
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
 from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event, reswap
-from django.utils import timezone
 from django.template.response import TemplateResponse
 from django.apps import apps
-from django.template import Template
+from django.utils.safestring import mark_safe
+from django.db.models.deletion import Collector
 
-# from pages.models import Pages
-# from learn.models import Course, Lesson, Task, ContentArea
 from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
-
-from django.utils.safestring import mark_safe
 
 
 class QuizIndex(ListView):
@@ -61,7 +52,7 @@ def show_quiz(request, code, number) -> HttpResponse:
 
 
 def _get_questions(slug) -> list | Type[Exception]:
-    quiz = Quiz.objects.get(slug=slug)
+    quiz = Quiz.objects.select_related().get(slug=slug)
     questions = []
     areas = []
     if quiz.areas.all().exists():
@@ -69,20 +60,17 @@ def _get_questions(slug) -> list | Type[Exception]:
     elif not quiz.areas.all():
         areas = quiz.course.content_areas.all().values()
     for area in areas:
-        tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
+        q = BaseQuestion.objects.filter(category=area["slug"]).values("id")
         mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values("id")
         weight = area["weight"]
         options = []
-        for question in tf:
-            options.append(f"TrueFalseQuestion:{question["id"]}")
-        for question in mc:
-            options.append(f"MultipleChoiceQuestion:{question["id"]}")
+        for question in q:
+            options.append(question["id"])
         questions += random.sample(options, weight)
     return questions
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
 def _save_progress(request):
     slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
     progress = get_object_or_404(
@@ -94,7 +82,6 @@ def _save_progress(request):
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
 def _continue(request, **kwargs) -> HttpResponse:
     if request.GET.get("continue") == "next" or "next" in kwargs:
         _save_progress(request)
@@ -107,9 +94,9 @@ def _continue(request, **kwargs) -> HttpResponse:
     index = progress.index
     key = progress.key[str(index)]
     model = apps.get_model("quiz", key["table"])
-    question = model.objects.get(pk=key["question"])
+    question = model.objects.selectt_related().get(pk=key["question"])
     choices = []
-    if key["table"] == "MultipleChoiceQuestion":
+    """if key["table"] == "MultipleChoiceQuestion":
         choices = [
             (
                 answer.id,
@@ -120,13 +107,12 @@ def _continue(request, **kwargs) -> HttpResponse:
             for answer in question.answers.all()
         ]
     elif key["table"] == "TrueFalseQuestion":
-        choices = [(True, "True"), (False, "False")]
+        choices = [(True, "True"), (False, "False")]"""
     form = TakeQuizForm(choices=choices)
     response = TemplateResponse(
         request, "quiz/question_form.html", {"form": form, "question": question}
     )
     return trigger_client_event(response, "reset", after="swap")
-    # Add ", code, number" when client-side storage figured out
 
 
 @htmx_required
@@ -142,9 +128,10 @@ def _start(request, code, number) -> HttpResponse:
         tuple(questions)
         data = {}
         for index, question in enumerate(questions):
-            info = question.split(":")
-            model = apps.get_model("quiz", info[0])
-            obj = model.objects.get(id=info[1])
+            base = BaseQuestion.objects.get(pk=question)
+            collector = Collector(using="default")
+            meta = collector.collect(base)
+
             index = index
             answer = None
             if info[0] == "MultipleChoiceQuestion":
@@ -216,7 +203,6 @@ def _check_progress(request, code, number):
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
 def _check_answer(request):
     slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
     progress = get_object_or_404(

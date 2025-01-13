@@ -17,7 +17,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 @admin.register(MultipleChoiceQuestion)
 class MultipleChoiceAdmin(admin.ModelAdmin):
-    pass
+    exclude = ["type"]
 
 
 @admin.register(MultipleChoiceAnswer)
@@ -27,9 +27,10 @@ class MultipleChoiceAnswerAdmin(admin.ModelAdmin):
 
 @admin.register(TrueFalseQuestion)
 class TrueFalseAdmin(admin.ModelAdmin):
+    exclude = ["type"]
     form = EditTrueFalseForm
 
 
-@admin.register(QuizProgress)
+"""@admin.register(QuizProgress)
 class QuizProgressAdmin(admin.ModelAdmin):
-    pass
+    pass"""

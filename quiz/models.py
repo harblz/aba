@@ -46,9 +46,17 @@ class BaseQuestion(models.Model):
     text = CKEditor5Field("Question Text")
     hint = CKEditor5Field("Question Hint", blank=True, null=True)
     disabled = models.BooleanField(default=False, null=True, blank=True)
+    type = models.CharField("Question Type", max_length=50)
 
     def __str__(self):
         return self.text
+
+    def save(self, *args, **kwargs):
+        self.type = self.__class__.__name__
+        self.save_base()
+
+    def get_concrete(self):
+        return self.__getattribute__(self.type.lower())
 
 
 class MultipleChoiceQuestion(BaseQuestion):
@@ -57,7 +65,6 @@ class MultipleChoiceQuestion(BaseQuestion):
     )
 
     class Meta:
-        default_related_name = "multiple_choice_questions"
         verbose_name = "Multiple Choice Question"
         db_table_comment = "All multiple choice questions"
 
@@ -66,7 +73,6 @@ class TrueFalseQuestion(BaseQuestion):
     answer = models.BooleanField()
 
     class Meta:
-        default_related_name = "true_false_questions"
         verbose_name = "True/False Question"
         db_table_comment = "All True/False Questions"
 
@@ -77,6 +83,7 @@ class MultipleChoiceAnswer(models.Model):
 
     class Meta:
         default_related_name = "answers"
+        verbose_name = "Multiple Choice Answer"
         db_table_comment = "Table of multiple choice answers"
 
     def __str__(self):
