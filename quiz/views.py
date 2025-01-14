@@ -61,7 +61,6 @@ def _get_questions(slug) -> list | Type[Exception]:
         areas = quiz.course.content_areas.all().values()
     for area in areas:
         q = BaseQuestion.objects.filter(category=area["slug"]).values("id")
-        mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values("id")
         weight = area["weight"]
         options = []
         for question in q:
@@ -93,10 +92,9 @@ def _continue(request, **kwargs) -> HttpResponse:
     )
     index = progress.index
     key = progress.key[str(index)]
-    model = apps.get_model("quiz", key["table"])
-    question = model.objects.selectt_related().get(pk=key["question"])
+    question = BaseQuestion.objects.select_related().get(pk=key["question"])
     choices = []
-    """if key["table"] == "MultipleChoiceQuestion":
+    if question.type.model == "multiplechoicequestion":
         choices = [
             (
                 answer.id,
@@ -106,8 +104,8 @@ def _continue(request, **kwargs) -> HttpResponse:
             )
             for answer in question.answers.all()
         ]
-    elif key["table"] == "TrueFalseQuestion":
-        choices = [(True, "True"), (False, "False")]"""
+    elif question.type.model == "truefalsequestion":
+        choices = [(True, "True"), (False, "False")]
     form = TakeQuizForm(choices=choices)
     response = TemplateResponse(
         request, "quiz/question_form.html", {"form": form, "question": question}
@@ -128,17 +126,15 @@ def _start(request, code, number) -> HttpResponse:
         tuple(questions)
         data = {}
         for index, question in enumerate(questions):
-            base = BaseQuestion.objects.get(pk=question)
-            collector = Collector(using="default")
-            meta = collector.collect(base)
-
-            index = index
+            q = BaseQuestion.objects.select_related().get(pk=question)
+            model = q.type.model
+            rel = getattr(q, model)
             answer = None
-            if info[0] == "MultipleChoiceQuestion":
-                answer = obj.answer.id
-            elif info[0] == "TrueFalseQuestion":
-                answer = obj.answer
-            data[index] = {"table": info[0], "question": info[1], "correct": answer}
+            if model == "multiplechoicequestion":
+                answer = rel.answer_id
+            elif model == "truefalsequestion":
+                answer = rel.answer
+            data[index] = {"question": q.text, "correct": answer}
         if quiz.timed:
             time = quiz.time
             timed = True
@@ -155,23 +151,24 @@ def _start(request, code, number) -> HttpResponse:
         )
 
         first_question = data[0]
-        model = apps.get_model("quiz", first_question["table"])
-        question = model.objects.get(pk=first_question["question"])
+        question = BaseQuestion.objects.select_related().get(
+            pk=first_question["question"]
+        )
+        rel = getattr(question.type.app_label, question.type.model)
         choices = []
-        if first_question["table"] == "MultipleChoiceQuestion":
-            choices = [
-                (answer.id, mark_safe(answer.text)) for answer in question.answers.all()
-            ]
+        if question.type.model == "multiplechoicequestion":
             choices = [
                 (
-                    answer.id,
+                    rel.answer.id,
                     mark_safe(
-                        answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
+                        rel.answer.text[:2]
+                        + " class='is-inline-block'"
+                        + rel.answer.text[2:]
                     ),
                 )
                 for answer in question.answers.all()
             ]
-        elif first_question["table"] == "TrueFalseQuestion":
+        elif question.type.model == "truefalsequestion":
             choices = [(True, "True"), (False, "False")]
         form = TakeQuizForm(choices=choices)
 
@@ -210,13 +207,12 @@ def _check_answer(request):
     )
     index = progress.index
     question = progress.key[str(index)]
+    # Needs logic to highlight the selected answer in green client side
     if request.POST.get("answer") == str(question["correct"]):
-        # Needs logic to highlight the selected answer in green client side
         response = _continue(request, next=True)
         return response
     elif request.POST.get("answer") != str(question["correct"]):
-        model = apps.get_model("quiz", question["table"])
-        q_obj = model.objects.get(id=question["question"])
+        q_obj = BaseQuestion.objects.select_related().get(id=question["question"])
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)

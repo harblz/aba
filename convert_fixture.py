@@ -1,4 +1,25 @@
 import json
+from django.conf import settings
+import django
+
+
+settings.configure(
+    DEBUG=True,
+    INSTALLED_APPS=("django.contrib.contenttypes",),
+    DATABASES={
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "OPTIONS": {
+                "service": "aba.rocks",
+                "passfile": ".pgpass",
+            },
+        },
+    },
+)
+django.setup()
+
+
+from django.contrib.contenttypes.models import ContentType
 
 
 def convert_fixture(file):
@@ -13,11 +34,8 @@ def convert_fixture(file):
             or i["model"] == "quiz.truefalsequestion"
         ):
             bf = i["fields"]
-            q_type = None
-            if i["model"] == "quiz.truefalsequestion":
-                q_type = "MultipleChoiceQuestion"
-            elif i["model"] == "quiz.multiplechoicequestion":
-                q_type = "MultipleChoiceQuestion"
+            q_model = i["model"].split(".")
+            q_type = ContentType.objects.get_by_natural_key(q_model[0], q_model[1]).id
             bfs = dict(
                 text=bf["text"],
                 category=bf["category"],
@@ -49,3 +67,9 @@ def convert_fixture(file):
             o,
             indent=4,
         )
+
+
+if __name__ == "__main__":
+    import sys
+
+    convert_fixture(sys.argv[1])

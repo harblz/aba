@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 
 from learn import models as learn
 from django_ckeditor_5.fields import CKEditor5Field
@@ -46,17 +47,18 @@ class BaseQuestion(models.Model):
     text = CKEditor5Field("Question Text")
     hint = CKEditor5Field("Question Hint", blank=True, null=True)
     disabled = models.BooleanField(default=False, null=True, blank=True)
-    type = models.CharField("Question Type", max_length=50)
+    type = models.ForeignKey(ContentType, editable=False, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
 
     def save(self, *args, **kwargs):
-        self.type = self.__class__.__name__
-        self.save_base()
+        if self._state.adding:
+            self.type = self._get_type()
+        super(BaseQuestion, self).save(*args, **kwargs)
 
-    def get_concrete(self):
-        return self.__getattribute__(self.type.lower())
+    def _get_type(self):
+        return ContentType.objects.get_for_model(self)
 
 
 class MultipleChoiceQuestion(BaseQuestion):
