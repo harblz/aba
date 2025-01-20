@@ -26,9 +26,9 @@
         <div class="modal-background"></div>
         <div class="modal-card"
              id="modals-here"
-             x-ref='modal'
-             @reset.window='$refs.modal.replaceChildren();
-                            $nextTick(() => { modal = false })'></div>
+             x-ref="modal"
+             @reset.window="$refs.modal.replaceChildren();
+                            $nextTick(() => { modal = false })"></div>
       </div>
   </div>
 </div>

@@ -201,7 +201,7 @@ customColorPalette = [
     {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
     {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
 ]
-
+CKEDITOR_5_CUSTOM_CSS = os.path.join(STATIC_URL, "css/custom-ck.css")
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [

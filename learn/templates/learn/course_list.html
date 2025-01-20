@@ -1,48 +1,48 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
-<div id='content_container' class='container' style='padding: 2.5%; border: 1px solid red;'>
+<div id="content_container" class="container" style="padding: 2.5%; border: 1px solid red;">
 
-  <div class='row'>
-    <div class='col-12 lms-title'>
+  <div class="row">
+    <div class="col-12 lms-title">
       <h2>The Task-List Takedown!</h2>
     </div>
 
-    <div class='w-100' style='height: 2rem;'></div>
+    <div class="w-100" style="height: 2rem;"></div>
 
-    <div class='col lms-resume'>
+    <div class="col lms-resume">
 
-      <div class='card' style='width: 18rem;'>
-        <div class='card-body'>
-          <h5 class='card-title'> {{ user.profile.last_lesson_page }} </h5>
-          <h6 class='card-subtitle mb-2 text-muted'>Pick up where you left off</h6>
-          <img class='img-fluid' src='https://www.aba.rocks/{{ user.profile.last_lesson_page.pic }}' alt='User's Profile Picture'>
-          <div class='w-100' style='height: 1rem;'></div>
-          <p class='card-text'>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"> {{ user.profile.last_lesson_page }} </h5>
+          <h6 class="card-subtitle mb-2 text-muted">Pick up where you left off</h6>
+          <img class="img-fluid" src="https://www.aba.rocks/{{ user.profile.last_lesson_page.pic }}" alt="User"s Profile Picture">
+          <div class="w-100" style="height: 1rem;"></div>
+          <p class="card-text">
             {{ user.profile.last_lesson_page.body|safe|truncatewords_html:user.profile.last_lesson_page.snippet_size }}
           </p>
-          <a href='{% url "course_index" %}' class='btn btn-info text-white'>Study</a>
+          <a href="{% url 'course_index' %}" class="btn btn-info text-white">Study</a>
           <!-- /learn/unit/{{user.profile.last_lesson_page.id}} -->
         </div>
       </div>
     </div>
 
-    <div class='col-8 lms-progress-chart'>
-      <div class='container' style='height: 400px;width:400px;'>
-        <canvas id='myChart'></canvas>
+    <div class="col-8 lms-progress-chart">
+      <div class="container" style="height: 400px;width:400px;">
+        <canvas id="myChart"></canvas>
       </div>
     </div>
 
-    <div class='w-100' style='height: 5rem;'></div>
+    <div class="w-100" style="height: 5rem;"></div>
 
-    <div class='col-12 lms-all-units'>
+    <div class="col-12 lms-all-units">
 
       <h2>RBT Study Materials</h2>
       <p>
         Let's cover the task list, item-by-item - then, take practice quizzes to get yourself ready for the RBT exam
       </p>
-      <p class='text-info'>
+      <p class="text-info">
         <u>NOTE</u>: this course <b><u>DOES NOT</u></b> count towards your 40 hour training requirement for the RBT exam -- this is intended as a free, supplementary resource to build your skills and confidence in behavior analysis, and help get you ready for the BACB's RBT exam. There's also no substitute for real-world practice - real-world practice with a competent BCBA is strongly suggested.
       </p>
 

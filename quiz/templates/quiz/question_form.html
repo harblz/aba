@@ -1,6 +1,7 @@
 {% load static %}
 {{ question|safe }}
-<form hx-post="{% url 'quiz:check_answer' %}"
+<form id="questionForm"
+      hx-post="{% url 'quiz:check_answer' %}"
       hx-swap="innerHTML"
       hx-target="#quiz-wrapper"
       x-data="{ loading: false }"
