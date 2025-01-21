@@ -76,11 +76,10 @@ def _save_progress(request):
     progress = get_object_or_404(
         QuizProgress, session=request.session.session_key, quiz=slug
     )
-    if isinstance((answer := request.POST.get("answer")), int):
+    if (answer := request.POST.get("answer")).isdigit():
         progress.key[str(progress.index)]["user_choice"] = answer
     elif answer == "True":
         progress.key[str(progress.index)]["user_choice"] = True
-
     elif answer == "False":
         progress.key[str(progress.index)]["user_choice"] = False
     progress.index += 1
@@ -88,7 +87,22 @@ def _save_progress(request):
 
 
 @htmx_required
-def _continue(request, **kwargs) -> HttpResponse:
+def _continue(request):
+    response = None
+    if request.GET.get("action") == "check":
+        response = _check_answer(request)
+    elif request.GET.get("action") == "next":
+        _save_progress(request)
+        response = _next_question(request)
+    elif request.GET.get("action") == "resume":
+        response = _next_question(request)
+    elif request.GET.get("action") == "end":
+        response = _grade_quiz(request)
+    return response
+
+
+@htmx_required
+def _next_question(request, **kwargs) -> HttpResponse:
     slug = request.headers["code"] + "-" + str(request.headers["number"])
     progress = get_object_or_404(
         QuizProgress, session=request.session.session_key, quiz=slug
@@ -111,10 +125,21 @@ def _continue(request, **kwargs) -> HttpResponse:
     elif question.type.model == "truefalsequestion":
         choices = [(True, "True"), (False, "False")]
     form = TakeQuizForm(choices=choices)
+    action = None
+    if not (_next := str(index + 1)) in progress.key.keys():
+        action = "end"
+    elif _next in progress.key.keys():
+        action = "check"
     response = TemplateResponse(
-        request, "quiz/question_form.html", {"form": form, "question": question}
+        request,
+        "quiz/question_form.html",
+        {
+            "form": form,
+            "question": question,
+            "action": action,
+        },
     )
-    return trigger_client_event(response, "reset", after="swap")
+    return trigger_client_event(response, "increment", after="swap")
 
 
 @htmx_required
@@ -129,6 +154,7 @@ def _start(request, code, number) -> HttpResponse:
         random.shuffle(questions)
         tuple(questions)
         data = {}
+        count = 0
         for index, question in enumerate(questions):
             q = BaseQuestion.objects.select_related().get(pk=question)
             model = q.type.model
@@ -139,6 +165,7 @@ def _start(request, code, number) -> HttpResponse:
             elif model == "truefalsequestion":
                 answer = rel.answer
             data[index] = {"question": q.id, "correct": answer}
+            count += 1
         if quiz.timed:
             time = quiz.time
             timed = True
@@ -177,7 +204,13 @@ def _start(request, code, number) -> HttpResponse:
         response = TemplateResponse(
             request,
             "quiz/question_form.html",
-            {"form": form, "slug": quiz.slug, "question": question},
+            {
+                "form": form,
+                "slug": quiz.slug,
+                "question": question,
+                "action": "check",
+                "total": count,
+            },
         )
         return trigger_client_event(response, "reset", after="swap")
 
@@ -210,10 +243,11 @@ def _check_answer(request):
     index = progress.index
     question = progress.key[str(index)]
     # Needs logic to highlight the selected answer in green client side
-    if request.POST.get("answer") == str(question["correct"]):
-        response = _continue(request, next="True")
+    if str(request.POST.get("answer")) == str(question["correct"]):
+        _save_progress(request)
+        response = _next_question(request)
         return response
-    elif request.POST.get("answer") != str(question["correct"]):
+    elif str(request.POST.get("answer")) != str(question["correct"]):
         q_obj = BaseQuestion.objects.select_related().get(id=question["question"])
         hint = q_obj.hint
         context = {"hint": hint}
@@ -229,7 +263,7 @@ def _grade_quiz(request):
     progress = get_object_or_404(
         QuizProgress, session=request.session.session_key, quiz=slug
     )
-    quiz = json.loads(progress.key)
+    quiz = progress.key
     total_q = 0
     total_q = sum(1 for key in quiz.keys())
     n_correct = 0

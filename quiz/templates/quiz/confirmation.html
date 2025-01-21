@@ -12,7 +12,7 @@
             x-data="{ loading: false }"
             :class="{ 'is-loading': loading }"
             @click="loading = !loading"
-            hx-get="{% url 'quiz:continue' %}?resume=True"
+            hx-get="{% url 'quiz:continue' %}?action=resume"
             hx-target="#quiz-wrapper"
             hx-swap="innerhtml"
 

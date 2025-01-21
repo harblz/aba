@@ -4,7 +4,7 @@
   {{ headers|json_script:"headers"}}
 {% endblock extra-head %}
 {% block content %}
-<div id="page-wrapper" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
+<div id="page-wrapper" x-data="{ count: 1 }" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
   <div id="quiz-wrapper">
     <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
       {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
@@ -14,7 +14,7 @@
     <button type="button"
             class="button is-primary"
             hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
-            x-data="{ loading: false }"
+            x-data="{ loading: false, }"
             :class="{'is-loading': loading }"
             @click="loading = !loading"
             hx-target="#quiz-wrapper"

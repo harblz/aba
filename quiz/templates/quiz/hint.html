@@ -12,7 +12,7 @@
             x-data="{ loading: false }"
             :class="{'is-loading': loading }"
             @click="loading = !loading"
-            hx-post="{% url 'quiz:continue' %}?next=True"
+            hx-post="{% url 'quiz:continue' %}?action=next"
             hx-include="#questionForm"
             hx-target="#quiz-wrapper"
             hx-swap="innerHTML"
