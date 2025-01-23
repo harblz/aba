@@ -95,8 +95,9 @@ def _continue(request):
         _save_progress(request)
         response = _next_question(request)
     elif request.GET.get("action") == "resume":
-        response = _next_question(request)
+        response = _next_question(request, resume=True)
     elif request.GET.get("action") == "end":
+        _save_progress(request)
         response = _grade_quiz(request)
     return response
 
@@ -130,16 +131,21 @@ def _next_question(request, **kwargs) -> HttpResponse:
         action = "end"
     elif _next in progress.key.keys():
         action = "check"
+    context = {
+        "form": form,
+        "question": question,
+        "action": action,
+    }
     response = TemplateResponse(
         request,
         "quiz/question_form.html",
-        {
-            "form": form,
-            "question": question,
-            "action": action,
-        },
+        context,
     )
-    return trigger_client_event(response, "increment", after="swap")
+    if "return" in kwargs:
+        response.context_data["index"] = index + 1
+        response.context_data["total"] = len(progress.key)
+        trigger_client_event(response, "resume", {"index": index + 1}, after="settle")
+    return trigger_client_event(response, "reset", after="swap")
 
 
 @htmx_required

@@ -4,8 +4,8 @@
   {{ headers|json_script:"headers"}}
 {% endblock extra-head %}
 {% block content %}
-<div id="page-wrapper" x-data="{ count: 1 }" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
-  <div id="quiz-wrapper">
+<div id="page-wrapper" x-data="{ count: 0 }" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
+  <div id="quiz-wrapper" @htmx:after-swap="count++">
     <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
       {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
       {% else %}untimed. Take your time.
@@ -20,15 +20,19 @@
             hx-target="#quiz-wrapper"
             hx-swap="innerHTML"
     >Click here to begin!</button>
+    <span x-text="count" hx-preserve></span>
   </div>
-  <div id="alpine-wrapper" x-data="{ modal : false }">
+  <div id="alpine-wrapper"
+       x-data="{ modal : false }"
+       @reset.window="$refs.modal.replaceChildren();
+               $nextTick(() => { modal = false })"
+  >
       <div class="modal" id="modal-wrapper" @show-modal.window="modal = !modal" :class="{ 'is-active': modal }" x-transition>
         <div class="modal-background"></div>
         <div class="modal-card"
              id="modals-here"
              x-ref="modal"
-             @reset.window="$refs.modal.replaceChildren();
-                            $nextTick(() => { modal = false })"></div>
+      ></div>
       </div>
   </div>
 </div>
