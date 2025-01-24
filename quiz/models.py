@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 
 from learn import models as learn
 from django_ckeditor_5.fields import CKEditor5Field
@@ -46,12 +47,18 @@ class BaseQuestion(models.Model):
     text = CKEditor5Field("Question Text")
     hint = CKEditor5Field("Question Hint", blank=True, null=True)
     disabled = models.BooleanField(default=False, null=True, blank=True)
-
-    class Meta:
-        abstract = True
+    type = models.ForeignKey(ContentType, editable=False, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            self.type = self._get_type()
+        super(BaseQuestion, self).save(*args, **kwargs)
+
+    def _get_type(self):
+        return ContentType.objects.get_for_model(self)
 
 
 class MultipleChoiceQuestion(BaseQuestion):
@@ -60,7 +67,6 @@ class MultipleChoiceQuestion(BaseQuestion):
     )
 
     class Meta:
-        default_related_name = "multiple_choice_questions"
         verbose_name = "Multiple Choice Question"
         db_table_comment = "All multiple choice questions"
 
@@ -69,7 +75,6 @@ class TrueFalseQuestion(BaseQuestion):
     answer = models.BooleanField()
 
     class Meta:
-        default_related_name = "true_false_questions"
         verbose_name = "True/False Question"
         db_table_comment = "All True/False Questions"
 
@@ -80,6 +85,7 @@ class MultipleChoiceAnswer(models.Model):
 
     class Meta:
         default_related_name = "answers"
+        verbose_name = "Multiple Choice Answer"
         db_table_comment = "Table of multiple choice answers"
 
     def __str__(self):

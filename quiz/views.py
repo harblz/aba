@@ -1,29 +1,21 @@
 from typing import Type
 import json
+import datetime
 
-from django.shortcuts import get_object_or_404, render, Http404
-from django.http import (
-    HttpResponse,
-    HttpResponseServerError,
-    HttpResponseForbidden,
-    HttpResponseBadRequest,
-)
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
 from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event, reswap
-from django.utils import timezone
 from django.template.response import TemplateResponse
 from django.apps import apps
-from django.template import Template
+from django.utils.safestring import mark_safe
+from django.db.models.deletion import Collector
 
-# from pages.models import Pages
-# from learn.models import Course, Lesson, Task, ContentArea
 from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from core.decorators import htmx_required
-
-from django.utils.safestring import mark_safe
 
 
 class QuizIndex(ListView):
@@ -61,7 +53,7 @@ def show_quiz(request, code, number) -> HttpResponse:
 
 
 def _get_questions(slug) -> list | Type[Exception]:
-    quiz = Quiz.objects.get(slug=slug)
+    quiz = Quiz.objects.select_related().get(slug=slug)
     questions = []
     areas = []
     if quiz.areas.all().exists():
@@ -69,64 +61,91 @@ def _get_questions(slug) -> list | Type[Exception]:
     elif not quiz.areas.all():
         areas = quiz.course.content_areas.all().values()
     for area in areas:
-        tf = TrueFalseQuestion.objects.filter(category=area["slug"]).values("id")
-        mc = MultipleChoiceQuestion.objects.filter(category=area["slug"]).values("id")
+        q = BaseQuestion.objects.filter(category=area["slug"]).values("id")
         weight = area["weight"]
         options = []
-        for question in tf:
-            options.append(f"TrueFalseQuestion:{question["id"]}")
-        for question in mc:
-            options.append(f"MultipleChoiceQuestion:{question["id"]}")
+        for question in q:
+            options.append(question["id"])
         questions += random.sample(options, weight)
     return questions
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
 def _save_progress(request):
-    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    slug = request.headers["code"] + "-" + str(request.headers["number"])
     progress = get_object_or_404(
-        QuizProgress, session=request.session.session_key, slug=slug
+        QuizProgress, session=request.session.session_key, quiz=slug
     )
-    progress.key[str(progress.index)]["user_choice"] = request.POST.get("answer")
+    if (answer := request.POST.get("answer")).isdigit():
+        progress.key[str(progress.index)]["user_choice"] = answer
+    elif answer == "True":
+        progress.key[str(progress.index)]["user_choice"] = True
+    elif answer == "False":
+        progress.key[str(progress.index)]["user_choice"] = False
     progress.index += 1
     progress.save()
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
-def _continue(request, **kwargs) -> HttpResponse:
-    if request.GET.get("continue") == "next" or "next" in kwargs:
+def _continue(request):
+    response = None
+    if request.GET.get("action") == "check":
+        response = _check_answer(request)
+    elif request.GET.get("action") == "next":
         _save_progress(request)
-    elif request.GET.get("continue") == "resume":
-        pass
-    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+        response = _next_question(request)
+    elif request.GET.get("action") == "resume":
+        response = _next_question(request, resume=True)
+    elif request.GET.get("action") == "end":
+        _save_progress(request)
+        response = _grade_quiz(request)
+    return response
+
+
+@htmx_required
+def _next_question(request, **kwargs) -> HttpResponse:
+    slug = request.headers["code"] + "-" + str(request.headers["number"])
     progress = get_object_or_404(
-        QuizProgress, session=request.session.session_key, slug=slug
+        QuizProgress, session=request.session.session_key, quiz=slug
     )
     index = progress.index
     key = progress.key[str(index)]
-    model = apps.get_model("quiz", key["table"])
-    question = model.objects.get(pk=key["question"])
+    question = BaseQuestion.objects.select_related().get(pk=key["question"])
+    rel = getattr(question, question.type.model)
     choices = []
-    if key["table"] == "MultipleChoiceQuestion":
+    if question.type.model == "multiplechoicequestion":
         choices = [
             (
                 answer.id,
                 mark_safe(
-                    answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
+                    answer.text[:2] + " class='is-inline-block'" + answer.text[2:],
                 ),
             )
-            for answer in question.answers.all()
+            for answer in rel.answers.all()
         ]
-    elif key["table"] == "TrueFalseQuestion":
+    elif question.type.model == "truefalsequestion":
         choices = [(True, "True"), (False, "False")]
     form = TakeQuizForm(choices=choices)
+    action = None
+    if not (_next := str(index + 1)) in progress.key.keys():
+        action = "end"
+    elif _next in progress.key.keys():
+        action = "check"
+    context = {
+        "form": form,
+        "question": question,
+        "action": action,
+    }
     response = TemplateResponse(
-        request, "quiz/question_form.html", {"form": form, "question": question}
+        request,
+        "quiz/question_form.html",
+        context,
     )
+    if "return" in kwargs:
+        response.context_data["index"] = index + 1
+        response.context_data["total"] = len(progress.key)
+        trigger_client_event(response, "resume", {"index": index + 1}, after="settle")
     return trigger_client_event(response, "reset", after="swap")
-    # Add ", code, number" when client-side storage figured out
 
 
 @htmx_required
@@ -141,17 +160,18 @@ def _start(request, code, number) -> HttpResponse:
         random.shuffle(questions)
         tuple(questions)
         data = {}
+        count = 0
         for index, question in enumerate(questions):
-            info = question.split(":")
-            model = apps.get_model("quiz", info[0])
-            obj = model.objects.get(id=info[1])
-            index = index
+            q = BaseQuestion.objects.select_related().get(pk=question)
+            model = q.type.model
+            rel = getattr(q, model)
             answer = None
-            if info[0] == "MultipleChoiceQuestion":
-                answer = obj.answer.id
-            elif info[0] == "TrueFalseQuestion":
-                answer = obj.answer
-            data[index] = {"table": info[0], "question": info[1], "correct": answer}
+            if model == "multiplechoicequestion":
+                answer = rel.answer_id
+            elif model == "truefalsequestion":
+                answer = rel.answer
+            data[index] = {"question": q.id, "correct": answer}
+            count += 1
         if quiz.timed:
             time = quiz.time
             timed = True
@@ -168,13 +188,12 @@ def _start(request, code, number) -> HttpResponse:
         )
 
         first_question = data[0]
-        model = apps.get_model("quiz", first_question["table"])
-        question = model.objects.get(pk=first_question["question"])
+        question = BaseQuestion.objects.select_related().get(
+            pk=first_question["question"]
+        )
+        rel = getattr(question, question.type.model)
         choices = []
-        if first_question["table"] == "MultipleChoiceQuestion":
-            choices = [
-                (answer.id, mark_safe(answer.text)) for answer in question.answers.all()
-            ]
+        if question.type.model == "multiplechoicequestion":
             choices = [
                 (
                     answer.id,
@@ -182,20 +201,26 @@ def _start(request, code, number) -> HttpResponse:
                         answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
                     ),
                 )
-                for answer in question.answers.all()
+                for answer in rel.answers.all()
             ]
-        elif first_question["table"] == "TrueFalseQuestion":
+        elif question.type.model == "truefalsequestion":
             choices = [(True, "True"), (False, "False")]
         form = TakeQuizForm(choices=choices)
 
         response = TemplateResponse(
             request,
             "quiz/question_form.html",
-            {"form": form, "slug": quiz.slug, "question": question},
+            {
+                "form": form,
+                "slug": quiz.slug,
+                "question": question,
+                "action": "check",
+                "total": count,
+            },
         )
         return trigger_client_event(response, "reset", after="swap")
 
-    elif type(response) is TemplateResponse:
+    elif isinstance(response, TemplateResponse):
         reswap(response, "innerHTML")
         retarget(response, "#modals-here")
         return trigger_client_event(response, "show-modal", after="swap")
@@ -216,21 +241,20 @@ def _check_progress(request, code, number):
 
 
 @htmx_required
-# Add ", code, number" when client-side storage figured out
 def _check_answer(request):
-    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    slug = request.headers["code"] + "-" + str(request.headers["number"])
     progress = get_object_or_404(
-        QuizProgress, session=request.session.session_key, slug=slug
+        QuizProgress, session=request.session.session_key, quiz=slug
     )
     index = progress.index
     question = progress.key[str(index)]
-    if request.POST.get("answer") == str(question["correct"]):
-        # Needs logic to highlight the selected answer in green client side
-        response = _continue(request, next=True)
+    # Needs logic to highlight the selected answer in green client side
+    if str(request.POST.get("answer")) == str(question["correct"]):
+        _save_progress(request)
+        response = _next_question(request)
         return response
-    elif request.POST.get("answer") != str(question["correct"]):
-        model = apps.get_model("quiz", question["table"])
-        q_obj = model.objects.get(id=question["question"])
+    elif str(request.POST.get("answer")) != str(question["correct"]):
+        q_obj = BaseQuestion.objects.select_related().get(id=question["question"])
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)
@@ -241,11 +265,11 @@ def _check_answer(request):
 
 @htmx_required
 def _grade_quiz(request):
-    slug = request.GET.get("code") + "-" + str(request.GET.get("number"))
+    slug = request.headers["code"] + "-" + str(request.headers["number"])
     progress = get_object_or_404(
-        QuizProgress, session=request.session.session_key, slug=slug
+        QuizProgress, session=request.session.session_key, quiz=slug
     )
-    quiz = json.loads(progress.key)
+    quiz = progress.key
     total_q = 0
     total_q = sum(1 for key in quiz.keys())
     n_correct = 0
@@ -264,16 +288,28 @@ def _grade_quiz(request):
     }
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        save_data = profile.data
-        data = {}
-        if "quizzes" not in data.keys:
-            save_data["quizzes"] = {}
-        save_data = save_data["quizzes"]
-        if request.GET.get("code") not in save_data.keys():
-            save_data[request.GET.get("code")] = {}
-        save_data = save_data[request.GET.get("code")]
-        if str(request.GET.get("number")) not in save_data.keys():
-            save_data[request.GET.get("number")] = {}
-        save_data = save_data[request.GET.get("number")]
-
+        save_data = json.loads(profile.data)
+        data = {
+            "#correct": n_correct,
+            "total": total_q,
+            # Time elapsed to go here in ISO8601 Duration format
+            # Or save start and end times to be calculated after
+            "key": json.loads(progress.key),
+        }
+        keys = (
+            "quizzes",
+            request.GET.get("code"),
+            str(request.GET.get("number")),
+        )
+        for key in keys:
+            if key not in save_data.keys():
+                save_data[key] = {}
+                save_data = save_data[key]
+            elif key in save_data.keys():
+                save_data = save_data[key]
+        if (today := datetime.date.today()) not in save_data.keys():
+            save_data[datetime.date.today()] = []
+        elif today in save_data.keys():
+            save_data = save_data[today]
+        save_data.append(data)
     return TemplateResponse(request, "quiz/completed.html", context)

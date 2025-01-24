@@ -1,6 +1,16 @@
 {% load static %}
+<progress class="progress is-warning"
+          id="progressBar"
+          :value="count"
+          @resume="count = $event.detail.window"
+          max="{{ total }}"
+          x-text="count"
+          hx-preserve
+></progress>
+<br>
 {{ question|safe }}
-<form hx-post="{% url 'quiz:check_answer' %}"
+<form id="questionForm"
+      hx-post="{% url 'quiz:continue' %}?action={{ action }}"
       hx-swap="innerHTML"
       hx-target="#quiz-wrapper"
       x-data="{ loading: false }"
@@ -15,6 +25,5 @@
             <div class="is-inline-block"> {{ field.as_field_group }} </div>
       </div>
   {% endfor %}
-
   <button class="button is-primary" type="submit">Next Question</button>
 </form>
