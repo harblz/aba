@@ -2,7 +2,6 @@
 <progress class="progress is-warning"
           id="progressBar"
           :value="count"
-          @resume="count = $event.detail.window"
           max="{{ total }}"
           x-text="count"
           hx-preserve
