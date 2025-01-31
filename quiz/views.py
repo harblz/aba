@@ -141,10 +141,9 @@ def _next_question(request, **kwargs) -> HttpResponse:
         "quiz/question_form.html",
         context,
     )
-    if "return" in kwargs:
-        response.context_data["index"] = index + 1
+    if request.GET.get("action") == "resume":
         response.context_data["total"] = len(progress.key)
-        trigger_client_event(response, "resume", {"index": index + 1}, after="settle")
+        trigger_client_event(response, "resume", {"index": index + 1}, after="swap")
     return trigger_client_event(response, "reset", after="swap")
 
 
