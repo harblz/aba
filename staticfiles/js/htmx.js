@@ -1,2 +1,2 @@
-import "./node_modules/htmx.org/dist/htmx";
+import htmx from "htmx.org";
 window.htmx = htmx;

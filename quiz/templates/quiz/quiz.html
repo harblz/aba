@@ -4,7 +4,7 @@
   {{ headers|json_script:"headers"}}
 {% endblock extra-head %}
 {% block content %}
-<div id="page-wrapper" x-data="{ count: 0}" @resume="count = $event.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
+<div id="page-wrapper" x-data="{ count: 0 }" @resume="count = $event.detail.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
   <span x-text="count" hx-preserve></span>
     <div id="quiz-wrapper" @htmx:after-swap="count++">
     <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is

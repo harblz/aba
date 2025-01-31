@@ -1,8 +1,7 @@
-import "htmx.org/dist/htmx";
-import "htmx.org/dist/ext/debug.js";
-import "htmx.org/dist/ext/response-targets";
-import "htmx.org/dist/ext/alpine-morph.js";
-import "htmx.org/dist/ext/head-support.js";
+import "htmx-ext-debug/debug";
+import "htmx-ext-response-targets/response-targets";
+import "htmx-ext-alpine-morph/alpine-morph";
+import "htmx-ext-head-support/head-support";
 
 import Alpine from "alpinejs";
 import morph from "@alpinejs/morph";
