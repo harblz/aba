@@ -4,8 +4,7 @@
   {{ headers|json_script:"headers"}}
 {% endblock extra-head %}
 {% block content %}
-<div id="page-wrapper" x-data="{ count: 0 }" @resume="count = $event.detail.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
-  <span x-text="count" hx-preserve></span>
+<div id="page-wrapper" class="has-text-centered" x-data="{ count: 0 }" @resume="count = $event.detail.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
     <div id="quiz-wrapper" @htmx:after-swap="count++">
     <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
       {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
@@ -24,12 +23,13 @@
   </div>
   <div id="alpine-wrapper"
        x-data="{ modal : false }"
+       @show-modal.window="modal = !modal" 
        @reset.window="$refs.modal.replaceChildren();
                $nextTick(() => { modal = false })"
   >
-      <div class="modal" id="modal-wrapper" @show-modal.window="modal = !modal" :class="{ 'is-active': modal }" x-transition>
+      <div class="modal" id="modal-wrapper" :class="{ 'is-active': modal }" x-transition>
         <div class="modal-background"></div>
-        <div class="modal-card"
+        <div class="modal-card box"
              id="modals-here"
              x-ref="modal"
       ></div>

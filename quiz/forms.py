@@ -7,7 +7,9 @@ from .models import Quiz, MultipleChoiceQuestion, TrueFalseQuestion
 
 
 class TakeQuizForm(forms.Form):
-    answer = forms.ChoiceField(widget=forms.RadioSelect)
+    answer = forms.ChoiceField(
+        widget=forms.RadioSelect(),
+    )
 
     def __init__(self, *args, **kwargs):
         choices = None

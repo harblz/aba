@@ -117,9 +117,7 @@ def _next_question(request, **kwargs) -> HttpResponse:
         choices = [
             (
                 answer.id,
-                mark_safe(
-                    answer.text[:2] + " class='is-inline-block'" + answer.text[2:],
-                ),
+                mark_safe(answer.text),
             )
             for answer in rel.answers.all()
         ]
@@ -196,9 +194,7 @@ def _start(request, code, number) -> HttpResponse:
             choices = [
                 (
                     answer.id,
-                    mark_safe(
-                        answer.text[:2] + " class='is-inline-block'" + answer.text[2:]
-                    ),
+                    mark_safe(answer.text),
                 )
                 for answer in rel.answers.all()
             ]
@@ -270,7 +266,7 @@ def _grade_quiz(request):
     )
     quiz = progress.key
     total_q = 0
-    total_q = sum(1 for key in quiz.keys())
+    total_q = progress.index
     n_correct = 0
     for key, value in quiz.items():
         correct = value["correct"]
@@ -282,23 +278,24 @@ def _grade_quiz(request):
         "correct": n_correct,
         "total": total_q,
         "percent": percent,
-        "code": request.GET.get("code"),
-        "number": request.GET.get("number"),
+        "code": request.headers["code"],
+        "number": request.headers["number"],
     }
     if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        save_data = json.loads(profile.data)
+        profile = Profile.objects.get_or_create(user=request.user)
+        prof_obj = profile[0]
+        save_data = prof_obj.data
         data = {
             "#correct": n_correct,
             "total": total_q,
             # Time elapsed to go here in ISO8601 Duration format
             # Or save start and end times to be calculated after
-            "key": json.loads(progress.key),
+            "key": progress.key,
         }
         keys = (
             "quizzes",
-            request.GET.get("code"),
-            str(request.GET.get("number")),
+            request.headers["code"],
+            str(request.headers["number"]),
         )
         for key in keys:
             if key not in save_data.keys():
@@ -306,9 +303,14 @@ def _grade_quiz(request):
                 save_data = save_data[key]
             elif key in save_data.keys():
                 save_data = save_data[key]
-        if (today := datetime.date.today()) not in save_data.keys():
-            save_data[datetime.date.today()] = []
+        if (
+            today := datetime.date.isoformat(datetime.date.today())
+        ) not in save_data.keys():
+            save_data[today] = []
+            save_data = save_data[today]
         elif today in save_data.keys():
             save_data = save_data[today]
         save_data.append(data)
-    return TemplateResponse(request, "quiz/completed.html", context)
+        prof_obj.save()
+    response = TemplateResponse(request, "quiz/completed.html", context)
+    return retarget(response, "#page-wrapper")

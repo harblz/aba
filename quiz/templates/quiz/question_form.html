@@ -7,7 +7,6 @@
           hx-preserve
 ></progress>
 <br>
-{{ question|safe }}
 <form id="questionForm"
       hx-post="{% url 'quiz:continue' %}?action={{ action }}"
       hx-swap="innerHTML"
@@ -15,14 +14,18 @@
       x-data="{ loading: false }"
       :class="{'is-loading': loading }"
       @click="loading = !loading">
+  {{ question|safe }}
   {% csrf_token %}
-  
-  {% for field in form %}
-      <div id="answers" class="fieldWrapper">
-          {{ field.errors }}
-            <div class="is-inline-block"> {{ field.label_tag.as_field_group }} </div>
-            <div class="is-inline-block"> {{ field.as_field_group }} </div>
-      </div>
-  {% endfor %}
+  <div class="field">
+    <legend>{{ form.answer.label }}</legend>
+    <div class="radios is-flex-direction-column">
+    {% for radio in form.answer %}
+      <label class="radio has-text-justified p-4" for="{{ radio.id_for_label }}">
+        {{ radio.tag }}
+        {{ radio.choice_label|striptags }}
+      </label>
+    {% endfor %}  
+    </div>
+  </div>
   <button class="button is-primary" type="submit">Next Question</button>
 </form>

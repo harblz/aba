@@ -1,23 +1,25 @@
 {% block content %}
-<h1>{{ code }} Quiz No.{{ number }} Final Results</h1>
-<ul>
-  <li>
-    <p>Total Number of Questions:</p>
+<div class="has-text-centered is-medium">
+<h1 class="title is-1">{{ code }} Quiz No.{{ number }} Final Results</h1>
+<ul class="">
+  <li class="is-inline">
+    <h2 class="title is-2 is-inline">Total Number of Questions:</h2>
     <p>{{ total }}</p>
   </li>
-  <li>
-    <p>Number of Questions Answered Correctly:</p>
+  <li class="is-inline">
+    <p class="title is-2">Number of Questions Answered Correctly:</p>
     <p>{{ correct }}</p>
   </li>
-  <li>
-    <p>Final Grade:</p>
+  <li class="is-inline">
+    <p class="title is-2">Final Grade:</p>
     <p>{{ percent }}</p>
   </li>
   {% comment "List item for time taken to complete quiz" %}
-    <li>
-    <p>Time Taken:</p>
+    <li class="is-inline">
+    <p class="title is-2">Time Taken:</p>
     <p>{{ time }}</p>
     </li>
   {% endcomment %}
 </ul>
+</div>
 {% endblock content %}
