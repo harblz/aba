@@ -862,6 +862,5 @@ Temporary Items
 .apdisk
 
 !/debug.log
-staticfiles/js/aba.js
 staticfiles/css/aba-bulma.css
 !/static/

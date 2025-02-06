@@ -1,41 +1,43 @@
 {% load static django_htmx %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
-        <meta name="keywords" content="ABA.Rocks, RBT, RBT Exam Prep, BCBA Exam Prep">
+<html lang="en" 
+      x-data="{ theme: 'auto',
+      init() { theme: $persist('auto').as('theme') }"
+      :data-theme="">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
+      <meta name="keywords" content="ABA.Rocks, RBT, RBT Exam Prep, BCBA Exam Prep">
 
-        <!-- Pinterest Claim -->
-        <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
+      <!-- Pinterest Claim -->
+      <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
 
-        <title>{% block title %}{% endblock title %}</title>
+      <title>{% block title %}{% endblock title %}</title>
 
-        <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+      <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
-        <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
-        
-        <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
-        <link rel="stylesheet" href="{% static 'css/app.css' %}">
-        <script src="{% static 'js/aba.js' %}" defer></script>
-        {% django_htmx_script %}
+      <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
-        <meta name="theme-color" content="#ffffff">
+      <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
+      <link rel="stylesheet" href="{% static 'css/app.css' %}">
+      <script src="{% static 'js/aba.js' %}" defer></script>
+      {% django_htmx_script %}
+
+      <meta name="theme-color" content="#ffffff">
     <link rel="favicon" href="{% static 'img/favicon.ico' %}">
-    
-    {% block extra-head %}{% endblock extra-head %}
 
-    </head>
+    {% block extra-head %}{% endblock extra-head %}
+  </head>
 	<body hx-ext="debug response-targets alpine-morph head-support" hx-swap="morph">
-        <section class="section">
-		    {% include "navbar.html" %}
-        </section>
-        
-        <section class="section content" id="content">
-            {% block content %}{% endblock content %}
-		    </section>
+    <section class="section">
+    {% include "navbar.html" %}
+    </section>
+
+    <section class="section content" id="content">
+        {% block content %}{% endblock content %}
+    </section>
 
 		{% include "footer.html" %}
 

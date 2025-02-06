@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar is-fixed-top" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
@@ -49,6 +50,9 @@
           </a>
         </div>
       </div>
+      <button class="navbar-item">
+        <i class="fas fa-lightbulb" @click="toggleTheme()"></i>
+      </button>
     </div>
   </div>
 </nav>
