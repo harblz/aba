@@ -6,15 +6,15 @@ const isProduction = process.env.NODE_ENV === "production";
 const stylesHandler = "style-loader";
 
 const config = {
-  entry: "./staticfiles/js/main.js",
+  entry: "./staticfiles/js/src/main.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "aba-bundle.js"
+    path: path.resolve(__dirname, "./staticfiles/js"),
+    filename: "aba.js"
   },
   plugins: [
     new webpack.ProvidePlugin({
-      htmx: "htmx.org",
-    }),
+      htmx: "htmx.org"
+    })
   ],
   module: {
     rules: [

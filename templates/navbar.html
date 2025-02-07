@@ -51,7 +51,7 @@
         </div>
       </div>
       <button class="navbar-item">
-        <i class="fas fa-lightbulb" @click="toggleTheme()"></i>
+        <i class="fas fa-lightbulb" x-on:click="$store.themeSwitcher.toggle()"></i>
       </button>
     </div>
   </div>

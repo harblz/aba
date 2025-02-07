@@ -1,9 +1,8 @@
 {% load static django_htmx %}
 <!DOCTYPE html>
 <html lang="en" 
-      x-data="{ theme: 'auto',
-      init() { theme: $persist('auto').as('theme') }"
-      :data-theme="">
+      x-data
+      :data-theme="$store.themeSwitcher.theme">
   <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,7 @@
 
       <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
       <link rel="stylesheet" href="{% static 'css/app.css' %}">
-      <script src="{% static 'js/aba.js' %}" defer></script>
+      <script type="module" src="{% static 'js/aba.js' %}"></script>
       {% django_htmx_script %}
 
       <meta name="theme-color" content="#ffffff">
