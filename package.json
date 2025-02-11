@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "webpack --config webpack.config.js",
     "build-bulma": "sass --load-path=node_modules staticfiles/css/aba-bulma.scss staticfiles/css/aba-bulma.css",
-    "start": "npm run build-bulma -- --watch"
+    "start-build": "npm run build-bulma --watch"
   },
   "repository": {
     "type": "git",
@@ -26,19 +26,16 @@
     "htmx-ext-alpine-morph": "^2.0.0",
     "htmx-ext-head-support": "^2.0.3",
     "htmx-ext-response-targets": "^2.0.2",
-    "htmx.org": "^1.9.12",
-    "sass": "^1.83.0"
+    "htmx.org": "^1.9.12"
   },
   "devDependencies": {
-    "@webpack-cli/generators": "^3.0.7",
     "autoprefixer": "^10.4.20",
     "bulma": "^1.0.3",
     "css-loader": "^7.1.2",
     "htmx-ext-debug": "^2.0.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.0",
+    "sass": "^1.84.0",
     "style-loader": "^4.0.0",
-    "ts-loader": "^9.5.2",
-    "typescript": "^5.7.2",
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   },
