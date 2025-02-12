@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "webpack --config webpack.config.js",
-    "build-bulma": "sass --load-path=node_modules staticfiles/css/aba-bulma.scss staticfiles/css/aba-bulma.css",
-    "start-build": "npm run build-bulma --watch"
+    "sass": "sass --load-path=node_modules src/scss/aba-bulma.scss staticfiles/css/aba-bulma.css",
+    "build-bulma": "npm run sass --watch"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "htmx.org": "^1.9.12"
   },
   "devDependencies": {
+    "@types/alpinejs": "^3.13.11",
     "autoprefixer": "^10.4.20",
     "bulma": "^1.0.3",
     "css-loader": "^7.1.2",
@@ -38,6 +39,5 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

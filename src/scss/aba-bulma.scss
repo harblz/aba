@@ -8,7 +8,7 @@ $beige-lighter: #eff0eb;
 $white: #fff;
 
 // Path to Bulma's sass folder
-@use "bulma/sass" with (
+@use "../../node_modules/bulma/sass/index" with (
     $family-primary: '"Nunito", sans-serif',
     $grey-dark: $brown,
     $grey-light: $beige-light,

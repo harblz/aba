@@ -36,12 +36,16 @@ RUN poetry install --no-root --with prod
 FROM node:23 as npm-build
 
 RUN npm install --production \
-    && npm run pack
+    && npm run pack \
+    && npm run build-bulma
 
 FROM base as run
 
-COPY . .
-COPY --from=builder ${VENV_PATH} ${VENV_PATH}
+COPY --exclude="./src/" . .
+COPY --from=poetry-build ${VENV_PATH} ${VENV_PATH}
+COPY --from=npm-build "staticfiles/js" "staticfiles/js"
+COPY --from=npm-build "staticfiles/css" "staticfiles/css"
+
 
 RUN apk add --no-cache libpq py3-gunicorn
 
@@ -57,6 +61,8 @@ RUN adduser \
 
 ENV PATH="/app/.venv/bin:$PATH"
 ENV DEBUG=False
+
+RUN python manage.py collectstatic --noinput
 
 USER appuser
 
