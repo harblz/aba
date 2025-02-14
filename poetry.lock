@@ -290,18 +290,18 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-ckeditor-5"
-version = "0.2.16"
+version = "0.2.17"
 description = "CKEditor 5 for Django."
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "django_ckeditor_5-0.2.16-py3-none-any.whl", hash = "sha256:1e7ef99b9b66f7f904df601158d102835d8113a22493b6de06adaabf2fbcb115"},
-    {file = "django_ckeditor_5-0.2.16.tar.gz", hash = "sha256:11a2e36d29ee6bd3bbcef18cc8fcd53107ba300af4e6157c0c3b6f4670248e4c"},
+    {file = "django_ckeditor_5-0.2.17-py3-none-any.whl", hash = "sha256:16d4113bad7a80a82046c461a6b5bd03592f5215dc1d10d85ee9481d9f6257b7"},
+    {file = "django_ckeditor_5-0.2.17.tar.gz", hash = "sha256:ce1ab6e21010d6742618275e237d042b1b15645dda3258f7e960b57e93268caf"},
 ]
 
 [package.dependencies]
-Django = ">=5.1.6"
+Django = ">=2.2"
 Pillow = "*"
 
 [package.extras]
@@ -916,14 +916,14 @@ xmp = ["defusedxml"]
 
 [[package]]
 name = "pip"
-version = "24.3.1"
+version = "25.0.1"
 description = "The PyPA recommended tool for installing Python packages."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "pip-24.3.1-py3-none-any.whl", hash = "sha256:3790624780082365f47549d032f3770eeb2b1e8bd1f7b2e02dace1afa361b4ed"},
-    {file = "pip-24.3.1.tar.gz", hash = "sha256:ebcb60557f2aefabc2e0f918751cd24ea0d56d8ec5445fe1807f1d2109660b99"},
+    {file = "pip-25.0.1-py3-none-any.whl", hash = "sha256:c46efd13b6aa8279f33f2864459c8ce587ea6a1a59ee20de055868d8f7688f7f"},
+    {file = "pip-25.0.1.tar.gz", hash = "sha256:88f96547ea48b940a3a385494e181e29fb8637898f88d88737c5049780f196ea"},
 ]
 
 [[package]]
@@ -1462,4 +1462,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "ea1d51006b2d7c03cc764dadb1af11bc5fc652f56ce19a21155b74f9f603ad6a"
+content-hash = "8653c7fb293224049e20b55c669fdad62991ce82ac3745d83aa103e7c6903cca"

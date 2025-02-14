@@ -1,4 +1,5 @@
-FROM python:3.12-alpine3.20 as base
+# syntax=docker/dockerfile:1.7-labs
+FROM python:3.12-alpine3.20 AS base
 LABEL authors="nullandvoid"
 
 WORKDIR /app
@@ -7,14 +8,14 @@ RUN apk update
 
 ENV PYTHON_VERSION=3.12 \
 	VENV_PATH=/app/.venv \
-	POETRY_VERSION=1.8.3 \
 	PYTHONDONTWRITEBYTECODE=1 \
 	PYTHONUNBUFFERED=1
 
-FROM base as poetry-build
+FROM base AS poetry-build
 
 ENV POETRY_NO_INTERACTION=1 \
-	POETRY_VIRTUALENVS_IN_PROJECT=1 \
+	POETRY_VERSION=1.8.3 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
 	POETRY_VIRTUALENVS_CREATE=true \
 	POETRY_CACHE_DIR=/tmp/poetry_cache
 
@@ -33,18 +34,23 @@ COPY poetry.lock pyproject.toml ./
 RUN --mount=type=cache,target=${POETRY_CACHE_DIR}
 RUN poetry install --no-root --with prod
 
-FROM node:23 as npm-build
+FROM node:23 AS npm-build
 
-RUN npm install --production \
+WORKDIR /app
+COPY package.json package-lock.json webpack.config.js ./
+COPY src/ ./src/
+COPY staticfiles/ ./staticfiles/
+
+RUN npm install --omit=dev \
     && npm run pack \
     && npm run build-bulma
 
-FROM base as run
+FROM base AS run
 
 COPY --exclude="./src/" . .
 COPY --from=poetry-build ${VENV_PATH} ${VENV_PATH}
-COPY --from=npm-build "staticfiles/js" "staticfiles/js"
-COPY --from=npm-build "staticfiles/css" "staticfiles/css"
+COPY --from=npm-build /app/staticfiles/js ./staticfiles/js
+COPY --from=npm-build /app/staticfiles/css ./staticfiles/css
 
 
 RUN apk add --no-cache libpq py3-gunicorn
@@ -60,7 +66,7 @@ RUN adduser \
     appuser
 
 ENV PATH="/app/.venv/bin:$PATH"
-ENV DEBUG=False
+    DEBUG=False
 
 RUN python manage.py collectstatic --noinput
 
