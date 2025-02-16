@@ -11,6 +11,8 @@ ENV PYTHON_VERSION=3.12 \
 	PYTHONDONTWRITEBYTECODE=1 \
 	PYTHONUNBUFFERED=1
 
+RUN env
+
 FROM base AS poetry-build
 
 ENV POETRY_NO_INTERACTION=1 \
@@ -63,10 +65,12 @@ RUN adduser \
     --shell "/sbin/nologin" \
     --no-create-home \
     --uid "${UID}" \
-    appuser
+    appuser \
+    && env
 
 ENV PATH="/app/.venv/bin:$PATH"
-    DEBUG=False
+ENV DEBUG="False"
+RUN env
 
 RUN python manage.py collectstatic --noinput
 
