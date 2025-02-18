@@ -18,6 +18,7 @@ def Lessons(request, code):
     return render(request, "learn/lessons_landing_page.html", {"course": course, "lessons": lessons})
 
 def QuizLessons(request, quiz_slug):
+    lessons = ""
     try:
         quizzes = Quiz.objects.filter(slug=quiz_slug).prefetch_related("areas")
         for quiz in quizzes:
@@ -55,7 +56,7 @@ def course_landing_page(request, code) -> HttpResponse:
     course = get_object_or_404(Course, pk=code)
     return render(
         request,
-        "learn/unit_landing_page.html",  # TODO: Check template name
+        "learn/course_landing_page.html",  # TODO: Check template name
         {
             "learn_topic": course,
             # "page": page,
@@ -86,7 +87,7 @@ def lesson_page(request, course) -> HttpResponse:
     # TODO: Determine logic for saving sessions and handling users
     return render(
         request,
-        "unit_landing_page.html",  # TODO: rename template? Unit renamed to "lesson"
+        "learn/course_landing_page.html",
         {"lesson": lesson, "page": page},
     )
 

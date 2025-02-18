@@ -141,9 +141,8 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 
 ### Django template
-*.log
+# *.log
 *.pot
-*.pyc
 __pycache__/
 local_settings.py
 db.sqlite3
@@ -156,7 +155,8 @@ media
 
 ### Node template
 # Logs
-logs
+# logs
+# debug.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -363,18 +363,12 @@ Temporary Items
 
 ### Python template
 # Byte-compiled / optimized / DLL files
-*.py[cod]
 *$py.class
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
 build/
 develop-eggs/
-dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -386,7 +380,6 @@ wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
-*.egg
 MANIFEST
 
 # PyInstaller
@@ -412,9 +405,6 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
-# Translations
-*.mo
 
 # Django stuff:
 
@@ -481,7 +471,6 @@ celerybeat.pid
 # Environments
 .venv
 env/
-venv/
 ENV/
 env.bak/
 venv.bak/
@@ -517,3 +506,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Docker
+Dockerfile
+.dockerignore
