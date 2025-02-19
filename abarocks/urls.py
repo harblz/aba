@@ -14,8 +14,8 @@ urlpatterns = (
         path("blog/", include("blog.urls")),
         path("quizzes/", include("quiz.urls")),
         path("learn/", include("learn.urls")),
+        path("safmeds/", include("safmeds.urls")),
         path("ckeditor5/", include("django_ckeditor_5.urls")),
-        path("testdebug/", views.testdebug, name="testdebug"),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

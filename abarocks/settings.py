@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     # "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
     "pages.apps.PagesConfig",
+    "safmeds.apps.SafmedsConfig"
 ]
 
 MIDDLEWARE = [

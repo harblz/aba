@@ -22,7 +22,7 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-    def get_task_list(self) -> dict:
+    def get_task_list(self) -> type(dict):
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
             tasks = self.tasks.all().order_by("area", "task")
