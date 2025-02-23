@@ -13,7 +13,7 @@
       <!-- Pinterest Claim -->
       <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
 
-      <title>{% block title %}{% endblock title %}</title>
+      <title>{% block title %}{% endblock title %}</title> <!-- TODO: populate title blocks in children -->
 
       <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
@@ -30,11 +30,11 @@
     {% block extra-head %}{% endblock extra-head %}
   </head>
 	<body hx-ext="$store.extensions.extensions" hx-swap="morph">
-    <section class="section">
+    <section class="section pb-3">
     {% include "navbar.html" %}
     </section>
 
-    <section class="section content" id="content">
+    <section class="section" id="content">
         {% block content %}{% endblock content %}
     </section>
 

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="columns is-flex is-centered">
+        <div class="card column is-three-fifths has-text-black is-size-2" id="card-{{ card.id }}">
+            <div class="card-content index-card is-flex is-align-items-center is-justify-content-center has-background-grey" id="{{ card.id }}-front">
+                <p>{{ card.front }}</p>
+            </div>
+            <hr>
+            <div class="card-content index-card is-flex is-align-items-center is-justify-content-center has-background-grey-light" id="{{ card.id }}-back }}">
+                <p>{{ card.back }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="column is-flex is-justify-content-space-evenly has-text-centered is-centered">
+        <button class="button">Got It!</button>
+    </div>
+</div>
+{% endblock content %}

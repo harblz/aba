@@ -10,8 +10,6 @@ $white: #fff;
 // Path to Bulma's sass folder
 @use "../../node_modules/bulma/sass/index" with (
     $family-primary: '"Nunito", sans-serif',
-    $grey-dark: $brown,
-    $grey-light: $beige-light,
     $primary: $purple,
     $link: $white,
     $control-border-width: 2px,
@@ -20,5 +18,15 @@ $white: #fff;
     $navbar-item-color: #fff,
     );
 
+// Custom SCSS
+
+[class^="card-"] {
+  height: 100vh;
+}
+
+.index-card {
+  height: 35vh;
+  text-align: center;
+}
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");

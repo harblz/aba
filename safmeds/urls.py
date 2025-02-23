@@ -6,5 +6,6 @@ from . import views
 app_name = "safmeds"
 
 urlpatterns = [
-    path("all/", views.card_list, name="card_list"),
+    path("all/", views.card_catalog, name="card_catalog"),
+    path("<int:id>/", views.card_detail, name="card_detail"),
 ]

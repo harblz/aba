@@ -2,10 +2,6 @@ import "htmx-ext-response-targets/response-targets";
 import "htmx-ext-alpine-morph/alpine-morph";
 import "htmx-ext-head-support/head-support";
 
-if (process.env.DEBUG === "True") {
-  import("htmx-ext-debug/debug");
-}
-
 import Alpine from "alpinejs";
 import morph from "@alpinejs/morph";
 import persist from "@alpinejs/persist";
@@ -36,9 +32,6 @@ Alpine.store("themeSwitcher", {
 Alpine.store("extensions", {
   extensions: "response-targets alpine-morph head-support",
   init() {
-    if (process.env.DEBUG === "True") {
-      this.extensions += " debug";
-    }
   }
 });
 

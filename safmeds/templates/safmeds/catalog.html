@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="grid">
-    {% for card in cards %}
-    <div class="card" id="card-{{ card.id }}">
-        <div class="card-content front">
-            <p>
-                {{ card.front }}
-            </p>
-        </div>
-        <div class="card-content back">
-            <p>
-                {{ card.back }}
-            </p>
-        </div>
+<div class="container">
+    <div class="grid">
+        {% for card in cards %}
+        <a class="card has-text-centered" id="card-{{ card.id }}" href="{% url "safmeds:card_detail" card.id %}">
+            <div class="card-content front">
+                <p>{{ card.front }}</p>
+            </div>
+            <div class="card-content back">
+                <p>{{ card.back }}</p>
+            </div>
+        </a>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
-{% endblock %}
+{% endblock content %}
