@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import admin
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = (
@@ -16,6 +17,10 @@ urlpatterns = (
         path("learn/", include("learn.urls")),
         path("safmeds/", include("safmeds.urls")),
         path("ckeditor5/", include("django_ckeditor_5.urls")),
+        path(
+            "playground/",
+            TemplateView.as_view(template_name="counter-test.html"),
+        ),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

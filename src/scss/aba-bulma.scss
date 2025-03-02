@@ -18,15 +18,60 @@ $white: #fff;
     $navbar-item-color: #fff,
     );
 
+@use "../../node_modules/bulma/sass/utilities/mixins";
+
 // Custom SCSS
+.counter {
+  @extend button;
+  border: 0;
+  border-radius: 15%;
+  padding: 0 .1rem 0 0;
+  white-space: nowrap;
 
-[class^="card-"] {
-  height: 100vh;
+  .counter-input {
+    border-radius: 10%;
+    margin: 0 .1rem 0 0;
+    padding: .25rem .5rem;
+  }
 }
 
-.index-card {
-  height: 35vh;
-  text-align: center;
+#card-buttons {
+  display: flex;
+
+  @include mixins.tablet {
+    flex-direction: column;
+  }
+  button {
+    margin: .5rem;
+  }
 }
+
+#card-columns {
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.tablet {
+    flex-direction: row;
+  }
+}
+
+#card-stats {
+  flex-basis: fit-content;
+
+  p {
+    margin: .5rem;
+  }
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .counter-input {
+    background-color: inherit;
+  }
+}
+
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
