@@ -1,4 +1,4 @@
-[tool.poetry]
+[project]
 name = "abarocks"
 version = "2.0.0"
 description = "ABA Rocks is an open-source web app for aspiring behavior analysts!"
@@ -8,6 +8,8 @@ authors = [
 ]
 license = "n"
 readme = "README.md"
+
+[tool.poetry]
 package-mode = false
 
 [tool.poetry.dependencies]
