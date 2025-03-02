@@ -21,15 +21,10 @@
                     </div>
                 </div>
             </div>
-            <div class="column is-narrow" id="card-stats">
-                <p class="block">Number Correct: </p>
-                <p class="block">Number Wrong: </p>
-                <p class="block">Time Elapsed: </p>
-            </div>
             <div class="column has-text-centered is-narrow has-text-black buttons" id="card-buttons">
-                <button class="button is-danger">Oops!</button>
-                <button class="button is-info">Next</button>
-                <button class="button is-success">Got It!</button>
+                {% include "components/alpine-counter.html" with classes="button is-success" name="Correct" id="num-correct" %}
+                {% include "components/alpine-counter.html" with classes="button is-warning" name="Next" id="next" %}
+                {% include "components/alpine-counter.html" with classes="button is-danger" name="Incorrect" id="num-incorrect" %}
             </div>
         </div>
     </div>
