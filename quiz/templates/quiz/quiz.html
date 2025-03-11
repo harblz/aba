@@ -16,14 +16,14 @@
             hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
             x-data="{ loading: false, }"
             :class="{'is-loading': loading }"
-            @click="loading = !loading"
+            @click="loading = ! loading"
             hx-target="#quiz-wrapper"
             hx-swap="innerHTML"
     >Click here to begin!</button>
   </div>
   <div id="alpine-wrapper"
        x-data="{ modal : false }"
-       @show-modal.window="modal = !modal" 
+       @show-modal.window="modal = ! modal"
        @reset.window="$refs.modal.replaceChildren();
                $nextTick(() => { modal = false })"
   >

@@ -23,7 +23,7 @@
             </div>
             <div class="column has-text-centered is-narrow has-text-black buttons" id="card-buttons">
                 {% include "components/alpine-counter.html" with classes="button is-success" name="Correct" id="num-correct" %}
-                {% include "components/alpine-counter.html" with classes="button is-warning" name="Next" id="next" %}
+                <button x-data="{ count: 0 }" class="button is-warning" id="next">Next</button>
                 {% include "components/alpine-counter.html" with classes="button is-danger" name="Incorrect" id="num-incorrect" %}
             </div>
         </div>

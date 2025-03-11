@@ -1,3 +1,6 @@
-<button class="counter {{ classes }}" id="{{ id }}" x-on:click="count++" x-data="{ count: 0 }">
-    {{ name }} <span class="count" x-text="count"></span>
+<button class="counter {{ classes }}"
+        id="{{ id }}"
+        x-on:click="count++"
+        x-data="{ count: 0 }"
+        >{{ name }} <span class="count" x-text="count"></span>
 </button>
