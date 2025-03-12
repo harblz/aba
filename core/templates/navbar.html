@@ -14,7 +14,7 @@
   </div>
   <div id="navbar-menu is-size-4" :class="{ 'is-active': open }" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item has-text-weight-bold" href="{% url 'learn:course-index' %}">
+      <a class="navbar-item has-text-weight-bold is-tab is-active" href="{% url 'learn:course-index' %}">
         Learn
       </a>
 
@@ -30,13 +30,13 @@
         &nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp
       </a>
 
-      <div class="navbar-item has-text-weight-bold has-dropdown"
-           @click="dropdown = ! dropdown" :class="{ 'is-active': dropdown }">
+      <div class="navbar-item is-boxed is-hoverable has-text-weight-bold has-dropdown"
+           @click="dropdown = ! dropdown">
         <a class="navbar-link">
           More
         </a>
 
-        <div class="navbar-dropdown is-size-5">
+        <div class="navbar-dropdown is-size-5" x-show.important="dropdown" x-collapse>
           <a class="navbar-item has-text-weight-bold">
             About
           </a>

@@ -5,9 +5,11 @@ import "htmx-ext-head-support/head-support";
 import Alpine from "alpinejs";
 import morph from "@alpinejs/morph";
 import persist from "@alpinejs/persist";
+import collapse from "@alpinejs/collapse";
 
 Alpine.plugin(morph);
 Alpine.plugin(persist);
+Alpine.plugin(collapse);
 
 window.alpine = Alpine;
 
@@ -26,13 +28,14 @@ Alpine.store("themeSwitcher", {
   },
   toggle() {
     this.theme = this.theme === "dark" ? "light" : "dark";
-  }
+  },
 });
 
 Alpine.store("extensions", {
   extensions: "response-targets alpine-morph head-support",
-  init() {
-  }
+  init() {},
 });
+
+document.addEventListener('alpine:init', () => {});
 
 Alpine.start();

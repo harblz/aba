@@ -27,7 +27,7 @@
        @reset.window="$refs.modal.replaceChildren();
                $nextTick(() => { modal = false })"
   >
-      <div class="modal" id="modal-wrapper" :class="{ 'is-active': modal }" x-transition>
+      <div class="modal" id="modal-wrapper" x-show.important="modal" x-transition>
         <div class="modal-background"></div>
         <div class="modal-card box"
              id="modals-here"
