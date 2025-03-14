@@ -36,6 +36,31 @@ Alpine.store("extensions", {
   init() {},
 });
 
-document.addEventListener('alpine:init', () => {});
-
+Alpine.store("showMenu", {
+  show: false,
+  init() {
+    this.show = window.matchMedia("(min-width: 1024px)").matches;
+    this.resizeToggle();
+  },
+  resizeToggle() {
+    window.matchMedia("(min-width: 1024px)").addEventListener("change",
+      (e) => {
+    this.show = e.matches;
+  });},
+  clickToggle() {
+    this.show = !this.show;
+  },
+});
+Alpine.bind("burger", {
+  cross: false,
+  init() {
+    this.touch = window.matchMedia("(pointer: coarse)").matches;
+  },
+  "@click"() {
+    this.cross = !this.cross;
+  },
+  ":class"() {
+    return this.cross ? "is-active" : "";
+  },
+});
 Alpine.start();

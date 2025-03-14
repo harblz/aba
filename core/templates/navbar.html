@@ -1,18 +1,19 @@
 {% load static %}
-<nav class="navbar is-fixed-top" x-data="{ open: false, dropdown: false }" role="navigation">
+<nav class="navbar is-fixed-top" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
         <h1 class="title is-1 is-family-secondary">ABA.Rocks</h1>
     </a>
-    <a role="button"  id="burger" class="navbar-burger" aria-label="menu"
-       @click="open = ! open" :class="{ 'is-active': open }" data-target="navMenu">
+    <a role="button"  id="burger" class="navbar-burger" aria-label="menu" data-target="navMenu"
+       @click="$store.showMenu.clickToggle()" x-bind="burger">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div id="navbar-menu is-size-4" :class="{ 'is-active': open }" class="navbar-menu">
+  <div class="navbar-menu is-size-4" id="navbar-menu"
+       x-show="$store.showMenu.show" x-collapse>
     <div class="navbar-start">
       <a class="navbar-item has-text-weight-bold is-tab is-active" href="{% url 'learn:course-index' %}">
         Learn
@@ -30,13 +31,12 @@
         &nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp
       </a>
 
-      <div class="navbar-item is-boxed is-hoverable has-text-weight-bold has-dropdown"
-           @click="dropdown = ! dropdown">
-        <a class="navbar-link">
+      <div class="navbar-item is-boxed is-hoverable has-text-weight-bold has-dropdown" x-data="{ dropdown : false }">
+        <a class="navbar-link" @click="dropdown = !dropdown">
           More
         </a>
 
-        <div class="navbar-dropdown is-size-5" x-show.important="dropdown" x-collapse>
+        <div class="navbar-dropdown is-size-5" x-show="dropdown" x-collapse>
           <a class="navbar-item has-text-weight-bold">
             About
           </a>
