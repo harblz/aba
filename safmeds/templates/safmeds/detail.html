@@ -1,30 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container" id="card-container">
-        <div class="columns is-centered is-vcentered" id="card-columns">
-            <div class="column is-three-fifths has-text-black is-size-2"
-                 id="index-card">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="content has-text-black">
-                            {{ card.text }}
-                            <div class="card-content index-card is-flex is-align-items-center is-justify-content-center has-background-grey"
-                                 id="{{ card.id }}-front">
-                                <p>{{ card.front }}</p>
-                            </div>
-                            <hr>
-                            <div class="card-content index-card is-flex is-align-items-center is-justify-content-center has-background-grey-light"
-                                 id="{{ card.id }}-back }}">
-                                <p>{{ card.back }}</p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="columns py-5 is-centered is-vcentered is-desktop" id="card-columns">
+        <div class="column is-three-fifths-tablet is-full-mobile is-size-2"
+             id="index-card" x-data="{ side: 'front' }">
+            <div id="$id">
+                <div class="index-card  has-background-text-90 has-text-text-90-invert"
+                     id="{{ card.id }}-front" x-show="side === 'front'">
+                    <p>{{ card.front }}</p>
+                </div>
+                <div class="index-card  has-background-text-90 has-text-text-60-invert"
+                     id="{{ card.id }}-back" x-show="side === 'back'">
+                    <p>{{ card.back }}</p>
                 </div>
             </div>
-            <div class="column has-text-centered is-narrow has-text-black buttons" id="card-buttons">
-                {% include "components/alpine-counter.html" with classes="button is-success" name="Correct" id="num-correct" %}
-                <button x-data="{ count: 0 }" class="button is-warning" id="next">Next</button>
-                {% include "components/alpine-counter.html" with classes="button is-danger" name="Incorrect" id="num-incorrect" %}
+            <div class="icon has-text-grey is-clickable is-large" id="flip-button"
+                 @click="side = side === 'front' ? 'back' : 'front'">
+              <i class="fas fa-rotate"></i>
+            </div>
+        </div>
+        <div class="column">
+            <div class="columns is-mobile is-vcentered is-multiline is-centered">
+                <div class="column has-text-centered is-narrow has-text-black buttons mb-0" id="card-buttons">
+                    {% include "components/alpine-counter.html" with classes="button is-success is-large" name="Correct" id="num-correct" %}
+                    {% include "components/alpine-counter.html" with classes="button is-danger is-large" name="Incorrect" id="num-incorrect" %}
+                </div>
+                <div class="column is-narrow">
+                    <button x-data="{ count: 0 }" class="button is-warning is-large" id="next">Next</button>
+                </div>
             </div>
         </div>
     </div>

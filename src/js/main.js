@@ -27,6 +27,14 @@ Alpine.store("themeSwitcher", {
     console.log("initialized successfully");
   },
   toggle() {
+    if (this.theme === "auto") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        this.theme = "light";
+      }
+      else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        this.theme="dark";
+      }
+    }
     this.theme = this.theme === "dark" ? "light" : "dark";
   },
 });
@@ -42,20 +50,18 @@ Alpine.store("showMenu", {
     this.show = window.matchMedia("(min-width: 1024px)").matches;
     this.resizeToggle();
   },
-  resizeToggle() {
-    window.matchMedia("(min-width: 1024px)").addEventListener("change",
-      (e) => {
-    this.show = e.matches;
-  });},
-  clickToggle() {
+  toggle() {
     this.show = !this.show;
   },
+  resizeToggle() {
+    addEventListener("resize", () => {
+      this.show = window.matchMedia("(min-width: 1024px)").matches;
+    });
+  },
 });
+
 Alpine.bind("burger", {
   cross: false,
-  init() {
-    this.touch = window.matchMedia("(pointer: coarse)").matches;
-  },
   "@click"() {
     this.cross = !this.cross;
   },
@@ -63,4 +69,5 @@ Alpine.bind("burger", {
     return this.cross ? "is-active" : "";
   },
 });
+
 Alpine.start();

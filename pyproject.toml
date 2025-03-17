@@ -3,8 +3,8 @@ name = "abarocks"
 version = "2.0.0"
 description = "ABA Rocks is an open-source web app for aspiring behavior analysts!"
 authors = [
-    "Alex Raymond <harblz@gmail.com>",
-    "Kyle Jensen <kyle@nullandvoid.digital>"
+    { name="Alex Raymond", email="harblz@gmail.com" },
+    { name="Kyle Jensen", email="kyle@nullandvoid.digital" }
 ]
 license = "n"
 readme = "README.md"

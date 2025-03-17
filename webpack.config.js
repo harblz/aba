@@ -3,7 +3,11 @@ delete require.cache[require.resolve("path")];
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
+  devtool: "source-map",
+  optimization: {
+    minimize: false, // Disable minification
+  },
   entry: "./src/js/main.js",
   target: "web",
   output: {

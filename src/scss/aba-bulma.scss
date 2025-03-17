@@ -13,24 +13,40 @@ $white: #fff;
     $family-secondary: 'Finger Paint',
     $control-border-width: 2px,
     $input-shadow: none,
-    $navbar-background-color: $orange,
-    $navbar-item-color: #fff,
+    /* $navbar-background-color: $orange,
+    $navbar-item-color: #fff, */
     );
 
+@use "../../node_modules/bulma/sass/utilities/extends";
 @use "../../node_modules/bulma/sass/utilities/mixins";
+@use "../../node_modules/bulma/sass/utilities/controls";
 @use "../../node_modules/bulma/sass/utilities/initial-variables.scss" as iv;
+@use "../../node_modules/bulma/sass/utilities/css-variables" as cv;
 
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 
+// Alpine.js `x-cloak`
+[x-cloak] { display: none !important; }
+
 // Custom SCSS
 .counter {
   @extend button;
   border: 0;
-  border-radius: 15%;
-  padding: 0 .1rem 0 0;
+  border-radius: .5rem;
+  padding: .25rem 0 .25rem .25rem;
   white-space: nowrap;
+
+  .count {
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: inherit;
+    filter: brightness(.7);
+    margin: -.25rem 0 -.25rem .25rem;
+    padding: .25rem;
+  }
 
   .counter-input {
     border-radius: 0;
@@ -54,42 +70,44 @@ $white: #fff;
   display: flex;
   flex-direction: column;
 
-  @include mixins.tablet {
+  @include mixins.desktop {
     flex-direction: row;
   }
 }
 
-#card-stats {
-  flex-basis: fit-content;
+.index-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
 
-  p {
-    margin: .5rem;
+  @include mixins.tablet {
+    height: 60vh;
   }
 }
 
-.counter {
-  border-radius: .5rem;
-  padding: .25rem 0 .25rem .25rem;
 
-  .count {
-    border-radius: inherit;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    background-color: inherit;
-    filter: brightness(.7);
-    margin: -.25rem 0 -.25rem .25rem;
-    padding: .25rem;
-  }
-}
-
-.modal {
+.#{iv.$class-prefix}modal {
   display: flex;
 }
 
-.navbar-menu {
+.#{iv.$class-prefix}navbar-dropdown {
   display: block;
 }
 
-.navbar-dropdown {
-  display: block;
+.#{iv.$class-prefix}navbar-menu {
+    display: flex;
+}
+
+#index-card {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+}
+
+#flip-button {
+  position: absolute;
+  z-index: 2;
+  bottom: 1.5rem;
+  right: 1.5rem;
 }

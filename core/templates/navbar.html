@@ -1,37 +1,46 @@
 {% load static %}
-<nav class="navbar is-fixed-top" role="navigation">
+<nav class="navbar is-transparent is-fixed-bottom px-2" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
-        <h1 class="title is-1 is-family-secondary">ABA.Rocks</h1>
+        <h1 class="title is-family-secondary">ABA.Rocks</h1>
     </a>
     <a role="button"  id="burger" class="navbar-burger" aria-label="menu" data-target="navMenu"
-       @click="$store.showMenu.clickToggle()" x-bind="burger">
+       @click="$store.showMenu.toggle()" x-bind="burger">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div class="navbar-menu is-size-4" id="navbar-menu"
-       x-show="$store.showMenu.show" x-collapse>
+  <div class="navbar-menu" id="navbar-menu"
+  x-show.important="$store.showMenu.show" x-collapse>
     <div class="navbar-start">
-      <a class="navbar-item has-text-weight-bold is-tab is-active" href="{% url 'learn:course-index' %}">
+      <div class="navbar-item">
+            <div class="buttons">
+                <button class="icon" @click="$store.themeSwitcher.toggle()">
+                    <i class="fas fa-lightbulb is-large"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-end">
+<a class="navbar-item has-text-weight-bold is-tab" href="{% url 'learn:course-index' %}">
         Learn
       </a>
 
-      <a class="navbar-item has-text-weight-bold" href="{% url 'blog:blog-posts' %}">
+      <a class="navbar-item has-text-weight-bold is-tab" href="{% url 'blog:blog-posts' %}">
         Blog
       </a>
 
-      <a class="navbar-item has-text-weight-bold" href="{% url 'about' %}">
+      <a class="navbar-item has-text-weight-bold is-tab" href="{% url 'about' %}">
         About
       </a>
 
-      <a class="navbar-item has-text-weight-bold" href="https://ko-fi.com/abarocks">
+      <a class="navbar-item has-text-weight-bold is-tab" href="https://ko-fi.com/abarocks">
         &nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp
       </a>
 
-      <div class="navbar-item is-boxed is-hoverable has-text-weight-bold has-dropdown" x-data="{ dropdown : false }">
+      <div class="navbar-item has-dropdown has-text-weight-bold has-dropdown-up is-tab" x-data="{ dropdown : false }">
         <a class="navbar-link" @click="dropdown = !dropdown">
           More
         </a>
@@ -52,9 +61,6 @@
           </a>
         </div>
       </div>
-      <button class="navbar-item">
-        <i class="fas fa-lightbulb" x-on:click="$store.themeSwitcher.toggle()"></i>
-      </button>
     </div>
   </div>
 </nav>
