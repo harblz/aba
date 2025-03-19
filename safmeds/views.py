@@ -16,5 +16,5 @@ def card_catalog(request):
 
 def card_detail(request, id):
     return TemplateResponse(
-        request, "safmeds/detail.html", {"card": Card.objects.get(id=id)}
+        request, "safmeds/detail.html", {"card": Card.objects.get(id=id), "id": id}
     )

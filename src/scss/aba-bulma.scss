@@ -66,26 +66,15 @@ $white: #fff;
   }
 }
 
-#card-columns {
+#safmeds-wrapper {
   display: flex;
   flex-direction: column;
+  perspective: 800px;
 
   @include mixins.desktop {
     flex-direction: row;
   }
 }
-
-.index-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-
-  @include mixins.tablet {
-    height: 60vh;
-  }
-}
-
 
 .#{iv.$class-prefix}modal {
   display: flex;
@@ -99,15 +88,32 @@ $white: #fff;
     display: flex;
 }
 
-#index-card {
-  position: relative;
-  z-index: 1;
-  padding: 0;
+#card-column {
+
+  #index-card {
+    position: relative;
+    height: 50vh;
+    padding: 0;
+
+    .index-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include mixins.tablet {
+        height: 60vh;
+      }
+    }
+  }
 }
 
 #flip-button {
   position: absolute;
-  z-index: 2;
   bottom: 1.5rem;
   right: 1.5rem;
+}
+
+.flip {
+  transform: rotateY(180deg);
 }
