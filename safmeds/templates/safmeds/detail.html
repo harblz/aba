@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <div class="columns py-5 is-centered is-vcentered is-desktop" id="safmeds-wrapper">
-        <div class="column is-three-fifths-desktop is-full-tablet is-full-mobile is-size-2"
-             id="card-column" x-data="{ flipped: false }">
-            <div id="index-card">
-                <div class="index-card has-background-text-90 has-text-text-90-invert"
+    <div class="columns py-5 is-centered is-vcentered" id="safmeds-wrapper">
+        <div class="column is-three-fifths-widescreen is-full-desktop is-full-tablet is-full-mobile is-size-2"
+             id="card-column" x-data="{ flip: false }">
+            <div id="index-card" class="index-card" :class="flip ? 'flip' : ''">
+                <div class="index-card-side has-background-text-90 has-text-text-90-invert"
                      id="{{ card.id }}-front">
                     <p>{{ card.front }}</p>
                 </div>
-                <div class="index-card has-background-text-90 has-text-text-60-invert"
+                <div class="index-card-side has-background-text-90 has-text-text-60-invert"
                      id="{{ card.id }}-back">
                     <p>{{ card.back }}</p>
                 </div>
-                <div class="icon has-text-grey is-clickable is-large" id="flip-button">
-                    <i class="fas fa-rotate"></i>
-                </div>
             </div>
+            <div class="icon has-text-grey is-clickable is-large" id="flip-button"
+                 @click="flip = !flip">
+                <i class="fas fa-rotate"></i>
+            </div>
+
         </div>
         <div class="column">
             <div class="columns is-vcentered is-multiline is-centered">

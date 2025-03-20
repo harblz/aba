@@ -71,7 +71,7 @@ $white: #fff;
   flex-direction: column;
   perspective: 800px;
 
-  @include mixins.desktop {
+  @include mixins.widescreen {
     flex-direction: row;
   }
 }
@@ -89,31 +89,61 @@ $white: #fff;
 }
 
 #card-column {
+  perspective: 1000px;
+  height: 50vh;
 
-  #index-card {
+  @include mixins.tablet {
+    height: 60vh;
+  }
+
+  .index-card {
     position: relative;
-    height: 50vh;
     padding: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    width: 100%;
+    height: 100%;
+    transition: transform ease-out 0.5s;
 
-    .index-card {
+    p {
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @include mixins.tablet {
-        height: 60vh;
-      }
     }
   }
+  .flip {
+    transform: rotateY(180deg);
+  }
+}
+#card-column.flip {
+  transform: rotateY(180deg);
+}
+
+.index-card-side {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+div[id$="-front"] {
+  @extend .index-card-side;
+  z-index: 10;
+  transform: rotateY(0deg);
+}
+
+div[id$="-back"] {
+  @extend .index-card-side;
+  transform: rotateY(180deg);
+  z-index: 0;
 }
 
 #flip-button {
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
-}
-
-.flip {
-  transform: rotateY(180deg);
+  z-index: 1000;
 }
