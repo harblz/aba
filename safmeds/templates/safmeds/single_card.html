@@ -1,0 +1,17 @@
+{% load static %}
+<div class="container" id="card-container" x-data="{ flip: false }">
+    <div id="index-card" class="index-card" :class="flip ? 'flip' : ''">
+        <div class="index-card-side has-background-text-90 has-text-text-90-invert"
+             id="{{ card.id }}-front">
+            <p>{{ card.front }}</p>
+        </div>
+        <div class="index-card-side has-background-text-90 has-text-text-90-invert"
+             id="{{ card.id }}-back">
+            <p>{{ card.back }}</p>
+        </div>
+    </div>
+    <div class="icon has-text-grey is-clickable is-large" id="flip-button"
+         @click="flip = !flip">
+        <i class="fas fa-rotate"></i>
+    </div>
+</div>

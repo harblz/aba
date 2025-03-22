@@ -14,6 +14,7 @@ class Card(models.Model):
 
 
 class Deck(models.Model):
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
+    subject = models.ForeignKey(Course, on_delete=models.CASCADE)
     deck = models.ManyToManyField(Card, related_name="decks")

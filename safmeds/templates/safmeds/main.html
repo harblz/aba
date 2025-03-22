@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero is-primary has-text-centered">
+    <div class="hero-body">
+        <h1 class="title">SAFMEDS</h1>
+        <h2 class="subtitle">Say All Fast Minute Every Day Shuffled</h2>
+        <p>To start, pick a deck!</p>
+    </div>
+</section>
+<section class="section p-0" id="deck-browser">
+    <div class="container m-0" id="deck-browser-nav"></div>
+    <div class="columns has-text-centered is-8 m-5" id="deck-list">
+        {% if decks %}
+        	{% for deck in decks %}
+                <div class="column deck-column">
+                    <div class="card deck pb-5 has-background-white is-size-5">
+                        <div class="card-header has-background-grey-light" id="deck-name">
+                            <p class="card-header-title is-centered">{{ deck.name }}</p>
+                        </div>
+                        <div class="card-content" id="deck-info">
+                            <div class="content">{{ deck.subject }}</div>
+                        </div>
+                        <footer class="card-footer" id="select-button">
+                            <a class="card-footer-item has-background-primary" href="">Select Deck</a>
+                        </footer>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>Sorry, no decks yet!</h3>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

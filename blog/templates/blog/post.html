@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}
+<section class="section">
 <div class="py-4 jumbotron jumbotron-fluid">
 	<div class="container">
 	<h1 class="display-4">{{ post.title }}</h1>
@@ -10,4 +11,5 @@
 	{% endautoescape %}
 	</div>
 </div>
+</section>
 {% endblock content %}

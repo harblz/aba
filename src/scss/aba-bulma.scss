@@ -13,6 +13,7 @@ $white: #fff;
     $family-secondary: 'Finger Paint',
     $control-border-width: 2px,
     $input-shadow: none,
+    $primary: $orange,
     /* $navbar-background-color: $orange,
     $navbar-item-color: #fff, */
     );
@@ -69,7 +70,6 @@ $white: #fff;
 #safmeds-wrapper {
   display: flex;
   flex-direction: column;
-  perspective: 800px;
 
   @include mixins.widescreen {
     flex-direction: row;
@@ -89,12 +89,21 @@ $white: #fff;
 }
 
 #card-column {
-  perspective: 1000px;
   height: 50vh;
 
   @include mixins.tablet {
     height: 60vh;
   }
+}
+
+.card-cell {
+  height: 25vh;
+}
+
+#card-container {
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
 
   .index-card {
     position: relative;
@@ -113,7 +122,8 @@ $white: #fff;
     transform: rotateY(180deg);
   }
 }
-#card-column.flip {
+
+#card-container.flip {
   transform: rotateY(180deg);
 }
 
@@ -146,4 +156,40 @@ div[id$="-back"] {
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 1000;
+}
+
+#deck-browser {
+  position: absolute;
+  height: 65vh;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.deck {
+  width: 20vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#select-button {
+  border-top-style: none !important;
+  width: 50%;
+  border-radius: 1rem;
+}
+
+#deck-name {
+  box-shadow: none;
+  width: 100%;
+}
+
+#deck-info {
+  z-index: 2;
+}
+
+#deck-list {
+  position: sticky;
+  height: 100%;
 }
