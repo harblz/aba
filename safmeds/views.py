@@ -24,6 +24,6 @@ def card_detail(request, id):
     )
 
 
-def main(request):
+def browse_decks(request):
     decks = Deck.objects.all()
     return render(request, "safmeds/main.html", context={"decks": decks})

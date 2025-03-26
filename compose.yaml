@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres
+    init: true
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: "gunicorn abarocks.wsgi -b 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      POSTGRES_HOST: "db"
+    secrets:
+      - debug
+      - secret_key
+      - allowed_hosts
+      - internal_ips
+      - postgres_name
+      - postgres_password
+      - postgres_user
+    depends_on:
+      - db
+
+secrets:
+  debug:
+    file: $SECRETS_DIR/DEBUG
+  secret_key:
+    file: $SECRETS_DIR/SECRET_KEY
+  allowed_hosts:
+    file: $SECRETS_DIR/ALLOWED_HOSTS
+  internal_ips:
+    file: $SECRETS_DIR/INTERNAL_IPS
+  postgres_name:
+    file: $SECRETS_DIR/POSTGRES_NAME
+  postgres_password:
+    file: $SECRETS_DIR/POSTGRES_PASSWORD
+  postgres_user:
+    file: $SECRETS_DIR/POSTGRES_USER
+
+volumes:
+  postgres_data:

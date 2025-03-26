@@ -130,12 +130,10 @@ WSGI_APPLICATION = "abarocks.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("PG_NAME"),
-        "PASSWORD": os.environ.get("PG_PASSWORD"),
-        "HOST": os.environ.get("PG_HOST"),
-        "PORT": os.environ.get("PG_PORT"),
-        "CONN_MAX_AGE": 0,
-        "USER": os.environ.get("PG_USER"),
+        "OPTIONS": {
+            "service": "aba.rocks",
+            "passfile": ".my_pgpass",
+        },
     },
     "old": {
         "ENGINE": "django.db.backends.sqlite3",
