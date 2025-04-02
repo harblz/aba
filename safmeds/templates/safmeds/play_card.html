@@ -1,10 +1,19 @@
 {% extends "base.html" %}
+{% block extra-head %}{{ data|json_script:"cards" }}{% endblock extra-head %}
 {% block content %}
-<section class="section">
+<section class="section" x-data="cards">
+    <div class="pagination">
+        <ul class="pagination-list">
+            <template x-for="(card, index) in deck">
+                <li class="pagination-link" :class="(index + 1 == 1) ? 'is-current' : '' "
+                    x-text="index + 1"></li>
+            </template>
+        </ul>
+    </div>
     <div class="columns py-5 is-centered is-vcentered" id="safmeds-wrapper">
         <div class="column is-three-fifths-widescreen is-full-desktop is-full-tablet is-full-mobile is-size-2"
              id="card-column">
-            {% include "safmeds/single_card.html" %}
+            {% include "safmeds/single_card.html" with show_button="true" use_alpine="true" %}
         </div>
         <div class="column">
             <div class="columns is-vcentered is-multiline is-centered">
@@ -13,7 +22,10 @@
                     {% include "components/alpine-counter.html" with classes="button is-danger is-large" name="Incorrect" id="num-incorrect" %}
                 </div>
                 <div class="column is-narrow is-centered has-text-centered">
-                    <button x-data="{ count: 0 }" class="button is-warning is-large" id="next">Next</button>
+                    <button class="button is-warning is-large" id="next"
+                            @click="
+                                $dispatch('reset-card');
+                                $nextTick(() => {nextCard();})">Next</button>
                 </div>
             </div>
         </div>

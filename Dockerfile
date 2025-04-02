@@ -49,19 +49,13 @@ RUN npm install --omit=dev \
 
 FROM base AS run
 
-ARG ALLOWED_HOSTS
-ARG SECRET_KEY
-ARG INTERNAL_IPS
-ARG POSTGRES_NAME
-ARG POSTGRES_USER
-ARG POSTGRES_PASSWORD
-ARG POSTGRES_HOST
 
 COPY --exclude="./src/" . .
 COPY --from=poetry-build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY --from=npm-build /app/staticfiles/js ./staticfiles/js
 COPY --from=npm-build /app/staticfiles/css ./staticfiles/css
 
+RUN --mount=type=secret,
 
 RUN apk add --no-cache libpq py3-gunicorn
 
@@ -82,7 +76,7 @@ RUN touch .pg_service.conf \
     && touch .pgpass \
     && echo [aba.rocks] >> .pg_service.conf \
     && echo host=${POSTGRES_HOST} >> .pg_service.conf \
-    && echo dbname=${POSTGRES_NAME} >> .pg_service.conf \
+    && echo dbname=${POSTGRES_DB} >> .pg_service.conf \
     && echo port=5432 >> .pg_service.conf \
     && echo "${POSTGRES_HOST}:5432:${POSTGRES_NAME}:${POSTGRES_USER}:${POSTGRES_PASSWORD}" >> .pgpass
 
@@ -93,4 +87,4 @@ USER abarocks
 
 EXPOSE 8000
 
-ENTRYPOINT [ "gunicorn", "abarocks.wsgi", "-b", "0.0.0.0:8000" ]
+CMD [ "gunicorn", "abarocks.wsgi", "-b", "0.0.0.0:8000" ]

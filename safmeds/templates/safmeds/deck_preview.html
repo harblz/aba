@@ -1,0 +1,19 @@
+{% if deck.cards.all %}
+    <div class="is-mobile" id="deck-list" x-data="cards">
+    {% for card in deck.cards.all %}
+        {% include "safmeds/single_card.html" with card=card show_button="false" use_alpine="false" %}
+    {% endfor %}
+    </div>
+    <div class="buttons is-centered">
+        <a class="button is-3 is-large" @click="preview = false">Back</a>
+        <a class="button is-3 is-success is-large" href="{% url 'safmeds:play_deck' deck.slug %}">Play</a>
+    </div>
+{% else %}
+    <div class="block" id="deck-list">
+        <p class="subtitle is-2">This deck is empty</p>
+    </div>
+    <div class="buttons is-centered">
+        <a class="button is-3" disabled>Play</a>
+        <a class="button is-3" @click="preview = false">Back</a>
+    </div>
+{% endif %}

@@ -15,6 +15,9 @@ import os
 import tempfile
 import sys
 
+import core.context_processors
+from core.secrets_processor import load_secret
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = load_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False) == "True"
+DEBUG = load_secret("DEBUG", False) == "True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(":")
-INTERNAL_IPS = os.environ.get("INTERNAL_IPS").split(":")
+ALLOWED_HOSTS = load_secret("ALLOWED_HOSTS").split(":")
+INTERNAL_IPS = load_secret("INTERNAL_IPS").split(":")
 
 MANAGERS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
 ADMINS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
@@ -117,6 +120,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
+                # "core.context_processors.page_context",
             ],
         },
     },

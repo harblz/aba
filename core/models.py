@@ -21,7 +21,12 @@ class NavLink(models.Model):
 
 
 class PageContent(models.Model):
-    page = models.SlugField(max_length=200, unique=True, primary_key=True)
+    view = models.SlugField(
+        db_comment="The view that corresponds to the specified path in the request object",
+        max_length=200,
+        unique=True,
+        primary_key=True,
+    )
     heading = models.CharField(max_length=255, null=True, blank=True)
     subheading = models.CharField(max_length=255, null=True, blank=True)
     body = CKEditor5Field("Page Body", null=True, blank=True)

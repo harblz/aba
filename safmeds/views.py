@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.template.response import TemplateResponse
+from django_htmx.http import trigger_client_event
+import json
 
 from .models import Card, Deck
 
@@ -7,7 +9,7 @@ from .models import Card, Deck
 def card_catalog(request):
     return TemplateResponse(
         request,
-        "safmeds/deck.html",
+        "safmeds/catalog.html",
         {
             "cards": Card.objects.all(),
         },
@@ -20,10 +22,31 @@ def deck_editor(request):
 
 def card_detail(request, id):
     return TemplateResponse(
-        request, "safmeds/detail.html", {"card": Card.objects.get(id=id), "id": id}
+        request, "safmeds/play_card.html", {"card": Card.objects.get(id=id), "id": id}
     )
 
 
 def browse_decks(request):
     decks = Deck.objects.all()
     return render(request, "safmeds/main.html", context={"decks": decks})
+
+
+def view_deck(request, slug):
+    deck = Deck.objects.get(slug=slug)
+    if request.htmx:
+        response = TemplateResponse(
+            request, "safmeds/deck_preview.html", context={"deck": deck}
+        )
+        return trigger_client_event(response, "preview", after="swap")
+    else:
+        return TemplateResponse(request, "safmeds/deck.html", context={"deck": deck})
+
+
+def play(request, slug):
+    deck = Deck.objects.get(slug=slug)
+    data = list(deck.cards.all().values())
+    return TemplateResponse(
+        request,
+        "safmeds/play_card.html",
+        context={"deck": deck, "data": json.dumps(data)},
+    )

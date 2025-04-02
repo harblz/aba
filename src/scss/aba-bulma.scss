@@ -23,6 +23,7 @@ $white: #fff;
 @use "../../node_modules/bulma/sass/utilities/controls";
 @use "../../node_modules/bulma/sass/utilities/initial-variables.scss" as iv;
 @use "../../node_modules/bulma/sass/utilities/css-variables" as cv;
+@use "../../node_modules/bulma/sass/base/generic" as gen;
 
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
@@ -100,7 +101,7 @@ $white: #fff;
   height: 25vh;
 }
 
-#card-container {
+.card-container {
   perspective: 1000px;
   height: 100%;
   width: 100%;
@@ -123,7 +124,7 @@ $white: #fff;
   }
 }
 
-#card-container.flip {
+.card-container.flip {
   transform: rotateY(180deg);
 }
 
@@ -151,7 +152,7 @@ div[id$="-back"] {
   z-index: 0;
 }
 
-#flip-button {
+.flip-button {
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
@@ -163,33 +164,85 @@ div[id$="-back"] {
   height: 65vh;
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .deck {
-  width: 20vw;
+  width: 60vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @include mixins.tablet {
+    width: 20vw;
+  }
 }
 
-#select-button {
-  border-top-style: none !important;
+.deck-button {
   width: 50%;
   border-radius: 1rem;
 }
 
-#deck-name {
+.deck-name {
   box-shadow: none;
   width: 100%;
 }
 
-#deck-info {
-  z-index: 2;
+#deck-carousel {
+  position: absolute;
+  height: 100%;
+}
+
+#modals-here {
+  height: 100vh;
+  width: 100vw;
+  border-radius: 1.5rem;
+  background-color: gen.$body-background-color;
+
+  @include mixins.tablet {
+    height: 75vh;
+    width: 75vw;
+  }
+}
+
+#deck-preview {
+  position: absolute;
+  z-index: 2000;
+  height: 100vh;
+  width: 100vh;
 }
 
 #deck-list {
-  position: sticky;
-  height: 100%;
+  height: 90%;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .card-container {
+    width: 90%;
+    height: 45%;
+    margin: .5rem;
+    flex-grow: 0;
+
+    @include mixins.desktop {
+      width: 40%;
+    }
+  }
+}
+
+.deck-foot {
+  border-top-style: none;
+  width: 100%;
+  bottom: 0;
+
+  button {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+  }
 }

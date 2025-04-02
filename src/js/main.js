@@ -24,15 +24,13 @@ Alpine.store("themeSwitcher", {
     } else {
       this.theme = "dark";
     }
-    console.log("initialized successfully");
   },
   toggle() {
     if (this.theme === "auto") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         this.theme = "light";
-      }
-      else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-        this.theme="dark";
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        this.theme = "dark";
       }
     }
     this.theme = this.theme === "dark" ? "light" : "dark";
@@ -69,5 +67,39 @@ Alpine.bind("burger", {
     return this.cross ? "is-active" : "";
   },
 });
+
+Alpine.data("cards", () => ({
+  front: "",
+  back: "",
+  currentIndex: 0,
+  total: 0,
+  deck: [],
+  init() {
+    try {
+      this.deck = JSON.parse(
+        JSON.parse(document.getElementById("cards").textContent),
+      );
+    } catch {
+      this.deck = [];
+    }
+    this.total = this.deck.length;
+    const card = this.deck[0] || {};
+    this.current = 1;
+    this.front = card.front || "";
+    this.back = card.back || "";
+  },
+  frontside(ogtext) {
+    return ogtext || this.front;
+  },
+  backside(ogtext) {
+    return ogtext || this.back;
+  },
+  nextCard() {
+    this.current += 1;
+    const card = this.deck[this.current];
+    this.front = card.front;
+    this.back = card.back;
+  },
+}));
 
 Alpine.start();
