@@ -71,9 +71,11 @@ Alpine.bind("burger", {
 Alpine.data("cards", () => ({
   front: "",
   back: "",
-  currentIndex: 0,
+  current: 0,
   total: 0,
   deck: [],
+  correct: 0,
+  incorrect: 0,
   init() {
     try {
       this.deck = JSON.parse(
@@ -95,10 +97,19 @@ Alpine.data("cards", () => ({
     return ogtext || this.back;
   },
   nextCard() {
-    this.current += 1;
-    const card = this.deck[this.current];
-    this.front = card.front;
-    this.back = card.back;
+    if (this.current === this.total) {
+      console.log("Results");
+      console.log("Correct: " + this.correct);
+      console.log("Incorrect: " + this.incorrect);
+      const score = this.correct / this.total;
+      console.log("Score: " + this.score);
+      console.log("Thanks for Playing!");
+    } else {
+      this.current += 1;
+      const card = this.deck[this.current];
+      this.front = card.front;
+      this.back = card.back;
+    }
   },
 }));
 

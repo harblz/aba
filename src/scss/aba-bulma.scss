@@ -24,6 +24,7 @@ $white: #fff;
 @use "../../node_modules/bulma/sass/utilities/initial-variables.scss" as iv;
 @use "../../node_modules/bulma/sass/utilities/css-variables" as cv;
 @use "../../node_modules/bulma/sass/base/generic" as gen;
+@use "../../node_modules/bulma/sass/utilities/derived-variables" as dv;
 
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
@@ -244,5 +245,15 @@ div[id$="-back"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border: none;
+  }
+}
+
+.pagination > .pagination-list {
+
+  .is-current {
+    background-color: dv.$warning;
+  }
+  .is-completed {
+    background-color: dv.$success;
   }
 }
