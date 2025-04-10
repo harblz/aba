@@ -1,13 +1,14 @@
 {% load static %}
-<div class="container card-container" @reset-card.window="flip = false"
-     x-data="{ flip: false, showButton: {{ show_button }}, useAlpine: {{ use_alpine }} }">
+<div class="container card-container" x-data="card"
+     @reset-card.window="flip = false;$nextTick(() => {nextCard();})"
+     x-init="button = showButton;id = '{{ card.id }}' || $store.cardData.deck[current].id">
     <div class="index-card" :class="flip ? 'flip' : ''">
         <div class="index-card-side has-background-text-90 has-text-text-90-invert"
-             :id="useAlpine ? current + '-front' : '{{ card.id }}-front'">
+             :id="id + '-front'">
             <p x-text="frontside('{{ card.front }}')"></p>
         </div>
         <div class="index-card-side has-background-text-90 has-text-text-90-invert"
-             :id="useAlpine ? current + '-back' : '{{ card.id }}-back'">
+             :id="id + '-back'">
             <p x-text="backside('{{ card.back }}')"></p>
         </div>
     </div>

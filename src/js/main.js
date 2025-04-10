@@ -68,27 +68,58 @@ Alpine.bind("burger", {
   },
 });
 
-Alpine.data("cards", () => ({
-  front: "",
-  back: "",
+Alpine.store("cardData", {
+  deck: [],
   current: 0,
   total: 0,
-  deck: [],
   correct: 0,
   incorrect: 0,
   init() {
-    try {
+    if (document.getElementById("card-data")) {
       this.deck = JSON.parse(
-        JSON.parse(document.getElementById("cards").textContent),
+        JSON.parse(document.getElementById("card-data").textContent),
       );
-    } catch {
-      this.deck = [];
+      this.total = this.deck.length;
+      this.current = 1;
+    } else {
+      this.deck = null;
     }
-    this.total = this.deck.length;
-    const card = this.deck[0] || {};
-    this.current = 1;
-    this.front = card.front || "";
-    this.back = card.back || "";
+  },
+  get front() {
+    return this.deck[this.current - 1].front;
+  },
+  get back() {
+    return this.deck[this.current - 1].back;
+  },
+  next() {
+    this.current += 1;
+  },
+  get score() {
+    console.log("Results");
+    console.log("Correct: " + this.correct);
+    console.log("Incorrect: " + this.incorrect);
+    const score = this.correct / this.total;
+    console.log("Score: " + score);
+    console.log("Thanks for Playing!");
+  }
+});
+
+Alpine.data("card", () => ({
+  cardData: Alpine.store("cardData"),
+  index: 0,
+  flip: false,
+  button: false,
+  id: "",
+  front: "",
+  back: "",
+  init() {
+    this.alpine = window.alpine.$data("useAlpine");
+    this.button = window.alpine.$data("showButton");
+    if (this.alpine) {
+      this.index = this.cardData.current;
+      this.front = this.cardData.front;
+      this.back = this.cardData.back;
+    }
   },
   frontside(ogtext) {
     return ogtext || this.front;
@@ -97,18 +128,12 @@ Alpine.data("cards", () => ({
     return ogtext || this.back;
   },
   nextCard() {
-    if (this.current === this.total) {
-      console.log("Results");
-      console.log("Correct: " + this.correct);
-      console.log("Incorrect: " + this.incorrect);
-      const score = this.correct / this.total;
-      console.log("Score: " + this.score);
-      console.log("Thanks for Playing!");
+    if (this.cardData.current === this.cardData.total) {
+      this.cardData.score();
     } else {
-      this.current += 1;
-      const card = this.deck[this.current];
-      this.front = card.front;
-      this.back = card.back;
+      this.cardData.next();
+      this.front = this.cardData.front;
+      this.back = this.cardData.back;
     }
   },
 }));

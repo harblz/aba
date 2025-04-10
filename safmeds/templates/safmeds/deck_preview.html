@@ -1,7 +1,7 @@
 {% if deck.cards.all %}
-    <div class="is-mobile" id="deck-list" x-data="cards">
+    <div class="is-mobile" id="deck-list" x-data="{ showButton: false }">
     {% for card in deck.cards.all %}
-        {% include "safmeds/single_card.html" with card=card show_button="false" use_alpine="false" %}
+        {% include "safmeds/single_card.html" with card=card %}
     {% endfor %}
     </div>
     <div class="buttons is-centered">

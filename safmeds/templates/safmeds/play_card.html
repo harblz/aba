@@ -1,27 +1,33 @@
 {% extends "base.html" %}
-{% block extra-head %}{{ data|json_script:"cards" }}{% endblock extra-head %}
+{% block extra-head %}{{ data|json_script:"card-data" }}{% endblock extra-head %}
 {% block content %}
-<section class="section" x-data="cards">
+<section class="section"
+         x-data="{
+                 current: $store.cardData.current,
+                 correct: $store.cardData.correct,
+                 incorrect: $store.cardData.incorrect,
+                 total: $store.cardData.total
+                 }">
     <div class="columns py-5 is-centered is-vcentered is-gapless" id="safmeds-wrapper">
         <div class="column is-three-fifths-widescreen is-full-desktop is-full-tablet is-full-mobile is-size-2"
-             id="card-column">
-            {% include "safmeds/single_card.html" with show_button="true" use_alpine="true" %}
+             id="card-column" x-data="{ showButton: true }">
+            {% include "safmeds/single_card.html"%}
         </div>
         <div class="column">
             <div class="columns is-vcentered is-multiline is-centered">
                 <div class="column has-text-centered is-narrow has-text-black buttons mb-0" id="card-buttons"
-                     @click="$dispatch('reset-card');$nextTick(() => {nextCard();})">
-                    {% include "components/alpine-counter.html" with classes="button is-success is-large" name="Correct" id="num-correct" %}
-                    {% include "components/alpine-counter.html" with classes="button is-danger is-large" name="Incorrect" id="num-incorrect" %}
+                     @click="$dispatch('reset-card')">
+                    {% include "components/alpine-counter.html" with classes="button is-success is-large" name="Correct" id="num-correct" data="correct" %}
+                    {% include "components/alpine-counter.html" with classes="button is-danger is-large" name="Incorrect" id="num-incorrect" data="incorrect" %}
                 </div>
             </div>
         </div>
     </div>
     <div class="pagination is-centered">
         <ul class="pagination-list">
-            <template x-for="(card, index) in deck">
-                <li class="pagination-link" x-data="{ cardIndex: index + 1 }"
-                    :class="{'is-current': cardIndex == current, 'is-completed': cardIndex < current }"
+            <template x-for="i in total" :key="i">
+                <li class="pagination-link" x-data="{ cardIndex: i }"
+                    :class="{'is-current': i == current, 'is-completed': i < current }"
                     x-text="cardIndex"></li>
             </template>
         </ul>
