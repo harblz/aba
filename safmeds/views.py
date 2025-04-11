@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django_htmx.http import trigger_client_event
@@ -50,3 +51,19 @@ def play(request, slug):
         "safmeds/play_card.html",
         context={"deck": deck, "data": json.dumps(data)},
     )
+
+
+def results(request):
+    correct = int(request.GET.get("correct"))
+    incorrect = int(request.GET.get("incorrect"))
+    total = int(request.GET.get("total"))
+    score = (float(correct) / float(total)) * 100
+    context = {
+        "slug": request.GET.get("slug"),
+        "name": request.GET.get("name"),
+        "correct": correct,
+        "incorrect": incorrect,
+        "total": total,
+        "score": score,
+    }
+    return TemplateResponse(request, "safmeds/results.html", context)

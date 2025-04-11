@@ -1,3 +1,4 @@
+<h2 class="title mb-0">{{ deck.name }}</h2>
 {% if deck.cards.all %}
     <div class="is-mobile" id="deck-list" x-data="{ showButton: false }">
     {% for card in deck.cards.all %}
@@ -5,8 +6,8 @@
     {% endfor %}
     </div>
     <div class="buttons is-centered">
-        <a class="button is-3 is-large" @click="preview = false">Back</a>
-        <a class="button is-3 is-success is-large" href="{% url 'safmeds:play_deck' deck.slug %}">Play</a>
+        <a class="button is-3 is-medium" @click="preview = false">Back</a>
+        <a class="button is-3 is-success is-medium" href="{% url 'safmeds:play_deck' deck.slug %}">Play</a>
     </div>
 {% else %}
     <div class="block" id="deck-list">

@@ -1,3 +1,4 @@
+import "/Users/kyle/PycharmProjects/aba/src/js/htmx.js";
 import "htmx-ext-response-targets/response-targets";
 import "htmx-ext-alpine-morph/alpine-morph";
 import "htmx-ext-head-support/head-support";
@@ -12,6 +13,7 @@ Alpine.plugin(persist);
 Alpine.plugin(collapse);
 
 window.alpine = Alpine;
+window.htmx = htmx;
 
 Alpine.store("themeSwitcher", {
   theme: window.alpine.$persist("auto").as("theme"),
@@ -77,7 +79,7 @@ Alpine.store("cardData", {
   init() {
     if (document.getElementById("card-data")) {
       this.deck = JSON.parse(
-        JSON.parse(document.getElementById("card-data").textContent),
+        JSON.parse(document.getElementById("card-data").textContent)
       );
       this.total = this.deck.length;
       this.current = 1;
@@ -95,13 +97,14 @@ Alpine.store("cardData", {
     this.current += 1;
   },
   get score() {
-    console.log("Results");
-    console.log("Correct: " + this.correct);
-    console.log("Incorrect: " + this.incorrect);
-    const score = this.correct / this.total;
-    console.log("Score: " + score);
-    console.log("Thanks for Playing!");
-  }
+    window.htmx.trigger("#play-section", "score", {
+      slug: document.querySelector('meta[name="slug"]').content,
+      name: document.title,
+      correct: this.correct,
+      incorrect: this.incorrect,
+      total: this.total,
+    });
+  },
 });
 
 Alpine.data("card", () => ({
@@ -113,13 +116,10 @@ Alpine.data("card", () => ({
   front: "",
   back: "",
   init() {
-    this.alpine = window.alpine.$data("useAlpine");
     this.button = window.alpine.$data("showButton");
-    if (this.alpine) {
-      this.index = this.cardData.current;
-      this.front = this.cardData.front;
-      this.back = this.cardData.back;
-    }
+    this.index = this.cardData.current;
+    this.front = this.cardData.front;
+    this.back = this.cardData.back;
   },
   frontside(ogtext) {
     return ogtext || this.front;
