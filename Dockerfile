@@ -9,26 +9,21 @@ RUN apk update
 
 ARG DEBUG
 
-ENV PYTHON_VERSION=3.12
-ENV VENV_PATH=/app/.venv
-ENV PATH="${VENV_PATH}/bin:${VENV_PATH}:$PATH"
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV DEBUG=${DEBUG}
+ENV PYTHON_VERSION=3.12 VIRTUAL_ENV=/app/.venv PATH="${VIRTUAL_ENV}/bin:${VIRTUAL_ENV}:$PATH" \
+    PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 DEBUG=${DEBUG}
 
 FROM base AS poetry-build
 
-ENV POETRY_NO_INTERACTION=1
-ENV POETRY_VERSION=1.8.3
-ENV POETRY_VIRTUALENVS_IN_PROJECT=1
-ENV POETRY_VIRTUALENVS_CREATE=true
-ENV POETRY_CACHE_DIR=/tmp/poetry_cache
+ENV POETRY_NO_INTERACTION=1 POETRY_VIRTUALENVS_IN_PROJECT=true POETRY_VIRTUALENVS_PATH=${VIRTUAL_ENV} \
+    POETRY_VIRTUALENVS_CREATE=true POETRY_CACHE_DIR=/tmp/poetry_cache
 
 RUN apk add --no-cache libpq-dev gcc python3-dev musl-dev libffi-dev postgresql-dev graphviz graphviz-dev
 
-RUN python3 -m venv ${VENV_PATH} \
-	&& ${VENV_PATH}/bin/pip install -U pip setuptools \
-	&& ${VENV_PATH}/bin/pip install poetry==${POETRY_VERSION}
+RUN python3 -m venv ${VIRTUAL_ENV} \
+	&& pip install -U pip setuptools \
+	&& pip install poetry
+
+RUN which pip
 
 ENV POETRY_CACHE_DIR=/tmp/.cache
 
@@ -54,15 +49,13 @@ RUN npm install --omit=dev \
 
 FROM base AS run
 
-ARG ALLOWED_HOSTS
-ARG SECRET_KEY
-ARG INTERNAL_IPS
 
 COPY --exclude="./src/" . .
-COPY --from=poetry-build ${VENV_PATH} ${VENV_PATH}
+COPY --from=poetry-build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY --from=npm-build /app/staticfiles/js ./staticfiles/js
 COPY --from=npm-build /app/staticfiles/css ./staticfiles/css
 
+RUN --mount=type=secret,
 
 RUN apk add --no-cache libpq py3-gunicorn
 
@@ -77,11 +70,15 @@ RUN adduser \
     abarocks \
     && chown -R abarocks:abarocks /app/
 
-ENV ALLOWED_HOSTS=${ALLOWED_HOSTS}
-ENV SECRET_KEY=${SECRET_KEY}
-ENV INTERNAL_IPS=${INTERNAL_IPS}
-ENV DJANGO_SETTINGS_MODULE=abarocks.settings
-ENV PYTHONPATH="/app/.venv/lib/python${PYTHON_VERSION}/site-packages:/app"
+ENV ALLOWED_HOSTS=${ALLOWED_HOSTS} SECRET_KEY=${SECRET_KEY} INTERNAL_IPS=${INTERNAL_IPS} \
+    DJANGO_SETTINGS_MODULE=abarocks.settings PYTHONPATH="/app/.venv/lib/python${PYTHON_VERSION}/site-packages:/app"
+RUN touch .pg_service.conf \
+    && touch .pgpass \
+    && echo [aba.rocks] >> .pg_service.conf \
+    && echo host=${POSTGRES_HOST} >> .pg_service.conf \
+    && echo dbname=${POSTGRES_DB} >> .pg_service.conf \
+    && echo port=5432 >> .pg_service.conf \
+    && echo "${POSTGRES_HOST}:5432:${POSTGRES_NAME}:${POSTGRES_USER}:${POSTGRES_PASSWORD}" >> .pgpass
 
 RUN python manage.py collectstatic --noinput
 
@@ -90,4 +87,4 @@ USER abarocks
 
 EXPOSE 8000
 
-ENTRYPOINT [ "gunicorn", "abarocks.wsgi", "-b", "0.0.0.0:8000" ]
+CMD [ "gunicorn", "abarocks.wsgi", "-b", "0.0.0.0:8000" ]

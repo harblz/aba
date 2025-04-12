@@ -4,6 +4,7 @@
   {{ headers|json_script:"headers"}}
 {% endblock extra-head %}
 {% block content %}
+<section class="section">
 <div id="page-wrapper" class="has-text-centered" x-data="{ count: 0 }" @resume="count = $event.detail.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
     <div id="quiz-wrapper" @htmx:after-swap="count++">
     <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
@@ -16,18 +17,18 @@
             hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}"
             x-data="{ loading: false, }"
             :class="{'is-loading': loading }"
-            @click="loading = !loading"
+            @click="loading = ! loading"
             hx-target="#quiz-wrapper"
             hx-swap="innerHTML"
     >Click here to begin!</button>
   </div>
   <div id="alpine-wrapper"
        x-data="{ modal : false }"
-       @show-modal.window="modal = !modal" 
+       @show-modal.window="modal = ! modal"
        @reset.window="$refs.modal.replaceChildren();
                $nextTick(() => { modal = false })"
   >
-      <div class="modal" id="modal-wrapper" :class="{ 'is-active': modal }" x-transition>
+      <div class="modal" id="modal-wrapper" x-show.important="modal" x-transition>
         <div class="modal-background"></div>
         <div class="modal-card box"
              id="modals-here"
@@ -36,4 +37,5 @@
       </div>
   </div>
 </div>
+</section>
 {% endblock content %}

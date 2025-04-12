@@ -1,0 +1,21 @@
+{% load static %}
+<div class="container card-container" x-data="card"
+     @reset-card.window="flip = false;$nextTick(() => {nextCard();})"
+     x-init="button = showButton;id = '{{ card.id }}' || $store.cardData.deck[current].id">
+    <div class="index-card" :class="flip ? 'flip' : ''">
+        <div class="index-card-side has-background-text-90 has-text-text-90-invert"
+             :id="id + '-front'">
+            <p x-text="frontside('{{ card.front }}')"></p>
+        </div>
+        <div class="index-card-side has-background-text-90 has-text-text-90-invert"
+             :id="id + '-back'">
+            <p x-text="backside('{{ card.back }}')"></p>
+        </div>
+    </div>
+    <template x-if="showButton">
+        <div class="icon has-text-grey is-clickable is-large flip-button"
+             @click="flip = !flip">
+            <i class="fas fa-rotate"></i>
+        </div>
+    </template>
+</div>

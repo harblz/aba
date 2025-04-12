@@ -81,7 +81,7 @@ class TrueFalseQuestion(BaseQuestion):
 
 class MultipleChoiceAnswer(models.Model):
     question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
-    text = models.TextField("Answer Text")
+    text = CKEditor5Field("Answer Text")
 
     class Meta:
         default_related_name = "answers"

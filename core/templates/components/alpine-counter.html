@@ -1,0 +1,5 @@
+<button class="counter {{ classes }}"
+        id="{{ id }}"
+        x-on:click="{{ data }}++"
+        >{{ name }} <span class="count" x-text="$store.cardData.{{ name|lower }}"></span>
+</button>

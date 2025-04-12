@@ -8,17 +8,252 @@ $beige-lighter: #eff0eb;
 $white: #fff;
 
 // Path to Bulma's sass folder
-@use "../../node_modules/bulma/sass/index" with (
+@use "../../node_modules/bulma/sass" with (
     $family-primary: '"Nunito", sans-serif',
-    $grey-dark: $brown,
-    $grey-light: $beige-light,
-    $primary: $purple,
-    $link: $white,
+    $family-secondary: 'Finger Paint',
     $control-border-width: 2px,
     $input-shadow: none,
-    $navbar-background-color: $orange,
-    $navbar-item-color: #fff,
+    $primary: $orange,
+    /* $navbar-background-color: $orange,
+    $navbar-item-color: #fff, */
     );
+
+@use "../../node_modules/bulma/sass/utilities/extends";
+@use "../../node_modules/bulma/sass/utilities/mixins";
+@use "../../node_modules/bulma/sass/utilities/controls";
+@use "../../node_modules/bulma/sass/utilities/initial-variables.scss" as iv;
+@use "../../node_modules/bulma/sass/utilities/css-variables" as cv;
+@use "../../node_modules/bulma/sass/base/generic" as gen;
+@use "../../node_modules/bulma/sass/utilities/derived-variables" as dv;
 
 // Import the Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+// Alpine.js `x-cloak`
+[x-cloak] { display: none !important; }
+
+// Custom SCSS
+.counter {
+  @extend button;
+  border: 0;
+  border-radius: .5rem;
+  padding: .25rem 0 .25rem .25rem;
+  white-space: nowrap;
+
+  .count {
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: inherit;
+    filter: brightness(.7);
+    margin: -.25rem 0 -.25rem .25rem;
+    padding: .25rem;
+  }
+
+  .counter-input {
+    border-radius: 0;
+    margin: 0 .1rem 0 0;
+    padding: 0;
+  }
+}
+
+#card-buttons {
+  display: flex;
+
+  @include mixins.tablet {
+    flex-direction: column;
+  }
+  button {
+    margin: .5rem;
+  }
+}
+
+#safmeds-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.widescreen {
+    flex-direction: row;
+  }
+}
+
+.#{iv.$class-prefix}modal {
+  display: flex;
+}
+
+.#{iv.$class-prefix}navbar-dropdown {
+  display: block;
+}
+
+.#{iv.$class-prefix}navbar-menu {
+    display: flex;
+}
+
+#card-column {
+  height: 50vh;
+
+  @include mixins.tablet {
+    height: 60vh;
+  }
+}
+
+.card-cell {
+  height: 25vh;
+}
+
+.card-container {
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
+
+  .index-card {
+    position: relative;
+    padding: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    width: 100%;
+    height: 100%;
+    transition: transform ease-out 0.5s;
+
+    p {
+      position: relative;
+    }
+  }
+  .flip {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-container.flip {
+  transform: rotateY(180deg);
+}
+
+.index-card-side {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+div[id$="-front"] {
+  @extend .index-card-side;
+  z-index: 10;
+  transform: rotateY(0deg);
+}
+
+div[id$="-back"] {
+  @extend .index-card-side;
+  transform: rotateY(180deg);
+  z-index: 0;
+}
+
+.flip-button {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+}
+
+#deck-browser {
+  position: absolute;
+  height: 65vh;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.deck {
+  width: 60vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mixins.tablet {
+    width: 20vw;
+  }
+}
+
+.deck-button {
+  width: 50%;
+  border-radius: 1rem;
+}
+
+.deck-name {
+  box-shadow: none;
+  width: 100%;
+}
+
+#deck-carousel {
+  position: absolute;
+  height: 100%;
+}
+
+#modals-here {
+  height: 100vh;
+  width: 100vw;
+  border-radius: 1.5rem;
+  background-color: gen.$body-background-color;
+
+  @include mixins.tablet {
+    height: 75vh;
+    width: 75vw;
+  }
+}
+
+#deck-preview {
+  position: absolute;
+  z-index: 2000;
+  height: 100vh;
+  width: 100vh;
+}
+
+#deck-list {
+  height: 80%;
+  width: 80%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .card-container {
+    width: 90%;
+    height: 45%;
+    margin: .5rem;
+    flex-grow: 0;
+
+    @include mixins.desktop {
+      width: 40%;
+    }
+  }
+}
+
+.deck-foot {
+  border-top-style: none;
+  width: 100%;
+  bottom: 0;
+
+  button {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+  }
+}
+
+.pagination > .pagination-list {
+
+  .is-current {
+    background-color: dv.$warning;
+  }
+  .is-completed {
+    background-color: dv.$success;
+  }
+}

@@ -2,5 +2,7 @@
 {% load static django_htmx %}
 {% block title %}Blog Posts{% endblock %}
 {% block content %}
- {% include "blog/posts.html" %}
+<section class="section">
+     {% include "blog/posts.html" %}
+</section>
 {% endblock %}

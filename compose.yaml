@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres
+    init: true
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_USER_FILE: /run/secrets/postgres_user
+      POSTGRES_DB_FILE: /run/secrets/postgres_db
+    secrets:
+      - postgres_password
+      - postgres_user
+      - postgres_db
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      POSTGRES_HOST: "db"
+      POSTGRES_DB: cat /run/secrets/postgres_db
+      POSTGRES_USER: cat /run/secrets/postgres_user
+      POSTGRES_PASSWORD: cat /run/secrets/postgres_password
+      ALLOWED_HOSTS: cat /run/secrets/allowed_hosts
+      DEBUG_FILE: cat /run/secrets/debug
+      SECRET_KEY: cat /run/secrets/secret_key
+      INTERNAL_IPS: cat /run/secrets/internal_ips
+    secrets:
+      - debug
+      - secret_key
+      - allowed_hosts
+      - internal_ips
+      - postgres_db
+      - postgres_password
+      - postgres_user
+    depends_on:
+      - db
+
+secrets:
+  debug:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/DEBUG
+  secret_key:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/SECRET_KEY
+  allowed_hosts:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/ALLOWED_HOSTS
+  internal_ips:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/INTERNAL_IPS
+  postgres_db:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/POSTGRES_DB
+  postgres_password:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/POSTGRES_PASSWORD
+  postgres_user:
+    file: /Users/Kyle/Library/DevSecrets/abarocks/POSTGRES_USER
+
+volumes:
+  postgres_data:

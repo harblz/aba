@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ deck.name }}{% endblock title %}
+{% block extra-head %}
+    {{ data|json_script:"card-data" }}
+    <meta name="slug" content="{{ deck.slug }}" />
+{% endblock extra-head %}
+{% block content %}
+<section class="section" id="play-section" hx-get="{% url 'safmeds:results' %}"
+         hx-trigger="score" hx-vals="js:...event.detail" hx-swap="outerHTML">
+    <div class="columns py-5 is-centered is-vcentered is-gapless" id="safmeds-wrapper">
+        <div class="column is-three-fifths-widescreen is-full-desktop is-full-tablet is-full-mobile is-size-2"
+             id="card-column" x-data="{ showButton: true }">
+            {% include "safmeds/single_card.html"%}
+        </div>
+        <div class="column">
+            <div class="columns is-vcentered is-multiline is-centered">
+                <div class="column has-text-centered is-narrow has-text-black buttons mb-0" id="card-buttons"
+                     @click="$dispatch('reset-card')">
+                    {% include "components/alpine-counter.html" with classes="button is-success is-large" data="$store.cardData.correct" name="Correct" id="num-correct" %}
+                    {% include "components/alpine-counter.html" with classes="button is-danger is-large" data="$store.cardData.incorrect" name="Incorrect" id="num-incorrect" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination is-centered">
+        <ul class="pagination-list">
+            <template x-for="i in $store.cardData.total" :key="i">
+                <li class="pagination-link" x-data="{ cardIndex: i }"
+                    :class="{'is-current': i == $store.cardData.current, 'is-completed': i < $store.cardData.current }"
+                    x-text="cardIndex"></li>
+            </template>
+        </ul>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% load static %}
+    <nav class="navbar is-transparent is-fixed-bottom px-5" role="navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
+            <p class="title is-family-secondary">ABA.Rocks</p>
+        </a>
+        <a role="button"  id="burger" class="navbar-burger" aria-label="menu" data-target="navMenu"
+           @click="$store.showMenu.toggle()" x-bind="burger">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navbar-menu"
+      x-show.important="$store.showMenu.show" x-collapse>
+        <div class="navbar-start">
+          <div class="navbar-item">
+                <div class="buttons">
+                    <button class="icon" @click="$store.themeSwitcher.toggle()">
+                        <i class="fas fa-lightbulb is-large"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+    <a class="navbar-item has-text-weight-bold is-tab" href="{% url 'learn:course-index' %}">
+            Learn
+          </a>
+
+          <a class="navbar-item has-text-weight-bold is-tab" href="{% url 'blog:blog-posts' %}">
+            Blog
+          </a>
+
+          <a class="navbar-item has-text-weight-bold is-tab" href="{% url 'about' %}">
+            About
+          </a>
+
+          <a class="navbar-item has-text-weight-bold is-tab" href="https://ko-fi.com/abarocks">
+            &nbsp&nbsp ☕️ &nbsp Buy Us a Ko-Fi &nbsp ❤️ &nbsp&nbsp
+          </a>
+
+          <div class="navbar-item has-dropdown has-text-weight-bold has-dropdown-up is-tab" x-data="{ dropdown : false }">
+            <a class="navbar-link" @click="dropdown = !dropdown">
+              More
+            </a>
+
+            <div class="navbar-dropdown is-right is-size-5" x-show="dropdown" x-collapse>
+              <a class="navbar-item has-text-weight-bold">
+                About
+              </a>
+              <a class="navbar-item has-text-weight-bold">
+                Jobs
+              </a>
+              <a class="navbar-item has-text-weight-bold">
+                Contact
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item has-text-weight-bold">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>

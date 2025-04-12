@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section" x-data="cards">
+    <div class="grid is-col-min-12 is-gap-3">
+        {% for card in cards.all %}
+        <div class="cell card-cell" x-data="{ showButton: true }">
+            {% include "safmeds/single_card.html" with card=card %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}

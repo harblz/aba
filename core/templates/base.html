@@ -1,6 +1,6 @@
 {% load static django_htmx %}
 <!DOCTYPE html>
-<html lang="en" 
+<html lang="en"
       x-data
       :data-theme="$store.themeSwitcher.theme">
   <head>
@@ -13,14 +13,13 @@
       <!-- Pinterest Claim -->
       <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
 
-      <title>{% block title %}{% endblock title %}</title>
+      <title>{% block title %}{% endblock title %}</title> <!-- TODO: populate title blocks in children -->
 
       <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
       <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
       <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
-      <link rel="stylesheet" href="{% static 'css/app.css' %}">
       <script type="module" src="{% static 'js/aba.js' %}"></script>
       {% django_htmx_script %}
 
@@ -29,16 +28,9 @@
 
     {% block extra-head %}{% endblock extra-head %}
   </head>
-	<body hx-ext="$store.extensions.extensions" hx-swap="morph">
-    <section class="section">
-    {% include "navbar.html" %}
-    </section>
-
-    <section class="section content" id="content">
+	<body class="has-navbar-fixed-bottom" hx-ext="$store.extensions.extensions" hx-swap="morph">
+        {% include "navbar.html" %}
         {% block content %}{% endblock content %}
-    </section>
-
 		{% include "footer.html" %}
-
 	</body>
 </html>

@@ -1,0 +1,417 @@
+[
+  {
+    "model": "safmeds.card",
+    "pk": 1,
+    "fields": {
+      "front": "Term 1 Front",
+      "back": "Term 1 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 2,
+    "fields": {
+      "front": "Term 2 Front",
+      "back": "Term 2 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 3,
+    "fields": {
+      "front": "Term 3 Front",
+      "back": "Term 3 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 4,
+    "fields": {
+      "front": "Term 4 Front",
+      "back": "Term 4 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 5,
+    "fields": {
+      "front": "Term 5 Front",
+      "back": "Term 5 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 6,
+    "fields": {
+      "front": "Term 6 Front",
+      "back": "Term 6 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 7,
+    "fields": {
+      "front": "Term 7 Front",
+      "back": "Term 7 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 8,
+    "fields": {
+      "front": "Term 8 Front",
+      "back": "Term 8 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 9,
+    "fields": {
+      "front": "Term 9 Front",
+      "back": "Term 9 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 10,
+    "fields": {
+      "front": "Term 10 Front",
+      "back": "Term 10 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 11,
+    "fields": {
+      "front": "Term 11 Front",
+      "back": "Term 11 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 12,
+    "fields": {
+      "front": "Term 12 Front",
+      "back": "Term 12 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 13,
+    "fields": {
+      "front": "Term 13 Front",
+      "back": "Term 13 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 14,
+    "fields": {
+      "front": "Term 14 Front",
+      "back": "Term 14 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 15,
+    "fields": {
+      "front": "Term 15 Front",
+      "back": "Term 15 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 16,
+    "fields": {
+      "front": "Term 16 Front",
+      "back": "Term 16 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 17,
+    "fields": {
+      "front": "Term 17 Front",
+      "back": "Term 17 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 18,
+    "fields": {
+      "front": "Term 18 Front",
+      "back": "Term 18 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 19,
+    "fields": {
+      "front": "Term 19 Front",
+      "back": "Term 19 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 20,
+    "fields": {
+      "front": "Term 20 Front",
+      "back": "Term 20 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 21,
+    "fields": {
+      "front": "Term 21 Front",
+      "back": "Term 21 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 22,
+    "fields": {
+      "front": "Term 22 Front",
+      "back": "Term 22 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 23,
+    "fields": {
+      "front": "Term 23 Front",
+      "back": "Term 23 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 24,
+    "fields": {
+      "front": "Term 24 Front",
+      "back": "Term 24 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 25,
+    "fields": {
+      "front": "Term 25 Front",
+      "back": "Term 25 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 26,
+    "fields": {
+      "front": "Term 26 Front",
+      "back": "Term 26 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 27,
+    "fields": {
+      "front": "Term 27 Front",
+      "back": "Term 27 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 28,
+    "fields": {
+      "front": "Term 28 Front",
+      "back": "Term 28 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 29,
+    "fields": {
+      "front": "Term 29 Front",
+      "back": "Term 29 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 30,
+    "fields": {
+      "front": "Term 30 Front",
+      "back": "Term 30 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 31,
+    "fields": {
+      "front": "Term 31 Front",
+      "back": "Term 31 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 32,
+    "fields": {
+      "front": "Term 32 Front",
+      "back": "Term 32 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 33,
+    "fields": {
+      "front": "Term 33 Front",
+      "back": "Term 33 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 34,
+    "fields": {
+      "front": "Term 34 Front",
+      "back": "Term 34 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 35,
+    "fields": {
+      "front": "Term 35 Front",
+      "back": "Term 35 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 36,
+    "fields": {
+      "front": "Term 36 Front",
+      "back": "Term 36 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 37,
+    "fields": {
+      "front": "Term 37 Front",
+      "back": "Term 37 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 38,
+    "fields": {
+      "front": "Term 38 Front",
+      "back": "Term 38 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 39,
+    "fields": {
+      "front": "Term 39 Front",
+      "back": "Term 39 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 40,
+    "fields": {
+      "front": "Term 40 Front",
+      "back": "Term 40 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 41,
+    "fields": {
+      "front": "Term 41 Front",
+      "back": "Term 41 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 42,
+    "fields": {
+      "front": "Term 42 Front",
+      "back": "Term 42 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 43,
+    "fields": {
+      "front": "Term 43 Front",
+      "back": "Term 43 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 44,
+    "fields": {
+      "front": "Term 44 Front",
+      "back": "Term 44 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 45,
+    "fields": {
+      "front": "Term 45 Front",
+      "back": "Term 45 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 46,
+    "fields": {
+      "front": "Term 46 Front",
+      "back": "Term 46 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 47,
+    "fields": {
+      "front": "Term 47 Front",
+      "back": "Term 47 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 48,
+    "fields": {
+      "front": "Term 48 Front",
+      "back": "Term 48 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 49,
+    "fields": {
+      "front": "Term 49 Front",
+      "back": "Term 49 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 50,
+    "fields": {
+      "front": "Term 50 Front",
+      "back": "Term 50 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 51,
+    "fields": {
+      "front": "Term 51 Front",
+      "back": "Term 51 Back"
+    }
+  },
+  {
+    "model": "safmeds.card",
+    "pk": 52,
+    "fields": {
+      "front": "Term..."
+    }
+  }
+]

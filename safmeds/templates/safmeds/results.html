@@ -1,0 +1,29 @@
+<section class="hero is-primary has-text-centered">
+    <div class="hero-body container">
+        <h1 class="title">Results</h1>
+        <h2 class="subtitle">You completed all {{ total }} cards in {{ name }}</h2>
+        <p>Here's how you did!</p>
+    </div>
+</section>
+<section class="container has-text-centered p-4">
+    <div class="content" id="total">
+        <h3>Total number of cards:</h3>
+        <p>{{ total }}</p>
+    </div>
+    <div class="content" id="correct">
+        <h3>Number of cards you answered correctly:</h3>
+        <p>{{ correct }}</p>
+    </div>
+    <div class="content" id="incorrect">
+        <h3>Number of cards you answered incorrectly:</h3>
+        <p>{{ incorrect }}</p>
+    </div>
+    <div class="content" id="score">
+        <h3>Your final score is...</h3>
+        <p>{{ score }}%</p>
+    </div>
+    <div class="buttons is-centered">
+        <a class="button is-large" href="{% url 'safmeds:browse_decks' %}">Back to Deck Selection</a>
+        <a class="button is-large is-success" href="{% url 'safmeds:play_deck' slug %}">Play Again</a>
+    </div>
+</section>

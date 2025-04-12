@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero is-primary has-text-centered">
+    <div class="hero-body">
+        <h1 class="title">SAFMEDS</h1>
+        <h2 class="subtitle">Say All Fast Minute Every Day Shuffled</h2>
+        <p>To start, pick a deck!</p>
+    </div>
+</section>
+<section class="section p-0" id="deck-browser">
+    <div class="columns has-text-centered is-8 m-5 is-mobile" id="deck-carousel">
+        {% if decks %}
+        	{% for deck in decks %}
+                <div class="column deck-column is-size-5">
+                    <div class="card deck has-background-black-bold has-text-black-bold-invert">
+                        <div class="card-header deck-name has-background-black-bold-invert">
+                            <p class="card-header-title is-centered">{{ deck.name }}</p>
+                        </div>
+                        <div class="card-content deck-info">
+                            <div class="content">{{ deck.subject }}</div>
+                        </div>
+                        <div class="card-footer deck-foot">
+                            <button type="button" hx-target="#modals-here" hx-trigger="click"
+                                    class="button is-large card-footer-item has-background-primary"
+                                    hx-get="{% url 'safmeds:view_deck' deck.slug %}">Select</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>Sorry, no decks yet!</h3>
+        {% endif %}
+    </div>
+    <div id="deck-preview"
+         x-data="{ preview: false }"
+         @preview.window="preview = true"
+        x-show.important="preview" x-transition>
+      <div class="modal has-text-centered is-centered" id="modal-wrapper">
+        <div class="modal-background"
+             @click="$refs.modal.replaceChildren();
+             $nextTick(() => { preview = false })"
+        ></div>
+        <div class="modal-content p-5 is-flex is-flex-direction-column is-align-items-center"
+             id="modals-here" x-ref="modal"></div>
+      </div>
+    </div>
+</section>
+{% endblock content %}
