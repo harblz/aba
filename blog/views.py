@@ -3,21 +3,17 @@ from django.shortcuts import render, get_object_or_404, Http404
 from django.core.paginator import Paginator
 from django.template.response import TemplateResponse
 
-from pages.models import Pages
 from .models import Post
 from core.decorators import htmx_required
 from .models import Post
 
 
 def post(request, post_id):
-    try:
-        post = get_object_or_404(Post, pk=post_id)
-    except Pages.DoesNotExist:
-        raise Http404("Page does not exist")
+    post = get_object_or_404(Post, pk=post_id)
     return render(request, "blog/post.html", {"post": post})
 
 
-class Posts(ListView):
+"""class Posts(ListView):
     model = Post
     paginate_by = 10
     context_object_name = "posts"
@@ -25,7 +21,7 @@ class Posts(ListView):
     ordering = "-published_date"
 
     def get_queryset(self):
-        return Post.objects.filter(is_pinned=False).order_by(self.ordering)
+        return Post.objects.filter(is_pinned=False).order_by(self.ordering)"""
 
 
 def posts(request):

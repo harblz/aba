@@ -98,7 +98,6 @@ Alpine.store("cardData", {
   },
   get score() {
     window.htmx.trigger("#play-section", "score", {
-      slug: document.querySelector('meta[name="slug"]').content,
       name: document.title,
       correct: this.correct,
       incorrect: this.incorrect,

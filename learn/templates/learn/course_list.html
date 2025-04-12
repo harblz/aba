@@ -22,7 +22,7 @@
           <p class="card-text">
             {{ user.profile.last_lesson_page.body|safe|truncatewords_html:user.profile.last_lesson_page.snippet_size }}
           </p>
-          <a href="{% url 'course_index' %}" class="btn btn-info text-white">Study</a>
+          <a href="{% url 'course-index' %}" class="btn btn-info text-white">Study</a>
           <!-- /learn/unit/{{user.profile.last_lesson_page.id}} -->
         </div>
       </div>

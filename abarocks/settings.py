@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     # "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
-    "pages.apps.PagesConfig",
+    # "pages.apps.PagesConfig",
     "safmeds.apps.SafmedsConfig",
 ]
 

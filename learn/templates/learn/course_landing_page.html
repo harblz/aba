@@ -32,7 +32,7 @@ Quizzes = attached to lessons; multiple quizzes per lesson
         {% else %}
         <p class='card-text'>Multiple choice quiz. No time limit. Good luck!</p>
         {% endif %}
-        <a href='{% url "quiz:get_quiz" quiz.course_id quiz.number %}' class='card-link btn btn-primary'>Start Quiz</a>
+        <a href='{% url "quiz:get-quiz" quiz.course_id quiz.number %}' class='card-link btn btn-primary'>Start Quiz</a>
         <a href='#' class='card-link btn btn-secondary'>Lesson</a>
     </div>
     </div>

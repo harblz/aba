@@ -43,7 +43,7 @@ def view_deck(request, slug):
         return TemplateResponse(request, "safmeds/deck.html", context={"deck": deck})
 
 
-def play(request, slug):
+def _play(request, slug):
     deck = Deck.objects.get(slug=slug)
     data = list(deck.cards.all().values())
     return TemplateResponse(
@@ -53,13 +53,13 @@ def play(request, slug):
     )
 
 
-def results(request):
+def _results(request, slug):
     correct = int(request.GET.get("correct"))
     incorrect = int(request.GET.get("incorrect"))
     total = int(request.GET.get("total"))
     score = (float(correct) / float(total)) * 100
     context = {
-        "slug": request.GET.get("slug"),
+        "slug": slug,
         "name": request.GET.get("name"),
         "correct": correct,
         "incorrect": incorrect,

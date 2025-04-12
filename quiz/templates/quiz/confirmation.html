@@ -22,7 +22,7 @@
             x-data="{ loading: false }"
             :class="{ 'is-loading': loading }"
             @click="loading = !loading"
-            hx-get="{% url 'quiz:start_quiz' quiz.course.code quiz.number %}?confirm=True"
+            hx-get="{% url 'quiz:start-quiz' quiz.course.code quiz.number %}?confirm=True"
             hx-target="#quiz-wrapper"
     >Start Over</button>
 </footer>

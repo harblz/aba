@@ -1,9 +1,38 @@
 {% extends "base.html" %}
-
+{% block title %}Practice Quiz Index{% endblock title %}
 {% block content %}
-<section class="section">
-  {% for quiz in quizzes %}
-  <a class="button is-primary" href="{% url 'quiz:quiz' quiz.course_id quiz.number %}">{{ quiz }}</a>
-  {% endfor %}
+<section class="hero is-primary has-text-centered">
+    <div class="hero-body">
+        <h1 class="title">Practice Quizzes</h1>
+        <h2 class="subtitle">RBT, BCBA, and BCaBA quizzes available</h2>
+        <p>More subjects coming soon!</p>
+    </div>
+</section>
+<section class="container">
+<div class="tabs">
+  <ul>
+    <li class="is-active"><a>Pictures</a></li>
+    <li><a>Music</a></li>
+    <li><a>Videos</a></li>
+    <li><a>Documents</a></li>
+  </ul>
+</div>
+{% for quiz in quizzes %}
+  <div class="column deck-column is-size-5">
+        <div class="card deck has-background-black-bold has-text-black-bold-invert">
+            <div class="card-header deck-name has-background-black-bold-invert">
+                <p class="card-header-title is-centered">{{ quiz.course_id }} Practice Quiz Number {{ quiz.number}}</p>
+            </div>
+            <div class="card-content deck-info">
+                <div class="content">{{ quiz.desc }}</div>
+            </div>
+            <div class="card-footer deck-foot">
+                <a type="button" class="button is-large card-footer-item has-background-primary"
+                   href="{% url 'quiz:quiz' quiz.course_id quiz.number %}">Select</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</section>
 </section>
 {% endblock content %}

@@ -7,7 +7,7 @@
     </div>
     <div class="buttons is-centered">
         <a class="button is-3 is-medium" @click="preview = false">Back</a>
-        <a class="button is-3 is-success is-medium" href="{% url 'safmeds:play_deck' deck.slug %}">Play</a>
+        <a class="button is-3 is-success is-medium" href="{% url 'safmeds:play-deck' deck.slug %}">Play</a>
     </div>
 {% else %}
     <div class="block" id="deck-list">

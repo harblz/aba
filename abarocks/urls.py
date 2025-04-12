@@ -9,17 +9,13 @@ from . import views
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
-        path("about", views.about, name="about"),
+        path("about/", views.about, name="about"),
         path("login/", views.login, name="login"),
         path("blog/", include("blog.urls")),
         path("quizzes/", include("quiz.urls")),
         path("learn/", include("learn.urls")),
         path("safmeds/", include("safmeds.urls")),
         path("ckeditor5/", include("django_ckeditor_5.urls")),
-        path(
-            "playground/",
-            TemplateView.as_view(template_name="counter-test.html"),
-        ),
         path("", views.home, name="home"),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

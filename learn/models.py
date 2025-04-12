@@ -8,13 +8,10 @@ from django_ckeditor_5.fields import CKEditor5Field
 class Course(models.Model):
     """Competencies, subjects, and topics (e.g., BCBA, RBT, Feeding Therapy, etc.)"""
 
-    # TODO: Add relation in pages
     code = models.CharField(max_length=10, unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     subtitle = models.CharField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    course_data = models.JSONField(null=True, blank=True)
 
     class Meta:
         db_table_comment = "The competency, license, or topic of interest"

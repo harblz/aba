@@ -2,10 +2,9 @@
 {% block title %}{{ deck.name }}{% endblock title %}
 {% block extra-head %}
     {{ data|json_script:"card-data" }}
-    <meta name="slug" content="{{ deck.slug }}" />
 {% endblock extra-head %}
 {% block content %}
-<section class="section" id="play-section" hx-get="{% url 'safmeds:results' %}"
+<section class="section" id="play-section" hx-get="{% url 'safmeds:results' deck.slug %}"
          hx-trigger="score" hx-vals="js:...event.detail" hx-swap="outerHTML">
     <div class="columns py-5 is-centered is-vcentered is-gapless" id="safmeds-wrapper">
         <div class="column is-three-fifths-widescreen is-full-desktop is-full-tablet is-full-mobile is-size-2"

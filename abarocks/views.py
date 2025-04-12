@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseServerError, HttpResponseForbi
 from django.core.paginator import Paginator
 from django.template.response import TemplateResponse
 
-from pages.models import Pages
 from blog.models import Post
 
 

@@ -19,7 +19,7 @@
             <p>{{ course.description|truncatechars:250 }}</p>
             <a href="{% url 'learn:course-overview' code=course.code %}" class="button is-primary">Course Overview</a>
             <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="button is-secondary">TCO</a>
-            <a href="{% url 'quiz:quizzes_by_course' code=course.code %}" class="button is-info">Quizzes</a>
+            <a href="{% url 'quiz:quizzes-by-course' code=course.code %}" class="button is-info">Quizzes</a>
           </div>
         </div>
       </div>

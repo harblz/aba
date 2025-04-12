@@ -15,28 +15,21 @@ from django.db.models.deletion import Collector
 from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
+from learn.models import Course
 from core.decorators import htmx_required
 
 
-class QuizIndex(ListView):
-    model = Quiz
-    context_object_name = "quizzes"
-    template_name = "quiz/index.html"
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context["page"] = Pages.objects.get(title="Practice Quizzes")
-        return context
+def quiz_index(request):
+    quizzes = Quiz.objects.all().order_by("course_id")
+    courses = Course.objects.all().order_by("code")
+    return TemplateResponse(
+        request, "quiz/index.html", {"quizzes": quizzes, "courses": courses}
+    )
 
 
-class IndexByCourse(ListView):
-    model = Quiz
-    context_object_name = "quizzes"
-    template_name = "quiz/index.html"
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(course=self.kwargs["code"])
+def quizzes_by_course(request, code):
+    quizzes = Quiz.objects.filter(course_id=code)
+    return TemplateResponse(request, "quiz/index.html", {"quizzes": quizzes})
 
 
 def show_quiz(request, code, number) -> HttpResponse:
