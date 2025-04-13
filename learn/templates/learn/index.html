@@ -2,27 +2,30 @@
 {% load static %}
 {% block title %}Course Index{% endblock title %}
 {% block content %}
-<div class="container">
-  {% for course in Courses reversed %}
-      <div class="card">
-        <div class="card-content">
-        {% if course.image %}
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img class="card-img-top" height="auto" width="auto" src="{% get_media_prefix %}{{ course.image }}" alt="Card image cap">
-            </figure>
-          </div>
-        {% endif %}
-          <div class="content">
-            <p class="title is-4">{{ course.name }}</p>
-            <p class="subtitle is4">{{ course.subtitle }}</p>
-            <p>{{ course.description|truncatechars:250 }}</p>
-            <a href="{% url 'learn:course-overview' code=course.code %}" class="button is-primary">Course Overview</a>
-            <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="button is-secondary">TCO</a>
-            <a href="{% url 'quiz:quizzes-by-course' code=course.code %}" class="button is-info">Quizzes</a>
-          </div>
-        </div>
-      </div>
-  {% endfor %}
-</div>
+    {% include "components/_hero.html" %}
+    <section class="section">
+        {% for course in Courses reversed %}
+            <div class="card">
+                <div class="card-content">
+                    {% if course.image %}
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img class="card-img-top" height="auto" width="auto"
+                                     src="{% get_media_prefix %}{{ course.image }}" alt="Card image cap">
+                            </figure>
+                        </div>
+                    {% endif %}
+                    <div class="content">
+                        <p class="title is-4">{{ course.name }}</p>
+                        <p class="subtitle is4">{{ course.subtitle }}</p>
+                        <p>{{ course.description|truncatechars:250 }}</p>
+                        <a href="{% url 'learn:course-overview' code=course.code %}" class="button is-primary">Course
+                            Overview</a>
+                        <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="button is-secondary">TCO</a>
+                        <a href="{% url 'quiz:quizzes-by-course' code=course.code %}" class="button is-info">Quizzes</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock content %}

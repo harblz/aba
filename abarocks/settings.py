@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     # "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
-    # "pages.apps.PagesConfig",
     "safmeds.apps.SafmedsConfig",
 ]
 
@@ -104,6 +103,22 @@ if ENABLE_DEBUG_TOOLBAR:
     }
     RUNSERVERPLUS_POLLER_RELOADER_INTERVAL = 1
 
+EXCLUDE_FROM_PAGE = (
+    "admin",
+    "auth",
+    "contenttypes",
+    "sessions",
+    "messages",
+    "runserver_nostatic",
+    "staticfiles",
+    "humanize",
+    "postgres",
+    "taggit",
+    "django_ckeditor_5",
+    "django_htmx",
+    "fontawesomefree",
+)
+
 RESULTS_CACHE_SIZE = 1000
 
 ROOT_URLCONF = "abarocks.urls"
@@ -120,7 +135,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
-                # "core.context_processors.page_context",
+                "core.context_processors.page_context",
             ],
         },
     },

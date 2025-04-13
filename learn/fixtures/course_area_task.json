@@ -3,24 +3,21 @@
    "model": "learn.course",
    "pk": "BCaBA",
    "fields": {
-      "name": "Board Certified Assistant Behavior Analyst",
-      "course_data": null
+      "name": "Board Certified Assistant Behavior Analyst"
    }
 },
 {
    "model": "learn.course",
    "pk": "BCBA",
    "fields": {
-      "name": "Board Certified Behavior Analyst",
-      "course_data": null
+      "name": "Board Certified Behavior Analyst"
    }
 },
 {
    "model": "learn.course",
    "pk": "RBT",
    "fields": {
-      "name": "Registered Behavior Technician",
-      "course_data": null
+      "name": "Registered Behavior Technician"
    }
 },
 {

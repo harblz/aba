@@ -1,13 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<section class="hero is-primary has-text-centered">
-    <div class="hero-body">
-        <h1 class="title">SAFMEDS</h1>
-        <h2 class="subtitle">Say All Fast Minute Every Day Shuffled</h2>
-        <p>To start, pick a deck!</p>
-    </div>
-</section>
+{% include "components/_hero.html" %}
 <section class="section p-0" id="deck-browser">
     <div class="columns has-text-centered is-8 m-5 is-mobile" id="deck-carousel">
         {% if decks %}

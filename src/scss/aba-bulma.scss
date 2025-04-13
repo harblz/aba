@@ -257,3 +257,14 @@ div[id$="-back"] {
     background-color: dv.$success;
   }
 }
+
+#tables {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  table > caption {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}

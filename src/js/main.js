@@ -13,7 +13,6 @@ Alpine.plugin(persist);
 Alpine.plugin(collapse);
 
 window.alpine = Alpine;
-window.htmx = htmx;
 
 Alpine.store("themeSwitcher", {
   theme: window.alpine.$persist("auto").as("theme"),
@@ -79,7 +78,7 @@ Alpine.store("cardData", {
   init() {
     if (document.getElementById("card-data")) {
       this.deck = JSON.parse(
-        JSON.parse(document.getElementById("card-data").textContent)
+        JSON.parse(document.getElementById("card-data").textContent),
       );
       this.total = this.deck.length;
       this.current = 1;

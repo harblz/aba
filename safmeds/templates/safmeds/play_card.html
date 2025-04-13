@@ -15,8 +15,8 @@
             <div class="columns is-vcentered is-multiline is-centered">
                 <div class="column has-text-centered is-narrow has-text-black buttons mb-0" id="card-buttons"
                      @click="$dispatch('reset-card')">
-                    {% include "components/alpine-counter.html" with classes="button is-success is-large" data="$store.cardData.correct" name="Correct" id="num-correct" %}
-                    {% include "components/alpine-counter.html" with classes="button is-danger is-large" data="$store.cardData.incorrect" name="Incorrect" id="num-incorrect" %}
+                    {% include "components/_alpine-counter.html" with classes="button is-success is-large" data="$store.cardData.correct" name="Correct" id="num-correct" %}
+                    {% include "components/_alpine-counter.html" with classes="button is-danger is-large" data="$store.cardData.incorrect" name="Incorrect" id="num-incorrect" %}
                 </div>
             </div>
         </div>

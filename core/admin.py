@@ -11,7 +11,36 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
-    exclude = ["slug"]
+    fieldsets = [
+        (
+            "Navigation and URL Details",
+            {
+                "fields": ["app", "view", "params"],
+                "description": "The details to reverse a page URL for the nav.",
+            },
+        ),
+        (
+            "Advanced Nav Settings",
+            {
+                "fields": ["nav", "root"],
+                "description": "Options to configure the page display in the nav.",
+            },
+        ),
+        (
+            "Hero Content",
+            {
+                "fields": ["title", "subtitle", "blurb"],
+                "description": "The content for the page Hero.",
+            },
+        ),
+        (
+            None,
+            {
+                "fields": ["body"],
+                "description": "Any extra page content not saved elsewhere.",
+            },
+        ),
+    ]
 
 
 """class SessionAdmin(admin.ModelAdmin):
