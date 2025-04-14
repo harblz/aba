@@ -82,12 +82,40 @@ $white: #fff;
   display: flex;
 }
 
-.#{iv.$class-prefix}navbar-dropdown {
-  display: block;
-}
+.navbar-menu {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
 
-.#{iv.$class-prefix}navbar-menu {
+  @include mixins.desktop {
+    flex-direction: row;
+  }
+  .navbar-end {
     display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+
+    @include mixins.desktop {
+      justify-content: flex-end;
+      margin-inline-start: auto;
+      align-items: stretch;
+      width: inherit;
+    }
+
+  }
+
+  .navbar-start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mixins.desktop {
+      align-items: stretch;
+      flex-direction: row;
+    }
+  }
 }
 
 #card-column {

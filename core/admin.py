@@ -19,13 +19,7 @@ class PageAdmin(admin.ModelAdmin):
                 "description": "The details to reverse a page URL for the nav.",
             },
         ),
-        (
-            "Advanced Nav Settings",
-            {
-                "fields": ["nav", "root"],
-                "description": "Options to configure the page display in the nav.",
-            },
-        ),
+        (None, {"fields": ["nav"], "description": "Add page to the navigation bar?"}),
         (
             "Hero Content",
             {
@@ -41,6 +35,11 @@ class PageAdmin(admin.ModelAdmin):
             },
         ),
     ]
+
+
+@admin.register(NavLink)
+class NavLinkAdmin(admin.ModelAdmin):
+    readonly_fields = ["page"]
 
 
 """class SessionAdmin(admin.ModelAdmin):

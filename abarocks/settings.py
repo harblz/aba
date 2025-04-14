@@ -117,6 +117,8 @@ EXCLUDE_FROM_PAGE = (
     "django_ckeditor_5",
     "django_htmx",
     "fontawesomefree",
+    "debug_toolbar",
+    "django_extensions",
 )
 
 RESULTS_CACHE_SIZE = 1000
@@ -136,6 +138,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
                 "core.context_processors.page_context",
+                "core.context_processors.nav_links",
             ],
         },
     },
