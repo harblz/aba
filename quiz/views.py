@@ -139,7 +139,7 @@ def _next_question(request, **kwargs) -> HttpResponse:
 
 
 @htmx_required
-def _start(request, code, number) -> HttpResponse:
+def _start(request, code, number):
     quiz = Quiz.objects.get(course=code, number=number)
     if (response := _check_progress(request, code, number)) is None or bool(
         request.GET.get("confirm")
