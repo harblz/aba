@@ -1,4 +1,4 @@
-import "/Users/kyle/PycharmProjects/aba/src/js/htmx.js";
+import "./htmx";
 import "htmx-ext-response-targets/response-targets";
 import "htmx-ext-alpine-morph/alpine-morph";
 import "htmx-ext-head-support/head-support";

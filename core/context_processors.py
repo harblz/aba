@@ -4,7 +4,7 @@ from django.conf import settings
 import core
 
 
-def page_context(request):
+def page_context(request) -> dict:
     from .models import Page
 
     lookups = {}

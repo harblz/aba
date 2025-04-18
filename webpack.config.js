@@ -8,7 +8,7 @@ module.exports = {
   optimization: {
     minimize: false, // Disable minification
   },
-  entry: "./src/js/main.js",
+  entry: path.resolve(__dirname,"src/js/main.js"),
   target: "web",
   output: {
     path: path.resolve(__dirname, "staticfiles/js"),
@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      htmx: "htmx.org",
+      htmx: path.resolve(__dirname, "src/js/htmx.js")
     }),
     new webpack.ProvidePlugin({
       process: "process/browser",
@@ -25,4 +25,7 @@ module.exports = {
   infrastructureLogging: {
     level: "verbose",
   },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  }
 };
