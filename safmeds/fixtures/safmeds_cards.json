@@ -3,415 +3,416 @@
     "model": "safmeds.card",
     "pk": 1,
     "fields": {
-      "front": "Term 1 Front",
-      "back": "Term 1 Back"
+      "back": "Term 1 Back",
+      "front": "Term 1 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 2,
     "fields": {
-      "front": "Term 2 Front",
-      "back": "Term 2 Back"
+      "back": "Term 2 Back",
+      "front": "Term 2 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 3,
     "fields": {
-      "front": "Term 3 Front",
-      "back": "Term 3 Back"
+      "back": "Term 3 Back",
+      "front": "Term 3 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 4,
     "fields": {
-      "front": "Term 4 Front",
-      "back": "Term 4 Back"
+      "back": "Term 4 Back",
+      "front": "Term 4 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 5,
     "fields": {
-      "front": "Term 5 Front",
-      "back": "Term 5 Back"
+      "back": "Term 5 Back",
+      "front": "Term 5 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 6,
     "fields": {
-      "front": "Term 6 Front",
-      "back": "Term 6 Back"
+      "back": "Term 6 Back",
+      "front": "Term 6 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 7,
     "fields": {
-      "front": "Term 7 Front",
-      "back": "Term 7 Back"
+      "back": "Term 7 Back",
+      "front": "Term 7 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 8,
     "fields": {
-      "front": "Term 8 Front",
-      "back": "Term 8 Back"
+      "back": "Term 8 Back",
+      "front": "Term 8 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 9,
     "fields": {
-      "front": "Term 9 Front",
-      "back": "Term 9 Back"
+      "back": "Term 9 Back",
+      "front": "Term 9 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 10,
     "fields": {
-      "front": "Term 10 Front",
-      "back": "Term 10 Back"
+      "back": "Term 10 Back",
+      "front": "Term 10 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 11,
     "fields": {
-      "front": "Term 11 Front",
-      "back": "Term 11 Back"
+      "back": "Term 11 Back",
+      "front": "Term 11 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 12,
     "fields": {
-      "front": "Term 12 Front",
-      "back": "Term 12 Back"
+      "back": "Term 12 Back",
+      "front": "Term 12 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 13,
     "fields": {
-      "front": "Term 13 Front",
-      "back": "Term 13 Back"
+      "back": "Term 13 Back",
+      "front": "Term 13 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 14,
     "fields": {
-      "front": "Term 14 Front",
-      "back": "Term 14 Back"
+      "back": "Term 14 Back",
+      "front": "Term 14 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 15,
     "fields": {
-      "front": "Term 15 Front",
-      "back": "Term 15 Back"
+      "back": "Term 15 Back",
+      "front": "Term 15 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 16,
     "fields": {
-      "front": "Term 16 Front",
-      "back": "Term 16 Back"
+      "back": "Term 16 Back",
+      "front": "Term 16 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 17,
     "fields": {
-      "front": "Term 17 Front",
-      "back": "Term 17 Back"
+      "back": "Term 17 Back",
+      "front": "Term 17 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 18,
     "fields": {
-      "front": "Term 18 Front",
-      "back": "Term 18 Back"
+      "back": "Term 18 Back",
+      "front": "Term 18 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 19,
     "fields": {
-      "front": "Term 19 Front",
-      "back": "Term 19 Back"
+      "back": "Term 19 Back",
+      "front": "Term 19 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 20,
     "fields": {
-      "front": "Term 20 Front",
-      "back": "Term 20 Back"
+      "back": "Term 20 Back",
+      "front": "Term 20 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 21,
     "fields": {
-      "front": "Term 21 Front",
-      "back": "Term 21 Back"
+      "back": "Term 21 Back",
+      "front": "Term 21 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 22,
     "fields": {
-      "front": "Term 22 Front",
-      "back": "Term 22 Back"
+      "back": "Term 22 Back",
+      "front": "Term 22 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 23,
     "fields": {
-      "front": "Term 23 Front",
-      "back": "Term 23 Back"
+      "back": "Term 23 Back",
+      "front": "Term 23 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 24,
     "fields": {
-      "front": "Term 24 Front",
-      "back": "Term 24 Back"
+      "back": "Term 24 Back",
+      "front": "Term 24 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 25,
     "fields": {
-      "front": "Term 25 Front",
-      "back": "Term 25 Back"
+      "back": "Term 25 Back",
+      "front": "Term 25 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 26,
     "fields": {
-      "front": "Term 26 Front",
-      "back": "Term 26 Back"
+      "back": "Term 26 Back",
+      "front": "Term 26 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 27,
     "fields": {
-      "front": "Term 27 Front",
-      "back": "Term 27 Back"
+      "back": "Term 27 Back",
+      "front": "Term 27 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 28,
     "fields": {
-      "front": "Term 28 Front",
-      "back": "Term 28 Back"
+      "back": "Term 28 Back",
+      "front": "Term 28 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 29,
     "fields": {
-      "front": "Term 29 Front",
-      "back": "Term 29 Back"
+      "back": "Term 29 Back",
+      "front": "Term 29 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 30,
     "fields": {
-      "front": "Term 30 Front",
-      "back": "Term 30 Back"
+      "back": "Term 30 Back",
+      "front": "Term 30 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 31,
     "fields": {
-      "front": "Term 31 Front",
-      "back": "Term 31 Back"
+      "back": "Term 31 Back",
+      "front": "Term 31 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 32,
     "fields": {
-      "front": "Term 32 Front",
-      "back": "Term 32 Back"
+      "back": "Term 32 Back",
+      "front": "Term 32 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 33,
     "fields": {
-      "front": "Term 33 Front",
-      "back": "Term 33 Back"
+      "back": "Term 33 Back",
+      "front": "Term 33 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 34,
     "fields": {
-      "front": "Term 34 Front",
-      "back": "Term 34 Back"
+      "back": "Term 34 Back",
+      "front": "Term 34 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 35,
     "fields": {
-      "front": "Term 35 Front",
-      "back": "Term 35 Back"
+      "back": "Term 35 Back",
+      "front": "Term 35 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 36,
     "fields": {
-      "front": "Term 36 Front",
-      "back": "Term 36 Back"
+      "back": "Term 36 Back",
+      "front": "Term 36 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 37,
     "fields": {
-      "front": "Term 37 Front",
-      "back": "Term 37 Back"
+      "back": "Term 37 Back",
+      "front": "Term 37 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 38,
     "fields": {
-      "front": "Term 38 Front",
-      "back": "Term 38 Back"
+      "back": "Term 38 Back",
+      "front": "Term 38 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 39,
     "fields": {
-      "front": "Term 39 Front",
-      "back": "Term 39 Back"
+      "back": "Term 39 Back",
+      "front": "Term 39 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 40,
     "fields": {
-      "front": "Term 40 Front",
-      "back": "Term 40 Back"
+      "back": "Term 40 Back",
+      "front": "Term 40 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 41,
     "fields": {
-      "front": "Term 41 Front",
-      "back": "Term 41 Back"
+      "back": "Term 41 Back",
+      "front": "Term 41 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 42,
     "fields": {
-      "front": "Term 42 Front",
-      "back": "Term 42 Back"
+      "back": "Term 42 Back",
+      "front": "Term 42 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 43,
     "fields": {
-      "front": "Term 43 Front",
-      "back": "Term 43 Back"
+      "back": "Term 43 Back",
+      "front": "Term 43 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 44,
     "fields": {
-      "front": "Term 44 Front",
-      "back": "Term 44 Back"
+      "back": "Term 44 Back",
+      "front": "Term 44 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 45,
     "fields": {
-      "front": "Term 45 Front",
-      "back": "Term 45 Back"
+      "back": "Term 45 Back",
+      "front": "Term 45 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 46,
     "fields": {
-      "front": "Term 46 Front",
-      "back": "Term 46 Back"
+      "back": "Term 46 Back",
+      "front": "Term 46 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 47,
     "fields": {
-      "front": "Term 47 Front",
-      "back": "Term 47 Back"
+      "back": "Term 47 Back",
+      "front": "Term 47 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 48,
     "fields": {
-      "front": "Term 48 Front",
-      "back": "Term 48 Back"
+      "back": "Term 48 Back",
+      "front": "Term 48 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 49,
     "fields": {
-      "front": "Term 49 Front",
-      "back": "Term 49 Back"
+      "back": "Term 49 Back",
+      "front": "Term 49 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 50,
     "fields": {
-      "front": "Term 50 Front",
-      "back": "Term 50 Back"
+      "back": "Term 50 Back",
+      "front": "Term 50 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 51,
     "fields": {
-      "front": "Term 51 Front",
-      "back": "Term 51 Back"
+      "back": "Term 51 Back",
+      "front": "Term 51 Front"
     }
   },
   {
     "model": "safmeds.card",
     "pk": 52,
     "fields": {
-      "front": "Term..."
+      "back": "Term 52 Back",
+      "front": "Term 52 Front"
     }
   }
 ]

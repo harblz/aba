@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      htmx: path.resolve(__dirname, "src/js/htmx.js")
+       htmx: 'htmx.org',
     }),
     new webpack.ProvidePlugin({
       process: "process/browser",

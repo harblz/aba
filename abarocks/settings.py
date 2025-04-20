@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
-    # "fluency.apps.FluencyConfig",
     "learn.apps.LearnConfig",
     "safmeds.apps.SafmedsConfig",
 ]
@@ -75,7 +74,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
-    # "werkzeug.debug.DebuggedApplication",
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
@@ -154,7 +152,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "OPTIONS": {
             "service": "aba.rocks",
-            "passfile": ".my_pgpass",
+            "passfile": ".pgpass",
         },
     },
     "old": {

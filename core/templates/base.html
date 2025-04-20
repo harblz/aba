@@ -28,7 +28,7 @@
 
     {% block extra-head %}{% endblock extra-head %}
   </head>
-	<body class="has-navbar-fixed-bottom" hx-ext="$store.extensions.extensions" hx-swap="morph">
+	<body class="has-navbar-fixed-bottom" hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph">
         {% include "navbar.html" %}
         {% block content %}{% endblock content %}
 		{% include "footer.html" %}

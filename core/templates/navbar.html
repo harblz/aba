@@ -16,7 +16,7 @@
          x-show.important="$store.showMenu.show" x-collapse>
         <div class="navbar-start">
             {% for app, links in nav.items %}
-                <a class="navbar-item is-size-4 is-tab has-text-weight-bold" href="{{ app.root }}">{{ app }}</a>
+                <a class="navbar-item is-size-4 is-tab has-text-weight-bold" href="{% url app.root %}">{{ app }}</a>
             {% endfor %}
         </div>
         <div class="navbar-end">
