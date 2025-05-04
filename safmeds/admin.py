@@ -10,4 +10,4 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Deck)
 class DeckAdmin(admin.ModelAdmin):
-    pass
+    exclude = ["slug"]
