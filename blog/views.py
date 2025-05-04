@@ -8,7 +8,7 @@ from core.decorators import htmx_required
 from .models import Post
 
 
-def post(request, post_id):
+def view_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return render(request, "blog/post.html", {"post": post})
 
@@ -29,4 +29,4 @@ def posts(request):
     paginator = Paginator(all_posts, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return TemplateResponse(request, "blog/posts.html", {"page_obj": page_obj})
+    return TemplateResponse(request, "blog/index.html", {"page_obj": page_obj})

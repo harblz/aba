@@ -2,14 +2,17 @@
 {% load static %}
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}
-<section class="section">
-<div class="py-4 jumbotron jumbotron-fluid">
-	<div class="container">
-	<h1 class="display-4">{{ post.title }}</h1>
-	{% autoescape off %}
-		{{ post.text }}
-	{% endautoescape %}
-	</div>
-</div>
-</section>
+    <section class="section">
+        <div class="card-content">
+            <a class="title is-4" href="{% url 'blog:blog-post' post.id %}">{{ post.title }}</a>
+            <br/>
+            <time class="subtitle is-6" datetime="2016-1-1">{{ post.created_date }}</time>
+            <br/>
+            {% if post.subtitle %}
+                <br/>
+                <p class="subtitle is-5">{{ post.subtitle|safe }}</p>
+            {% endif %}
+            <p>{{ post.text|safe }}</p>
+        </div>
+    </section>
 {% endblock content %}
