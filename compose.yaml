@@ -4,8 +4,6 @@ services:
     init: true
     restart: always
     shm_size: 128mb
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
     environment:
