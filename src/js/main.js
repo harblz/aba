@@ -14,7 +14,7 @@ Alpine.plugin(collapse);
 window.alpine = Alpine;
 
 Alpine.store("themeSwitcher", {
-  theme: window.alpine.$persist("auto").as("theme"),
+  theme: Alpine.$persist("auto").as("theme"),
   init() {
     if (
       window.matchMedia("(prefers-color-scheme: dark)").matches ||
@@ -77,7 +77,7 @@ Alpine.store("cardData", {
   init() {
     if (document.getElementById("card-data")) {
       this.deck = JSON.parse(
-        JSON.parse(document.getElementById("card-data").textContent),
+        JSON.parse(document.getElementById("card-data").textContent)
       );
       this.total = this.deck.length;
       this.current = 1;
@@ -113,7 +113,7 @@ Alpine.data("card", () => ({
   front: "",
   back: "",
   init() {
-    this.button = window.alpine.$data("showButton");
+    this.button = Alpine.$data("showButton");
     this.index = this.cardData.current;
     this.front = this.cardData.front;
     this.back = this.cardData.back;

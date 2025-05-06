@@ -1,16 +1,12 @@
 from typing import Type
-import json
 import datetime
 
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-from django.views.generic import ListView
 import random
 from django_htmx.http import retarget, trigger_client_event, reswap
 from django.template.response import TemplateResponse
-from django.apps import apps
 from django.utils.safestring import mark_safe
-from django.db.models.deletion import Collector
 
 from core.models import Profile
 from .models import *
@@ -208,9 +204,10 @@ def _start(request, code, number):
         )
         return trigger_client_event(response, "reset", after="swap")
 
-    elif isinstance(response, TemplateResponse):
+    else:
         reswap(response, "innerHTML")
         retarget(response, "#modals-here")
+
         return trigger_client_event(response, "show-modal", after="swap")
 
 
@@ -224,7 +221,7 @@ def _check_progress(request, code, number):
         context = {"quiz": Quiz.objects.get(slug=slug)}
         response = TemplateResponse(request, "quiz/confirmation.html", context)
         return response
-    elif not progress.exists():
+    else:
         return None
 
 
