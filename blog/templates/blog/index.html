@@ -3,6 +3,13 @@
 {% block title %}Blog Posts{% endblock %}
 {% block content %}
 <section class="section">
-     {% include "blog/posts.html" %}
+    {% include "blog/posts.html" %}
+    {% if page_obj.has_next %}
+        <span hx-get="{% url 'blog:blog-posts' %}?page={{ page_obj.next_page_number }}"
+              hx-target="#posts"
+              hx-swap="beforeend"
+              hx-trigger="revealed"
+        ></span>
+    {% endif %}
 </section>
 {% endblock %}

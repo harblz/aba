@@ -33,19 +33,15 @@ Alpine.store("themeSwitcher", {
         this.theme = "dark";
       }
     }
-    this.theme = this.theme === "dark" ? "light" : "dark";
+    this.theme = (this.theme === "dark" ? "light" : "dark");
   },
 });
 
-Alpine.store("extensions", {
-  extensions: "response-targets alpine-morph head-support",
-  init() {},
-});
-
-Alpine.store("showMenu", {
+Alpine.store("responsiveNav", {
   show: false,
+  top: false,
   init() {
-    this.show = window.matchMedia("(min-width: 1024px)").matches;
+    this.show = this.top = window.matchMedia("(min-width: 1024px)").matches;
     this.resizeToggle();
   },
   toggle() {
@@ -53,7 +49,7 @@ Alpine.store("showMenu", {
   },
   resizeToggle() {
     addEventListener("resize", () => {
-      this.show = window.matchMedia("(min-width: 1024px)").matches;
+      this.show = this.top = window.matchMedia("(min-width: 1024px)").matches;
     });
   },
 });

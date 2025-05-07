@@ -1,11 +1,12 @@
 {% load static %}
-<nav class="navbar is-fixed-bottom px-5" role="navigation">
+<nav class="navbar px-5" role="navigation"
+     :class="$store.responsiveNav.top ? 'is-fixed-top' : 'is-fixed-bottom'">
     <div class="navbar-brand">
         <a class="navbar-item has-text-weight-bold" href="{% url 'home' %}">
             <h1 class="title is-family-secondary is-size-2">ABA.Rocks</h1>
         </a>
         <a role="button" id="burger" class="navbar-burger" aria-label="menu" data-target="navMenu"
-           @click="$store.showMenu.toggle()" x-bind="burger">
+           @click="$store.responsiveNav.toggle()" x-bind="burger">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -13,7 +14,7 @@
         </a>
     </div>
     <div class="navbar-menu" id="navbar-menu"
-         x-show.important="$store.showMenu.show" x-collapse>
+         x-show.important="$store.responsiveNav.show">
         <div class="navbar-start">
             {% for app, links in nav.items %}
                 <a class="navbar-item is-size-4 is-tab has-text-weight-bold" href="{% url links.root %}">{{ app }}</a>
@@ -37,8 +38,8 @@
                 </a>
             </div>
             <!--- <div class="navbar-item is-size-4 is-tab">
-                <a class="has-text-text-bold has-text-weight-bold" href="{% url 'login' %}">Log In</a>--->
-            </div>
+                <a class="has-text-text-bold has-text-weight-bold" href="{% url 'login' %}">Log In</a>
+            </div>--->
         </div>
     </div>
 </nav>
