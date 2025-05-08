@@ -25,7 +25,7 @@ def view_post(request, post_id):
 
 
 def posts(request):
-    all_posts = Post.objects.all().order_by("is_pinned", "-published_date")
+    all_posts = Post.objects.all().order_by("pinned", "-published_date")
     paginator = Paginator(all_posts, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

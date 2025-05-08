@@ -16,7 +16,7 @@ import tempfile
 import sys
 
 import core.context_processors
-from core.secrets_processor import load_secret
+from core.utilities import load_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

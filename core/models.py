@@ -64,3 +64,10 @@ class NavLink(models.Model):
 
     def __str__(self):
         return self.page.__str__()
+
+
+class View(models.Model):
+    url = models.URLField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField(null=True, blank=True)
