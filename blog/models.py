@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
-from datetime import datetime
 
 from taggit.managers import TaggableManager
 
