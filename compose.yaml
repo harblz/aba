@@ -36,21 +36,21 @@ services:
 
 secrets:
   debug:
-    file: /opt/secrets/aba/DEBUG
+    file: ./secrets/DEBUG
   secret_key:
-    file: /opt/secrets/aba/SECRET_KEY
+    file: ./secrets/SECRET_KEY
   allowed_hosts:
-    file: /opt/secrets/aba/ALLOWED_HOSTS
+    file: ./secrets/ALLOWED_HOSTS
   internal_ips:
-    file: /opt/secrets/aba/INTERNAL_IPS
+    file: ./secrets/INTERNAL_IPS
   postgres_db:
-    file: /opt/secrets/aba/POSTGRES_DB
+    file: ./secrets/POSTGRES_DB
   postgres_password:
-    file: /opt/secrets/aba/POSTGRES_PASSWORD
+    file: ./secrets/POSTGRES_PASSWORD
   postgres_user:
-    file: /opt/secrets/aba/POSTGRES_USER
+    file: ./secrets/POSTGRES_USER
   postgres_port:
-    file: /opt/secrets/aba/POSTGRES_PORT
+    file: ./secrets/POSTGRES_PORT
 
 volumes:
   postgres_data:
