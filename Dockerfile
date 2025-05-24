@@ -97,7 +97,8 @@ COPY --chown=abarocks --chmod=600 --from=pg-config /usr/src/app/.pgpass ./
 RUN --mount=type=secret,id=secret_key \
     --mount=type=secret,id=allowed_hosts \
     --mount=type=secret,id=internal_ips \
-    --mount=type=secret,id=debug
+    --mount=type=secret,id=debug \
+    chown abarocks:abarocks /usr/src/app
 
 RUN apk add --no-cache libpq py3-gunicorn && pwd
 
