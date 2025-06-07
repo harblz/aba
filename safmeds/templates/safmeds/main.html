@@ -15,7 +15,7 @@
                             <div class="content">{{ deck.subject }}</div>
                         </div>
                         <div class="card-footer deck-foot">
-                            <button type="button" hx-target="#modals-here" hx-trigger="click"
+                            <button type="button" hx-target="#modal-wrapper" hx-swap="beforeend" hx-trigger="click"
                                     class="button is-large card-footer-item has-background-primary"
                                     hx-get="{% url 'safmeds:view-deck' deck.slug %}">Select</button>
                         </div>

@@ -1,10 +1,11 @@
 <header class="modal-card-head is-justify-content-center">
-  <h2 class="modal-card-title is-2">Wait!</h2>
+    <h2 class="modal-card-title is-2">Wait!</h2>
 </header>
 <section class="modal-card-body">
-  <p>
-    You previously started this quiz and didn't finish. Would you like to continue where you left off, or start over?
-  </p>
+    <p>
+        You previously started this quiz and didn't finish. Would you like to continue where you left off, or start
+        over?
+    </p>
 </section>
 <footer class="modal-card-foot is-justify-content-space-evenly">
     <button type="button"
@@ -16,7 +17,8 @@
             hx-target="#quiz-wrapper"
             hx-swap="innerhtml"
 
-    >Resume</button>
+    >Resume
+    </button>
     <button type="button"
             class="button is-primary"
             x-data="{ loading: false }"
@@ -24,5 +26,6 @@
             @click="loading = !loading"
             hx-get="{% url 'quiz:start-quiz' quiz.course.code quiz.number %}?confirm=True"
             hx-target="#quiz-wrapper"
-    >Start Over</button>
+    >Start Over
+    </button>
 </footer>

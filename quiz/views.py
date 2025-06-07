@@ -205,8 +205,8 @@ def _start(request, code, number):
         return trigger_client_event(response, "reset", after="swap")
 
     else:
-        reswap(response, "innerHTML")
-        retarget(response, "#modals-here")
+        reswap(response, "beforeend")
+        retarget(response, "#modal-wrapper")
 
         return trigger_client_event(response, "show-modal", after="swap")
 
@@ -238,13 +238,13 @@ def _check_answer(request):
         _save_progress(request)
         response = _next_question(request)
         return response
-    elif str(request.POST.get("answer")) != str(question["correct"]):
+    else:
         q_obj = BaseQuestion.objects.select_related().get(id=question["question"])
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)
-        reswap(response, "innerHTML")
-        retarget(response, "#modals-here")
+        reswap(response, "beforeend")
+        retarget(response, "#modal-wrapper")
         return trigger_client_event(response, "show-modal", after="swap")
 
 

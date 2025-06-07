@@ -24,7 +24,7 @@ class PageAdmin(admin.ModelAdmin):
             "Hero Content",
             {
                 "fields": ["title", "subtitle", "blurb"],
-                "description": "The content for the page Hero.",
+                "description": "The content for the page's Hero.",
             },
         ),
         (

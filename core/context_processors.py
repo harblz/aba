@@ -11,7 +11,7 @@ def page_context(request) -> dict:
     context = {}
     match = resolve(request.path)
     view = match.url_name
-    if (app := match.namespace) is not None:
+    if app := match.namespace:
         if app in settings.EXCLUDE_FROM_PAGE:
             return {}
         lookups["app"] = app
