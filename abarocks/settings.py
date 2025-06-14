@@ -123,6 +123,8 @@ RESULTS_CACHE_SIZE = 1000
 
 ROOT_URLCONF = "abarocks.urls"
 
+LOGIN_REDIRECT_URL = "/"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

@@ -29,7 +29,8 @@
     {% block extra-head %}{% endblock extra-head %}
   </head>
 	<body :class="$store.responsiveNav.top ? 'has-navbar-fixed-top' : 'has-navbar-fixed-bottom'"
-          hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph">
+          hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph"
+          hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
         {% include "navbar.html" %}
         {% block content %}{% endblock content %}
 		{% include "footer.html" %}

@@ -80,6 +80,8 @@ $white: #fff;
 
 .#{iv.$class-prefix}modal {
   display: flex;
+  flex-basis: content;
+  flex-shrink: 1;
 }
 
 .navbar-menu {

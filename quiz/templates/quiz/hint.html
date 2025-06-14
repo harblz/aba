@@ -1,21 +1,23 @@
-<header class="modal-card-head is-justify-content-center">
-    <h2 class="modal-card-title is-2">Not Quite!</h2>
-</header>
-<section class="modal-card-body">
-    <p>
-        {{ hint|safe }}
-    </p>
-</section>
-<footer class="modal-card-foot is-justify-content-space-evenly">
-    <button type="button"
-            class="button is-primary"
-            x-data="{ loading: false }"
-            :class="{'is-loading': loading }"
-            @click="loading = !loading"
-            hx-post="{% url 'quiz:continue' %}?action=next"
-            hx-include="#questionForm"
-            hx-target="#quiz-wrapper"
-            hx-swap="innerHTML"
-    >Next Question
-    </button>
-</footer>
+<div class="modal-card box" x-ref="modal">
+    <header class="modal-card-head has-text-centered">
+        <h2 class="modal-card-title is-2">Not Quite!</h2>
+    </header>
+    <section class="modal-card-body">
+        <p>
+            {{ hint|safe }}
+        </p>
+    </section>
+    <footer class="modal-card-foot is-justify-content-space-evenly">
+        <button type="button"
+                class="button is-primary"
+                x-data="{ loading: false }"
+                :class="{'is-loading': loading }"
+                @click="loading = !loading"
+                hx-post="{% url 'quiz:continue' %}?action=next"
+                hx-include="#questionForm"
+                hx-target="#quiz-wrapper"
+                hx-swap="innerHTML"
+        >Next Question
+        </button>
+    </footer>
+</div>
