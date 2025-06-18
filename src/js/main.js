@@ -1,3 +1,7 @@
+import "htmx-ext-response-targets/response-targets";
+import "htmx-ext-alpine-morph/alpine-morph";
+import "htmx-ext-head-support/head-support"
+
 import Alpine from "alpinejs";
 import morph from "@alpinejs/morph";
 import persist from "@alpinejs/persist";
@@ -7,7 +11,7 @@ Alpine.plugin(morph);
 Alpine.plugin(persist);
 Alpine.plugin(collapse);
 
-window.alpine = Alpine;
+window.Alpine = Alpine;
 
 Alpine.store("themeSwitcher", {
   theme: Alpine.$persist("auto").as("theme"),
@@ -28,8 +32,9 @@ Alpine.store("themeSwitcher", {
       } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
         this.theme = "dark";
       }
+    } else if {
+      this.theme = (this.theme === "dark" ? "light" : "dark");
     }
-    this.theme = (this.theme === "dark" ? "light" : "dark");
   },
 });
 

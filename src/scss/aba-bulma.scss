@@ -87,19 +87,21 @@ $white: #fff;
 .navbar-menu {
   display: flex;
   height: auto;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+
 
   @include mixins.desktop {
     flex-direction: row;
   }
   .navbar-end {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    width: 100%;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 25%;
 
     @include mixins.desktop {
+      flex-direction: row;
       justify-content: flex-end;
       margin-inline-start: auto;
       align-items: stretch;
@@ -107,15 +109,26 @@ $white: #fff;
     }
 
   }
-
   .navbar-start {
-    display: flex;
+    border-right-style: solid;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
+    width: 75%;
 
     @include mixins.desktop {
+      border: none;
       align-items: stretch;
       flex-direction: row;
+      width: inherit;
+    }
+  }
+  .divider {
+    width: 15px;
+    border-left-style: solid;
+    display: inline-block;
+    @include mixins.desktop {
+      display: none;
     }
   }
 }
