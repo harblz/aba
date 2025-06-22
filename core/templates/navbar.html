@@ -43,10 +43,8 @@
                 <div class="navbar-item has-dropdown is-size-4 is-tab" x-data="dropdown">
                 <a class="navbar-link has-text-text-bold has-text-weight-bold" @click="toggle()">{{ user.username }}</a>
                 <div class="navbar-dropdown" x-show.important="show">
-                    <form class="has-text-text-bold has-text-weight-bold" action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Log Out</button>
-                    </form>
+                    <a class="navbar-item" href="{% url 'user_profile' %}">Profile</a>
+                    <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
                 </div>
             {% else %}
                 <div class="navbar-item is-size-4 is-tab" hx-boost="true" hx-target="#modal-wrapper"

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Welcome back,
+    {% if request.user.first_name %}
+    {{ request.user.first_name }}
+    {% else %}
+    {{ request.user.username }}
+    {% endif %}
+{% endblock title %}
+{% block content %}
+    <p>Nothing here yet!</p>
+{% endblock content %}

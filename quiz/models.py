@@ -105,3 +105,8 @@ class QuizProgress(models.Model):
 
     class Meta:
         db_table_comment = "Quiz progress data"
+
+
+class QuizResults(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    quiz = models.SlugField()
