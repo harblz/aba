@@ -44,6 +44,7 @@ GOOGLE_ANALYTICS_DOMAIN = "aba.rocks"
 
 # Application definition
 INSTALLED_APPS = [
+    "core.apps.CoreConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -57,7 +58,6 @@ INSTALLED_APPS = [
     "django_ckeditor_5",
     "django_htmx",
     "fontawesomefree",
-    "core.apps.CoreConfig",
     "quiz.apps.QuizConfig",
     "blog.apps.BlogConfig",
     "learn.apps.LearnConfig",
@@ -74,6 +74,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "core.middleware.HtmxRedirectMiddleware",
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
@@ -124,6 +125,7 @@ RESULTS_CACHE_SIZE = 1000
 ROOT_URLCONF = "abarocks.urls"
 
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 TEMPLATES = [
     {
@@ -174,6 +176,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

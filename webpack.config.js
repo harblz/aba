@@ -16,7 +16,8 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-       htmx: 'htmx.org',
+      htmx: 'htmx.org',
+      process: "process/browser",
     }),
     new webpack.ProvidePlugin({
       process: "process/browser",
@@ -27,5 +28,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      'htmx.org$': require.resolve('htmx.org/dist/htmx.js')
+    }
   }
 };

@@ -1,0 +1,45 @@
+{% extends "registration/account_info.html" %}
+{% block form %}
+    <h2 class="title">Signup</h2>
+    <form action="{% url 'signup' %}" method="post" class="form" id="signup-form">
+        {% csrf_token %}
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            <div class="control">{{ form.username }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+            <div class="control">{{ form.first_name }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+            <div class="control">{{ form.last_name }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            <div class="control">{{ form.email }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            <div class="control">{{ form.password1 }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            <div class="control">{{ form.password2 }}</div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+                <button @click="$dispatch('reset')" class="button">Cancel</button>
+            </p>
+            <p class="control">
+                <input type="submit" form="signup-form" class="button" value="Submit" hx-push-url="true">
+            </p>
+        </div>
+    </form>
+{% endblock form %}

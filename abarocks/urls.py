@@ -4,6 +4,7 @@ from django.urls import path, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 from . import views
+from core import views as core
 
 urlpatterns = (
     [
@@ -15,7 +16,8 @@ urlpatterns = (
         path("safmeds/", include("safmeds.urls")),
         path("ckeditor5/", include("django_ckeditor_5.urls")),
         path("", views.home, name="home"),
-        path('accounts/', include('django.contrib.auth.urls')),
+        path("accounts/signup/", core.SignUpView.as_view(), name="signup"),
+        path("accounts/", include("django.contrib.auth.urls")),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -23,6 +25,7 @@ urlpatterns = (
 
 if settings.ENABLE_DEBUG_TOOLBAR:
     from debug_toolbar.toolbar import debug_toolbar_urls
+
     urlpatterns = [
         *urlpatterns,
     ] + debug_toolbar_urls()

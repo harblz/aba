@@ -1,6 +1,7 @@
+import "./htmx.js";
 import "htmx-ext-response-targets/response-targets";
 import "htmx-ext-alpine-morph/alpine-morph";
-import "htmx-ext-head-support/head-support"
+import "htmx-ext-head-support/head-support";
 
 import Alpine from "alpinejs";
 import morph from "@alpinejs/morph";
@@ -14,7 +15,7 @@ Alpine.plugin(collapse);
 window.Alpine = Alpine;
 
 Alpine.store("themeSwitcher", {
-  theme: Alpine.$persist("auto").as("theme"),
+  theme: Alpine.$persist("auto"),
   init() {
     if (
       window.matchMedia("(prefers-color-scheme: dark)").matches ||
@@ -32,7 +33,7 @@ Alpine.store("themeSwitcher", {
       } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
         this.theme = "dark";
       }
-    } else if {
+    } else {
       this.theme = (this.theme === "dark" ? "light" : "dark");
     }
   },
@@ -55,7 +56,7 @@ Alpine.store("responsiveNav", {
   },
 });
 
-Alpine.bind("burger", {
+Alpine.bind("burger", () => ({
   cross: false,
   "@click"() {
     this.cross = !this.cross;
@@ -63,7 +64,7 @@ Alpine.bind("burger", {
   ":class"() {
     return this.cross ? "is-active" : "";
   },
-});
+}));
 
 Alpine.store("cardData", {
   deck: [],
@@ -129,6 +130,13 @@ Alpine.data("card", () => ({
       this.front = this.cardData.front;
       this.back = this.cardData.back;
     }
+  },
+}));
+Alpine.data("dropdown", () => ({
+  show: false,
+  init() {},
+  toggle() {
+    this.show = !this.show;
   },
 }));
 

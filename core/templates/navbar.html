@@ -17,7 +17,8 @@
          x-show.important="$store.responsiveNav.show">
         <div class="navbar-start">
             {% for app, links in nav.items %}
-                <a class="navbar-item has-text-text-bold is-size-4 is-tab has-text-weight-bold" href="{% url links.root %}">{{ app }}</a>
+                <a class="navbar-item has-text-text-bold is-size-4 is-tab has-text-weight-bold"
+                   href="{% url links.root %}">{{ app }}</a>
             {% endfor %}
         </div>
         <div class="divider"></div>
@@ -39,14 +40,22 @@
                 </a>
             </div>
             {% if request.user.is_authenticated %}
-                <div class="navbar-item is-size-4 is-tab">
-                    <a class="has-text-text-bold has-text-weight-bold" href="">{{ user.username }}</a>
+                <div class="navbar-item has-dropdown is-size-4 is-tab" x-data="dropdown">
+                <a class="navbar-link has-text-text-bold has-text-weight-bold" @click="toggle()">{{ user.username }}</a>
+                <div class="navbar-dropdown" x-show.important="show">
+                    <form class="has-text-text-bold has-text-weight-bold" action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Log Out</button>
+                    </form>
                 </div>
             {% else %}
-                <div class="navbar-item is-size-4 is-tab" hx-boost="true" hx-target="#modal-wrapper" hx-select="#login-modal" hx-swap="beforeend" hx-push-url="false">
-                    <a class="has-text-text-bold has-text-weight-bold" href="{% url 'login' %}" @click="$dispatch('show-modal')">Log In</a>
+                <div class="navbar-item is-size-4 is-tab" hx-boost="true" hx-target="#modal-wrapper"
+                     hx-select="#account-modal" hx-swap="beforeend" hx-push-url="false">
+                    <a class="has-text-text-bold has-text-weight-bold" href="{% url 'login' %}"
+                       @click="$dispatch('show-modal')">Log In</a>
                 </div>
             {% endif %}
+            </div>
         </div>
     </div>
 </nav>
