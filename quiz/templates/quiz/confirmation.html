@@ -27,6 +27,7 @@
                 @click="loading = !loading"
                 hx-get="{% url 'quiz:start-quiz' quiz.course.code quiz.number %}?confirm=True"
                 hx-target="#quiz-wrapper"
+                hx-swap="innerhtml"
         >Start Over
         </button>
     </footer>

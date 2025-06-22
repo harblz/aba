@@ -2,38 +2,40 @@
 <!DOCTYPE html>
 <html lang="en"
       x-data
-      :data-theme="$store.themeSwitcher.theme">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning." />
-      <meta name="keywords" content="ABA.Rocks, RBT, RBT Exam Prep, BCBA Exam Prep">
+      :data-theme="$store.themeSwitcher.theme"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ABA.Rocks is a behavior analysis blog dedicated to the science of learning."/>
+    <meta name="keywords" content="ABA.Rocks, RBT, RBT Exam Prep, BCBA Exam Prep">
 
-      <!-- Pinterest Claim -->
-      <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0" />
+    <!-- Pinterest Claim -->
+    <meta name="p:domain_verify" content="4d2813b6def4c45e881bd8e54cfbb0d0"/>
 
-      <title>{% block title %}{% endblock title %}</title> <!-- TODO: populate title blocks in children -->
+    <title>{% block title %}{% endblock title %}</title> <!-- TODO: populate title blocks in children -->
 
-      <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
-      <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
-      <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
-      <script type="module" src="{% static 'js/aba.js' %}"></script>
-      {% django_htmx_script %}
+    <link rel="stylesheet" href="{% static 'css/aba-bulma.css' %}">
+    <script type="module" src="{% static 'js/aba.js' %}"></script>
+    {% django_htmx_script %}
 
-      <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
     <link rel="favicon" href="{% static 'img/favicon.ico' %}">
 
     {% block extra-head %}{% endblock extra-head %}
-  </head>
-	<body :class="$store.responsiveNav.top ? 'has-navbar-fixed-top' : 'has-navbar-fixed-bottom'"
-          hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph"
-          hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
-        {% include "navbar.html" %}
-        {% block content %}{% endblock content %}
-		{% include "footer.html" %}
-        {% include "components/_alpine-modal.html" %}
+</head>
+<body :class="$store.responsiveNav.top ? 'has-navbar-fixed-top' : 'has-navbar-fixed-bottom'"
+      hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph"
+      hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'
+      >
+{% include "navbar.html" %}
+{% block content %}{% endblock content %}
+{% include "footer.html" %}
+{% include "components/_alpine-modal.html" %}
 </body>
 </html>

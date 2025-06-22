@@ -1,41 +1,28 @@
 {% extends "base.html" %}
 {% load duration_extras humanize static %}
 {% block extra-head %}
-  {{ headers|json_script:"headers"}}
+    {{ headers|json_script:"headers" }}
 {% endblock extra-head %}
 {% block content %}
-<section class="section">
-<div id="page-wrapper" class="has-text-centered" x-data="{ count: 0 }" @resume="count = $event.detail.index" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
-    <div id="quiz-wrapper" @htmx:after-swap="count++">
-    <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
-      {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
-      {% else %}untimed. Take your time.
-      {% endif %}</p>
-    <br>
-    <button type="button"
-            class="button is-primary"
-            hx-get="{% url 'quiz:start-quiz' quiz.course.code quiz.number %}"
-            x-data="{ loading: false, }"
-            :class="{'is-loading': loading }"
-            @click="loading = ! loading"
-            hx-target="#quiz-wrapper"
-            hx-swap="innerHTML"
-    >Click here to begin!</button>
-  </div>
-  <div id="alpine-wrapper"
-       x-data="{ modal : false }"
-       @show-modal.window="modal = ! modal"
-       @reset.window="$refs.modal.replaceChildren();
-               $nextTick(() => { modal = false })"
-  >
-      <div class="modal" id="modal-wrapper" x-show.important="modal" x-transition>
-        <div class="modal-background"></div>
-        <div class="modal-card box"
-             id="modals-here"
-             x-ref="modal"
-      ></div>
-      </div>
-  </div>
-</div>
-</section>
+    <section class="section" hx-headers="js:...JSON.parse(document.getElementById('headers').textContent)">
+        <div id="page-wrapper" class="has-text-centered" x-data="{ count: 0 }" @resume="count = $event.detail.index">
+            <div id="quiz-wrapper" @htmx:after-swap="count++">
+                <p>Welcome to the {{ quiz.number|ordinal }} {{ quiz.course }} Practice Quiz. This quiz is
+                    {% if quiz.timed %}{{ quiz.time|minutes }} minutes long. This matches the length of the real exam.
+                    {% else %}untimed. Take your time.
+                    {% endif %}</p>
+                <br>
+                <button type="button"
+                        class="button is-primary"
+                        hx-get="{% url 'quiz:start-quiz' quiz.course.code quiz.number %}"
+                        x-data="{ loading: false, }"
+                        :class="{'is-loading': loading }"
+                        @click="loading = ! loading"
+                        hx-target="#quiz-wrapper"
+                        hx-swap="innerHTML"
+                >Click here to begin!
+                </button>
+            </div>
+        </div>
+    </section>
 {% endblock content %}

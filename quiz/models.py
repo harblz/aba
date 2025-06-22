@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sessions.models import Session
 
 from learn import models as learn
 from django_ckeditor_5.fields import CKEditor5Field
@@ -96,7 +97,7 @@ class QuizProgress(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True
     )
-    session = models.CharField(max_length=100)
+    session = models.CharField(max_length=150)
     quiz = models.SlugField()
     index = models.IntegerField(default=0)
     timed = models.BooleanField("Timed?", default=False, null=True, blank=True)
@@ -110,3 +111,8 @@ class QuizProgress(models.Model):
 class QuizResults(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.SlugField()
+    datetime = models.DateTimeField(auto_now_add=True)
+    elapsed = models.DurationField(null=True, blank=True)
+    total = models.IntegerField()
+    correct = models.IntegerField()
+    key = models.JSONField(default=dict)

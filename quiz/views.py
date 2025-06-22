@@ -8,7 +8,6 @@ from django_htmx.http import retarget, trigger_client_event, reswap
 from django.template.response import TemplateResponse
 from django.utils.safestring import mark_safe
 
-from core.models import Profile
 from .models import *
 from .forms import TakeQuizForm
 from learn.models import Course
@@ -100,7 +99,7 @@ def _next_question(request, **kwargs) -> HttpResponse:
     index = progress.index
     key = progress.key[str(index)]
     question = BaseQuestion.objects.select_related().get(pk=key["question"])
-    rel = getattr(question, question.type.model)
+    rel = getattr(question, str(question.type.model))
     choices = []
     if question.type.model == "multiplechoicequestion":
         choices = [
@@ -149,7 +148,7 @@ def _start(request, code, number):
         count = 0
         for index, question in enumerate(questions):
             q = BaseQuestion.objects.select_related().get(pk=question)
-            model = q.type.model
+            model = str(q.type.model)
             rel = getattr(q, model)
             answer = None
             if model == "multiplechoicequestion":
@@ -177,7 +176,7 @@ def _start(request, code, number):
         question = BaseQuestion.objects.select_related().get(
             pk=first_question["question"]
         )
-        rel = getattr(question, question.type.model)
+        rel = getattr(question, str(question.type.model))
         choices = []
         if question.type.model == "multiplechoicequestion":
             choices = [
@@ -272,35 +271,13 @@ def _grade_quiz(request):
         "number": request.headers["number"],
     }
     if request.user.is_authenticated:
-        profile = Profile.objects.get_or_create(user=request.user)
-        prof_obj = profile[0]
-        save_data = prof_obj.data
-        data = {
-            "#correct": n_correct,
-            "total": total_q,
-            # Time elapsed to go here in ISO8601 Duration format
-            # Or save start and end times to be calculated after
-            "key": progress.key,
-        }
-        keys = (
-            "quizzes",
-            request.headers["code"],
-            str(request.headers["number"]),
+        QuizResults.objects.create(
+            user=request.user.username,
+            quiz=slug,
+            # elapsed=<To be replaced with time it took to complete quiz
+            total=total_q,
+            correct=n_correct,
+            key=request.session.session_key,
         )
-        for key in keys:
-            if key not in save_data.keys():
-                save_data[key] = {}
-                save_data = save_data[key]
-            elif key in save_data.keys():
-                save_data = save_data[key]
-        if (
-            today := datetime.date.isoformat(datetime.date.today())
-        ) not in save_data.keys():
-            save_data[today] = []
-            save_data = save_data[today]
-        elif today in save_data.keys():
-            save_data = save_data[today]
-        save_data.append(data)
-        prof_obj.save()
     response = TemplateResponse(request, "quiz/completed.html", context)
     return retarget(response, "#page-wrapper")

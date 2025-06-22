@@ -2,6 +2,7 @@
 {% block form %}
     <h2 class="title">Login</h2>
     <form action="{% url 'login' %}" method="post" class="form" id="login-form">
+        {{ form.errors }}
         {% csrf_token %}
         <div class="field">
             {{ field.errors }}
