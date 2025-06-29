@@ -77,11 +77,14 @@ Alpine.store("cardData", {
       this.deck = JSON.parse(
         JSON.parse(document.getElementById("card-data").textContent)
       );
-      this.total = this.deck.length;
       this.current = 1;
+      this.total = this.deck.length;
     } else {
       this.deck = null;
     }
+  },
+  get id() {
+    return this.deck[this.current - 1].id;
   },
   get front() {
     return this.deck[this.current - 1].front;
@@ -111,10 +114,18 @@ Alpine.data("card", () => ({
   front: "",
   back: "",
   init() {
-    this.button = Alpine.$data("showButton");
-    this.index = this.cardData.current;
-    this.front = this.cardData.front;
-    this.back = this.cardData.back;
+    if (Alpine.$data("skipInit") === true) {
+      //pass
+    } else {
+      this.button = Alpine.$data("showButton");
+      this.id = this.cardData.id;
+      this.index = this.cardData.current;
+      this.front = this.cardData.front;
+      this.back = this.cardData.back;
+    }
+  },
+  cardid(ogid){
+    return ogid || this.id;
   },
   frontside(ogtext) {
     return ogtext || this.front;
@@ -139,5 +150,14 @@ Alpine.data("dropdown", () => ({
     this.show = !this.show;
   },
 }));
+window.processHeaders = () => {
+  let element = document.getElementById('headers');
+  if (element) {
+    return JSON.parse(element.textContent);
+  }
+  else {
+    return {};
+  }
+};
 
 Alpine.start();

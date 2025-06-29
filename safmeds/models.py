@@ -30,3 +30,12 @@ class Deck(models.Model):
         if not self.slug and self._state.adding:
             self.slug = slugify(self.name)
             super(Deck, self).save(*args, **kwargs)
+
+
+class Result(models.Model):
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+    deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
+    correct = models.IntegerField(default=0)
+    incorrect = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)

@@ -15,7 +15,7 @@ class Profile(models.Model):
         )
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Page(models.Model):

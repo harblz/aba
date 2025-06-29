@@ -263,8 +263,8 @@ div[id$="-back"] {
 }
 
 #deck-list {
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -272,7 +272,7 @@ div[id$="-back"] {
   justify-content: flex-start;
 
   .card-container {
-    width: 90%;
+    width: 50%;
     height: 45%;
     margin: .5rem;
     flex-grow: 0;

@@ -2,6 +2,6 @@
      @show-modal.window="modal = ! modal"
      @reset.window="$nextTick(() => { $refs.modal.remove(); modal = false })">
     <div class="modal is-flex-shrink-1" id="modal-wrapper" x-cloak x-show.important="modal" x-transition>
-        <div class="modal-background"></div>
+        <div class="modal-background" @click="$nextTick(() => { $refs.modal.remove(); modal = false })"></div>
     </div>
 </div>

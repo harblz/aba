@@ -272,7 +272,7 @@ def _grade_quiz(request):
     }
     if request.user.is_authenticated:
         QuizResults.objects.create(
-            user=request.user.username,
+            user=request.user,
             quiz=slug,
             # elapsed=<To be replaced with time it took to complete quiz
             total=total_q,

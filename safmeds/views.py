@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django_htmx.http import trigger_client_event
 import json
 
-from .models import Card, Deck
+from .models import Card, Deck, Result
 
 
 def card_catalog(request):
@@ -38,7 +38,7 @@ def view_deck(request, slug):
         response = TemplateResponse(
             request, "safmeds/deck_preview.html", context={"deck": deck}
         )
-        return trigger_client_event(response, "preview", after="swap")
+        return trigger_client_event(response, "show-modal", after="swap")
     else:
         return TemplateResponse(request, "safmeds/deck.html", context={"deck": deck})
 
@@ -66,4 +66,13 @@ def _results(request, slug):
         "total": total,
         "score": score,
     }
+    if request.user.is_authenticated:
+        deck = Deck.objects.get(slug=slug)
+        Result.objects.create(
+            user=request.user,
+            deck=deck,
+            correct=correct,
+            incorrect=incorrect,
+            score=score,
+        )
     return TemplateResponse(request, "safmeds/results.html", context)

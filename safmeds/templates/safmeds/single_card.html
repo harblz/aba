@@ -1,7 +1,7 @@
 {% load static %}
 <div class="container card-container" x-data="card"
      @reset-card.window="flip = false;$nextTick(() => {nextCard();})"
-     x-init="button = showButton;id = '{{ card.id }}' || $store.cardData.deck[current].id">
+     x-init="button = showButton;id = cardid({{ card.id }})">
     <div class="index-card" :class="flip ? 'flip' : ''">
         <div class="index-card-side has-background-text-90 has-text-text-90-invert"
              :id="id + '-front'">

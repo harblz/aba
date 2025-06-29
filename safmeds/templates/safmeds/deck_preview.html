@@ -1,20 +1,33 @@
-<h2 class="title mb-0">{{ deck.name }}</h2>
-{% if deck.cards.all %}
-    <div class="is-mobile" id="deck-list" x-data="{ showButton: false }">
-    {% for card in deck.cards.all %}
-        {% include "safmeds/single_card.html" with card=card %}
-    {% endfor %}
-    </div>
-    <div class="buttons is-centered">
-        <a class="button is-3 is-medium" @click="preview = false">Back</a>
-        <a class="button is-3 is-success is-medium" href="{% url 'safmeds:play-deck' deck.slug %}">Play</a>
-    </div>
-{% else %}
-    <div class="block" id="deck-list">
-        <p class="subtitle is-2">This deck is empty</p>
-    </div>
-    <div class="buttons is-centered">
-        <a class="button is-3" disabled>Play</a>
-        <a class="button is-3" @click="preview = false">Back</a>
-    </div>
-{% endif %}
+<div class="modal-card box">
+    <header class="modal-card-head has-text-centered">
+    <h2 class="modal-card-title mb-0">{{ deck.name }}</h2>
+    </header>
+    {% if deck.cards.all %}
+        <section class="modal-card-body">
+        <div class="is-mobile" id="deck-list" x-data="{ showButton: false, skipInit: true }">
+        {% for card in deck.cards.all %}
+            {% include "safmeds/single_card.html" with card=card %}
+        {% endfor %}
+        </div>
+        </section>
+        <footer class="modal-card-foot is-justify-content-space-evenly">
+        <div class="buttons is-centered">
+            <a class="button is-3 is-medium" @click="$dispatch('reset')">Back</a>
+            <a class="button is-3 is-success is-medium" href="{% url 'safmeds:play-deck' deck.slug %}">Play</a>
+        </div>
+        </footer>
+    {% else %}
+        <section class="modal-card-body">
+        <div class="block" id="deck-list">
+            <p class="subtitle is-2">This deck is empty</p>
+        </div>
+        </section>
+        <footer class="modal-card-foot">
+        <div class="buttons is-centered">
+            <a class="button is-3" disabled>Play</a>
+            <a class="button is-3" @click="$dispatch('reset')">Back</a>
+        </div>
+        </footer>
+    {% endif %}
+</section>
+</div>

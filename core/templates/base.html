@@ -3,6 +3,7 @@
 <html lang="en"
       x-data
       :data-theme="$store.themeSwitcher.theme"
+      hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'
 >
 <head>
     <meta charset="utf-8">
@@ -31,7 +32,7 @@
 </head>
 <body :class="$store.responsiveNav.top ? 'has-navbar-fixed-top' : 'has-navbar-fixed-bottom'"
       hx-ext="response-targets, alpine-morph, head-support" hx-swap="morph"
-      hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'
+      hx-headers="js:...window.processHeaders()"
       >
 {% include "navbar.html" %}
 {% block content %}{% endblock content %}
