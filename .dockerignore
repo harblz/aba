@@ -509,3 +509,4 @@ cython_debug/
 # Docker
 Dockerfile
 .dockerignore/core/management/
+/queries/

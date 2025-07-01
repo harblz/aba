@@ -1,12 +1,67 @@
 {% extends "base.html" %}
-{% block title %}
-    Welcome back,
-    {% if request.user.first_name %}
-    {{ request.user.first_name }}
-    {% else %}
-    {{ request.user.username }}
-    {% endif %}
-{% endblock title %}
+{% block title %}{{ request.user.username }}'s Profile{% endblock title %}
 {% block content %}
-    <p>Nothing here yet!</p>
+{% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
+<section class="section" x-data="{ active: 'quiz' }">
+    <div class="tabs">
+        <ul>
+            <li :class="active === 'quiz' ? 'is-active' : ''">
+                <a @click="active = 'quiz'">Quizzes</a>
+            </li>
+            <li :class="active === 'safmeds' ? 'is-active' : ''">
+                <a @click="active = 'safmeds'">SAFMEDS</a>
+            </li>
+            <li :class="active === 'prefs' ? 'is-active' : ''">
+                <a @click="active = 'prefs'">Preferences</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box" id="quiz-box" x-show="active === 'quiz'">
+        <header class="title">Quiz Results</header>
+        <table class="table is-striped is-bordered is-center">
+            <thead>
+            <tr>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Correct</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for quiz in quizzes %}
+                <tr>
+                    <th scope="row">{{ quiz.datetime|date:"SHORT_DATE_FORMAT" }} {{ quiz.datetime|date:"g:iA" }}</th>
+                    <td>{{ quiz.correct }}</td>
+                    <td>{{ quiz.total }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="box" id="safmeds-box" x-cloak x-show="active === 'safmeds'">
+        <header class="title">SAFMEDS Results</header>
+        <table class="table is-striped is-bordered is-center">
+            <thead>
+            <tr>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Correct</th>
+                <th scope="col">Incorrect</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for attempt in safmeds_attempts %}
+                <tr>
+                    <th scope="row">{{ attempt.datetime|date:"SHORT_DATE_FORMAT" }} {{ attempt.datetime|date:"g:iA" }}</th>
+                    <td>{{ attempt.correct }}</td>
+                    <td>{{ attempt.incorrect }}</td>
+                    <td>{{ attempt.total }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="box" id="preferences-box" x-cloak x-show="active === 'prefs'">
+        <h2 class="title">Nothing here yet!</h2>
+    </div>
+</section>
 {% endblock content %}

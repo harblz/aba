@@ -108,11 +108,14 @@ class QuizProgress(models.Model):
         db_table_comment = "Quiz progress data"
 
 
-class QuizResults(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class Result(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.SlugField()
     datetime = models.DateTimeField(auto_now_add=True)
     elapsed = models.DurationField(null=True, blank=True)
     total = models.IntegerField()
     correct = models.IntegerField()
     key = models.JSONField(default=dict)
+
+    class Meta:
+        default_related_name = "quiz_results"

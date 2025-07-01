@@ -33,9 +33,12 @@ class Deck(models.Model):
 
 
 class Result(models.Model):
-    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    user = models.OneToOneField("auth.User", on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
     correct = models.IntegerField(default=0)
     incorrect = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
+
+    class Meta:
+        default_related_name = "safmeds_results"
