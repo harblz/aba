@@ -271,13 +271,13 @@ def _grade_quiz(request):
         "number": request.headers["number"],
     }
     if request.user.is_authenticated:
-        QuizResults.objects.create(
+        Result.objects.create(
             user=request.user,
             quiz=slug,
             # elapsed=<To be replaced with time it took to complete quiz
             total=total_q,
             correct=n_correct,
-            key=request.session.session_key,
+            key=progress.key,
         )
     response = TemplateResponse(request, "quiz/completed.html", context)
     return retarget(response, "#page-wrapper")

@@ -3,7 +3,7 @@
 {% block content %}
 {% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
 <section class="section" x-data="{ active: 'quiz' }">
-    <div class="tabs">
+    <div class="tabs is-centered">
         <ul>
             <li :class="active === 'quiz' ? 'is-active' : ''">
                 <a @click="active = 'quiz'">Quizzes</a>
@@ -16,14 +16,16 @@
             </li>
         </ul>
     </div>
-    <div class="box" id="quiz-box" x-show="active === 'quiz'">
+    <div class="box has-text-centered" id="quiz-box" x-show="active === 'quiz'">
         <header class="title">Quiz Results</header>
-        <table class="table is-striped is-bordered is-center">
+        <table class="table is-striped is-bordered is-fullwidth">
             <thead>
             <tr>
                 <th scope="col">Date and Time</th>
                 <th scope="col">Correct</th>
                 <th scope="col">Total</th>
+                <th scope="col">Score</th>
+                <th scope="col">Link</th>
             </tr>
             </thead>
             <tbody>
@@ -32,12 +34,14 @@
                     <th scope="row">{{ quiz.datetime|date:"SHORT_DATE_FORMAT" }} {{ quiz.datetime|date:"g:iA" }}</th>
                     <td>{{ quiz.correct }}</td>
                     <td>{{ quiz.total }}</td>
+                    <td>{{ quiz.score }}</td>
+                    <td><a class="button" href="">View</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-    <div class="box" id="safmeds-box" x-cloak x-show="active === 'safmeds'">
+    <div class="box has-text-centered" id="safmeds-box" x-cloak x-show="active === 'safmeds'">
         <header class="title">SAFMEDS Results</header>
         <table class="table is-striped is-bordered is-center">
             <thead>
@@ -54,7 +58,7 @@
                     <th scope="row">{{ attempt.datetime|date:"SHORT_DATE_FORMAT" }} {{ attempt.datetime|date:"g:iA" }}</th>
                     <td>{{ attempt.correct }}</td>
                     <td>{{ attempt.incorrect }}</td>
-                    <td>{{ attempt.total }}</td>
+                    <td>{{ attempt.correct|add:attempt.incorrect }}</td> <!---Add incorrect and correct--->
                 </tr>
             {% endfor %}
             </tbody>

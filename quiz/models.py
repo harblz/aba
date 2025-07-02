@@ -115,6 +115,7 @@ class Result(models.Model):
     elapsed = models.DurationField(null=True, blank=True)
     total = models.IntegerField()
     correct = models.IntegerField()
+    score = models.IntegerField(default=0)
     key = models.JSONField(default=dict)
 
     class Meta:
