@@ -34,31 +34,23 @@ RUN --mount=type=secret,id=postgres_db \
     && chmod 600 .pgpass \
     && chmod 600 .pg_service.conf
 
-FROM base AS poetry-build
+FROM ghcr.io/astral-sh/uv:python3.12-alpine AS uv-build
 
-ENV POETRY_NO_INTERACTION=1 POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_VIRTUALENVS_CREATE=true POETRY_CACHE_DIR=/tmp/poetry_cache
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=0 UV_PROJECT_ENVIRONMENT=/.venv \
+    UV_CACHE_DIR=/opt/uv-cache/
 
-RUN apk add --no-cache gcc python3-dev musl-dev libffi-dev postgresql-dev graphviz graphviz-dev jpeg-dev zlib-dev g++ \
-    freetype-dev jpeg-dev libjpeg
-
-RUN pip install poetry
-
-RUN which pip
-
-ENV POETRY_CACHE_DIR=/tmp/.cache
-
-COPY poetry.lock pyproject.toml ./
+RUN apk add --no-cache gcc python3-dev musl-dev libffi-dev postgresql-dev postgresql-libs graphviz  \
+    graphviz-dev jpeg-dev zlib-dev g++ freetype-dev jpeg-dev libjpeg
 
 RUN --mount=type=secret,id=debug \
-    --mount=type=cache,target=${POETRY_CACHE_DIR} \
+    --mount=type=cache,target=${UV_CACHE_DIR} \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     if [ "$(cat /run/secrets/debug)" = "True" ] ; then \
-      poetry install --with dev --no-root; \
+      uv sync --locked --no-install-project; \
     else \
-      poetry install --with prod --no-root; \
+      uv sync --no-dev --locked --no-install-project; \
     fi
-
-RUN rm -rf $POETRY_CACHE_DIR
 
 FROM node:23 AS npm-build
 
@@ -77,17 +69,10 @@ FROM base AS run
 RUN mkdir -p /usr/src/app
 
 ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/usr/src/app" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    abarocks
+RUN adduser -D -H -h "/usr/src/app" -s "/sbin/nologin" -u "${UID}" abarocks
 
 COPY --chown=abarocks --chmod=755 . .
-COPY --from=poetry-build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+COPY --from=uv-build /.venv ${VIRTUAL_ENV}
 COPY --from=npm-build /usr/src/app/staticfiles/js/. ./staticfiles/js
 COPY --from=npm-build /usr/src/app/staticfiles/css/. ./staticfiles/css
 
@@ -105,6 +90,8 @@ RUN apk add --no-cache libpq py3-gunicorn && pwd
 ENV DJANGO_SETTINGS_MODULE=abarocks.settings \
     PYTHONPATH=/usr/src/app/.venv/lib/python${PYTHON_VERSION}/site-packages:/usr/src/app/abarocks \
     PATH=/usr/bin:/usr/src/app/.venv/bin:/bin:$PATH
+
+RUN pip list
 
 USER abarocks
 
