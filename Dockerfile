@@ -36,7 +36,7 @@ RUN --mount=type=secret,id=postgres_db \
 
 FROM ghcr.io/astral-sh/uv:python3.12-alpine AS uv-build
 
-ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=0 UV_PROJECT_ENVIRONMENT=/.venv \
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=0 UV_PROJECT_ENVIRONMENT=./.venv \
     UV_CACHE_DIR=/opt/uv-cache/
 
 RUN apk add --no-cache gcc python3-dev musl-dev libffi-dev postgresql-dev postgresql-libs graphviz  \
@@ -89,7 +89,7 @@ RUN apk add --no-cache libpq py3-gunicorn && pwd
 
 ENV DJANGO_SETTINGS_MODULE=abarocks.settings \
     PYTHONPATH=/usr/src/app/.venv/lib/python${PYTHON_VERSION}/site-packages:/usr/src/app/abarocks \
-    PATH=/usr/bin:/usr/src/app/.venv/bin:/bin:$PATH
+    PATH=/usr/src/app/.venv/bin:/usr/bin:/bin:$PATH
 
 RUN pip list
 

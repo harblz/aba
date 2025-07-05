@@ -2,10 +2,12 @@ services:
   db:
     image: postgres
     init: true
-    restart: always
+    restart: unless-stopped
     shm_size: 128mb
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER_FILE: /run/secrets/postgres_user
@@ -14,9 +16,7 @@ services:
       - postgres_password
       - postgres_user
       - postgres_db
-    volumes:
-      -
-  web:
+  devcontainer:
     build:
       secrets:
         - debug
@@ -30,31 +30,28 @@ services:
       args:
         DEBUG: /run/secrets/DEBUG
         POSTGRES_HOST: db
-      context: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+      dockerfile: Dockerfile
+    command: sleep infinity
     volumes:
-      - live_edit:/usr/src/app
+      - ../:/workspace/abarocks
 
 secrets:
   debug:
-    file: ./secrets/DEBUG
+    file: ../secrets/DEBUG
   secret_key:
-    file: ./secrets/SECRET_KEY
+    file: ../secrets/SECRET_KEY
   allowed_hosts:
-    file: ./secrets/ALLOWED_HOSTS
+    file: ../secrets/ALLOWED_HOSTS
   internal_ips:
-    file: ./secrets/INTERNAL_IPS
+    file: ../secrets/INTERNAL_IPS
   postgres_db:
-    file: ./secrets/POSTGRES_DB
+    file: ../secrets/POSTGRES_DB
   postgres_password:
-    file: ./secrets/POSTGRES_PASSWORD
+    file: ../secrets/POSTGRES_PASSWORD
   postgres_user:
-    file: ./secrets/POSTGRES_USER
+    file: ../secrets/POSTGRES_USER
   postgres_port:
-    file: ./secrets/POSTGRES_PORT
+    file: ../secrets/POSTGRES_PORT
 
 volumes:
   postgres_data:
