@@ -153,10 +153,11 @@ WSGI_APPLICATION = "abarocks.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {
-            "service": "aba.rocks",
-            "passfile": ".pgpass",
-        },
+        "NAME": load_secret("POSTGRES_DB"),
+        "USER": load_secret("POSTGRES_USER"),
+        "PASSWORD": load_secret("POSTGRES_PASSWORD"),
+        "HOST": load_secret("POSTGRES_HOST"),
+        "PORT": load_secret("POSTGRES_PORT"),
     },
 }
 

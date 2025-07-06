@@ -2,10 +2,12 @@ services:
   db:
     image: postgres
     init: true
-    restart: always
+    restart: unless-stopped
     shm_size: 128mb
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_USER_FILE: /run/secrets/postgres_user
@@ -18,39 +20,92 @@ services:
     build:
       secrets:
         - debug
-        - secret_key
-        - allowed_hosts
-        - internal_ips
-        - postgres_db
-        - postgres_password
-        - postgres_user
-        - postgres_port
-      args:
-        DEBUG: /run/secrets/DEBUG
-        POSTGRES_HOST: db
       context: .
+      dockerfile: Dockerfile
+    secrets:
+      - debug
+      - secret_key
+      - allowed_hosts
+      - internal_ips
+      - postgres_db
+      - postgres_password
+      - postgres_user
+      - postgres_port
+      - postgres_host
+    environment:
+      SECRETS_DIR: "/run/secrets"
     ports:
       - "8000:8000"
     depends_on:
       - db
+  dev:
+    build:
+      secrets:
+        - debug
+      dockerfile: Dockerfile
+      context: .
+    working_dir: /usr/local/app
+    entrypoint: /usr/src/app/entrypoint.sh
+    command: python manage.py runserver_plus 0.0.0.0:8000
+    secrets:
+      - debug
+      - secret_key
+      - allowed_hosts
+      - internal_ips
+      - postgres_db
+      - postgres_password
+      - postgres_user
+      - postgres_port
+      - postgres_host
+    environment:
+      SECRETS_DIR: "/run/secrets"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./:/usr/local/app
+
+  devcontainer:
+    build:
+      secrets:
+        - debug
+      dockerfile: .devcontainer/Dockerfile
+    environment:
+      SECRETS_DIR: "/run/secrets"
+    secrets:
+      - debug
+      - secret_key
+      - allowed_hosts
+      - internal_ips
+      - postgres_db
+      - postgres_password
+      - postgres_user
+      - postgres_port
+      - postgres_host
+    command: sleep infinity
+    volumes:
+      - ./:/workspace/abarocks
 
 secrets:
   debug:
-    file: ./secrets/DEBUG
+    file: ${HOME}/.secrets/abarocks/DEBUG
   secret_key:
-    file: ./secrets/SECRET_KEY
+    file: ${HOME}/.secrets/abarocks/SECRET_KEY
   allowed_hosts:
-    file: ./secrets/ALLOWED_HOSTS
+    file: ${HOME}/.secrets/abarocks/ALLOWED_HOSTS
   internal_ips:
-    file: ./secrets/INTERNAL_IPS
+    file: ${HOME}/.secrets/abarocks/INTERNAL_IPS
   postgres_db:
-    file: ./secrets/POSTGRES_DB
+    file: ${HOME}/.secrets/abarocks/POSTGRES_DB
   postgres_password:
-    file: ./secrets/POSTGRES_PASSWORD
+    file: ${HOME}/.secrets/abarocks/POSTGRES_PASSWORD
   postgres_user:
-    file: ./secrets/POSTGRES_USER
+    file: ${HOME}/.secrets/abarocks/POSTGRES_USER
   postgres_port:
-    file: ./secrets/POSTGRES_PORT
+    file: ${HOME}/.secrets/abarocks/POSTGRES_PORT
+  postgres_host:
+    file: ${HOME}/.secrets/abarocks/POSTGRES_HOST
 
 volumes:
   postgres_data:

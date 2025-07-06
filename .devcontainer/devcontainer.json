@@ -1,7 +1,8 @@
 {
   "name": "Python & Typescript",
-  "dockerComposeFile": "compose.yaml",
+  "dockerComposeFile": "../compose.yaml",
   "service": "devcontainer",
+  "runServices": ["db", "devcontainer"],
   "workspaceFolder": "/workspace/abarocks",
   // 👇 Features to add to the Dev Container. More info: https://containers.dev/implementors/features.
   "features": {},
