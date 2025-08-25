@@ -106,6 +106,7 @@ class QuizProgress(models.Model):
 
     class Meta:
         db_table_comment = "Quiz progress data"
+        # TODO: Set constraint to limit progress rows to one per user per quiz
 
 
 class Result(models.Model):

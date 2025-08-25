@@ -20,7 +20,7 @@
     <legend>{{ form.answer.label }}</legend>
     <div class="radios is-flex-direction-column">
     {% for radio in form.answer %}
-      <label class="radio has-text-justified p-4" for="{{ radio.id_for_label }}">
+      <label class="radio has-text-justified p-4 is-size-6" for="{{ radio.id_for_label }}">
         {{ radio.tag }}
         {{ radio.choice_label|striptags }}
       </label>
