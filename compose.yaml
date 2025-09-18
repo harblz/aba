@@ -45,7 +45,7 @@ services:
       retries: 12
       start_period: 10s
     ports:
-      - "5432:5432"
+      - "8000:8000"
   nginx:
     image: nginx:stable-alpine
     volumes:
