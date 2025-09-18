@@ -53,7 +53,7 @@ services:
       web:
         condition: service_healthy
     ports:
-      - "80:80"
+      - "8000:80"
     restart: unless-stopped
   dev:
     build:
