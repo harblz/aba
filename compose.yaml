@@ -34,10 +34,29 @@ services:
       - postgres_host
     environment:
       SECRETS_DIR: "/run/secrets"
-    ports:
-      - "8000:8000"
+    volumes:
+      - static:/usr/src/app/static
     depends_on:
       - db
+    healthcheck:
+      test: [ "CMD-SHELL", "python -c 'import socket,sys; s=socket.socket(); s.settimeout(1); s.connect((\"127.0.0.1\",8000)); s.close(); sys.exit(0)'" ]
+      interval: 5s
+      timeout: 2s
+      retries: 12
+      start_period: 10s
+    ports:
+      - "5432:5432"
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - static:/var/www/html/static
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "8000:80"
+    restart: unless-stopped
   dev:
     build:
       secrets:
@@ -109,3 +128,5 @@ secrets:
 
 volumes:
   postgres_data:
+  static:
+  sock:
