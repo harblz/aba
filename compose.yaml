@@ -44,8 +44,6 @@ services:
       timeout: 2s
       retries: 12
       start_period: 10s
-    ports:
-      - "8000:8000"
   nginx:
     image: nginx:stable-alpine
     volumes:
