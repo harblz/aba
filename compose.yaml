@@ -36,6 +36,8 @@ services:
       SECRETS_DIR: "/run/secrets"
     volumes:
       - static:/usr/src/app/static
+    ports:
+      - "8000:8000"
     depends_on:
       - db
     healthcheck:
