@@ -3,416 +3,400 @@
     "model": "safmeds.card",
     "pk": 1,
     "fields": {
-      "back": "Term 1 Back",
-      "front": "Term 1 Front"
+      "back": "Applied Behavior Analysis",
+      "front": "A scientific approach that applies principles of behavior to improve socially significant outcomes and uses experimentation to identify functional relations."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 2,
     "fields": {
-      "back": "Term 2 Back",
-      "front": "Term 2 Front"
+      "back": "Behavior",
+      "front": "Anything an organism does that can be observed and measured."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 3,
     "fields": {
-      "back": "Term 3 Back",
-      "front": "Term 3 Front"
+      "back": "Response",
+      "front": "A single instance of behavior; an action of the effector system."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 4,
     "fields": {
-      "back": "Term 4 Back",
-      "front": "Term 4 Front"
+      "back": "Stimulus",
+      "front": "Any event or condition that affects an organism through its receptors."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 5,
     "fields": {
-      "back": "Term 5 Back",
-      "front": "Term 5 Front"
+      "back": "Reinforcement",
+      "front": "A process in which a behavior increases in future frequency due to its consequences."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 6,
     "fields": {
-      "back": "Term 6 Back",
-      "front": "Term 6 Front"
+      "back": "Positive Reinforcement",
+      "front": "Presenting a stimulus after a response that increases future responding."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 7,
     "fields": {
-      "back": "Term 7 Back",
-      "front": "Term 7 Front"
+      "back": "Negative Reinforcement",
+      "front": "Removing or reducing a stimulus after a response that increases future responding."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 8,
     "fields": {
-      "back": "Term 8 Back",
-      "front": "Term 8 Front"
+      "back": "Punishment",
+      "front": "A process in which a behavior decreases in future frequency due to its consequences."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 9,
     "fields": {
-      "back": "Term 9 Back",
-      "front": "Term 9 Front"
+      "back": "Positive Punishment",
+      "front": "Presenting a stimulus after a response that decreases future responding."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 10,
     "fields": {
-      "back": "Term 10 Back",
-      "front": "Term 10 Front"
+      "back": "Negative Punishment",
+      "front": "Removing a stimulus after a response that decreases future responding."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 11,
     "fields": {
-      "back": "Term 11 Back",
-      "front": "Term 11 Front"
+      "back": "Extinction",
+      "front": "Withholding reinforcement for a previously reinforced response, leading to a decrease in its frequency."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 12,
     "fields": {
-      "back": "Term 12 Back",
-      "front": "Term 12 Front"
+      "back": "Discriminative Stimulus (SD)",
+      "front": "A stimulus that signals the availability of reinforcement for a particular response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 13,
     "fields": {
-      "back": "Term 13 Back",
-      "front": "Term 13 Front"
+      "back": "Motivating Operation (MO)",
+      "front": "An environmental event that momentarily alters the value of a reinforcer and the frequency of behavior that has produced that reinforcer."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 14,
     "fields": {
-      "back": "Term 14 Back",
-      "front": "Term 14 Front"
+      "back": "Establishing Operation (EO)",
+      "front": "An MO that increases the effectiveness of a reinforcer and evokes behavior that has produced that reinforcer."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 15,
     "fields": {
-      "back": "Term 15 Back",
-      "front": "Term 15 Front"
+      "back": "Abolishing Operation (AO)",
+      "front": "An MO that decreases the effectiveness of a reinforcer and abates behavior that has produced that reinforcer."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 16,
     "fields": {
-      "back": "Term 16 Back",
-      "front": "Term 16 Front"
+      "back": "Functional Behavior Assessment (FBA)",
+      "front": "A systematic process for identifying the function of problem behavior and variables maintaining it."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 17,
     "fields": {
-      "back": "Term 17 Back",
-      "front": "Term 17 Front"
+      "back": "ABC Recording",
+      "front": "Data collection of Antecedents, Behavior, and Consequences to identify functional relations."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 18,
     "fields": {
-      "back": "Term 18 Back",
-      "front": "Term 18 Front"
+      "back": "Antecedent",
+      "front": "An event or condition that occurs immediately before a behavior."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 19,
     "fields": {
-      "back": "Term 19 Back",
-      "front": "Term 19 Front"
+      "back": "Consequence",
+      "front": "An event or condition that follows a behavior and affects its future frequency."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 20,
     "fields": {
-      "back": "Term 20 Back",
-      "front": "Term 20 Front"
+      "back": "Behavior Intervention Plan (BIP)",
+      "front": "A document detailing strategies to reduce problem behavior and teach replacement skills based on FBA results."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 21,
     "fields": {
-      "back": "Term 21 Back",
-      "front": "Term 21 Front"
+      "back": "Differential Reinforcement",
+      "front": "Reinforcing one set of responses while withholding reinforcement for others."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 22,
     "fields": {
-      "back": "Term 22 Back",
-      "front": "Term 22 Front"
+      "back": "DRA",
+      "front": "Differential Reinforcement of Alternative behavior: reinforce a functional alternative to the problem behavior."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 23,
     "fields": {
-      "back": "Term 23 Back",
-      "front": "Term 23 Front"
+      "back": "DRI",
+      "front": "Differential Reinforcement of Incompatible behavior: reinforce a behavior that cannot occur simultaneously with the problem behavior."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 24,
     "fields": {
-      "back": "Term 24 Back",
-      "front": "Term 24 Front"
+      "back": "DRO",
+      "front": "Differential Reinforcement of Other behavior: reinforce the absence of the problem behavior for a specified interval."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 25,
     "fields": {
-      "back": "Term 25 Back",
-      "front": "Term 25 Front"
+      "back": "DRL",
+      "front": "Differential Reinforcement of Low rates: reinforce when the behavior occurs at or below a criterion rate."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 26,
     "fields": {
-      "back": "Term 26 Back",
-      "front": "Term 26 Front"
+      "back": "DRH",
+      "front": "Differential Reinforcement of High rates: reinforce when the behavior occurs at or above a criterion rate."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 27,
     "fields": {
-      "back": "Term 27 Back",
-      "front": "Term 27 Front"
+      "back": "Prompt",
+      "front": "An added stimulus or cue that increases the likelihood of a correct response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 28,
     "fields": {
-      "back": "Term 28 Back",
-      "front": "Term 28 Front"
+      "back": "Prompt Fading",
+      "front": "Systematically reducing prompts to transfer stimulus control to the natural SD."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 29,
     "fields": {
-      "back": "Term 29 Back",
-      "front": "Term 29 Front"
+      "back": "Shaping",
+      "front": "Differentially reinforcing successive approximations toward a target behavior."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 30,
     "fields": {
-      "back": "Term 30 Back",
-      "front": "Term 30 Front"
+      "back": "Chaining",
+      "front": "Teaching a complex skill by linking discrete responses in a specific sequence."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 31,
     "fields": {
-      "back": "Term 31 Back",
-      "front": "Term 31 Front"
+      "back": "Task Analysis",
+      "front": "Breaking a complex skill into smaller, teachable steps."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 32,
     "fields": {
-      "back": "Term 32 Back",
-      "front": "Term 32 Front"
+      "back": "Generalization",
+      "front": "The occurrence of a learned behavior under different, untrained conditions (people, settings, stimuli)."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 33,
     "fields": {
-      "back": "Term 33 Back",
-      "front": "Term 33 Front"
+      "back": "Maintenance",
+      "front": "Sustained performance of a learned behavior over time after instruction ends."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 34,
     "fields": {
-      "back": "Term 34 Back",
-      "front": "Term 34 Front"
+      "back": "Pairing",
+      "front": "Establishing oneself or a stimulus as a conditioned reinforcer by associating with existing reinforcers."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 35,
     "fields": {
-      "back": "Term 35 Back",
-      "front": "Term 35 Front"
+      "back": "Preference Assessment",
+      "front": "Procedures to identify potential reinforcers based on choice and engagement."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 36,
     "fields": {
-      "back": "Term 36 Back",
-      "front": "Term 36 Front"
+      "back": "Functional Communication Training (FCT)",
+      "front": "Teaching an appropriate communicative response that serves the same function as problem behavior."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 37,
     "fields": {
-      "back": "Term 37 Back",
-      "front": "Term 37 Front"
+      "back": "Latency",
+      "front": "Elapsed time from the onset of a stimulus to the initiation of a response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 38,
     "fields": {
-      "back": "Term 38 Back",
-      "front": "Term 38 Front"
+      "back": "Interresponse Time (IRT)",
+      "front": "Elapsed time between two consecutive responses."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 39,
     "fields": {
-      "back": "Term 39 Back",
-      "front": "Term 39 Front"
+      "back": "Rate",
+      "front": "Frequency of responses per unit of time."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 40,
     "fields": {
-      "back": "Term 40 Back",
-      "front": "Term 40 Front"
+      "back": "Frequency",
+      "front": "Count of response occurrences."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 41,
     "fields": {
-      "back": "Term 41 Back",
-      "front": "Term 41 Front"
+      "back": "Duration",
+      "front": "Total time a behavior occurs from onset to offset."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 42,
     "fields": {
-      "back": "Term 42 Back",
-      "front": "Term 42 Front"
+      "back": "Topography",
+      "front": "The physical form or shape of a behavior; what it looks like."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 43,
     "fields": {
-      "back": "Term 43 Back",
-      "front": "Term 43 Front"
+      "back": "Magnitude",
+      "front": "The intensity or force of a response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 44,
     "fields": {
-      "back": "Term 44 Back",
-      "front": "Term 44 Front"
+      "back": "Continuous Reinforcement (CRF)",
+      "front": "Reinforcement delivered after every occurrence of the target response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 45,
     "fields": {
-      "back": "Term 45 Back",
-      "front": "Term 45 Front"
+      "back": "Intermittent Reinforcement",
+      "front": "Reinforcement delivered on some, but not all, occurrences of the response."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 46,
     "fields": {
-      "back": "Term 46 Back",
-      "front": "Term 46 Front"
+      "back": "Fixed Ratio (FR)",
+      "front": "A schedule in which reinforcement is delivered after a fixed number of responses (e.g., FR5)."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 47,
     "fields": {
-      "back": "Term 47 Back",
-      "front": "Term 47 Front"
+      "back": "Variable Ratio (VR)",
+      "front": "A schedule in which reinforcement is delivered after a variable number of responses around an average (e.g., VR5)."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 48,
     "fields": {
-      "back": "Term 48 Back",
-      "front": "Term 48 Front"
+      "back": "Fixed Interval (FI)",
+      "front": "A schedule in which the first response after a fixed time interval is reinforced (e.g., FI 2 min)."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 49,
     "fields": {
-      "back": "Term 49 Back",
-      "front": "Term 49 Front"
+      "back": "Variable Interval (VI)",
+      "front": "A schedule in which the first response after variable time intervals is reinforced around an average (e.g., VI 2 min)."
     }
   },
   {
     "model": "safmeds.card",
     "pk": 50,
     "fields": {
-      "back": "Term 50 Back",
-      "front": "Term 50 Front"
-    }
-  },
-  {
-    "model": "safmeds.card",
-    "pk": 51,
-    "fields": {
-      "back": "Term 51 Back",
-      "front": "Term 51 Front"
-    }
-  },
-  {
-    "model": "safmeds.card",
-    "pk": 52,
-    "fields": {
-      "back": "Term 52 Back",
-      "front": "Term 52 Front"
+      "back": "Social Validity",
+      "front": "The extent to which goals, procedures, and outcomes are acceptable, important, and meaningful to stakeholders."
     }
   }
 ]
