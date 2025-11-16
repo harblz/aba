@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "back": "Applied Behavior Analysis",
-      "front": "A scientific approach that applies principles of behavior to improve socially significant outcomes and uses experimentation to identify functional relations."
+      "front": "Science applying behavior principles to improve socially important outcomes."
     }
   },
   {
@@ -20,7 +20,7 @@
     "pk": 3,
     "fields": {
       "back": "Response",
-      "front": "A single instance of behavior; an action of the effector system."
+      "front": "A single instance of behavior; an action of the organism."
     }
   },
   {
@@ -36,7 +36,7 @@
     "pk": 5,
     "fields": {
       "back": "Reinforcement",
-      "front": "A process in which a behavior increases in future frequency due to its consequences."
+      "front": "A process where behavior increases in future frequency due to its consequences."
     }
   },
   {
@@ -44,7 +44,7 @@
     "pk": 6,
     "fields": {
       "back": "Positive Reinforcement",
-      "front": "Presenting a stimulus after a response that increases future responding."
+      "front": "Presenting a stimulus after a response increases future responding."
     }
   },
   {
@@ -52,7 +52,7 @@
     "pk": 7,
     "fields": {
       "back": "Negative Reinforcement",
-      "front": "Removing or reducing a stimulus after a response that increases future responding."
+      "front": "Removing a stimulus after a response increases future responding."
     }
   },
   {
@@ -60,7 +60,7 @@
     "pk": 8,
     "fields": {
       "back": "Punishment",
-      "front": "A process in which a behavior decreases in future frequency due to its consequences."
+      "front": "A process where behavior decreases in future frequency due to its consequences."
     }
   },
   {
@@ -68,7 +68,7 @@
     "pk": 9,
     "fields": {
       "back": "Positive Punishment",
-      "front": "Presenting a stimulus after a response that decreases future responding."
+      "front": "Presenting a stimulus after a response decreases future responding."
     }
   },
   {
@@ -76,7 +76,7 @@
     "pk": 10,
     "fields": {
       "back": "Negative Punishment",
-      "front": "Removing a stimulus after a response that decreases future responding."
+      "front": "Removing a stimulus after a response decreases future responding."
     }
   },
   {
@@ -84,7 +84,7 @@
     "pk": 11,
     "fields": {
       "back": "Extinction",
-      "front": "Withholding reinforcement for a previously reinforced response, leading to a decrease in its frequency."
+      "front": "Withholding reinforcement for a previously reinforced response reduces it."
     }
   },
   {
@@ -92,7 +92,7 @@
     "pk": 12,
     "fields": {
       "back": "Discriminative Stimulus (SD)",
-      "front": "A stimulus that signals the availability of reinforcement for a particular response."
+      "front": "Stimulus signaling reinforcement is available for a particular response."
     }
   },
   {
@@ -100,7 +100,7 @@
     "pk": 13,
     "fields": {
       "back": "Motivating Operation (MO)",
-      "front": "An environmental event that momentarily alters the value of a reinforcer and the frequency of behavior that has produced that reinforcer."
+      "front": "Alters reinforcer value and momentarily changes behavior frequency."
     }
   },
   {
@@ -108,7 +108,7 @@
     "pk": 14,
     "fields": {
       "back": "Establishing Operation (EO)",
-      "front": "An MO that increases the effectiveness of a reinforcer and evokes behavior that has produced that reinforcer."
+      "front": "An MO that increases a reinforcer’s effectiveness and evokes related behavior."
     }
   },
   {
@@ -116,7 +116,7 @@
     "pk": 15,
     "fields": {
       "back": "Abolishing Operation (AO)",
-      "front": "An MO that decreases the effectiveness of a reinforcer and abates behavior that has produced that reinforcer."
+      "front": "An MO that decreases a reinforcer’s effectiveness and abates related behavior."
     }
   },
   {
@@ -124,7 +124,7 @@
     "pk": 16,
     "fields": {
       "back": "Functional Behavior Assessment (FBA)",
-      "front": "A systematic process for identifying the function of problem behavior and variables maintaining it."
+      "front": "Systematic process to identify the function and variables maintaining behavior."
     }
   },
   {
@@ -132,7 +132,7 @@
     "pk": 17,
     "fields": {
       "back": "ABC Recording",
-      "front": "Data collection of Antecedents, Behavior, and Consequences to identify functional relations."
+      "front": "Collect Antecedent, Behavior, Consequence data to find functional relations."
     }
   },
   {
@@ -148,7 +148,7 @@
     "pk": 19,
     "fields": {
       "back": "Consequence",
-      "front": "An event or condition that follows a behavior and affects its future frequency."
+      "front": "An event or condition that follows a behavior and alters future frequency."
     }
   },
   {
@@ -156,7 +156,7 @@
     "pk": 20,
     "fields": {
       "back": "Behavior Intervention Plan (BIP)",
-      "front": "A document detailing strategies to reduce problem behavior and teach replacement skills based on FBA results."
+      "front": "Plan to reduce problem behavior and teach replacements based on FBA results."
     }
   },
   {
@@ -164,7 +164,7 @@
     "pk": 21,
     "fields": {
       "back": "Differential Reinforcement",
-      "front": "Reinforcing one set of responses while withholding reinforcement for others."
+      "front": "Reinforce a desired response class while withholding reinforcement for others."
     }
   },
   {
@@ -172,7 +172,7 @@
     "pk": 22,
     "fields": {
       "back": "DRA",
-      "front": "Differential Reinforcement of Alternative behavior: reinforce a functional alternative to the problem behavior."
+      "front": "Reinforce an alternative behavior that serves the same function."
     }
   },
   {
@@ -180,7 +180,7 @@
     "pk": 23,
     "fields": {
       "back": "DRI",
-      "front": "Differential Reinforcement of Incompatible behavior: reinforce a behavior that cannot occur simultaneously with the problem behavior."
+      "front": "Reinforce a behavior that cannot occur with the problem behavior."
     }
   },
   {
@@ -188,7 +188,7 @@
     "pk": 24,
     "fields": {
       "back": "DRO",
-      "front": "Differential Reinforcement of Other behavior: reinforce the absence of the problem behavior for a specified interval."
+      "front": "Reinforce the absence of the problem behavior for a set interval."
     }
   },
   {
@@ -196,7 +196,7 @@
     "pk": 25,
     "fields": {
       "back": "DRL",
-      "front": "Differential Reinforcement of Low rates: reinforce when the behavior occurs at or below a criterion rate."
+      "front": "Reinforce when the behavior occurs at or below a specified rate."
     }
   },
   {
@@ -204,7 +204,7 @@
     "pk": 26,
     "fields": {
       "back": "DRH",
-      "front": "Differential Reinforcement of High rates: reinforce when the behavior occurs at or above a criterion rate."
+      "front": "Reinforce when the behavior occurs at or above a specified rate."
     }
   },
   {
@@ -212,7 +212,7 @@
     "pk": 27,
     "fields": {
       "back": "Prompt",
-      "front": "An added stimulus or cue that increases the likelihood of a correct response."
+      "front": "Added cue that increases the likelihood of a correct response."
     }
   },
   {
@@ -220,7 +220,7 @@
     "pk": 28,
     "fields": {
       "back": "Prompt Fading",
-      "front": "Systematically reducing prompts to transfer stimulus control to the natural SD."
+      "front": "Systematically reduce prompts to transfer control to the natural SD."
     }
   },
   {
@@ -228,7 +228,7 @@
     "pk": 29,
     "fields": {
       "back": "Shaping",
-      "front": "Differentially reinforcing successive approximations toward a target behavior."
+      "front": "Reinforce successive approximations toward a target behavior."
     }
   },
   {
@@ -236,7 +236,7 @@
     "pk": 30,
     "fields": {
       "back": "Chaining",
-      "front": "Teaching a complex skill by linking discrete responses in a specific sequence."
+      "front": "Teach a complex skill by linking steps in a specific sequence."
     }
   },
   {
@@ -244,7 +244,7 @@
     "pk": 31,
     "fields": {
       "back": "Task Analysis",
-      "front": "Breaking a complex skill into smaller, teachable steps."
+      "front": "Break a complex skill into smaller, teachable steps."
     }
   },
   {
@@ -252,7 +252,7 @@
     "pk": 32,
     "fields": {
       "back": "Generalization",
-      "front": "The occurrence of a learned behavior under different, untrained conditions (people, settings, stimuli)."
+      "front": "Learned behavior occurs under different, untrained people, settings, or stimuli."
     }
   },
   {
@@ -260,7 +260,7 @@
     "pk": 33,
     "fields": {
       "back": "Maintenance",
-      "front": "Sustained performance of a learned behavior over time after instruction ends."
+      "front": "Sustained performance of a learned behavior after instruction ends."
     }
   },
   {
@@ -268,7 +268,7 @@
     "pk": 34,
     "fields": {
       "back": "Pairing",
-      "front": "Establishing oneself or a stimulus as a conditioned reinforcer by associating with existing reinforcers."
+      "front": "Make yourself or a stimulus a reinforcer by association with existing reinforcers."
     }
   },
   {
@@ -276,7 +276,7 @@
     "pk": 35,
     "fields": {
       "back": "Preference Assessment",
-      "front": "Procedures to identify potential reinforcers based on choice and engagement."
+      "front": "Identify potential reinforcers using choice and engagement measures."
     }
   },
   {
@@ -284,7 +284,7 @@
     "pk": 36,
     "fields": {
       "back": "Functional Communication Training (FCT)",
-      "front": "Teaching an appropriate communicative response that serves the same function as problem behavior."
+      "front": "Teach a communicative response that serves the same function as problem behavior."
     }
   },
   {
@@ -292,7 +292,7 @@
     "pk": 37,
     "fields": {
       "back": "Latency",
-      "front": "Elapsed time from the onset of a stimulus to the initiation of a response."
+      "front": "Time from stimulus onset to response initiation."
     }
   },
   {
@@ -300,7 +300,7 @@
     "pk": 38,
     "fields": {
       "back": "Interresponse Time (IRT)",
-      "front": "Elapsed time between two consecutive responses."
+      "front": "Time between two consecutive responses."
     }
   },
   {
@@ -308,7 +308,7 @@
     "pk": 39,
     "fields": {
       "back": "Rate",
-      "front": "Frequency of responses per unit of time."
+      "front": "Frequency of responses per unit time."
     }
   },
   {
@@ -324,7 +324,7 @@
     "pk": 41,
     "fields": {
       "back": "Duration",
-      "front": "Total time a behavior occurs from onset to offset."
+      "front": "Total time a behavior occurs from start to finish."
     }
   },
   {
@@ -364,7 +364,7 @@
     "pk": 46,
     "fields": {
       "back": "Fixed Ratio (FR)",
-      "front": "A schedule in which reinforcement is delivered after a fixed number of responses (e.g., FR5)."
+      "front": "Reinforce after a fixed number of responses (e.g., FR5)."
     }
   },
   {
@@ -372,7 +372,7 @@
     "pk": 47,
     "fields": {
       "back": "Variable Ratio (VR)",
-      "front": "A schedule in which reinforcement is delivered after a variable number of responses around an average (e.g., VR5)."
+      "front": "Reinforce after a variable number of responses around an average (e.g., VR5)."
     }
   },
   {
@@ -380,7 +380,7 @@
     "pk": 48,
     "fields": {
       "back": "Fixed Interval (FI)",
-      "front": "A schedule in which the first response after a fixed time interval is reinforced (e.g., FI 2 min)."
+      "front": "First response after a fixed time interval is reinforced (e.g., FI 2 min)."
     }
   },
   {
@@ -388,7 +388,7 @@
     "pk": 49,
     "fields": {
       "back": "Variable Interval (VI)",
-      "front": "A schedule in which the first response after variable time intervals is reinforced around an average (e.g., VI 2 min)."
+      "front": "First response after variable intervals is reinforced around an average (e.g., VI 2 min)."
     }
   },
   {
@@ -396,7 +396,7 @@
     "pk": 50,
     "fields": {
       "back": "Social Validity",
-      "front": "The extent to which goals, procedures, and outcomes are acceptable, important, and meaningful to stakeholders."
+      "front": "The acceptability and importance of goals, procedures, and outcomes to stakeholders."
     }
   }
 ]
