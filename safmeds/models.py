@@ -14,7 +14,7 @@ class Card(models.Model):
         ]
 
     def __str__(self):
-        return self.front
+        return self.back
 
 
 class Deck(models.Model):
@@ -29,6 +29,8 @@ class Deck(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug and self._state.adding:
             self.slug = slugify(self.name)
+            super(Deck, self).save(*args, **kwargs)
+        else:
             super(Deck, self).save(*args, **kwargs)
 
 

@@ -178,6 +178,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://abarocks.nullandvoid.digital"]
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Internationalization

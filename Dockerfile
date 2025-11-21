@@ -67,4 +67,4 @@ EXPOSE 8000
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD [ "gunicorn", "abarocks.wsgi", "--bind", "0.0.0.0:8000" ]
+CMD [ "gunicorn", "abarocks.wsgi", "--ssl-version", "SSLv3", "--bind", "0.0.0.0:8000" ]
