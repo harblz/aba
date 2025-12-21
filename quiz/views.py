@@ -152,7 +152,11 @@ def _start(request, code, number):
             rel = getattr(q, model)
             answer = None
             if model == "multiplechoicequestion":
-                answer = rel.answer_id
+                answer = None
+                for answer in rel.answers.all():
+                    if answer.is_correct:
+                        answer = answer.id
+                        break
             elif model == "truefalsequestion":
                 answer = rel.answer
             data[index] = {"question": q.id, "correct": answer}
