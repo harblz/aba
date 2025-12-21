@@ -15,14 +15,14 @@ class QuizAdmin(admin.ModelAdmin):
         js = ["https://unpkg.com/hyperscript.org@0.9.13"]
 
 
+class MultipleChoiceAnswerAdmin(admin.StackedInline):
+    model = MultipleChoiceAnswer
+
+
 @admin.register(MultipleChoiceQuestion)
 class MultipleChoiceAdmin(admin.ModelAdmin):
     exclude = ["type"]
-
-
-@admin.register(MultipleChoiceAnswer)
-class MultipleChoiceAnswerAdmin(admin.ModelAdmin):
-    pass
+    inlines = [MultipleChoiceAnswerAdmin]
 
 
 @admin.register(TrueFalseQuestion)
