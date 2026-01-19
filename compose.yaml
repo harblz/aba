@@ -32,8 +32,11 @@ services:
       - postgres_user
       - postgres_port
       - postgres_host
+      - email_user
+      - email_password
     environment:
       SECRETS_DIR: "/run/secrets"
+      NODE_ENV: "production"
     volumes:
       - static:/usr/src/app/static
     ports:
@@ -46,6 +49,7 @@ services:
       timeout: 2s
       retries: 12
       start_period: 10s
+
   nginx:
     image: nginx:stable-alpine
     volumes:
@@ -57,33 +61,6 @@ services:
     ports:
       - "8000:80"
     restart: unless-stopped
-  dev:
-    build:
-      secrets:
-        - debug
-      dockerfile: Dockerfile
-      context: .
-    working_dir: /usr/local/app
-    entrypoint: /usr/src/app/entrypoint.sh
-    command: python manage.py runserver_plus 0.0.0.0:8000
-    secrets:
-      - debug
-      - secret_key
-      - allowed_hosts
-      - internal_ips
-      - postgres_db
-      - postgres_password
-      - postgres_user
-      - postgres_port
-      - postgres_host
-    environment:
-      SECRETS_DIR: "/run/secrets"
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    volumes:
-      - ./:/usr/local/app
 
   devcontainer:
     build:
@@ -125,8 +102,11 @@ secrets:
     file: ${HOME}/.secrets/abarocks/POSTGRES_PORT
   postgres_host:
     file: ${HOME}/.secrets/abarocks/POSTGRES_HOST
+  email_user:
+    file: ${HOME}/.secrets/abarocks/EMAIL_USER
+  email_password:
+    file: ${HOME}/.secrets/abarocks/EMAIL_PASSWORD
 
 volumes:
   postgres_data:
   static:
-  sock:

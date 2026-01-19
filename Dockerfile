@@ -34,9 +34,9 @@ COPY package.json package-lock.json webpack.config.js ./
 COPY src/ ./src/
 COPY staticfiles/ ./staticfiles/
 
-RUN npm install --omit=dev
-RUN npm run pack
-RUN npm run build-bulma
+RUN npm install --omit=dev \
+    && webpack --config webpack.config.js \
+    && sass --load-path=node_modules src/scss/aba-bulma.scss staticfiles/css/aba-bulma.css
 
 FROM base AS run
 

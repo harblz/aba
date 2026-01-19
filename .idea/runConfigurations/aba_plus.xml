@@ -5,16 +5,18 @@
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
-      <env name="PYTHONUNBUFFERED" value="1" />
       <env name="ALLOWED_HOSTS" value="localhost:127.0.0.1" />
       <env name="DEBUG" value="True" />
       <env name="DJANGO_SETTINGS_MODULE" value="abarocks.settings" />
+      <env name="EMAIL_PASSWORD" value="i1TRIZo9LiGRlL5h" />
+      <env name="EMAIL_USER" value="abarocks" />
       <env name="INTERNAL_IPS" value="localhost:127.0.0.1" />
       <env name="POSTGRES_DB" value="aba_rocks" />
       <env name="POSTGRES_HOST" value="localhost" />
       <env name="POSTGRES_PASSWORD" value="aba_rocks_admin" />
       <env name="POSTGRES_PORT" value="5432" />
       <env name="POSTGRES_USER" value="aba_admin" />
+      <env name="PYTHONUNBUFFERED" value="1" />
       <env name="SECRET_KEY" value="kjfasdbno4hw5t80noig" />
     </envs>
     <option name="SDK_HOME" value="" />
@@ -22,6 +24,7 @@
     <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
+    <option name="RUN_TOOL" value="true" />
     <option name="launchJavascriptDebuger" value="false" />
     <option name="port" value="8000" />
     <option name="host" value="" />
