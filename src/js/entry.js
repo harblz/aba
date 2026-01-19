@@ -1,3 +1,5 @@
+import "./timer.js";
+
 import "./htmx.js";
 import "htmx-ext-response-targets/response-targets";
 import "htmx-ext-alpine-morph/alpine-morph";

@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pack": "webpack --config webpack.config.js",
+    "pack": "webpack --config webpack.config.js --mode=development",
     "sass": "sass --load-path=node_modules src/scss/aba-bulma.scss staticfiles/css/aba-bulma.css",
     "build-bulma": "npm run sass --watch"
   },

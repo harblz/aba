@@ -181,6 +181,11 @@ AUTH_PASSWORD_VALIDATORS = [
 CSRF_TRUSTED_ORIGINS = ["https://abarocks.nullandvoid.digital"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "mail.smtp2go.com"
+EMAIL_HOST_USER = load_secret("EMAIL_USER")
+EMAIL_HOST_PASSWORD = load_secret("EMAIL_PASSWORD")
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
