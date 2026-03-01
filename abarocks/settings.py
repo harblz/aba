@@ -50,6 +50,13 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "allauth",
+    "allauth.account",
+    # "allauth.socialaccount",
+    # "allauth.socialaccount.providers.apple",
+    # "allauth.socialaccount.providers.google",
+    # "allauth.socialaccount.providers.microsoft",
+    # "allauth.socialaccount.providers.discord",
     "whitenoise.runserver_nostatic",  # Use Whitenoise w/ `manage.py runserver`
     "django.contrib.staticfiles",
     "django.contrib.humanize",
@@ -75,6 +82,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
     "core.middleware.HtmxRedirectMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 # Debug Toolbar and Extensions only when `DEBUG = False` and not running tests
@@ -130,7 +138,7 @@ LOGOUT_REDIRECT_URL = "/"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "core/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -177,6 +185,11 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+ACCOUNT_FORMS = {
+    "login": "core.forms.LoginForm",
+    "signup": "core.forms.SignupForm",
+}
 
 CSRF_TRUSTED_ORIGINS = ["https://abarocks.nullandvoid.digital"]
 

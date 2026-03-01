@@ -6,7 +6,7 @@
         <section class="modal-card-body">
         <div class="is-mobile" id="deck-list" x-data="{ showButton: false, skipInit: true }">
         {% for card in deck.cards.all %}
-            {% include "safmeds/single_card.html" with card=card %}
+            {% include "safmeds/single_card.html" with card=card flipped='true' %}
         {% endfor %}
         </div>
         </section>

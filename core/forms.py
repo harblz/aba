@@ -1,8 +1,23 @@
-from django.contrib.auth.forms import UserCreationForm
+from allauth.account import forms as allauth
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import SupportMessage
 
 
-class SignupForm(UserCreationForm):
+class SignupForm(allauth.SignupForm):
+
+    def save(self, request):
+        user = super().save(request)
+        return user
+
+
+class LoginForm(allauth.LoginForm):
+
+    def login(self, *args, **kwargs):
+        return super().login(*args, **kwargs)
+
+
+class SupportMessageForm(ModelForm):
     class Meta:
-        model = User
-        fields = ("username", "email", "first_name", "last_name", "password1", "password2")
+        model = SupportMessage
+        fields = ("type", "message")

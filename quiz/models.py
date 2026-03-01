@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.models import Session
+from django.utils.html import strip_tags
 
 from learn import models as learn
 from django_ckeditor_5.fields import CKEditor5Field
@@ -52,7 +53,7 @@ class BaseQuestion(models.Model):
     type = models.ForeignKey(ContentType, editable=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.text
+        return strip_tags(self.text)
 
     def save(self, *args, **kwargs):
         if self._state.adding:
@@ -82,12 +83,15 @@ class MultipleChoiceAnswer(models.Model):
     question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
     text = CKEditor5Field("Answer Text")
     is_correct = models.BooleanField("Is Correct?", default=False)
+
     class Meta:
         default_related_name = "answers"
         verbose_name = "Multiple Choice Answer"
         db_table_comment = "Table of multiple choice answers"
         constraints = [
-            models.UniqueConstraint(fields=["question"], condition=Q(is_correct=True), name="unique_correct")
+            models.UniqueConstraint(
+                fields=["question"], condition=Q(is_correct=True), name="unique_correct"
+            )
         ]
 
     def __str__(self):

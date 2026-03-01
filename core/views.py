@@ -2,19 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 from django.conf import settings
 
 from core.forms import SignupForm
 from core.models import User, Profile
 from quiz.models import Result as qresult
 from safmeds.models import Result as sresult
-
-
-class SignUpView(CreateView):
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
-    template_name = "registration/signup.html"
+from .forms import SupportMessageForm
 
 
 @login_required
@@ -40,3 +35,7 @@ def user_profile(request):
         "safmeds_attempts": safmeds_results,
     }
     return render(request, "profile.html", context)
+
+
+class ContactUs(FormView):
+    form_class = SupportMessageForm

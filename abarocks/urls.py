@@ -9,6 +9,7 @@ import core
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
+        path("accounts/", include("allauth.urls")),
         path("about/", views.about, name="about"),
         path("blog/", include("blog.urls")),
         path("quizzes/", include("quiz.urls")),

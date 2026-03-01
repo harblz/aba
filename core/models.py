@@ -71,3 +71,14 @@ class View(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     ip = models.GenericIPAddressField(null=True, blank=True)
+
+
+class SupportMessage(models.Model):
+    MESSAGE_TYPES = {
+        "TECH": "Tech Support",
+        "FEAT": "Feature Request",
+    }
+    type = models.CharField(max_length=5)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    message = models.TextField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
