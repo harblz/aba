@@ -1,0 +1,31 @@
+{% extends "registration/account_info.html" %}
+{% block form %}
+    <h2 class="title">Update Account Info</h2>
+    <form action="{% url 'edit_profile' %}" method="post" class="form" id="login-form">
+        {{ form.errors }}
+        {% csrf_token %}
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            <div class="control">{{ form.username }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+            <div class="control">{{ form.first_name }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+            <div class="control">{{ form.last_name }}</div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+                <a class="button" href="{% url 'user_profile' %}">Cancel</a>
+            </p>
+            <p class="control">
+                <input type="submit" form="login-form" class="button" value="Submit" hx-push-url="true">
+            </p>
+        </div>
+    </form>
+{% endblock form %}

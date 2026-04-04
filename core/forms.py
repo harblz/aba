@@ -17,6 +17,12 @@ class LoginForm(allauth.LoginForm):
         return super().login(*args, **kwargs)
 
 
+class UserUpdateForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name")
+
+
 class SupportMessageForm(ModelForm):
     class Meta:
         model = SupportMessage

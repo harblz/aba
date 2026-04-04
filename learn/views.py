@@ -7,6 +7,7 @@ from django.views.generic import ListView
 from .models import Course, Lesson, Task, ContentArea
 from quiz.models import Quiz
 from core.decorators import htmx_required
+from core.models import Page
 
 
 def lessons(request, code):
@@ -55,7 +56,6 @@ class CourseIndex(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["page"] = Pages.objects.get("Courses")
         return context
 
 

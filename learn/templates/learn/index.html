@@ -19,9 +19,11 @@
                         <p class="title is-4">{{ course.name }}</p>
                         <p class="subtitle is4">{{ course.subtitle }}</p>
                         <p>{{ course.description|truncatechars:250 }}</p>
+                        <!--
                         <a href="{% url 'learn:course-overview' code=course.code %}" class="button is-primary">Course
-                            Overview</a>
-                        <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="button is-secondary">TCO</a>
+                            Overview</a>-->
+                        <a href="" class="button is-primary is-static">Courses Coming Soon!</a>
+                        <a href="{% url 'learn:tasklist-landing-page' code=course.code %}" class="button is-secondary">Tasklist</a>
                         <a href="{% url 'quiz:quizzes-by-course' code=course.code %}" class="button is-info">Quizzes</a>
                     </div>
                 </div>

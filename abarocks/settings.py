@@ -50,8 +50,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # allauth apps
     "allauth",
     "allauth.account",
+    "allauth.mfa",
     # "allauth.socialaccount",
     # "allauth.socialaccount.providers.apple",
     # "allauth.socialaccount.providers.google",
@@ -186,6 +188,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# allauth settings
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*"]
+ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
+MFA_ADAPTER = "core.adapters.MFAAdapter"
+MFA_SUPPORTED_TYPES = ["totp", "webauthn", "recovery_codes"]
+MFA_PASSKEY_LOGIN_ENABLED = True
+MFA_PASSKEY_SIGNUP_ENABLED = True
 ACCOUNT_FORMS = {
     "login": "core.forms.LoginForm",
     "signup": "core.forms.SignupForm",

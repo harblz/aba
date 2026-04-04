@@ -11,8 +11,8 @@
             <li :class="active === 'safmeds' ? 'is-active' : ''">
                 <a @click="active = 'safmeds'">SAFMEDS</a>
             </li>
-            <li :class="active === 'prefs' ? 'is-active' : ''">
-                <a @click="active = 'prefs'">Preferences</a>
+            <li :class="active === 'account' ? 'is-active' : ''">
+                <a @click="active = 'account'">Account</a>
             </li>
         </ul>
     </div>
@@ -64,8 +64,26 @@
             </tbody>
         </table>
     </div>
-    <div class="box" id="preferences-box" x-cloak x-show="active === 'prefs'">
-        <h2 class="title">Nothing here yet!</h2>
+    <div class="box has-text-centered" id="account-box" x-cloak x-show="active === 'account'">
+        <header class="title">Account Management</header>
+        <h2 class="subtitle">Account Info</h2>
+        <p><strong>Username:</strong> {{ request.user.username }}</p>
+        <p><strong>First Name:</strong> {{ request.user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ request.user.last_name }}</p>
+        <div class="control">
+            <a class="button" href="{% url 'edit_profile' %}">Update Account Info</a>
+        </div>
+        <br>
+        <h2 class="subtitle">Preferences</h2>
+        <div class="control">
+            <a class="button" href="{% url 'account_email' %}">Manage Emails</a>
+        </div>
+        <div class="control">
+            <a class="button" href="{% url 'account_change_password' %}">Change Password</a>
+        </div>
+        <div class="control">
+            <a class="button" href="{% url 'mfa_index' %}">Multifactor Authentication</a>
+        </div>
     </div>
 </section>
 {% endblock content %}

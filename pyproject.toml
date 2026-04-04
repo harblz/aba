@@ -17,7 +17,7 @@ dependencies = [
     "fontawesomefree~=6.6.0",
     "django-ckeditor-5~=0.2.13",
     "pip~=26.0.1",
-    "django-allauth[socialaccount]~=65.0",
+    "django-allauth[socialaccount,mfa]~=65.0",
 ]
 
 [dependency-groups]
