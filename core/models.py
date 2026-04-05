@@ -73,7 +73,7 @@ class View(models.Model):
     ip = models.GenericIPAddressField(null=True, blank=True)
 
 
-class SupportMessage(models.Model):
+class SupportTicket(models.Model):
     MESSAGE_TYPES = {
         "TECH": "Tech Support",
         "FEAT": "Feature Request",
@@ -82,3 +82,17 @@ class SupportMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     message = models.TextField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
+    closed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.message
+
+
+class SupportResponse(models.Model):
+    ticket = models.ForeignKey(SupportTicket, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(max_length=255)
+
+    def __str__(self):
+        return self.message

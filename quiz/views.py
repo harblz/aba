@@ -1,17 +1,16 @@
-from typing import Type
-import datetime
-
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
 import random
-from django_htmx.http import retarget, trigger_client_event, reswap
+from typing import Type
+
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.template.response import TemplateResponse
 from django.utils.safestring import mark_safe
+from django_htmx.http import retarget, trigger_client_event, reswap
 
-from .models import *
-from .forms import TakeQuizForm
-from learn.models import Course
 from core.decorators import htmx_required
+from learn.models import Course
+from .forms import TakeQuizForm
+from .models import *
 
 
 def quiz_index(request):

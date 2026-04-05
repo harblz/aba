@@ -1,7 +1,7 @@
 from allauth.account import forms as allauth
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import SupportMessage
+from .models import SupportTicket
 
 
 class SignupForm(allauth.SignupForm):
@@ -23,7 +23,7 @@ class UserUpdateForm(ModelForm):
         fields = ("username", "first_name", "last_name")
 
 
-class SupportMessageForm(ModelForm):
+class SupportTicketForm(ModelForm):
     class Meta:
-        model = SupportMessage
+        model = SupportTicket
         fields = ("type", "message")

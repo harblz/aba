@@ -1,18 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
-from django.conf import settings
-from django.dispatch import receiver
-
 from allauth.account.signals import email_confirmed
+from django.contrib.auth.decorators import login_required
+from django.dispatch import receiver
+from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
-from core.forms import SignupForm
-from core.models import User, Profile
+from core.models import Profile, SupportTicket
 from quiz.models import Result as QResult
 from safmeds.models import Result as SResult
-from .forms import SupportMessageForm, UserUpdateForm
+from .forms import SupportTicketForm, UserUpdateForm
 
 
 @receiver(email_confirmed)
@@ -62,4 +57,13 @@ def edit_profile(request):
 
 
 class ContactUs(FormView):
-    form_class = SupportMessageForm
+    form_class = SupportTicketForm
+    template_name = "contact_us.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+def support_ticket(request, id):
+    ticket = SupportTicket.objects.select_related().get(pk=id)

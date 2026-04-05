@@ -1,7 +1,8 @@
-{% extends "registration/account_info.html" %}
-{% block form %}
+{% extends "base.html" %}
+{% block content %}
+<div class="section has-text-centered" id="info-section">
     <h2 class="title">Update Account Info</h2>
-    <form action="{% url 'edit_profile' %}" method="post" class="form" id="login-form">
+    <form action="{% url 'edit_profile' %}" method="post" class="form" id="info-form">
         {{ form.errors }}
         {% csrf_token %}
         <div class="field">
@@ -24,8 +25,9 @@
                 <a class="button" href="{% url 'user_profile' %}">Cancel</a>
             </p>
             <p class="control">
-                <input type="submit" form="login-form" class="button" value="Submit" hx-push-url="true">
+                <input type="submit" form="info-form" class="button" value="Submit" hx-push-url="true">
             </p>
         </div>
     </form>
-{% endblock form %}
+</div>
+{% endblock content %}

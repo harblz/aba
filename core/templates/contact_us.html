@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock title %}
+{% block content %}
+<div class="box has-text-centered" id="contact-section">
+    <h2 class="subtitle">Contact Us</h2>
+    <form action="{% url 'contact_us' %}" method="post" class="form" id="contact-form">
+        {{ form.errors }}
+        {% csrf_token %}
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.type.id_for_label }}">{{ form.type.label }}</label>
+            <div class="control">{{ form.type }}</div>
+        </div>
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+            <div class="control">{{ form.message }}</div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+                <a class="button" href="{% url 'home' %}" @click="$dispatch('reset')">Cancel</a>
+            </p>
+            <p class="control">
+                <input type="submit" form="contact-form" class="button" value="Submit" hx-push-url="true">
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -19,7 +21,7 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-    def get_task_list(self) -> type(dict):
+    def get_task_list(self) -> dict[Any, Any] | None:
         """Returns the entire BACB Task List for RBTs, BCBAs, or BCaBAs"""
         if self.code == "RBT" or self.code == "BCBA" or self.code == "BCaBA":
             tasks = self.tasks.all().order_by("area", "task")
@@ -33,7 +35,7 @@ class Course(models.Model):
                     task_list[area] = {task_name: task.task_desc}
             return task_list
         else:
-            pass
+            return
 
 
 class ContentArea(models.Model):
@@ -90,7 +92,7 @@ class Task(models.Model):
         return f"{self.license.code} Task List: Item {self.area.letter}-{self.task}"
 
     def natural_key(self):
-        return (self.license, self.area, self.task)
+        return self.license, self.area, self.task
 
     def save(self, *args, **kwargs):
         if not self.slug:

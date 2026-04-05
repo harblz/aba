@@ -1,8 +1,8 @@
-from django.http import HttpResponse
+import json
+
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django_htmx.http import trigger_client_event
-import json
 
 from .models import Card, Deck, Result
 

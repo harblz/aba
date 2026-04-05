@@ -1,5 +1,4 @@
 import os
-from django.conf import settings
 from pathlib import Path
 
 from qrcode import QRCode

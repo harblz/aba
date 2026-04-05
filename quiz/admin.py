@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-import quiz.forms
-from .models import *
 from .forms import EditQuizForm, EditTrueFalseForm
+from .models import *
 
 
 # Register your models here.

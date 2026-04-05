@@ -6,7 +6,8 @@
     {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
     {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
     {% if attrs.value %}value="{{ attrs.value }}"{% endif %}
-    {% if attrs.type %}type="{{ attrs.type }}"{% endif %} class="button">
+    {% if attrs.type %}type="{{ attrs.type }}"{% endif %}
+    {% if attrs.click %}@click="{{ attrs.click }}"{% endif %} class="button">
 {% slot %}
 {% endslot %}
 </{% if attrs.href %}a{% else %}button{% endif %}>

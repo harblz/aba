@@ -1,5 +1,5 @@
-from django.urls import resolve, reverse
 from django.conf import settings
+from django.urls import resolve
 
 import core
 

@@ -1,8 +1,7 @@
 from django.contrib import admin
-import pprint
-from django.contrib.sessions.models import Session
-from .models import *
 from django.contrib.contenttypes.models import ContentType
+
+from .models import *
 
 
 @admin.register(Profile)
@@ -48,6 +47,6 @@ class ContentTypeAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SupportMessage)
+@admin.register(SupportTicket)
 class SupportMessageAdmin(admin.ModelAdmin):
     pass

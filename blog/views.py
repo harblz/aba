@@ -1,10 +1,7 @@
-from django.views.generic import ListView
-from django.shortcuts import render, get_object_or_404, Http404
 from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404
 from django.template.response import TemplateResponse
 
-from .models import Post
-from core.decorators import htmx_required
 from .models import Post
 
 

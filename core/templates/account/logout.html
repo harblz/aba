@@ -1,9 +1,9 @@
 {% extends "account/base_manage.html" %}
 {% load allauth i18n %}
-{% block head_title %}
+{% block title %}
     {% trans "Sign Out" %}
-{% endblock head_title %}
-{% block content %}
+{% endblock title %}
+{% block form %}
     {% element h1 %}
         {% trans "Sign Out" %}
     {% endelement %}
@@ -22,4 +22,7 @@
             {% endelement %}
         {% endslot %}
     {% endelement %}
-{% endblock content %}
+    {% element button click="$dispatch('reset')" %}
+        {% trans 'Cancel' %}
+    {% endelement %}
+{% endblock form %}
