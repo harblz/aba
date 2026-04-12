@@ -23,7 +23,7 @@ RUN --mount=type=secret,id=debug \
     if [ "$(cat /run/secrets/debug)" = "True" ] ; then \
       uv sync --locked --no-install-project; \
     else \
-      uv sync --no-dev --locked --no-install-project; \
+      uv sync --no-dev --group prod --locked --no-install-project; \
     fi
 
 FROM node:23 AS npm-build
@@ -55,7 +55,7 @@ RUN --mount=type=secret,id=secret_key \
     --mount=type=secret,id=internal_ips \
     --mount=type=secret,id=debug \
     chown abarocks:abarocks /usr/src/app \
-    && apk add --no-cache libpq py3-gunicorn \
+    && apk add --no-cache libpq py3-gunicorn
 
 ENV DJANGO_SETTINGS_MODULE=abarocks.settings \
     PYTHONPATH=${VIRTUAL_ENV}/lib/python${PYTHON_VERSION}/site-packages:/usr/src/app/abarocks \
