@@ -35,7 +35,7 @@ COPY src/ ./src/
 COPY staticfiles/ ./staticfiles/
 
 RUN npm install --omit=dev \
-    && ./node_modules/.bin/webpack --config webpack.config.js \
+    && ./node_modules/.bin/webpack --mode development \
     && ./node_modules/.bin/sass --load-path=node_modules src/scss/aba-bulma.scss staticfiles/css/aba-bulma.css
 
 FROM base AS run
