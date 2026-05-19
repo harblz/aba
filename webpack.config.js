@@ -1,9 +1,7 @@
 const path = require("path");
-delete require.cache[require.resolve("path")];
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "production",
   entry: path.resolve(__dirname,"src/js/entry.js"),
   target: "web",
   output: {
@@ -29,3 +27,4 @@ module.exports = {
     }
   }
 };
+

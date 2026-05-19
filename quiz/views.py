@@ -43,18 +43,21 @@ def _get_questions(slug) -> list | Type[Exception]:
     quiz = Quiz.objects.select_related().get(slug=slug)
     questions = []
     areas = []
-    if quiz.areas.all().exists():
-        areas = quiz.areas.all().values()
-    elif not quiz.areas.all():
-        areas = quiz.course.content_areas.all().values()
-    for area in areas:
-        q = BaseQuestion.objects.filter(category=area["slug"]).values("id")
-        weight = area["weight"]
-        options = []
-        for question in q:
-            options.append(question["id"])
-        questions += random.sample(options, weight)
-    return questions
+    try:
+        if quiz.areas.all().exists():
+            areas = quiz.areas.all().values()
+        elif not quiz.areas.all():
+            areas = quiz.course.content_areas.all().values()
+        for area in areas:
+            q = BaseQuestion.objects.filter(category=area["slug"]).values("id")
+            weight = area["weight"]
+            options = []
+            for question in q:
+                options.append(question["id"])
+            questions += random.sample(options, weight)
+        return questions
+    except Exception as e:
+        return e
 
 
 @htmx_required
@@ -134,15 +137,15 @@ def _next_question(request, **kwargs) -> HttpResponse:
 
 @htmx_required
 def _start(request, code, number):
-    quiz = Quiz.objects.get(course=code, number=number)
+    quiz = quiz = get_object_or_404(Quiz, course=code, number=number)
     if (response := _check_progress(request, code, number)) is None or bool(
         request.GET.get("confirm")
-    ) == True:
+    ):
         timed = False
         time = None
         questions = _get_questions(quiz.slug)
         random.shuffle(questions)
-        tuple(questions)
+        questions = tuple(questions)
         data = {}
         count = 0
         for index, question in enumerate(questions):
@@ -213,7 +216,6 @@ def _start(request, code, number):
         return trigger_client_event(response, "show-modal", after="swap")
 
 
-@htmx_required
 def _check_progress(request, code, number):
     slug = code + "-" + str(number)
     progress = QuizProgress.objects.filter(
