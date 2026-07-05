@@ -36,7 +36,7 @@ INTERNAL_IPS = load_secret("INTERNAL_IPS").split(":")
 MANAGERS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
 ADMINS = [("Alex", "harblz@gmail.com"), ("Kyle", "kyle@nullandvoid.digital")]
 
-SERVER_EMAIL = "noreply@behaviorist.tech"  # TODO: Update email address
+SERVER_EMAIL = f"noreply@{ALLOWED_HOSTS[0]}"  # TODO: Update email address
 
 # Google Analytics
 GOOGLE_ANALYTICS_PROPERTY_ID = "UA-98470698-1"
@@ -203,6 +203,7 @@ ACCOUNT_FORMS = {
 
 CSRF_TRUSTED_ORIGINS = ["https://abarocks.nullandvoid.digital"]
 
+DEFAULT_FROM_EMAIL = f"noreply@{ALLOWED_HOSTS[0]}"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "mail.smtp2go.com"
 EMAIL_HOST_USER = load_secret("EMAIL_USER")
@@ -227,6 +228,7 @@ STATICFILES_DIRS = [
 ]
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
+# Media files (User uploads)
 MEDIA_ROOT = BASE_DIR / "media/"
 MEDIA_URL = "/media/"
 

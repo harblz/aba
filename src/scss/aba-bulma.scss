@@ -90,7 +90,6 @@ $white: #fff;
   align-items: center;
   justify-content: space-evenly;
 
-
   @include mixins.desktop {
     flex-direction: row;
   }
@@ -297,14 +296,8 @@ div[id$="-back"] {
   }
 }
 
-.pagination > .pagination-list {
-
-  .is-current {
-    background-color: dv.$warning;
-  }
-  .is-completed {
-    background-color: dv.$success;
-  }
+progress {
+  width: 100%;
 }
 
 #tables {

@@ -24,14 +24,6 @@
             </div>
         </div>
     </div>
-    <div class="pagination is-centered">
-        <ul class="pagination-list">
-            <template x-for="i in $store.cardData.total" :key="i">
-                <li class="pagination-link" x-data="{ cardIndex: i }"
-                    :class="{'is-current': i == $store.cardData.current, 'is-completed': i < $store.cardData.current }"
-                    x-text="cardIndex"></li>
-            </template>
-        </ul>
-    </div>
+    {% include "components/_progress-bar.html" %}
 </section>
 {% endblock content %}

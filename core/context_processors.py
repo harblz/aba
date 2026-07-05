@@ -32,7 +32,7 @@ def nav_links(request):
 
     roots = NavLink.objects.filter(root=True).order_by("root_pos")
     noroots = NavLink.objects.filter(root=False).order_by(
-        "page__app", "page__view", "page__params"
+        "page__app", "page__view"
     )
     nav = {}
     for root in roots:

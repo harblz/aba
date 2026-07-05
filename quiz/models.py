@@ -115,7 +115,7 @@ class QuizProgress(models.Model):
 
 
 class Result(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.SlugField()
     datetime = models.DateTimeField(auto_now_add=True)
     elapsed = models.DurationField(null=True, blank=True)
