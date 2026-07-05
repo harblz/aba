@@ -1,4 +1,4 @@
-waswdsdsawaawada# syntax=docker/dockerfile:1.7-labs
+# syntax=docker/dockerfile:1.7-labs
 FROM python:3.12-alpine3.20 AS base
 LABEL authors="nullandvoid"
 
