@@ -8,7 +8,7 @@ from django.conf import settings
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    data = models.JSONField(default=dict)
+    data = models.JSONField(default=dict, null=True, blank=True)
 
     class Meta:
         db_table_comment = (
