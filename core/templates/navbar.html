@@ -59,12 +59,10 @@
                     >Logout</a>
                 </div>
             {% else %}
-                <div class="navbar-item is-size-4 is-tab" hx-boost="true" hx-target="#modal-wrapper"
+                <div class="navbar-item is-size-4 is-tab" hx-boost="false" hx-target="#modal-wrapper"
                      hx-select="#account-modal" hx-swap="beforeend" hx-push-url="false"
                 >
-                    <a class="has-text-text-bold has-text-weight-bold" href="{% url 'account_login' %}"
-                       @click="$dispatch('show-modal')"
-                    >Log In</a>
+                    <a class="has-text-text-bold has-text-weight-bold" href="{% url 'account_login' %}">Log In</a>
                 </div>
             {% endif %}
             </div>
