@@ -29,6 +29,7 @@ def user_profile(request):
     data = profile.data
     quiz_results = QResult.objects.filter(user=request.user.id)
     safmeds_results = SResult.objects.filter(user=request.user.id)
+    tickets = SupportTicket.objects.filter(user=request.user.id)
     title = f"Welcome back, {name}!"
     subtitle = ""
     blurb = ""
@@ -39,6 +40,7 @@ def user_profile(request):
         "data": data,
         "quizzes": quiz_results,
         "safmeds_attempts": safmeds_results,
+        "tickets": tickets,
     }
     return render(request, "profile.html", context)
 

@@ -14,6 +14,9 @@
             <li :class="active === 'account' ? 'is-active' : ''">
                 <a @click="active = 'account'">Account</a>
             </li>
+            <li :class="active === 'tickets' ? 'is-active' : ''">
+                <a @click="active = 'tickets'">Support Tickets</a>
+            </li>
         </ul>
     </div>
     <div class="box has-text-centered" id="quiz-box" x-show="active === 'quiz'">
@@ -84,6 +87,29 @@
         <div class="control">
             <a class="button" href="{% url 'mfa_index' %}">Multifactor Authentication</a>
         </div>
+    </div>
+    <div class="box has-text-centered" id="tickets-box" x-cloak x-show="active === 'tickets'">
+        <header class="title">Support</header>
+        <h2 class="subtitle">Support Tickets</h2>
+        <table class="table" id="ticket-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <th>{{ ticket.id }}</th>
+                <td>{{ ticket.type }}</td>
+                <td>{{ ticket.date }}</td>
+                <td>{% if ticket.closed %}Closed{% else %}Open{% endif %}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+
     </div>
 </section>
 {% endblock content %}
