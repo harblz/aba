@@ -4,6 +4,10 @@
 {% block content %}
 {% include "components/_hero.html" %}
 <section class="section">
+{{ body }}
+</section>
+<section class="section">
+    <h3 class="subtitle">Blog Posts</h3>
     {% include "blog/posts.html" %}
     {% if page_obj.has_next %}
         <span hx-get="{% url 'blog:blog-posts' %}?page={{ page_obj.next_page_number }}"

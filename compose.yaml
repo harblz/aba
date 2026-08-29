@@ -22,6 +22,8 @@ services:
         - debug
       context: .
       dockerfile: Dockerfile
+      cache_from:
+        - myapp:latest
     secrets:
       - debug
       - secret_key
@@ -37,8 +39,6 @@ services:
     environment:
       SECRETS_DIR: "/run/secrets"
       NODE_ENV: "production"
-    volumes:
-      - static:/usr/src/app/static
     ports:
       - "8000:8000"
     depends_on:
@@ -49,40 +49,6 @@ services:
       timeout: 2s
       retries: 12
       start_period: 10s
-
-  nginx:
-    image: nginx:stable-alpine
-    volumes:
-      - static:/var/www/html/static
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      web:
-        condition: service_healthy
-    ports:
-      - "8000:80"
-    restart: unless-stopped
-
-  devcontainer:
-    build:
-      secrets:
-        - debug
-      dockerfile: .devcontainer/Dockerfile
-    environment:
-      SECRETS_DIR: "/run/secrets"
-    secrets:
-      - debug
-      - secret_key
-      - allowed_hosts
-      - internal_ips
-      - postgres_db
-      - postgres_password
-      - postgres_user
-      - postgres_port
-      - postgres_host
-    command: sleep infinity
-    volumes:
-      - ./:/workspace/abarocks
-
 secrets:
   debug:
     file: ${HOME}/.secrets/abarocks/DEBUG
@@ -109,4 +75,3 @@ secrets:
 
 volumes:
   postgres_data:
-  static:

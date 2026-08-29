@@ -2,11 +2,14 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: path.resolve(__dirname,"src/js/entry.js"),
+  entry: {
+    "entry" : path.resolve(__dirname,"src/js/entry.js"),
+    "chart" : path.resolve(__dirname,"src/js/chart.js"),
+  },
   target: "web",
   output: {
     path: path.resolve(__dirname, "staticfiles/js"),
-    filename: "aba.js",
+    filename: "[name].js",
   },
   plugins: [
     new webpack.ProvidePlugin({

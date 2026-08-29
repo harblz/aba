@@ -23,12 +23,10 @@
         </div>
         <div class="divider"></div>
         <div class="navbar-end">
-            <div class="navbar-item is-size-4 is-tab" hx-boost="true"
+            <div class="navbar-item is-size-4 is-tab" hx-boost="false"
                  hx-target="#modal-wrapper" hx-select="#contact-section"
                  hx-swap="beforeend" hx-push-url="false">
-                <a class="icon has-text-text-bold is-large" href="{% url 'contact_us' %}"
-                   @click="$dispatch('show-modal')"
-                >
+                <a class="icon has-text-text-bold is-large" href="{% url 'contact_us' %}">
                     <i class="fas fa-envelope is-large"></i>
                 </a>
             </div>
@@ -54,7 +52,7 @@
                 <div class="navbar-dropdown" x-show.important="show">
                     <a class="navbar-item" href="{% url 'user_profile' %}">Profile</a>
                     <a class="navbar-item" href="{% url 'account_logout' %}"
-                       @click="$dispatch('show-modal')"hx-boost="true" hx-target="#modal-wrapper"
+                       hx-boost="false" hx-target="#modal-wrapper"
                        hx-select="#account-modal" hx-swap="beforeend" hx-push-url="false"
                     >Logout</a>
                 </div>

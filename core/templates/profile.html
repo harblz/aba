@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{{ request.user.username }}'s Profile{% endblock title %}
+{% partialdef ticket %}
+    {% for message in messages %}
+        <div class="box message">
+            <p class="is-centered">
+                {{ message.user }}
+            </p>
+            <p>{{ message.message }}</p>
+        </div>
+    {% endfor %}
+{% endpartialdef %}
 {% block content %}
 {% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
 <section class="section" x-data="{ active: 'quiz' }">
@@ -91,25 +101,20 @@
     <div class="box has-text-centered" id="tickets-box" x-cloak x-show="active === 'tickets'">
         <header class="title">Support</header>
         <h2 class="subtitle">Support Tickets</h2>
-        <table class="table" id="ticket-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="columns">
+            <div class="column is-one-third-desktop" id="tickets-column">
                 {% for ticket in tickets %}
-                <th>{{ ticket.id }}</th>
-                <td>{{ ticket.type }}</td>
-                <td>{{ ticket.date }}</td>
-                <td>{% if ticket.closed %}Closed{% else %}Open{% endif %}</td>
+                    <div class="box has-text-centered is-clickable" hx-get="" hx-trigger="click" hx-target="#messages-column">
+                        <h3 class="">{{ ticket.id }} | {{ ticket.date }}</h3>
+                        <p>{{ ticket.message|truncatewords:5 }}</p>
+                    </div>
                 {% endfor %}
-            </tbody>
-        </table>
-
+            </div>
+            <div class="column" id="messages-column">
+                {% for message in messages %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </section>
 {% endblock content %}

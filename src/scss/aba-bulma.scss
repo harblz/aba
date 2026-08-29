@@ -34,6 +34,10 @@ $white: #fff;
 [x-cloak] { display: none !important; }
 
 // Custom SCSS
+.is-clickable {
+  cursor: pointer;
+}
+
 .counter {
   @extend button;
   border: 0;

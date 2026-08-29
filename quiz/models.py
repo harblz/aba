@@ -51,16 +51,18 @@ class BaseQuestion(models.Model):
     hint = CKEditor5Field("Question Hint", blank=True, null=True)
     disabled = models.BooleanField(default=False, null=True, blank=True)
     type = models.ForeignKey(ContentType, editable=False, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    attempts = models.IntegerField(default=0)
 
     def __str__(self):
         return strip_tags(self.text)
 
     def save(self, *args, **kwargs):
         if self._state.adding:
-            self.type = self._get_type()
+            self.type = self.get_type()
         super(BaseQuestion, self).save(*args, **kwargs)
 
-    def _get_type(self):
+    def get_type(self):
         return ContentType.objects.get_for_model(self)
 
 
@@ -73,6 +75,7 @@ class MultipleChoiceQuestion(BaseQuestion):
 
 class TrueFalseQuestion(BaseQuestion):
     answer = models.BooleanField()
+    accuracy = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = "True/False Question"
@@ -83,6 +86,7 @@ class MultipleChoiceAnswer(models.Model):
     question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
     text = CKEditor5Field("Answer Text")
     is_correct = models.BooleanField("Is Correct?", default=False)
+    picked = models.IntegerField(default=0,verbose_name="Number of times picked")
 
     class Meta:
         default_related_name = "answers"
@@ -93,6 +97,7 @@ class MultipleChoiceAnswer(models.Model):
                 fields=["question"], condition=Q(is_correct=True), name="unique_correct"
             )
         ]
+        ordering = ["-is_correct", "picked"]
 
     def __str__(self):
         return self.text

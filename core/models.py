@@ -79,7 +79,7 @@ class SupportTicket(models.Model):
         "TECH": "Tech Support",
         "FEAT": "Feature Request",
     }
-    type = models.CharField(max_length=5)
+    type = models.CharField(max_length=5, choices=MESSAGE_TYPES.items(), default="TECH")
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     message = models.TextField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)

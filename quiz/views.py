@@ -1,6 +1,7 @@
 import random
 from typing import Type
 
+from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.response import TemplateResponse
@@ -236,14 +237,20 @@ def _check_answer(request):
         QuizProgress, session=request.session.session_key, quiz=slug
     )
     index = progress.index
-    question = progress.key[str(index)]
+    qid = progress.key[str(index)]
+    question = BaseQuestion.objects.get(pk=qid["question"])
+    question.attempts += 1
+    if (qtype := question.get_type()) == "multiplechoicequestion":
+        MultipleChoiceAnswer.objects.filter(id=qid["user_choice"]).update(picked=F("picked") + 1)
+    elif qtype == "truefalsequestion":
+        TrueFalseQuestion.objects.filter(id=qid["question"]).update(accuracy=F("accuracy") + 1)
     # Needs logic to highlight the selected answer in green client side
-    if str(request.POST.get("answer")) == str(question["correct"]):
+    if str(request.POST.get("answer")) == str(qid["correct"]):
         _save_progress(request)
         response = _next_question(request)
         return response
     else:
-        q_obj = BaseQuestion.objects.select_related().get(id=question["question"])
+        q_obj = BaseQuestion.objects.select_related().get(id=qid["question"])
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)
@@ -282,7 +289,7 @@ def _grade_quiz(request):
             # elapsed=<To be replaced with time it took to complete quiz
             total=total_q,
             correct=n_correct,
-            key=progress.key,
+            key=quiz,
         )
     response = TemplateResponse(request, "quiz/completed.html", context)
     return retarget(response, "#page-wrapper")

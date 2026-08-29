@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="aba compose" type="docker-deploy" factoryName="docker-compose.yml" server-name="UTM">
+  <configuration default="false" name="aba compose" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
@@ -13,7 +13,6 @@
           <list>
             <option value="db" />
             <option value="web" />
-            <option value="nginx" />
           </list>
         </option>
         <option name="sourceFilePath" value="compose.yaml" />
