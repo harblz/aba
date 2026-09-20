@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
+from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -87,6 +88,9 @@ class SupportTicket(models.Model):
 
     def __str__(self):
         return self.message
+
+    def get_absolute_url(self):
+        return reverse("contact_us", kwargs={"pk": self.pk})
 
 
 class SupportResponse(models.Model):

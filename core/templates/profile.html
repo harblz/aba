@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %}{{ request.user.username }}'s Profile{% endblock title %}
 {% partialdef ticket %}
+    <div class="box">
     {% for message in messages %}
         <div class="box message">
             <p class="is-centered">
-                {{ message.user }}
+                <strong>{{ message.0 }}</strong>
             </p>
-            <p>{{ message.message }}</p>
+            <p>{{ message.1 }}</p>
         </div>
     {% endfor %}
+    </div>
 {% endpartialdef %}
 {% block content %}
 {% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
@@ -104,13 +106,18 @@
         <div class="columns">
             <div class="column is-one-third-desktop" id="tickets-column">
                 {% for ticket in tickets %}
-                    <div class="box has-text-centered is-clickable" hx-get="" hx-trigger="click" hx-target="#messages-column">
+                    <div class="box has-text-centered is-clickable"
+                         hx-get="{% url 'view_ticket' ticket.id  %}"
+                         hx-swap="innerhtml"
+                         hx-trigger="click"
+                         hx-target="#messages-column"
+                    >
                         <h3 class="">{{ ticket.id }} | {{ ticket.date }}</h3>
                         <p>{{ ticket.message|truncatewords:5 }}</p>
                     </div>
                 {% endfor %}
             </div>
-            <div class="column" id="messages-column">
+            <div class="column is-two-thirds-desktop" id="messages-column">
                 {% for message in messages %}
                 {% endfor %}
             </div>

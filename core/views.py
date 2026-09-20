@@ -62,10 +62,11 @@ def edit_profile(request):
 class ContactUs(FormView):
     form_class = SupportTicketForm
     template_name = "contact_us.html"
-    success_url = "/thanks"
+    success_url = "/thanks/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.save()
         return super().form_valid(form)
 
 def thanks(request):
@@ -73,8 +74,8 @@ def thanks(request):
 
 def view_support_ticket(request, id):
     ticket = SupportTicket.objects.select_related().get(pk=id)
-    messages = ([ticket.user, ticket.message])
-    for index, message in enumerate(ticket.supportresponse_set.all(), start=1):
+    messages = [[ticket.user, ticket.message]]
+    for message in ticket.supportresponse_set.all():
         messages += (message.user, message.message)
     return render(request, "profile.html#ticket", {"messages": messages})
 

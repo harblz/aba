@@ -3,7 +3,6 @@
 {% block content %}
 {% include "components/_hero.html" %}
 <div class="box has-text-centered" id="contact-section">
-    <h2 class="subtitle">Contact Us</h2>
     <form action="{% url 'contact_us' %}" method="post" class="form" id="contact-form">
         {{ form.errors }}
         {% csrf_token %}

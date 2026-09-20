@@ -138,6 +138,10 @@ $white: #fff;
 
 .navbar-dropdown {
   display: block;
+
+  a.navbar-item {
+    color: var(--bulma-body-color);
+  }
 }
 
 #card-column {

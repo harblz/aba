@@ -204,7 +204,7 @@ ACCOUNT_FORMS = {
 CSRF_TRUSTED_ORIGINS = ["https://abarocks.nullandvoid.digital"]
 
 DEFAULT_FROM_EMAIL = f"noreply@{ALLOWED_HOSTS[0]}"
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" if "localhost" in ALLOWED_HOSTS else "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "mail.smtp2go.com"
 EMAIL_HOST_USER = load_secret("EMAIL_USER")
 EMAIL_HOST_PASSWORD = load_secret("EMAIL_PASSWORD")
