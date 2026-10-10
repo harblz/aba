@@ -4,7 +4,7 @@ LABEL authors="nullandvoid"
 
 WORKDIR /usr/src/app
 
-RUN apk update && apk add psql
+RUN apk update && apk add postgresql
 
 ENV PYTHON_VERSION=3.12 VIRTUAL_ENV=/.venv PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
