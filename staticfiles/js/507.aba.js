@@ -1,0 +1,1 @@
+(self.webpackChunkaba_rocks=self.webpackChunkaba_rocks||[]).push([[507],{507:(e,o,n)=>{n(926).defineExtension("debug",{onEvent:function(e,o){if(console.debug)console.debug(e,o);else{if(!console)throw new Error("NO CONSOLE SUPPORTED");console.log("DEBUG:",e,o)}}})}}]);
