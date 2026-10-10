@@ -1,6 +1,8 @@
 from allauth.account import forms as allauth
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
+
 from .models import SupportTicket, SupportResponse
 
 
@@ -29,6 +31,8 @@ class SupportTicketForm(ModelForm):
         fields = ("type", "message")
 
 class SupportResponseForm(ModelForm):
+    ticket = forms.ModelChoiceField(queryset=SupportTicket.objects.all(), widget=forms.HiddenInput())
+
     class Meta:
         model = SupportResponse
-        fields = ("message",)
+        fields = ("message","ticket")

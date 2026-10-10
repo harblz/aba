@@ -1,0 +1,28 @@
+{% for message in messages %}
+    <div class="message">
+        <p class="is-centered">
+            <strong>{{ message.0 }}</strong>
+        </p>
+        <p>{{ message.1 }}</p>
+    </div>
+{% endfor %}
+<div class="message">
+    <form hx-post="{% url 'view_ticket' form.ticket.value %}"
+          hx-target="#messages-column"
+          hx-swap="innerHTML" method="post"
+          class="form" id="response-form">
+        {{ form.errors }}
+        {% csrf_token %}
+        {{ form.ticket }}
+        <div class="field">
+            {{ field.errors }}
+            <label class="label" for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+            <div class="control">{{ form.message }}</div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+                <input type="submit" form="response-form" class="button" value="Submit">
+            </p>
+        </div>
+    </form>
+</div>

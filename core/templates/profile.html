@@ -1,17 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{{ request.user.username }}'s Profile{% endblock title %}
-{% partialdef ticket %}
-    <div class="box">
-    {% for message in messages %}
-        <div class="box message">
-            <p class="is-centered">
-                <strong>{{ message.0 }}</strong>
-            </p>
-            <p>{{ message.1 }}</p>
-        </div>
-    {% endfor %}
-    </div>
-{% endpartialdef %}
 {% block content %}
 {% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
 <section class="section" x-data="{ active: 'quiz' }">
@@ -117,10 +105,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="column is-two-thirds-desktop" id="messages-column">
-                {% for message in messages %}
-                {% endfor %}
-            </div>
+            <div class="column is-two-thirds-desktop" id="messages-column"></div>
         </div>
     </div>
 </section>

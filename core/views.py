@@ -8,7 +8,7 @@ from django.views.generic import FormView
 from core.models import Profile, SupportTicket
 from quiz.models import Result as QResult
 from safmeds.models import Result as SResult
-from .forms import SupportTicketForm, UserUpdateForm
+from .forms import SupportTicketForm, UserUpdateForm, SupportResponseForm
 
 
 @receiver(email_confirmed)
@@ -72,11 +72,24 @@ class ContactUs(FormView):
 def thanks(request):
     return render(request, "thanks.html")
 
-def view_support_ticket(request, id):
-    ticket = SupportTicket.objects.select_related().get(pk=id)
+def view_support_ticket(request, pk):
+    ticket = SupportTicket.objects.select_related().get(pk=pk)
     messages = [[ticket.user, ticket.message]]
     for message in ticket.supportresponse_set.all():
-        messages += (message.user, message.message)
-    return render(request, "profile.html#ticket", {"messages": messages})
+        messages.append([message.user, message.message])
+    form = None
+    if request.method == "POST":
+        form = SupportResponseForm(request.POST)
+        if form.is_valid():
+            response = form.save(commit=False)
+            response.user = request.user
+            response.save()
+            messages = [[ticket.user, ticket.message]]
+            for message in ticket.supportresponse_set.all():
+                messages.append([message.user, message.message])
+            form = SupportResponseForm({"ticket": pk})
 
+    else:
+        form = SupportResponseForm({"ticket":pk})
 
+    return render(request, "support_ticket.html", {"messages": messages,"form":form})
