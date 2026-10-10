@@ -50,3 +50,7 @@ class ContentTypeAdmin(admin.ModelAdmin):
 @admin.register(SupportTicket)
 class SupportMessageAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(SupportResponse)
+class SupportResponseAdmin(admin.ModelAdmin):
+    pass
