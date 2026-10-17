@@ -5,6 +5,12 @@ from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
+from django.db.models import F
+from django_htmx.http import retarget, reswap, trigger_client_event
+from django_htmx.middleware import HtmxDetails
+from .decorators import htmx_required
 
 
 class Profile(models.Model):
@@ -101,3 +107,32 @@ class SupportResponse(models.Model):
 
     def __str__(self):
         return self.message
+
+
+@htmx_required
+def _check_answer(request):
+    slug = request.headers["code"] + "-" + str(request.headers["number"])
+    progress = get_object_or_404(
+        QuizProgress, session=request.session.session_key, quiz=slug
+    )
+    index = progress.index
+    qid = progress.key[str(index)]
+    question = BaseQuestion.objects.get(pk=qid["question"])
+    question.attempts += 1
+    if (qtype := question.get_type()) == "multiplechoicequestion":
+        MultipleChoiceAnswer.objects.filter(id=qid["user_choice"]).update(picked=F("picked") + 1)
+    elif qtype == "truefalsequestion":
+        TrueFalseQuestion.objects.filter(id=qid["question"]).update(accuracy=F("accuracy") + 1)
+    # Needs logic to highlight the selected answer in green client side
+    if str(request.POST.get("answer")) == str(qid["correct"]):
+        _save_progress(request)
+        response = _next_question(request)
+        return response
+    else:
+        q_obj = BaseQuestion.objects.select_related().get(id=qid["question"])
+        hint = q_obj.hint
+        context = {"hint": hint}
+        response = TemplateResponse(request, "quiz/hint.html", context)
+        retarget(response, "#modal-wrapper")
+        reswap(response, "innerHTML")
+        return trigger_client_event(response, "show-modal", after="swap")

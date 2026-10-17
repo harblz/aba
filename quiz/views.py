@@ -254,8 +254,8 @@ def _check_answer(request):
         hint = q_obj.hint
         context = {"hint": hint}
         response = TemplateResponse(request, "quiz/hint.html", context)
-        reswap(response, "beforeend")
-        retarget(response, "#modal-wrapper")
+        reswap(response, "innerHTML")
+        retarget(response, "#modal-content")
         return trigger_client_event(response, "show-modal", after="swap")
 
 
