@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static django_htmx %}
 {% block title %}Blog Posts{% endblock %}
-{% block content %}
+{% block body %}
 <section class="section">
     {% include "blog/posts.html" %}
     {% if page_obj.has_next %}

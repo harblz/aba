@@ -1,5 +1,6 @@
 from allauth.account.signals import email_confirmed
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -45,7 +46,7 @@ def user_profile(request):
     }
     return render(request, "profile.html", context)
 
-
+@login_required()
 def edit_profile(request):
     if request.method == "POST":
         form = UserUpdateForm(request.POST, instance=request.user)
@@ -59,7 +60,7 @@ def edit_profile(request):
         return render(request, "update_profile.html", context)
 
 
-class ContactUs(FormView):
+class ContactUs(FormView, LoginRequiredMixin):
     form_class = SupportTicketForm
     template_name = "contact_us.html"
     success_url = "/thanks/"
@@ -72,6 +73,7 @@ class ContactUs(FormView):
 def thanks(request):
     return render(request, "thanks.html")
 
+@login_required()
 def view_support_ticket(request, pk):
     ticket = SupportTicket.objects.select_related().get(pk=pk)
     messages = [[ticket.user, ticket.message]]
@@ -83,13 +85,20 @@ def view_support_ticket(request, pk):
         if form.is_valid():
             response = form.save(commit=False)
             response.user = request.user
+            if request.POST.get("closed"):
+                response.closed = True
             response.save()
             messages = [[ticket.user, ticket.message]]
             for message in ticket.supportresponse_set.all():
                 messages.append([message.user, message.message])
-            form = SupportResponseForm({"ticket": pk})
+            if not ticket.closed:
+                form = SupportResponseForm({"ticket": pk})
+        elif not form.is_valid() and request.POST.get("close"):
+            ticket.closed = True
+            ticket.save()
 
     else:
-        form = SupportResponseForm({"ticket":pk})
+        if not ticket.closed:
+            form = SupportResponseForm({"ticket":pk})
 
     return render(request, "support_ticket.html", {"messages": messages,"form":form})

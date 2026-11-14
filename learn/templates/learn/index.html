@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Course Index{% endblock title %}
-{% block content %}
+{% block body %}
     {% include "components/_hero.html" %}
     <section class="section">
         {% for course in Courses reversed %}
@@ -30,4 +30,4 @@
             </div>
         {% endfor %}
     </section>
-{% endblock content %}
+{% endblock body %}

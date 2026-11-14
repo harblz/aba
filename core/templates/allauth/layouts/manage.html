@@ -1,2 +1,7 @@
 {% extends "allauth/layouts/base.html" %}
-{% block content %}{% endblock %}
+
+{% block body %}
+    <div class="section">
+        {% block content %}{% endblock content %}
+    </div>
+{% endblock body %}

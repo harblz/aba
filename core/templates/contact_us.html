@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Contact Us{% endblock title %}
-{% block content %}
+{% block body %}
 {% include "components/_hero.html" %}
 <div class="box has-text-centered" id="contact-section">
     <form action="{% url 'contact_us' %}" method="post" class="form" id="contact-form">
@@ -26,4 +26,4 @@
         </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock body %}

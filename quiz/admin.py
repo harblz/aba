@@ -21,6 +21,7 @@ class MultipleChoiceAnswerAdmin(admin.StackedInline):
 class MultipleChoiceAdmin(admin.ModelAdmin):
     exclude = ["type"]
     inlines = [MultipleChoiceAnswerAdmin]
+    change_form_template = "quiz/admin/change_form.html"
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         question = MultipleChoiceQuestion.objects.prefetch_related("answers").get(id=object_id)
@@ -47,11 +48,11 @@ class MultipleChoiceAdmin(admin.ModelAdmin):
         js = ["js/chart.js"]
 
 
-
 @admin.register(TrueFalseQuestion)
 class TrueFalseAdmin(admin.ModelAdmin):
     exclude = ["type"]
     form = EditTrueFalseForm
+    change_form_template = "quiz/admin/change_form.html"
 
 
 """@admin.register(QuizProgress)

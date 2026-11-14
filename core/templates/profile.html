@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ request.user.username }}'s Profile{% endblock title %}
-{% block content %}
+{% block body %}
 {% include "components/_hero.html" with title=title subtitle=subtitle blurb=blurb %}
 <section class="section" x-data="{ active: 'quiz' }">
     <div class="tabs is-centered">
@@ -92,7 +92,7 @@
         <header class="title">Support</header>
         <h2 class="subtitle">Support Tickets</h2>
         <div class="columns">
-            <div class="column is-one-third-desktop" id="tickets-column">
+            <div class="column" id="tickets-column">
                 {% for ticket in tickets %}
                     <div class="box has-text-centered is-clickable"
                          hx-get="{% url 'view_ticket' ticket.id  %}"
@@ -105,8 +105,8 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="column is-two-thirds-desktop" id="messages-column"></div>
+            <div class="column" id="messages-column"></div>
         </div>
     </div>
 </section>
-{% endblock content %}
+{% endblock body %}

@@ -3,7 +3,7 @@
 {% block extra-head %}
     {{ data|json_script:"card-data" }}
 {% endblock extra-head %}
-{% block content %}
+{% block body %}
 <section class="section" id="play-section" hx-get="{% url 'safmeds:results' deck.slug %}"
          hx-trigger="score" hx-vals="js:...event.detail" hx-swap="outerHTML">
     <div class="columns py-5 is-centered is-vcentered is-gapless" id="safmeds-wrapper">
@@ -26,4 +26,4 @@
     </div>
     {% include "components/_progress-bar.html" %}
 </section>
-{% endblock content %}
+{% endblock body %}

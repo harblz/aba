@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block content %}
+{% block body %}
 <div class="section has-text-centered" id="info-section">
     <h2 class="title">Update Account Info</h2>
     <form action="{% url 'edit_profile' %}" method="post" class="form" id="info-form">
@@ -30,4 +30,4 @@
         </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock body %}

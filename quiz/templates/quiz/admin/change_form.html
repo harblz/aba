@@ -26,7 +26,9 @@
 {% endif %}
 
 {% block content %}
+{% if chart_data and not add %}
 <div class="chart-container" style="height:30vh"><canvas id="chart" width="500" height="500"></canvas></div>
+{% endif %}
 <div id="content-main">
 {% block object-tools %}
 {% if change and not is_popup %}

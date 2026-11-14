@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %} {{ post.title }} {% endblock title %}
-{% block content %}
+{% block body %}
     <section class="section">
         <div class="card-content">
             <a class="title is-4" href="{% url 'blog:blog-post' post.id %}">{{ post.title }}</a>
@@ -15,4 +15,4 @@
             <p>{{ post.text|safe }}</p>
         </div>
     </section>
-{% endblock content %}
+{% endblock body %}
