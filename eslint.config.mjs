@@ -8,13 +8,8 @@ export default defineConfig([
   {
     languageOptions: {
       globals: { ...globals.node, ...globals.browser },
-      ecmaVersion: 9,
+      ecmaVersion: latest,
       sourceType: "module",
-      parserOptions: {
-        ecmaFeatures: {
-          globalReturn: true,
-        },
       },
-    },
   },
 ]);

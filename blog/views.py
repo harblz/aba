@@ -26,4 +26,7 @@ def posts(request):
     paginator = Paginator(all_posts, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return TemplateResponse(request, "blog/index.html", {"page_obj": page_obj})
+    if request.htmx:
+        return TemplateResponse(request, "blog/posts.html", {"page_obj": page_obj})
+    else:
+        return TemplateResponse(request, "blog/index.html", {"page_obj": page_obj})

@@ -82,22 +82,25 @@ Alpine.store("cardData", {
       this.current = 1;
       this.total = this.deck.length;
     } else {
-      this.deck = null;
+      this.deck = [];
     }
   },
+  get currentCard(){
+    return this.deck?.[this.current - 1] ?? null;
+  },
   get id() {
-    return this.deck[this.current - 1].id;
+    return this.currentCard?.id ?? "";
   },
   get front() {
-    return this.deck[this.current - 1].front;
+    return this.currentCard?.front ?? "";
   },
   get back() {
-    return this.deck[this.current - 1].back;
+    return this.currentCard?.back ?? "";
   },
   next() {
     this.current += 1;
   },
-  get score() {
+  score() {
     window.htmx.trigger("#play-section", "score", {
       name: document.title,
       correct: this.correct,
@@ -116,10 +119,10 @@ Alpine.data("card", () => ({
   front: "",
   back: "",
   init() {
-    if (Alpine.$data("skipInit") === true) {
-      //pass
+    if (this.$data.skipInit === true) {
+      return;
     } else {
-      this.button = Alpine.$data("showButton");
+      this.button = this.$data("showButton");
       this.id = this.cardData.id;
       this.index = this.cardData.current;
       this.front = this.cardData.front;
